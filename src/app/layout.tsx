@@ -12,9 +12,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteTitle =
+  "Think Big AI Systems | AI Software, Automation, and Data Workflow Systems";
+
+const siteDescription =
+  "AI software systems, automation, internal tools, data platforms, and workflow applications built around real business workflows under Think Big Digital Solutions.";
+
 export const metadata: Metadata = {
-  title: "Parth Ghumatkar",
-  description: "Personal website of Parth Ghumatkar — portfolio, projects, and contact.",
+  title: siteTitle,
+  description: siteDescription,
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    type: "website",
+  },
 };
 
 export default function RootLayout({

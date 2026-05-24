@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --tb-navy: #0a1128;
+  --tb-navy-elevated: #111b33;
+  --tb-navy-border: #1e2a45;
+  --tb-blue: #2563eb;
+  --tb-blue-hover: #1d4ed8;
+  --tb-cyan: #38bdf8;
+  --tb-surface: #ffffff;
+  --tb-surface-muted: #f4f6f9;
+  --tb-text: #0f172a;
+  --tb-text-muted: #475569;
+  --tb-text-on-dark: #e2e8f0;
+  --tb-text-on-dark-muted: #94a3b8;
+  --background: var(--tb-surface);
+  --foreground: var(--tb-text);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-tb-navy: var(--tb-navy);
+  --color-tb-navy-elevated: var(--tb-navy-elevated);
+  --color-tb-navy-border: var(--tb-navy-border);
+  --color-tb-blue: var(--tb-blue);
+  --color-tb-blue-hover: var(--tb-blue-hover);
+  --color-tb-cyan: var(--tb-cyan);
+  --color-tb-surface: var(--tb-surface);
+  --color-tb-surface-muted: var(--tb-surface-muted);
+  --color-tb-text: var(--tb-text);
+  --color-tb-text-muted: var(--tb-text-muted);
+  --color-tb-text-on-dark: var(--tb-text-on-dark);
+  --color-tb-text-on-dark-muted: var(--tb-text-on-dark-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--tb-surface);
+  color: var(--tb-text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
