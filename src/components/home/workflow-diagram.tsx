@@ -88,27 +88,27 @@ export function SoftwareFirstDiagram() {
 
   return (
     <div
-      className="w-full rounded-2xl border border-slate-200 bg-gradient-to-br from-tb-surface-muted to-white p-6 shadow-sm sm:p-8 lg:p-10"
+      className="w-full"
       aria-label="Software-first flow: problem through software, data, and AI to workflow output"
     >
-      <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
         {steps.map((step, index) => (
           <div
             key={step}
-            className="flex items-center gap-3 sm:gap-4"
+            className="flex flex-1 items-center gap-2 sm:min-w-0 sm:flex-col sm:gap-2 lg:flex-row lg:gap-3"
           >
             <div
-              className={`w-full rounded-xl border px-4 py-3 text-center text-sm font-semibold sm:w-auto sm:text-base ${
+              className={`w-full rounded-xl border px-4 py-3.5 text-center text-sm font-semibold sm:flex-1 sm:text-base ${
                 index === 3
-                  ? "border-tb-blue/40 bg-blue-50 text-tb-blue shadow-sm"
-                  : "border-slate-200 bg-white text-tb-text"
+                  ? "border-tb-blue/50 bg-blue-50 text-tb-blue shadow-sm ring-1 ring-tb-blue/20"
+                  : "border-slate-200 bg-white text-tb-text shadow-sm"
               }`}
             >
               {step}
             </div>
             {index < steps.length - 1 ? (
               <span
-                className="hidden shrink-0 text-lg text-tb-text-muted sm:inline"
+                className="shrink-0 text-center text-lg font-medium text-tb-blue/60 sm:text-xl"
                 aria-hidden
               >
                 →

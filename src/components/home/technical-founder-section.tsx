@@ -1,20 +1,27 @@
 import { Section } from "@/components/ui/section";
-import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { founderCredibilityPoints } from "@/lib/home-data";
 
 export function TechnicalFounderSection() {
   return (
     <Section id="technical-founder" tone="light">
-      <SectionHeader
-        eyebrow="Technical Founder Layer"
-        title="Self-built credibility shaped through years of building, testing, and improving."
-        description="Parth’s technical path did not begin with a formal job title or a college brand. It began with curiosity, electronics, YouTube learning, robotics, Arduino, C++, IoT, drones, Python, Raspberry Pi, sensors, automation, and public project demos."
-      />
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start lg:gap-12 xl:grid-cols-[minmax(0,26rem)_1fr] xl:gap-16">
+        <div className="max-w-xl lg:max-w-none">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
+            Technical Founder Layer
+          </p>
+          <h2 className="mt-3 max-w-md text-balance text-2xl font-semibold leading-snug tracking-tight text-tb-text sm:text-[1.75rem] lg:text-3xl">
+            Self-built credibility shaped through years of building, testing, and
+            improving.
+          </h2>
 
-      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="rounded-2xl border border-slate-200/90 bg-tb-surface-muted p-7 sm:p-8 lg:col-span-5 lg:p-9">
-          <div className="space-y-5 text-base leading-relaxed text-tb-text-muted sm:text-lg">
+          <div className="mt-6 max-w-prose space-y-4 text-base leading-relaxed text-tb-text-muted">
+            <p>
+              Parth’s technical path did not begin with a formal job title or a
+              college brand. It began with curiosity, electronics, YouTube learning,
+              robotics, Arduino, C++, IoT, drones, Python, Raspberry Pi, sensors,
+              automation, and public project demos.
+            </p>
             <p>
               Over time, that early technical exposure moved into software systems,
               AI-assisted workflows, data platforms, internal tools, and
@@ -25,29 +32,36 @@ export function TechnicalFounderSection() {
               point is that he kept building.
             </p>
           </div>
+
+          <div className="mt-8 lg:mt-10">
+            <Button href="#technical-founder" variant="ghost">
+              Read About Parth
+            </Button>
+          </div>
         </div>
 
-        <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7 lg:gap-5">
-          {founderCredibilityPoints.map((point) => (
+        <ul className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:gap-5">
+          {founderCredibilityPoints.map((point, index) => (
             <li
               key={point.title}
-              className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm sm:p-7"
+              className={`flex ${
+                index === founderCredibilityPoints.length - 1 &&
+                founderCredibilityPoints.length % 2 !== 0
+                  ? "sm:col-span-2"
+                  : ""
+              }`}
             >
-              <h3 className="text-base font-semibold text-tb-text sm:text-lg">
-                {point.title}
-              </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-tb-text-muted sm:text-base">
-                {point.description}
-              </p>
+              <article className="flex h-full w-full flex-col rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ring-1 ring-slate-100/80 sm:p-7">
+                <h3 className="text-base font-semibold leading-snug text-tb-text sm:text-lg">
+                  {point.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-tb-text-muted sm:text-[15px]">
+                  {point.description}
+                </p>
+              </article>
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className="mt-12">
-        <Button href="#technical-founder" variant="ghost">
-          Read About Parth
-        </Button>
       </div>
     </Section>
   );
