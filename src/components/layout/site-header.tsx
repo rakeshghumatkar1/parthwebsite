@@ -2,8 +2,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { label: "Proof", href: "#proof-before-claims" },
+  { label: "Review", href: "#work-you-can-review" },
   { label: "Systems", href: "#what-we-build" },
+  { label: "Projects", href: "#selected-project-builds" },
   { label: "Process", href: "#how-the-work-happens" },
   { label: "Founder", href: "#technical-founder" },
   { label: "Contact", href: "#contact" },

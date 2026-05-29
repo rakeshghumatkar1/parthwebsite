@@ -5,15 +5,16 @@ import { FeaturedProjectsSection } from "@/components/home/featured-projects-sec
 import { HeroSection } from "@/components/home/hero-section";
 import { HowWorkHappensSection } from "@/components/home/how-work-happens-section";
 import { LatestUpdatesSection } from "@/components/home/latest-updates-section";
-import { ProofBeforeClaimsSection } from "@/components/home/proof-before-claims-section";
 import { ProofLibrarySection } from "@/components/home/proof-library-section";
 import { SoftwareFirstSection } from "@/components/home/software-first-section";
 import { TechnicalFounderSection } from "@/components/home/technical-founder-section";
 import { WhatWeBuildSection } from "@/components/home/what-we-build-section";
+import { WorkYouCanReviewSection } from "@/components/home/work-you-can-review-section";
 import {
-  featuredProjects,
   featuredProofItems,
   featuredUpdates,
+  launchProjects,
+  launchProofCategories,
 } from "@/lib/home-data";
 
 export default function Home() {
@@ -22,12 +23,15 @@ export default function Home() {
       <SiteHeader />
       <main>
         <HeroSection />
-        <ProofBeforeClaimsSection />
+        <WorkYouCanReviewSection />
         <WhatWeBuildSection />
-        <FeaturedProjectsSection projects={featuredProjects} />
+        <FeaturedProjectsSection projects={launchProjects} />
         <TechnicalFounderSection />
         <HowWorkHappensSection />
-        <ProofLibrarySection items={featuredProofItems} />
+        <ProofLibrarySection
+          items={featuredProofItems}
+          categories={launchProofCategories}
+        />
         <SoftwareFirstSection />
         <LatestUpdatesSection updates={featuredUpdates} />
         <FinalCtaSection />

@@ -2,7 +2,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { FeatureCard } from "@/components/ui/feature-card";
 import { IconLayers, IconWorkflow } from "@/components/ui/icons";
-import { whatWeBuildItems } from "@/lib/home-data";
+import { homeCapabilityCards } from "@/lib/home-data";
 
 const icons = [IconWorkflow, IconLayers, IconWorkflow, IconLayers, IconWorkflow, IconLayers];
 
@@ -11,10 +11,11 @@ export function WhatWeBuildSection() {
     <Section id="what-we-build" tone="muted">
       <SectionHeader
         eyebrow="What We Build"
-        title="We build software systems where AI, automation, data, and workflow logic support business work."
+        title="Software systems where AI, automation, data, and workflow logic support business work."
+        description="The work can start from a business problem, a repeated manual task, a data-handling need, a content workflow, or an internal process that needs better structure."
       />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {whatWeBuildItems.map((item, index) => {
+        {homeCapabilityCards.map((item, index) => {
           const Icon = icons[index % icons.length];
           return (
             <FeatureCard

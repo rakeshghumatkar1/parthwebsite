@@ -9,13 +9,17 @@ export function SoftwareFirstSection() {
         <div>
           <SectionHeader
             eyebrow="Software First"
-            title="Software First. AI Where It Improves the Workflow."
-            description="AI is useful when it supports the system. It can help with analysis, summaries, reports, content, classification, research, decision support, routing, or workflow automation. But the foundation still matters: software structure, data flow, interface design, security, testing, deployment, documentation, and user adoption."
+            title="AI works best when the surrounding system is clear."
+            description="AI can support analysis, summaries, classification, routing, research, content creation, reporting, and workflow automation."
           />
           <p className="text-base leading-relaxed text-tb-text-muted sm:text-lg">
-            This is why the focus is not on AI as a slogan. The focus is on
-            software systems that can be built, tested, reviewed, improved, and
-            used.
+            But the surrounding system still matters: software structure, data
+            flow, interface design, permissions, testing, documentation,
+            deployment, and user adoption.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-tb-text-muted sm:text-lg">
+            The focus here is not AI as a slogan. The focus is on software
+            systems that can be built, reviewed, improved, and used.
           </p>
         </div>
         <SoftwareFirstDiagram />

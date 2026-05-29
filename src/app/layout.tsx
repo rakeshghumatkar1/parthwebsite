@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 const siteTitle =
-  "Think Big AI Systems | AI Software, Automation, and Data Workflow Systems";
+  "Think Big AI Systems | AI Software, Automation, and Data Workflows";
 
 const siteDescription =
-  "AI software systems, automation, internal tools, data platforms, and workflow applications built around real business workflows under Think Big Digital Solutions.";
+  "AI software systems, internal tools, automation workflows, data platforms, and AI-assisted applications built around business use cases under Think Big Digital Solutions.";
 
 export const metadata: Metadata = {
   title: siteTitle,

@@ -8,9 +8,13 @@ export function HowWorkHappensSection() {
     <Section id="how-the-work-happens" tone="muted">
       <SectionHeader
         eyebrow="How the Work Happens"
-        title="The work usually starts with a business problem, workflow, or rough idea."
-        description="From there, the process moves through system thinking, technical build, testing, and improvement."
+        title="Start with the workflow. Then define the system around it."
+        description="Most useful software work starts with a clear view of the workflow: what the business is trying to handle, what is currently manual or unclear, what data is involved, and where AI or automation can support the process."
       />
+      <p className="-mt-6 mb-10 max-w-3xl text-base leading-relaxed text-tb-text-muted sm:text-lg">
+        From there, the work moves through system thinking, build structure,
+        testing, and improvement.
+      </p>
 
       <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {processSteps.map((item) => (

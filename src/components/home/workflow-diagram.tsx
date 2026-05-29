@@ -71,10 +71,10 @@ export function WorkflowDiagram() {
 export function SoftwareFirstDiagram() {
   const steps = [
     "Problem",
-    "Software logic",
+    "Software Logic",
     "Data",
-    "AI layer",
-    "Workflow output",
+    "AI Layer",
+    "Workflow Output",
   ] as const;
 
   return (

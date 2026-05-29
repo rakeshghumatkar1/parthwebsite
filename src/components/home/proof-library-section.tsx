@@ -1,44 +1,103 @@
 import type { ProofRecord } from "@/types/cms";
+import type { ProofCategoryCard } from "@/lib/home-data";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
+import { Button } from "@/components/ui/button";
+import { FeatureCard } from "@/components/ui/feature-card";
+import {
+  IconAward,
+  IconDocumentation,
+  IconDownload,
+  IconGitHub,
+  IconImage,
+  IconPlay,
+} from "@/components/ui/icons";
 
 type ProofLibrarySectionProps = {
-  items: ProofRecord[];
+  /** Individual proof records from CMS — later phase */
+  items?: ProofRecord[];
+  /** Category cards for launch — not fake proof records */
+  categories?: ProofCategoryCard[];
 };
 
+const categoryIcons = [
+  IconGitHub,
+  IconPlay,
+  IconImage,
+  IconDocumentation,
+  IconDownload,
+  IconAward,
+];
+
 /**
- * CMS-ready: renders only when featured proof items exist.
- * Phase 1–2: empty array → section hidden on public page.
+ * Proof Library — category cards at launch; CMS proof records can be added later.
  */
-export function ProofLibrarySection({ items }: ProofLibrarySectionProps) {
-  if (items.length === 0) {
+export function ProofLibrarySection({
+  items = [],
+  categories = [],
+}: ProofLibrarySectionProps) {
+  const hasCategories = categories.length > 0;
+  const hasItems = items.length > 0;
+
+  if (!hasCategories && !hasItems) {
     return null;
   }
 
   return (
     <Section id="proof-library" tone="muted">
       <SectionHeader
-        eyebrow="Proof Library Preview"
-        title="Every important claim should connect to something visible."
-        description="The Proof Library collects the material behind the claims: repositories, demos, presentations, recognition proof, screenshots, downloads, and project documents."
+        eyebrow="Proof Library"
+        title="Repositories, demos, screenshots, downloads, and build notes behind the work."
+        description="The Proof Library brings together material that helps visitors understand the project history and current work: repositories, demos, screenshots, presentations, recognition proof, downloads, PDFs, and technical notes."
       />
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
-          <article
-            key={item.id}
-            className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide text-tb-blue">
-              {item.proofType}
-            </p>
-            <h3 className="mt-2 text-lg font-semibold text-tb-text">{item.title}</h3>
-            {item.shortDescription ? (
-              <p className="mt-2 text-sm text-tb-text-muted">
-                {item.shortDescription}
+      <p className="-mt-6 mb-10 max-w-3xl text-base leading-relaxed text-tb-text-muted sm:text-lg">
+        This section gives visitors a path to review supporting material when
+        they want more detail.
+      </p>
+
+      {hasCategories ? (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((category, index) => {
+            const Icon = categoryIcons[index % categoryIcons.length];
+            return (
+              <FeatureCard
+                key={category.id}
+                title={category.title}
+                description={category.description}
+                icon={<Icon />}
+              />
+            );
+          })}
+        </div>
+      ) : null}
+
+      {hasItems ? (
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item) => (
+            <article
+              key={item.id}
+              className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide text-tb-blue">
+                {item.proofType}
               </p>
-            ) : null}
-          </article>
-        ))}
+              <h3 className="mt-2 text-lg font-semibold text-tb-text">
+                {item.title}
+              </h3>
+              {item.shortDescription ? (
+                <p className="mt-2 text-sm text-tb-text-muted">
+                  {item.shortDescription}
+                </p>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      ) : null}
+
+      <div className="mt-10">
+        <Button href="#proof-library" variant="ghost">
+          Review Proof Library
+        </Button>
       </div>
     </Section>
   );

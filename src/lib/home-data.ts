@@ -1,29 +1,101 @@
 import type { ProjectRecord, ProofRecord, UpdateRecord } from "@/types/cms";
 
-/** Phase 1–2: no CMS data. Sections hide when arrays are empty. */
+/** CMS featured records — empty until Proof/Projects/Updates CMS exists */
 export const featuredProjects: ProjectRecord[] = [];
 export const featuredProofItems: ProofRecord[] = [];
 export const featuredUpdates: UpdateRecord[] = [];
 
-export const proofSignals = [
-  "10+ years of self-led technical building exposure",
-  "GitHub repositories and project history",
-  "YouTube demos from early hardware and automation projects",
-  "2018 Nelkinda Tech Kids Meetup presentation",
-  "Global Day of Coderetreat 2018 recognition",
-  "Current full-project ownership across selected software builds",
-] as const;
+/** Static launch projects (replace with Projects CMS later) */
+export const launchProjects: ProjectRecord[] = [
+  {
+    id: "noctis",
+    title: "Noctis",
+    slug: "noctis",
+    shortDescription: "Privacy-first local AI journaling app.",
+    techStack: ["Python", "Ollama", "Local AI", "Desktop"],
+  },
+  {
+    id: "nonprofit-platform",
+    title: "Nonprofit Platform",
+    slug: "nonprofit-platform",
+    shortDescription: "IRS Form 990 data platform with SEO-ready pages.",
+    techStack: ["Python", "PostgreSQL", "Astro", "Docker"],
+  },
+  {
+    id: "tradepre",
+    title: "TradePre",
+    slug: "tradepre",
+    shortDescription: "ML trading prediction system with backtesting.",
+    techStack: ["Python", "XGBoost", "ML", "Plotly"],
+  },
+  {
+    id: "instagram-ai-news",
+    title: "Instagram AI News Generator",
+    slug: "instagram-ai-news-generator",
+    shortDescription:
+      "AI news to Instagram posts with images and captions.",
+    techStack: ["GPT-4o", "DALL-E 3", "Puppeteer", "APIs"],
+  },
+  {
+    id: "youtube-shorts",
+    title: "YouTube Shorts Generator",
+    slug: "youtube-shorts-generator",
+    shortDescription: "AI pipeline to create short videos automatically.",
+    techStack: ["GPT-4", "ElevenLabs", "FFmpeg", "Whisper"],
+  },
+  {
+    id: "seo-snapshot",
+    title: "SEO Snapshot",
+    slug: "seo-snapshot",
+    shortDescription: "AI-powered SEO advisory reports for businesses.",
+    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Vercel"],
+  },
+];
 
-export const whatWeBuildItems = [
+export type ReviewTrailCard = {
+  id: string;
+  title: string;
+  description: string;
+};
+
+/** Work You Can Review — static trail cards */
+export const homeReviewTrailCards: ReviewTrailCard[] = [
+  {
+    id: "repository-trail",
+    title: "Repository Trail",
+    description:
+      "Public GitHub repositories showing code, tools, experiments, and software builds across different stages of work.",
+  },
+  {
+    id: "demo-trail",
+    title: "Demo Trail",
+    description:
+      "Project videos and walkthroughs that show how selected tools, automations, and applications were built or tested.",
+  },
+  {
+    id: "build-documentation",
+    title: "Build Documentation",
+    description:
+      "Readmes, notes, screenshots, architecture references, and project explanations where available.",
+  },
+  {
+    id: "working-systems",
+    title: "Working Systems",
+    description:
+      "Applications, platforms, dashboards, content workflows, and data systems that go beyond presentation-only concepts.",
+  },
+];
+
+export const homeCapabilityCards = [
   {
     title: "Internal Tools",
     description:
-      "Custom tools for handling business processes, forms, users, data, admin workflows, requests, and repeatable tasks.",
+      "Custom tools for business processes, forms, users, data, admin workflows, requests, and repeated internal tasks.",
   },
   {
     title: "AI-Assisted Workflow Applications",
     description:
-      "Applications where AI supports analysis, summarization, classification, reporting, content creation, research, or decision support inside a defined workflow.",
+      "Applications where AI supports analysis, summarization, classification, reporting, research, content creation, or decision support inside a defined workflow.",
   },
   {
     title: "Automation Systems",
@@ -47,76 +119,180 @@ export const whatWeBuildItems = [
   },
 ] as const;
 
-export const founderCredibilityPoints = [
-  "Self-built credibility",
-  "Project-led learning",
-  "GitHub and YouTube proof",
-  "Public presentation and recognition",
-  "Current full-project ownership",
-  "Review and delivery structure through Think Big",
-] as const;
+export type ProofCategoryCard = {
+  id: string;
+  title: string;
+  description: string;
+};
+
+/** Proof Library category cards — not individual proof records */
+export const launchProofCategories: ProofCategoryCard[] = [
+  {
+    id: "github",
+    title: "GitHub Repositories",
+    description:
+      "Code repositories, tools, and software builds available for review.",
+  },
+  {
+    id: "youtube",
+    title: "YouTube Demos",
+    description:
+      "Video walkthroughs showing how selected projects were built or tested.",
+  },
+  {
+    id: "screenshots",
+    title: "Project Screenshots",
+    description:
+      "Interface and system captures that show how applications look in use.",
+  },
+  {
+    id: "technical-notes",
+    title: "Technical Notes",
+    description:
+      "Architecture references, build notes, and project explanations.",
+  },
+  {
+    id: "downloads",
+    title: "Downloads and PDFs",
+    description:
+      "Documents and downloadable material related to selected projects.",
+  },
+  {
+    id: "recognition",
+    title: "Recognition / Milestones",
+    description:
+      "Presentations, recognitions, and milestone material from the project trail.",
+  },
+];
+
+export type FounderCredibilityPoint = {
+  title: string;
+  description: string;
+};
+
+export const founderCredibilityPoints: FounderCredibilityPoint[] = [
+  {
+    title: "Independent technical learning",
+    description:
+      "Years of self-led building across hardware, software, automation, and AI workflow experiments.",
+  },
+  {
+    title: "Project-led development",
+    description:
+      "Learning through working builds, debugging, testing, documentation, and repeated improvement.",
+  },
+  {
+    title: "Public technical history",
+    description:
+      "GitHub repositories, YouTube demos, presentations, recognitions, and documented build material.",
+  },
+  {
+    title: "Current software ownership",
+    description:
+      "Recent work shows full-project ownership across selected software, AI workflow, automation, and data-system builds.",
+  },
+  {
+    title: "Think Big delivery structure",
+    description:
+      "For client-facing or business-critical work, review, QA, documentation, deployment discipline, and delivery oversight can be added through Think Big.",
+  },
+];
 
 export const processSteps = [
   {
     step: "01",
     title: "Understand the workflow",
     description:
-      "Clarify what the system needs to support, who will use it, and what manual work or confusion it should reduce.",
+      "Clarify what the system needs to support, who will use it, what information moves through it, and what manual work or confusion should reduce.",
   },
   {
     step: "02",
     title: "Define the system",
     description:
-      "Turn the idea into requirements, screens, flows, data needs, AI use cases, and technical structure.",
+      "Turn the idea into screens, flows, data needs, AI use cases, automation logic, integrations, and technical structure.",
   },
   {
     step: "03",
     title: "Build the first version",
     description:
-      "Create the working version with the required software, AI, API, database, automation, or interface layer.",
+      "Create a working version with the required software, interface, database, automation, API, AI, or reporting layer.",
   },
   {
     step: "04",
     title: "Test and improve",
     description:
-      "Debug, simplify, improve flows, and adjust the system based on actual use and technical behavior.",
+      "Debug, simplify, improve flows, adjust the system, and refine the experience based on actual use and technical behavior.",
   },
   {
     step: "05",
     title: "Review for serious delivery",
     description:
-      "For client-critical systems, Think Big adds review, QA, documentation, security checks, deployment discipline, and delivery oversight.",
+      "For larger or client-critical systems, Think Big can add review, QA, documentation, security checks, deployment discipline, and delivery oversight.",
   },
 ] as const;
 
 export const softwareFirstFlow = [
   "Problem",
-  "Software structure",
-  "Data flow",
-  "AI layer",
-  "Workflow output",
+  "Software Logic",
+  "Data",
+  "AI Layer",
+  "Workflow Output",
 ] as const;
 
-export const footerLinkGroups = [
-  {
-    title: "Systems",
-    links: [
-      { label: "What We Build", href: "#what-we-build" },
-      { label: "How the Work Happens", href: "#how-the-work-happens" },
-    ],
-  },
-  {
-    title: "Proof",
-    links: [
-      { label: "Proof Before Claims", href: "#proof-before-claims" },
-      { label: "Technical Founder", href: "#technical-founder" },
-    ],
-  },
+export type FooterLink = {
+  label: string;
+  href?: string;
+};
+
+export type FooterLinkGroup = {
+  title: string;
+  links: FooterLink[];
+};
+
+/** Footer v2 — only href when route/anchor is safe */
+export const launchFooterGroups: FooterLinkGroup[] = [
   {
     title: "Company",
     links: [
-      { label: "Think Big Digital Solutions", href: "#" },
+      { label: "About Parth", href: "#technical-founder" },
+      { label: "About Think Big" },
       { label: "Contact", href: "#contact" },
     ],
   },
-] as const;
+  {
+    title: "Systems",
+    links: [
+      { label: "AI Systems", href: "#what-we-build" },
+      { label: "Automation", href: "#what-we-build" },
+      { label: "Data Platforms", href: "#what-we-build" },
+      { label: "Internal Tools", href: "#what-we-build" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "GitHub Repositories" },
+      { label: "YouTube Videos" },
+      { label: "Downloads" },
+      { label: "Proof Library", href: "#proof-library" },
+    ],
+  },
+  {
+    title: "Projects",
+    links: [
+      { label: "All Projects", href: "#selected-project-builds" },
+      { label: "Build Notes" },
+      { label: "Demos" },
+      { label: "Roadmap" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Discuss a Software Use Case", href: "#contact" },
+      { label: "Email" },
+      { label: "GitHub" },
+      { label: "YouTube" },
+    ],
+  },
+];

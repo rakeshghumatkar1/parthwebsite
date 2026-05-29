@@ -10,31 +10,29 @@ export function HeroSection() {
             AI Software Systems
           </p>
           <h1 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-            AI Software Systems Built Around Business Workflows
+            AI software systems, automation, and data workflows built around
+            business use cases.
           </h1>
           <p className="mt-6 text-base leading-relaxed text-tb-text-on-dark-muted sm:text-lg">
-            Software, automation, AI-assisted tools, data platforms, internal
-            systems, and workflow applications — built with visible project proof
-            and technical ownership.
+            Custom software, internal tools, AI-assisted applications, automation
+            workflows, and data platforms built with technical ownership and
+            reviewable project history.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-tb-text-on-dark-muted sm:text-base">
             This is the AI software systems vertical of Think Big Digital
-            Solutions. The focus is simple: build software that supports real
-            work. That may mean an internal tool, a reporting system, an
-            automation pipeline, a local AI application, a dashboard, a content
-            workflow, or a business-facing software product.
+            Solutions, shaped around software architecture, workflow logic,
+            automation, data handling, and working applications.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-tb-text-on-dark-muted sm:text-base">
-            The work is led by Parth Ghumatkar, a self-led technical founder
-            whose project history moves from school-age electronics, IoT,
-            drones, and Python into current software, automation, AI workflow,
-            and data-system builds.
+            Led by Parth Ghumatkar, the work connects years of independent
+            technical building with current software, AI workflow, automation,
+            and data-system projects.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="#contact" variant="primary" dark>
               Discuss a Software Use Case
             </Button>
-            <Button href="#what-we-build" variant="secondary" dark>
+            <Button href="#selected-project-builds" variant="secondary" dark>
               View Current Projects
             </Button>
           </div>
