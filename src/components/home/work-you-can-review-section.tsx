@@ -20,12 +20,12 @@ export function WorkYouCanReviewSection() {
         title="A project trail built through repositories, demos, documentation, and working systems."
         description="This site brings together selected software builds, GitHub repositories, YouTube demos, screenshots, project notes, and technical documents."
       />
-      <p className="-mt-6 mb-10 max-w-3xl text-base leading-relaxed text-tb-text-muted sm:text-lg">
+      <p className="-mt-8 mb-12 max-w-3xl text-base leading-relaxed text-tb-text-muted sm:text-lg">
         Visitors can review how the work has developed — from early technical
         experiments to current software systems and workflow applications.
       </p>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
         {homeReviewTrailCards.map((card, index) => {
           const Icon = trailIcons[index % trailIcons.length];
           return (
@@ -33,13 +33,14 @@ export function WorkYouCanReviewSection() {
               key={card.id}
               title={card.title}
               description={card.description}
-              icon={<Icon />}
+              icon={<Icon className="h-6 w-6" />}
+              variant="emphasis"
             />
           );
         })}
       </div>
 
-      <div className="mt-10">
+      <div className="mt-12">
         <Button href="#proof-library" variant="ghost">
           Review Proof Library
         </Button>

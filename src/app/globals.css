@@ -2,6 +2,7 @@
 
 :root {
   --tb-navy: #0a1128;
+  --tb-navy-deep: #060d1f;
   --tb-navy-elevated: #111b33;
   --tb-navy-border: #1e2a45;
   --tb-blue: #2563eb;
@@ -21,6 +22,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-tb-navy: var(--tb-navy);
+  --color-tb-navy-deep: var(--tb-navy-deep);
   --color-tb-navy-elevated: var(--tb-navy-elevated);
   --color-tb-navy-border: var(--tb-navy-border);
   --color-tb-blue: var(--tb-blue);

@@ -28,12 +28,12 @@ function FlowNode({
 }) {
   return (
     <div
-      className={`rounded-lg border px-3 py-2 text-center font-medium ${
-        compact ? "text-[10px] sm:text-xs" : "text-xs sm:text-sm"
+      className={`rounded-xl border px-3 py-2.5 text-center font-medium ${
+        compact ? "text-xs sm:text-sm" : "text-sm sm:text-base"
       } ${
         highlight
-          ? "border-tb-cyan/50 bg-tb-blue/20 text-tb-cyan"
-          : "border-tb-navy-border bg-tb-navy-elevated text-tb-text-on-dark"
+          ? "border-tb-cyan/60 bg-tb-blue/25 text-tb-cyan shadow-sm shadow-tb-cyan/10"
+          : "border-tb-navy-border bg-tb-navy-elevated/90 text-tb-text-on-dark"
       }`}
     >
       {label}
@@ -44,25 +44,34 @@ function FlowNode({
 export function WorkflowDiagram() {
   return (
     <div
-      className="w-full overflow-hidden rounded-2xl border border-tb-navy-border bg-tb-navy-elevated/80 p-4 sm:p-6"
+      className="relative w-full min-h-[280px] overflow-hidden rounded-2xl border border-tb-navy-border bg-tb-navy-elevated/90 p-5 shadow-xl shadow-black/20 sm:min-h-[320px] sm:p-7 lg:min-h-[380px] lg:p-8"
       aria-label="Software workflow diagram: business problem through software and AI layers to a usable product"
     >
-      <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
-        {mainFlow.map((label, index) => (
-          <div key={label} className="flex items-center gap-2">
-            <FlowNode label={label} highlight={index === 3} />
-            {index < mainFlow.length - 1 ? (
-              <span className="hidden text-tb-text-on-dark-muted sm:inline" aria-hidden>
-                →
-              </span>
-            ) : null}
-          </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-        {satellites.map((label) => (
-          <FlowNode key={label} label={label} compact />
-        ))}
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-tb-blue/10 via-transparent to-tb-cyan/5"
+        aria-hidden
+      />
+      <div className="relative flex flex-col gap-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-2">
+          {mainFlow.map((label, index) => (
+            <div key={label} className="flex items-center gap-2">
+              <FlowNode label={label} highlight={index === 3} />
+              {index < mainFlow.length - 1 ? (
+                <span
+                  className="hidden shrink-0 text-tb-text-on-dark-muted sm:inline"
+                  aria-hidden
+                >
+                  →
+                </span>
+              ) : null}
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          {satellites.map((label) => (
+            <FlowNode key={label} label={label} compact />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -79,27 +88,35 @@ export function SoftwareFirstDiagram() {
 
   return (
     <div
-      className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+      className="w-full rounded-2xl border border-slate-200 bg-gradient-to-br from-tb-surface-muted to-white p-6 shadow-sm sm:p-8 lg:p-10"
       aria-label="Software-first flow: problem through software, data, and AI to workflow output"
     >
-      {steps.map((step, index) => (
-        <div key={step} className="flex items-center gap-2 sm:gap-3">
+      <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+        {steps.map((step, index) => (
           <div
-            className={`rounded-lg border px-3 py-2 text-xs font-medium sm:text-sm ${
-              index === 3
-                ? "border-tb-blue/40 bg-blue-50 text-tb-blue"
-                : "border-slate-200 bg-white text-tb-text"
-            }`}
+            key={step}
+            className="flex items-center gap-3 sm:gap-4"
           >
-            {step}
+            <div
+              className={`w-full rounded-xl border px-4 py-3 text-center text-sm font-semibold sm:w-auto sm:text-base ${
+                index === 3
+                  ? "border-tb-blue/40 bg-blue-50 text-tb-blue shadow-sm"
+                  : "border-slate-200 bg-white text-tb-text"
+              }`}
+            >
+              {step}
+            </div>
+            {index < steps.length - 1 ? (
+              <span
+                className="hidden shrink-0 text-lg text-tb-text-muted sm:inline"
+                aria-hidden
+              >
+                →
+              </span>
+            ) : null}
           </div>
-          {index < steps.length - 1 ? (
-            <span className="text-tb-text-muted" aria-hidden>
-              →
-            </span>
-          ) : null}
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

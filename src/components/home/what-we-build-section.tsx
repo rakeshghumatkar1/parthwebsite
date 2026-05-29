@@ -14,7 +14,7 @@ export function WhatWeBuildSection() {
         title="Software systems where AI, automation, data, and workflow logic support business work."
         description="The work can start from a business problem, a repeated manual task, a data-handling need, a content workflow, or an internal process that needs better structure."
       />
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
         {homeCapabilityCards.map((item, index) => {
           const Icon = icons[index % icons.length];
           return (
@@ -22,7 +22,7 @@ export function WhatWeBuildSection() {
               key={item.title}
               title={item.title}
               description={item.description}
-              icon={<Icon />}
+              icon={<Icon className="h-6 w-6" />}
             />
           );
         })}

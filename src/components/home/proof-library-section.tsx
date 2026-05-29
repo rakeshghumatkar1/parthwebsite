@@ -14,9 +14,7 @@ import {
 } from "@/components/ui/icons";
 
 type ProofLibrarySectionProps = {
-  /** Individual proof records from CMS — later phase */
   items?: ProofRecord[];
-  /** Category cards for launch — not fake proof records */
   categories?: ProofCategoryCard[];
 };
 
@@ -29,9 +27,6 @@ const categoryIcons = [
   IconAward,
 ];
 
-/**
- * Proof Library — category cards at launch; CMS proof records can be added later.
- */
 export function ProofLibrarySection({
   items = [],
   categories = [],
@@ -50,13 +45,13 @@ export function ProofLibrarySection({
         title="Repositories, demos, screenshots, downloads, and build notes behind the work."
         description="The Proof Library brings together material that helps visitors understand the project history and current work: repositories, demos, screenshots, presentations, recognition proof, downloads, PDFs, and technical notes."
       />
-      <p className="-mt-6 mb-10 max-w-3xl text-base leading-relaxed text-tb-text-muted sm:text-lg">
+      <p className="-mt-8 mb-12 max-w-3xl text-base leading-relaxed text-tb-text-muted sm:text-lg">
         This section gives visitors a path to review supporting material when
         they want more detail.
       </p>
 
       {hasCategories ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {categories.map((category, index) => {
             const Icon = categoryIcons[index % categoryIcons.length];
             return (
@@ -64,7 +59,8 @@ export function ProofLibrarySection({
                 key={category.id}
                 title={category.title}
                 description={category.description}
-                icon={<Icon />}
+                icon={<Icon className="h-6 w-6" />}
+                variant="library"
               />
             );
           })}
@@ -76,7 +72,7 @@ export function ProofLibrarySection({
           {items.map((item) => (
             <article
               key={item.id}
-              className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+              className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-tb-blue">
                 {item.proofType}
@@ -94,7 +90,7 @@ export function ProofLibrarySection({
         </div>
       ) : null}
 
-      <div className="mt-10">
+      <div className="mt-12">
         <Button href="#proof-library" variant="ghost">
           Review Proof Library
         </Button>
