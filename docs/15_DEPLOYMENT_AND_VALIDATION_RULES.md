@@ -1,0 +1,167 @@
+# 15 — Deployment and Validation Rules
+
+## Purpose
+
+Validation, commit, push, deployment verification, and failure handling for the Parth microsite (Next.js 16 on Vercel).
+
+---
+
+## Validation commands
+
+Run **before audit sign-off** and **before commit** when commit is requested:
+
+```bash
+npx tsc --noEmit
+npm run lint -- --max-warnings 0
+npm run build
+```
+
+| Command | Purpose |
+|---------|---------|
+| `tsc --noEmit` | Type errors |
+| `npm run lint` | ESLint (project uses `eslint` script) |
+| `npm run build` | Production build + static generation |
+
+**If scripts differ:** Report exact `package.json` scripts and run the nearest equivalent. Do not skip validation.
+
+### DB / CMS validation (when applicable)
+
+Additional checks when schema/CMS is in scope:
+
+- Migration applies cleanly locally  
+- Admin login works  
+- Public routes still build without CMS data  
+- No secret keys in repo  
+
+**Static-only phases:** DB validation not required.
+
+---
+
+## Preflight (before implementation)
+
+| Check | Action |
+|-------|--------|
+| `git status` | Know dirty files |
+| Task classification | static UI vs CMS vs DB (`08`) |
+| Docs read | Report per `07` |
+| Scope | List allowed paths |
+
+---
+
+## Audit (before commit when requested)
+
+Apply `09_AUDIT_CHECKLIST.md` for scoped work.
+
+**Minimum for public UI:** positioning, visual, layout, proof/CMS-readiness, responsive, technical.
+
+**Result:** Pass / Fail / Pass with follow-up.
+
+---
+
+## Commit rule
+
+Commit **only if all apply**:
+
+| Criterion | Required |
+|-----------|----------|
+| Validation | tsc, lint, build pass |
+| Audit | Pass or Pass with follow-up (no must-fix blockers) |
+| Scope | Only intended files changed |
+| Links | No new broken nav/footer links |
+| Exposure | No unfinished pages added to nav |
+| Proof integrity | No fake projects, proof, metrics, or URLs |
+| Surprises | No unexpected package/DB/auth file changes |
+
+### Commit message
+
+- Complete sentences; explain **why**  
+- Do not commit `.env`, credentials, or local-only artifacts  
+
+### Git safety (user rules)
+
+- No force push to `main` without explicit request  
+- No `--no-verify` unless requested  
+- No amend unless user rules allow  
+
+**Docs-only tasks:** Commit only when user requests (e.g. Batch doc creation).
+
+---
+
+## Push rule
+
+- Push **only when explicitly instructed** by user or prompt  
+- Use `git push -u origin <branch>` when new branch  
+- Verify remote after push  
+
+---
+
+## Deployment rule
+
+**Confirmed path:** GitHub `rakeshghumatkar1/parthwebsite` → Vercel (auto-deploy on `main` push).
+
+After push (when deployment expected):
+
+| Check | Action |
+|-------|--------|
+| Vercel build | Dashboard or GitHub deployment status — success |
+| Live URL | Load production URL (e.g. `https://parthwebsite.vercel.app` until custom domain) |
+| Mobile | Narrow viewport smoke test |
+| Key interactions | CTAs, anchors, header |
+| Metadata | Title/description visible; OG when configured |
+| CMS sections | Still hidden if no data (no empty cards) |
+
+Custom domain: re-verify canonical and OG after DNS cutover (`14`).
+
+---
+
+## Failure rule
+
+If **any validation command fails**:
+
+1. **Do not commit**  
+2. **Do not push**  
+3. **Do not deploy** (fix first)  
+4. Report **exact error output** (command + message)  
+5. Explain **likely cause** in plain language  
+6. Suggest **safest fix** (minimal diff)  
+
+If **audit fails** (must-fix items):
+
+- Fix or report blocker; do not commit until resolved or user accepts Pass with follow-up scope  
+
+If **commit hook fails**:
+
+- Do not amend unless user rules allow; fix and **new commit**  
+
+---
+
+## Environment and secrets
+
+- Never commit `.env`, `.env.local`, API keys  
+- Vercel env vars for CMS/auth when added—document in deploy notes, not in repo  
+
+---
+
+## Rollback
+
+- Revert commit on `main` or redeploy prior Vercel deployment if production broken  
+- Report incident in final summary  
+
+---
+
+## Current project baseline
+
+| Item | State |
+|------|--------|
+| Branch | `main` |
+| Deploy | Vercel connected |
+| Validation | Required for app changes |
+| CMS/DB | Not in production yet |
+
+---
+
+## Gaps / decisions needed
+
+- Staging branch / preview URL policy  
+- CI gate (GitHub Actions) — optional future  
+- `lint --max-warnings 0` if eslint config warns on legacy issues  
