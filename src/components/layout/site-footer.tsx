@@ -1,5 +1,61 @@
 import Link from "next/link";
-import { launchFooterGroups } from "@/lib/home-data";
+import type { FooterLink, FooterLinkGroup } from "@/lib/home-data";
+
+/** Simplified footer nav — only safe anchors; unbuilt items stay muted text */
+const footerNavGroups: FooterLinkGroup[] = [
+  {
+    title: "Company",
+    links: [
+      { label: "About Parth", href: "#technical-founder" },
+      { label: "Contact", href: "#contact" },
+    ],
+  },
+  {
+    title: "Systems",
+    links: [
+      { label: "AI Systems", href: "#what-we-build" },
+      { label: "Automation", href: "#what-we-build" },
+      { label: "Data Platforms", href: "#what-we-build" },
+      { label: "Internal Tools", href: "#what-we-build" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "GitHub" },
+      { label: "Videos" },
+      { label: "Downloads" },
+      { label: "Proof Library", href: "#proof-library" },
+      { label: "Current Projects", href: "#selected-project-builds" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Discuss a Software Use Case", href: "#contact" },
+      { label: "Email" },
+    ],
+  },
+];
+
+function FooterLinkItem({ link }: { link: FooterLink }) {
+  if (link.href) {
+    return (
+      <Link
+        href={link.href}
+        className="text-sm text-tb-text-on-dark transition-colors hover:text-white sm:text-[15px]"
+      >
+        {link.label}
+      </Link>
+    );
+  }
+
+  return (
+    <span className="text-sm text-tb-text-on-dark-muted/80 sm:text-[15px]">
+      {link.label}
+    </span>
+  );
+}
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -10,41 +66,30 @@ export function SiteFooter() {
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-tb-cyan/20 to-transparent"
         aria-hidden
       />
-      <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8 sm:py-24 lg:py-28">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-6 lg:gap-x-10 lg:gap-y-14">
-          <div className="sm:col-span-2 lg:col-span-2">
-            <p className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+      <div className="mx-auto w-full max-w-6xl px-6 py-16 sm:px-8 sm:py-20 lg:py-24">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-10">
+          <div className="sm:col-span-2 lg:col-span-4">
+            <p className="text-lg font-semibold tracking-tight text-white sm:text-xl">
               Think Big AI Systems
             </p>
-            <p className="mt-2 text-sm text-tb-cyan/90 sm:text-base">
+            <p className="mt-1.5 text-sm text-tb-cyan/90">
               by Think Big Digital Solutions
             </p>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-tb-text-on-dark-muted sm:text-base sm:leading-7">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-tb-text-on-dark-muted">
               AI software systems, workflow applications, automation, internal
               tools, and data platforms built around business use cases.
             </p>
           </div>
 
-          {launchFooterGroups.map((group) => (
-            <div key={group.title} className="min-w-0">
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-tb-text-on-dark-muted">
+          {footerNavGroups.map((group) => (
+            <div key={group.title} className="min-w-0 lg:col-span-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-tb-text-on-dark-muted">
                 {group.title}
               </p>
-              <ul className="mt-5 space-y-3">
+              <ul className="mt-4 space-y-2.5">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                    {link.href ? (
-                      <Link
-                        href={link.href}
-                        className="inline-block text-[15px] leading-snug text-tb-text-on-dark transition-colors hover:text-white sm:text-base"
-                      >
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <span className="inline-block text-[15px] leading-snug text-tb-text-on-dark-muted sm:text-base">
-                        {link.label}
-                      </span>
-                    )}
+                    <FooterLinkItem link={link} />
                   </li>
                 ))}
               </ul>
@@ -52,7 +97,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-tb-navy-border/80 pt-10 text-sm text-tb-text-on-dark-muted sm:flex-row sm:items-center sm:justify-between sm:text-[15px]">
+        <div className="mt-12 flex flex-col gap-3 border-t border-tb-navy-border/80 pt-8 text-sm text-tb-text-on-dark-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Think Big Digital Solutions. Parth Ghumatkar.</p>
           <p>AI software systems microsite</p>
         </div>

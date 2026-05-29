@@ -77,46 +77,46 @@ export function WorkflowDiagram() {
   );
 }
 
-export function SoftwareFirstDiagram() {
-  const steps = [
-    "Problem",
-    "Software Logic",
-    "Data",
-    "AI Layer",
-    "Workflow Output",
-  ] as const;
+const softwareFirstSteps = [
+  "Problem",
+  "Software Logic",
+  "Data",
+  "AI Layer",
+  "Workflow Output",
+] as const;
 
+export function SoftwareFirstDiagram() {
   return (
     <div
-      className="w-full"
+      className="w-full overflow-x-auto"
       aria-label="Software-first flow: problem through software, data, and AI to workflow output"
     >
-      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
-        {steps.map((step, index) => (
-          <div
-            key={step}
-            className="flex flex-1 items-center gap-2 sm:min-w-0 sm:flex-col sm:gap-2 lg:flex-row lg:gap-3"
-          >
-            <div
-              className={`w-full rounded-xl border px-4 py-3.5 text-center text-sm font-semibold sm:flex-1 sm:text-base ${
-                index === 3
-                  ? "border-tb-blue/50 bg-blue-50 text-tb-blue shadow-sm ring-1 ring-tb-blue/20"
-                  : "border-slate-200 bg-white text-tb-text shadow-sm"
-              }`}
-            >
-              {step}
-            </div>
-            {index < steps.length - 1 ? (
+      <ol className="flex flex-wrap items-center justify-center gap-y-2">
+        {softwareFirstSteps.map((step, index) => {
+          const isHighlight = index === 3;
+          return (
+            <li key={step} className="flex items-center">
               <span
-                className="shrink-0 text-center text-lg font-medium text-tb-blue/60 sm:text-xl"
-                aria-hidden
+                className={`whitespace-nowrap rounded-md border px-2.5 py-1.5 text-xs font-medium sm:px-3 sm:py-2 sm:text-sm ${
+                  isHighlight
+                    ? "border-tb-blue/40 bg-blue-50 text-tb-blue"
+                    : "border-slate-200 bg-white text-tb-text"
+                }`}
               >
-                →
+                {step}
               </span>
-            ) : null}
-          </div>
-        ))}
-      </div>
+              {index < softwareFirstSteps.length - 1 ? (
+                <span
+                  className="mx-1.5 shrink-0 text-sm text-tb-text-muted sm:mx-2"
+                  aria-hidden
+                >
+                  →
+                </span>
+              ) : null}
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }
