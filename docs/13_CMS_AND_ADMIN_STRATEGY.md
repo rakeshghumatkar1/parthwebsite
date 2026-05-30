@@ -16,19 +16,21 @@ Define **future** CMS and admin requirements for the Parth microsite—content t
 | Publishing workflow (draft/publish) | CMS states |
 | User roles | Auth + roles (defer until needed) |
 
-**Confirmed:** Phase 1–2 uses empty arrays and hidden sections—no CMS package installed yet.
+**Confirmed (Phase 2.1):** Neon Postgres + Drizzle ORM + custom Next.js admin (admin UI in later prompts). Public Home still uses static launch data until CMS connection phase.
 
 ---
 
-## CMS platform (decision needed)
+## CMS platform (settled)
 
-| Option | Notes |
-|--------|-------|
-| **Payload CMS 3** | Next.js-native, embedded admin, self-hosted |
-| **Sanity** | Strong Studio, separate hosting |
-| **Custom admin + DB** | Maximum control, highest build cost |
+| Choice | Status |
+|--------|--------|
+| **Neon Postgres** | Structured CMS data (Vercel / Neon integration) |
+| **Drizzle ORM** | Schema, migrations, type-safe queries |
+| **@neondatabase/serverless** | Serverless driver for Next.js on Vercel |
+| **Custom admin** | Built in later prompts under `/admin` |
+| **Vercel Blob** | Deferred — URL-only media metadata in Phase 2.1 |
 
-**Recommendation:** Choose one before Phase 3 implementation; document choice in `00` gaps when confirmed.
+Schema lives in `src/db/schema/`. Migrations in `drizzle/migrations/`. Do not connect public pages until explicitly scoped.
 
 ---
 
@@ -282,8 +284,8 @@ Otherwise link to approved GitHub profile only.
 
 ## Gaps / decisions needed
 
-- CMS platform selection  
 - Rich text sanitizer (server-safe on Vercel)  
 - Admin auth (password gate vs SSO)  
-- Image CDN (Vercel Blob, S3, CMS built-in)  
+- Image CDN (Vercel Blob for uploads — metadata table exists)  
 - Draft preview URL strategy  
+- Production Neon migrate approval workflow  

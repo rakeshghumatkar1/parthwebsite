@@ -29,11 +29,22 @@ npm run build
 Additional checks when schema/CMS is in scope:
 
 - Migration applies cleanly locally  
-- Admin login works  
+- Admin login works (when admin exists)  
 - Public routes still build without CMS data  
 - No secret keys in repo  
 
-**Static-only phases:** DB validation not required.
+**DB foundation scripts (Phase 2.1+):**
+
+```bash
+npm run db:generate    # generate migration from schema changes
+npm run db:migrate     # apply migrations (dev/preview only until approved for prod)
+npm run db:preflight   # verify DATABASE_URL and connectivity
+npm run db:studio      # Drizzle Studio (optional)
+```
+
+**Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
+
+**Static-only / schema-only commits:** DB validation not required if no public route imports `getDb()`.
 
 ---
 
