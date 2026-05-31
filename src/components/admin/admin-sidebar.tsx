@@ -2,29 +2,32 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import type { AdminUser } from "@/db/schema/admin-auth";
 
-const navGroups = [
-  {
-    label: "Overview",
-    items: [{ href: "/admin", label: "Dashboard", exact: true }],
-  },
-  {
-    label: "Content",
-    items: [
-      { href: "/admin/projects", label: "Projects" },
-      { href: "/admin/proof", label: "Proof Library" },
-      { href: "/admin/videos", label: "Videos" },
-      { href: "/admin/milestones", label: "Timeline" },
-      { href: "/admin/updates", label: "Updates" },
-      { href: "/admin/media", label: "Media Library" },
-    ],
-  },
-  {
-    label: "Support",
-    items: [{ href: "/admin/help", label: "Help" }],
-  },
-] as const;
+type NavItem = {
+  href: string;
+  label: string;
+  exact?: boolean;
+};
+
+const overviewItems: NavItem[] = [
+  { href: "/admin", label: "Dashboard", exact: true },
+];
+
+const contentItems: NavItem[] = [
+  { href: "/admin/projects", label: "Projects" },
+  { href: "/admin/updates", label: "Updates" },
+  { href: "/admin/media", label: "Media Library" },
+];
+
+const archivedItems: NavItem[] = [
+  { href: "/admin/proof", label: "Proof Library" },
+  { href: "/admin/videos", label: "Videos" },
+  { href: "/admin/milestones", label: "Timeline" },
+];
+
+const supportItems: NavItem[] = [{ href: "/admin/help", label: "Help" }];
 
 function isActive(pathname: string, href: string, exact?: boolean) {
   if (exact) {
@@ -33,12 +36,66 @@ function isActive(pathname: string, href: string, exact?: boolean) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+function isArchivedRouteActive(pathname: string) {
+  return archivedItems.some((item) => isActive(pathname, item.href));
+}
+
+function NavLinkList({ items, pathname }: { items: NavItem[]; pathname: string }) {
+  return (
+    <ul className="space-y-0.5">
+      {items.map((item) => {
+        const active = isActive(pathname, item.href, item.exact);
+        return (
+          <li key={item.href}>
+            <Link
+              href={item.href}
+              className={`block rounded-md px-2.5 py-2 text-sm font-medium transition ${
+                active
+                  ? "bg-tb-blue/10 text-tb-blue"
+                  : "text-tb-text hover:bg-slate-50"
+              }`}
+            >
+              {item.label}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function NavGroup({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <p className="mb-1.5 px-2 text-[11px] font-semibold uppercase tracking-wide text-tb-text-muted">
+        {label}
+      </p>
+      {children}
+    </div>
+  );
+}
+
 type AdminSidebarProps = {
   admin: AdminUser;
 };
 
 export function AdminSidebar({ admin }: AdminSidebarProps) {
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  const [archivedOpen, setArchivedOpen] = useState(() =>
+    isArchivedRouteActive(pathname),
+  );
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setArchivedOpen(isArchivedRouteActive(pathname));
+  }
 
   return (
     <aside className="flex w-56 shrink-0 flex-col border-r border-slate-200 bg-white">
@@ -51,36 +108,40 @@ export function AdminSidebar({ admin }: AdminSidebarProps) {
       </div>
 
       <nav className="flex-1 space-y-4 overflow-y-auto px-3 py-4">
-        {navGroups.map((group) => (
-          <div key={group.label}>
-            <p className="mb-1.5 px-2 text-[11px] font-semibold uppercase tracking-wide text-tb-text-muted">
-              {group.label}
-            </p>
-            <ul className="space-y-0.5">
-              {group.items.map((item) => {
-                const active = isActive(
-                  pathname,
-                  item.href,
-                  "exact" in item ? item.exact : false,
-                );
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`block rounded-md px-2.5 py-2 text-sm font-medium transition ${
-                        active
-                          ? "bg-tb-blue/10 text-tb-blue"
-                          : "text-tb-text hover:bg-slate-50"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+        <NavGroup label="Overview">
+          <NavLinkList items={overviewItems} pathname={pathname} />
+        </NavGroup>
+
+        <NavGroup label="Content">
+          <NavLinkList items={contentItems} pathname={pathname} />
+        </NavGroup>
+
+        <div>
+          <button
+            type="button"
+            aria-expanded={archivedOpen}
+            aria-controls="admin-archived-nav"
+            onClick={() => setArchivedOpen((open) => !open)}
+            className="mb-1.5 flex w-full items-center justify-between rounded-md px-2 py-1 text-left text-[11px] font-semibold uppercase tracking-wide text-tb-text-muted transition hover:bg-slate-50 hover:text-tb-text"
+          >
+            <span>Archived</span>
+            <span
+              aria-hidden
+              className={`text-xs transition-transform ${archivedOpen ? "rotate-90" : ""}`}
+            >
+              ▸
+            </span>
+          </button>
+          {archivedOpen ? (
+            <div id="admin-archived-nav">
+              <NavLinkList items={archivedItems} pathname={pathname} />
+            </div>
+          ) : null}
+        </div>
+
+        <NavGroup label="Support">
+          <NavLinkList items={supportItems} pathname={pathname} />
+        </NavGroup>
       </nav>
 
       <div className="border-t border-slate-100 px-4 py-4">
