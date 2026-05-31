@@ -66,3 +66,39 @@ export function formatDomainsCompact(values: string[]): string {
   if (labels.length <= 2) return labels.join(", ");
   return `${labels.slice(0, 2).join(", ")} +${labels.length - 2}`;
 }
+
+function taxonomyValueToSlug(value: string): string {
+  return value.replace(/_/g, "-");
+}
+
+function taxonomySlugToValue(slug: string): string {
+  return slug.trim().toLowerCase().replace(/-/g, "_");
+}
+
+export function industrySlug(value: string): string {
+  return taxonomyValueToSlug(value);
+}
+
+export function industryValueFromSlug(slug: string): IndustryValue | null {
+  const value = taxonomySlugToValue(slug);
+  return INDUSTRY_VALUES.includes(value as IndustryValue)
+    ? (value as IndustryValue)
+    : null;
+}
+
+export function domainSlug(value: string): string {
+  return taxonomyValueToSlug(value);
+}
+
+export function domainValueFromSlug(slug: string): DomainValue | null {
+  const value = taxonomySlugToValue(slug);
+  return DOMAIN_VALUES.includes(value as DomainValue) ? (value as DomainValue) : null;
+}
+
+export function allIndustrySlugs(): string[] {
+  return INDUSTRY_VALUES.map(industrySlug);
+}
+
+export function allDomainSlugs(): string[] {
+  return DOMAIN_VALUES.map(domainSlug);
+}

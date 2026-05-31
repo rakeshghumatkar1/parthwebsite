@@ -1,4 +1,4 @@
-import { and, asc, count, desc, eq, ilike, or, type SQL } from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, or, sql, type SQL } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db";
 import { projects, type Project } from "@/db/schema/projects";
 import {
@@ -45,6 +45,8 @@ export type PublicProjectListFilters = {
   status?: string;
   q?: string;
   projectPhase?: "current_work" | "early_work";
+  industry?: string;
+  domain?: string;
 };
 
 function buildPublicProjectListConditions(
@@ -60,6 +62,14 @@ function buildPublicProjectListConditions(
   }
   if (filters.status) {
     conditions.push(eq(projects.status, filters.status as never));
+  }
+  if (filters.industry) {
+    conditions.push(eq(projects.industry, filters.industry as never));
+  }
+  if (filters.domain) {
+    conditions.push(
+      sql`${projects.domains} @> ARRAY[${filters.domain}]::project_domain[]`,
+    );
   }
   const q = filters.q?.trim();
   if (q) {
@@ -178,9 +188,12 @@ export async function getPublicProjects(
   return queryPublicProjects(buildPublicProjectListConditions(filters));
 }
 
-/** Total published public projects, optionally filtered by phase. */
+/** Total published public projects, optionally filtered. */
 export async function getPublicProjectsCount(
-  filters: Pick<PublicProjectListFilters, "projectPhase"> = {},
+  filters: Pick<
+    PublicProjectListFilters,
+    "projectPhase" | "industry" | "domain"
+  > = {},
 ): Promise<number> {
   if (!isDatabaseConfigured()) {
     return 0;

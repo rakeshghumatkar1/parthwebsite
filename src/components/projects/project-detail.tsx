@@ -1,13 +1,14 @@
 import Link from "next/link";
 import type { PublicProject } from "@/lib/public/projects";
 import {
-  domainLabels,
+  domainLabel,
   industryLabel,
   projectHasLinks,
   projectPhaseLabel,
   projectStatusLabel,
   projectTypeLabel,
 } from "@/lib/public/projects";
+import { domainSlug, industrySlug } from "@/lib/projects/taxonomy";
 import type { YouTubeEmbed } from "@/lib/public/youtube";
 
 type ProjectLinksPanelProps = {
@@ -85,6 +86,31 @@ function ProjectTagList({ tags }: { tags: string[] }) {
   );
 }
 
+function ProjectTaxonomyTagList({
+  items,
+}: {
+  items: Array<{ label: string; href: string }>;
+}) {
+  if (items.length === 0) {
+    return <span className="text-tb-text-muted">—</span>;
+  }
+
+  return (
+    <ul className="flex flex-wrap gap-2">
+      {items.map((item) => (
+        <li key={item.href}>
+          <Link
+            href={item.href}
+            className="inline-flex max-w-full rounded-full border border-slate-200 bg-tb-surface-muted px-3 py-1 text-xs font-medium text-tb-blue break-words transition hover:border-tb-blue/40 hover:underline sm:text-sm"
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function ProjectContextPanel({ project }: { project: PublicProject }) {
   return (
     <aside className="rounded-2xl border border-slate-200 bg-white p-6">
@@ -100,10 +126,20 @@ export function ProjectContextPanel({ project }: { project: PublicProject }) {
           {projectStatusLabel(project.status)}
         </ProjectContextRow>
         <ProjectContextRow label="Industry">
-          {industryLabel(project.industry)}
+          <Link
+            href={`/projects/industry/${industrySlug(project.industry)}`}
+            className="text-tb-blue hover:underline"
+          >
+            {industryLabel(project.industry)}
+          </Link>
         </ProjectContextRow>
         <ProjectContextRow label="Domains">
-          <ProjectTagList tags={domainLabels(project.domains)} />
+          <ProjectTaxonomyTagList
+            items={project.domains.map((domain) => ({
+              label: domainLabel(domain),
+              href: `/projects/domain/${domainSlug(domain)}`,
+            }))}
+          />
         </ProjectContextRow>
         <ProjectContextRow label="Tech stack">
           <ProjectTagList tags={project.techStack} />

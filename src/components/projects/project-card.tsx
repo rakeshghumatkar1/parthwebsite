@@ -6,7 +6,11 @@ import {
   projectStatusLabel,
   projectTypeLabel,
 } from "@/lib/public/projects";
-import { domainLabels } from "@/lib/projects/taxonomy";
+import {
+  domainLabel,
+  domainSlug,
+  industrySlug,
+} from "@/lib/projects/taxonomy";
 
 type ProjectCardProps = {
   project: PublicProject;
@@ -19,15 +23,11 @@ export function ProjectCard({ project, dark = false }: ProjectCardProps) {
     : "border-slate-200 bg-white hover:border-tb-blue/30 shadow-sm";
 
   const mutedText = dark ? "text-tb-text-on-dark-muted" : "text-tb-text-muted";
-  const domainLabelList = domainLabels(project.domains);
-  const visibleDomains = domainLabelList.slice(0, 2);
-  const extraDomainCount = domainLabelList.length - visibleDomains.length;
-  const domainsText =
-    visibleDomains.length === 0
-      ? "—"
-      : extraDomainCount > 0
-        ? `${visibleDomains.join(", ")} +${extraDomainCount}`
-        : visibleDomains.join(", ");
+  const linkClass = dark
+    ? "font-medium text-tb-cyan hover:underline"
+    : "font-medium text-tb-blue hover:underline";
+  const visibleDomains = project.domains.slice(0, 2);
+  const extraDomainCount = project.domains.length - visibleDomains.length;
 
   return (
     <article
@@ -72,13 +72,35 @@ export function ProjectCard({ project, dark = false }: ProjectCardProps) {
           <span className={`font-medium ${dark ? "text-tb-text-on-dark" : "text-tb-text"}`}>
             Industry:
           </span>{" "}
-          {industryLabel(project.industry)}
+          <Link
+            href={`/projects/industry/${industrySlug(project.industry)}`}
+            className={linkClass}
+          >
+            {industryLabel(project.industry)}
+          </Link>
         </p>
         <p className="break-words">
           <span className={`font-medium ${dark ? "text-tb-text-on-dark" : "text-tb-text"}`}>
             Domains:
           </span>{" "}
-          {domainsText}
+          {visibleDomains.length === 0 ? (
+            "—"
+          ) : (
+            <>
+              {visibleDomains.map((domain, index) => (
+                <span key={domain}>
+                  {index > 0 ? ", " : null}
+                  <Link
+                    href={`/projects/domain/${domainSlug(domain)}`}
+                    className={linkClass}
+                  >
+                    {domainLabel(domain)}
+                  </Link>
+                </span>
+              ))}
+              {extraDomainCount > 0 ? ` +${extraDomainCount}` : null}
+            </>
+          )}
         </p>
       </div>
       {project.techStack.length > 0 ? (
