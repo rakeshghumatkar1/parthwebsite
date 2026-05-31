@@ -5,12 +5,14 @@ import {
   projectStatusLabel,
   projectTypeLabel,
 } from "@/lib/public/projects";
+import type { YouTubeEmbed } from "@/lib/public/youtube";
 
 type ProjectLinksPanelProps = {
   project: PublicProject;
+  youtubeEmbed?: YouTubeEmbed | null;
 };
 
-export function ProjectLinksPanel({ project }: ProjectLinksPanelProps) {
+export function ProjectLinksPanel({ project, youtubeEmbed }: ProjectLinksPanelProps) {
   if (!projectHasLinks(project)) {
     return null;
   }
@@ -18,7 +20,9 @@ export function ProjectLinksPanel({ project }: ProjectLinksPanelProps) {
   const links = [
     { label: "GitHub", href: project.githubUrl },
     { label: "Live demo", href: project.demoUrl },
-    { label: "Video", href: project.videoUrl },
+    ...(youtubeEmbed
+      ? []
+      : [{ label: "Video", href: project.videoUrl }]),
     { label: "PDF download", href: project.pdfDownloadUrl },
   ].filter((link): link is { label: string; href: string } => Boolean(link.href));
 
@@ -58,6 +62,45 @@ export function ProjectDetailSection({
       <div className="mt-4 text-sm leading-relaxed text-tb-text-muted sm:text-base">
         {children}
       </div>
+    </section>
+  );
+}
+
+type ProjectVideoEmbedProps = {
+  project: PublicProject;
+  embed: YouTubeEmbed;
+};
+
+export function ProjectVideoEmbed({ project, embed }: ProjectVideoEmbedProps) {
+  const sectionTitle =
+    project.projectPhase === "early_work" ? "Early project demo" : "Project video";
+  const iframeTitle = `${project.title} video on YouTube`;
+
+  return (
+    <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <h2 className="text-lg font-semibold text-tb-text">{sectionTitle}</h2>
+      <p className="mt-2 text-sm leading-relaxed text-tb-text-muted sm:text-base">
+        Watch the demo directly on this page.
+      </p>
+      <div className="mt-4 aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-black">
+        <iframe
+          src={embed.embedUrl}
+          title={iframeTitle}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
+          className="h-full w-full"
+        />
+      </div>
+      <a
+        href={embed.originalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 inline-flex text-sm font-medium text-tb-blue hover:underline"
+      >
+        Open on YouTube
+      </a>
     </section>
   );
 }

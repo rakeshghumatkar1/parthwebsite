@@ -6,9 +6,11 @@ import {
   ProjectDetailHeader,
   ProjectDetailSection,
   ProjectLinksPanel,
+  ProjectVideoEmbed,
 } from "@/components/projects/project-detail";
 import { Section } from "@/components/ui/section";
 import { getPublicProjectBySlug } from "@/lib/public/projects";
+import { parseYouTubeUrl } from "@/lib/public/youtube";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -54,6 +56,10 @@ export default async function ProjectDetailPage({
     { title: "Parth's role", content: project.parthRole },
   ].filter((section) => section.content?.trim());
 
+  const youtubeEmbed = project.videoUrl
+    ? parseYouTubeUrl(project.videoUrl)
+    : null;
+
   return (
     <div className="flex min-h-full flex-col">
       <SiteHeader />
@@ -62,6 +68,9 @@ export default async function ProjectDetailPage({
           <div className="grid gap-10 lg:grid-cols-[1fr_280px] lg:items-start">
             <div className="space-y-8">
               <ProjectDetailHeader project={project} />
+              {youtubeEmbed ? (
+                <ProjectVideoEmbed project={project} embed={youtubeEmbed} />
+              ) : null}
               {sections.length > 0 ? (
                 <div className="space-y-6">
                   {sections.map((section) => (
@@ -72,7 +81,7 @@ export default async function ProjectDetailPage({
                 </div>
               ) : null}
             </div>
-            <ProjectLinksPanel project={project} />
+            <ProjectLinksPanel project={project} youtubeEmbed={youtubeEmbed} />
           </div>
         </Section>
       </main>
