@@ -6,7 +6,6 @@ const CONTACT_URL = "https://thinkbigdigital.co/contact";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Proof", href: "/proof" },
   { label: "Downloads", href: "/downloads" },
   { label: "About Us", href: "/about-us" },
 ] as const;

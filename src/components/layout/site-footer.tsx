@@ -15,8 +15,8 @@ const footerNavGroups: FooterLinkGroup[] = [
   {
     title: "Work",
     links: [
-      { label: "Projects", href: "/projects" },
-      { label: "Proof", href: "/proof" },
+      { label: "Current Projects", href: "/projects" },
+      { label: "Early Work", href: "/projects/early-work" },
       { label: "Updates", href: "/updates" },
     ],
   },
