@@ -86,12 +86,14 @@ export function AdminSidebar({ admin }: AdminSidebarProps) {
       <div className="border-t border-slate-100 px-4 py-4">
         <p className="truncate text-xs font-medium text-tb-text">{admin.name}</p>
         <p className="truncate text-xs text-tb-text-muted">{admin.email}</p>
-        <Link
-          href="/admin/logout"
-          className="mt-2 inline-block text-xs font-medium text-tb-blue hover:underline"
-        >
-          Log out
-        </Link>
+        <form action="/admin/logout" method="POST" className="mt-2">
+          <button
+            type="submit"
+            className="text-xs font-medium text-tb-blue hover:underline"
+          >
+            Log out
+          </button>
+        </form>
       </div>
     </aside>
   );

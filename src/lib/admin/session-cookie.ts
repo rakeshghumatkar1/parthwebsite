@@ -7,20 +7,22 @@ export async function setSessionCookie(token: string): Promise<void> {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/admin",
+    path: "/",
     maxAge: SESSION_MAX_AGE_SECONDS,
   });
 }
 
 export async function clearSessionCookie(): Promise<void> {
   const cookieStore = await cookies();
-  cookieStore.set(ADMIN_SESSION_COOKIE, "", {
+  const base = {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "lax" as const,
     secure: process.env.NODE_ENV === "production",
-    path: "/admin",
     maxAge: 0,
-  });
+  };
+  // Clear current path and legacy /admin-scoped cookies from earlier builds.
+  cookieStore.set(ADMIN_SESSION_COOKIE, "", { ...base, path: "/" });
+  cookieStore.set(ADMIN_SESSION_COOKIE, "", { ...base, path: "/admin" });
 }
 
 export async function getSessionTokenFromCookie(): Promise<string | undefined> {
