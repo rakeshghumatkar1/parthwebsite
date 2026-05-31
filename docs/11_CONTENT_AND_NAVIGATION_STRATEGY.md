@@ -79,7 +79,9 @@ Use this status for every route before exposing it in nav:
 7. About Parth  
 8. Contact  
 
-**Current MVP nav** (implemented): shortened in-page anchors — Proof, Systems, Process, Founder, Contact — per `05` until full routes exist.
+**Current header nav** (Phase 3.2): Home, Projects, Proof, Videos, About Parth, Updates — all real public routes. CTA **Discuss a Software Use Case** → `/#contact`. Home section anchors removed from top nav; use footer Systems links or navigate Home for in-page sections.
+
+**Previous MVP nav** (Phase 1–2): shortened in-page anchors — Review, Systems, Process, Founder, Contact — replaced when public CMS routes went Live.
 
 **Navigation rule**
 
@@ -95,11 +97,12 @@ Footer **may** include more links than top nav (Systems, Proof, Company groups).
 **Footer rules**
 
 - Same Approved/Live rule—no broken routes.
-- In-page anchors (`#proof-before-claims`, `#contact`) acceptable on home until pages exist.
+- In-page anchors on home use **root-aware** URLs (`/#contact`, `/#what-we-build`) so they work from any public page.
+- GitHub, Downloads, Email, and `/contact` remain muted until approved routes or URLs exist.
 - Think Big Digital Solutions attribution allowed; link to main site only when URL approved.
 - Legal links (Privacy, Terms) only when pages are Live.
 
-**Current footer** (Phase 1–2): Systems / Proof / Company groups with in-page anchors — acceptable for MVP.
+**Current footer** (Phase 3.2): Company, Systems (root-aware home anchors), Resources (built CMS routes + muted GitHub), Connect (`/#contact` + muted Email).
 
 ---
 

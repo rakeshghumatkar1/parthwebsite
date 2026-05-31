@@ -6,6 +6,8 @@ Reusable structure for future Parth microsite pages—purpose, sections, CMS nee
 
 **Tone:** Mature, proof-led, technical founder—not student portfolio or prodigy narrative.
 
+**Site navigation (Phase 3.2):** `SiteHeader` links to built public routes (`/`, `/projects`, `/proof`, `/videos`, `/about-parth`, `/updates`); CTA → `/#contact`. `SiteFooter` mirrors built routes plus root-aware home anchors for Systems and Contact. No new pages created in this phase.
+
 ---
 
 ## Blueprint index

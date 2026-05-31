@@ -141,7 +141,7 @@ Commit **only if all apply**:
 | Validation | tsc, lint, build pass |
 | Audit | Pass or Pass with follow-up (no must-fix blockers) |
 | Scope | Only intended files changed |
-| Links | No new broken nav/footer links |
+| Links | No new broken nav/footer links; home anchors use root-aware `/#…` URLs from header/footer |
 | Exposure | No unfinished pages added to nav |
 | Proof integrity | No fake projects, proof, metrics, or URLs |
 | Surprises | No unexpected package/DB/auth file changes |

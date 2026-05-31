@@ -7,16 +7,16 @@ const footerNavGroups: FooterLinkGroup[] = [
     title: "Company",
     links: [
       { label: "About Parth", href: "/about-parth" },
-      { label: "Contact", href: "#contact" },
+      { label: "Contact", href: "/#contact" },
     ],
   },
   {
     title: "Systems",
     links: [
-      { label: "AI Systems", href: "#what-we-build" },
-      { label: "Automation", href: "#what-we-build" },
-      { label: "Data Platforms", href: "#what-we-build" },
-      { label: "Internal Tools", href: "#what-we-build" },
+      { label: "AI Systems", href: "/#what-we-build" },
+      { label: "Automation", href: "/#what-we-build" },
+      { label: "Data Platforms", href: "/#what-we-build" },
+      { label: "Internal Tools", href: "/#what-we-build" },
     ],
   },
   {
@@ -32,7 +32,7 @@ const footerNavGroups: FooterLinkGroup[] = [
   {
     title: "Connect",
     links: [
-      { label: "Discuss a Software Use Case", href: "#contact" },
+      { label: "Discuss a Software Use Case", href: "/#contact" },
       { label: "Email" },
     ],
   },

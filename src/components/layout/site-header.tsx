@@ -2,12 +2,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { label: "Review", href: "#work-you-can-review" },
-  { label: "Systems", href: "#what-we-build" },
+  { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Process", href: "#how-the-work-happens" },
-  { label: "Founder", href: "#technical-founder" },
-  { label: "Contact", href: "#contact" },
+  { label: "Proof", href: "/proof" },
+  { label: "Videos", href: "/videos" },
+  { label: "About Parth", href: "/about-parth" },
+  { label: "Updates", href: "/updates" },
 ] as const;
 
 export function SiteHeader() {
@@ -39,7 +39,7 @@ export function SiteHeader() {
         </nav>
 
         <Button
-          href="#contact"
+          href="/#contact"
           variant="primary"
           dark
           className="shrink-0 !px-4 !py-2.5 text-sm sm:!px-5 sm:!text-base"
