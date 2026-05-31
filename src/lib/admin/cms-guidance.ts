@@ -191,7 +191,7 @@ export const FIELD_HINTS = {
   whatThisProves: "What credibility this proof provides.",
   problemSolved: "What problem the project addresses.",
   whatItDoes: "Plain summary of what the project does.",
-  parthRole: "Parth's role or ownership.",
+  parthRole: "What was directly built, configured, reviewed, or owned in this project.",
   githubUrl: "Use the full URL, starting with https://",
   demoUrl: "Use the full URL, starting with https://",
   videoUrl: "Use the full URL, starting with https://",

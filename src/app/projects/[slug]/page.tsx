@@ -53,7 +53,7 @@ export default async function ProjectDetailPage({
     { title: "Overview", content: project.fullDescription },
     { title: "Problem solved", content: project.problemSolved },
     { title: "What it does", content: project.whatItDoes },
-    { title: "Parth's role", content: project.parthRole },
+    { title: "Contribution", content: project.parthRole },
   ].filter((section) => section.content?.trim());
 
   const youtubeEmbed = project.videoUrl

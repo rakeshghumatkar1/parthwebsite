@@ -8,8 +8,10 @@ import {
 } from "@/components/admin/admin-auth-panel";
 import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import {
+  AdminCollapsibleFormSection,
   AdminFieldHint,
   AdminFormSection,
+  AdminOptionalFieldsNote,
   AdminRequiredFieldsNote,
 } from "@/components/admin/admin-form-section";
 import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
@@ -25,7 +27,50 @@ import {
   PROJECT_TYPE_OPTIONS,
 } from "@/lib/admin/projects/constants";
 import { suggestSlug } from "@/lib/admin/projects/slug";
-import type { ProjectFormState, ProjectFormValues } from "@/lib/admin/projects/types";
+import type { ProjectFormErrors, ProjectFormState, ProjectFormValues } from "@/lib/admin/projects/types";
+
+const DETAIL_FIELDS = [
+  "fullDescription",
+  "problemSolved",
+  "whatItDoes",
+  "parthRole",
+] as const satisfies ReadonlyArray<keyof ProjectFormValues>;
+
+const TECH_FIELDS = ["techStack"] as const satisfies ReadonlyArray<
+  keyof ProjectFormValues
+>;
+
+const LINK_FIELDS = [
+  "githubUrl",
+  "demoUrl",
+  "videoUrl",
+  "pdfDownloadUrl",
+] as const satisfies ReadonlyArray<keyof ProjectFormValues>;
+
+function sectionHasContent(
+  values: ProjectFormValues,
+  fields: ReadonlyArray<keyof ProjectFormValues>,
+) {
+  return fields.some((field) => String(values[field]).trim());
+}
+
+function sectionHasErrors(
+  errors: ProjectFormErrors,
+  fields: ReadonlyArray<keyof ProjectFormValues>,
+) {
+  return fields.some((field) => Boolean(errors[field]));
+}
+
+function defaultSectionOpen(
+  mode: "create" | "edit",
+  values: ProjectFormValues,
+  errors: ProjectFormErrors,
+  fields: ReadonlyArray<keyof ProjectFormValues>,
+) {
+  if (sectionHasErrors(errors, fields)) return true;
+  if (mode === "edit" && sectionHasContent(values, fields)) return true;
+  return false;
+}
 
 const emptyValues: ProjectFormValues = {
   title: "",
@@ -79,6 +124,29 @@ export function ProjectForm({
     slugEditedManually ||
     Boolean(state.resetKey && values.slug);
 
+  const [prevResetKey, setPrevResetKey] = useState(state.resetKey);
+  const [detailsOpen, setDetailsOpen] = useState(() =>
+    defaultSectionOpen(mode, values, errors, DETAIL_FIELDS),
+  );
+  const [techOpen, setTechOpen] = useState(() =>
+    defaultSectionOpen(mode, values, errors, TECH_FIELDS),
+  );
+  const [linksOpen, setLinksOpen] = useState(() =>
+    defaultSectionOpen(mode, values, errors, LINK_FIELDS),
+  );
+
+  if (state.resetKey !== prevResetKey) {
+    setPrevResetKey(state.resetKey);
+    if (sectionHasErrors(errors, DETAIL_FIELDS)) setDetailsOpen(true);
+    if (sectionHasErrors(errors, TECH_FIELDS)) setTechOpen(true);
+    if (sectionHasErrors(errors, LINK_FIELDS)) setLinksOpen(true);
+  }
+
+  const showDetails =
+    sectionHasErrors(errors, DETAIL_FIELDS) || detailsOpen;
+  const showTech = sectionHasErrors(errors, TECH_FIELDS) || techOpen;
+  const showLinks = sectionHasErrors(errors, LINK_FIELDS) || linksOpen;
+
   function handleTitleChange(title: string) {
     if (!slugTouched && mode === "create") {
       const slugInput = document.getElementById("slug") as HTMLInputElement | null;
@@ -99,6 +167,7 @@ export function ProjectForm({
       <AdminCmsNotice />
       <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.projects.formIntro}</p>
       <AdminRequiredFieldsNote />
+      <AdminOptionalFieldsNote />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-6">
@@ -228,9 +297,12 @@ export function ProjectForm({
             </AdminField>
           </AdminFormSection>
 
-          <AdminFormSection
+          <AdminCollapsibleFormSection
+            id="project-details"
             title="Project details"
             description="Longer copy for detail pages and About references."
+            open={showDetails}
+            onToggle={() => setDetailsOpen((open) => !open)}
           >
             <AdminField
               id="fullDescription"
@@ -279,7 +351,7 @@ export function ProjectForm({
 
             <AdminField
               id="parthRole"
-              label="Parth's role"
+              label="Contribution"
               error={errors.parthRole}
               hint={FIELD_HINTS.parthRole}
             >
@@ -291,11 +363,14 @@ export function ProjectForm({
                 className={adminInputClassName(Boolean(errors.parthRole))}
               />
             </AdminField>
-          </AdminFormSection>
+          </AdminCollapsibleFormSection>
 
-          <AdminFormSection
+          <AdminCollapsibleFormSection
+            id="project-tech-stack"
             title="Tech stack"
             description="Comma-separated tags shown as pills on cards."
+            open={showTech}
+            onToggle={() => setTechOpen((open) => !open)}
           >
             <AdminField
               id="techStack"
@@ -310,11 +385,14 @@ export function ProjectForm({
                 className={adminInputClassName(Boolean(errors.techStack))}
               />
             </AdminField>
-          </AdminFormSection>
+          </AdminCollapsibleFormSection>
 
-          <AdminFormSection
+          <AdminCollapsibleFormSection
+            id="project-links"
             title="Links"
             description="Only add approved real URLs. Leave blank if not available yet."
+            open={showLinks}
+            onToggle={() => setLinksOpen((open) => !open)}
           >
             <AdminField
               id="githubUrl"
@@ -384,7 +462,7 @@ export function ProjectForm({
               Add cover images in Media Library, then paste the URL here or link
               via project detail fields when ready.
             </AdminFieldHint>
-          </AdminFormSection>
+          </AdminCollapsibleFormSection>
         </div>
 
         <aside className="space-y-3">
