@@ -27,3 +27,10 @@ export const RESERVED_SLUGS = [
 
 export const PROJECT_TYPE_VALUES = PROJECT_TYPE_OPTIONS.map((o) => o.value);
 export const PROJECT_STATUS_VALUES = PROJECT_STATUS_OPTIONS.map((o) => o.value);
+
+export const PROJECT_PHASE_OPTIONS = [
+  { value: "current_work", label: "Current Work" },
+  { value: "early_work", label: "Early Work" },
+] as const;
+
+export const PROJECT_PHASE_VALUES = PROJECT_PHASE_OPTIONS.map((o) => o.value);

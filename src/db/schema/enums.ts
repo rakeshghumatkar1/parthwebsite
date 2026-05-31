@@ -17,6 +17,11 @@ export const projectStatusEnum = pgEnum("project_status", [
   "concept",
 ]);
 
+export const projectPhaseEnum = pgEnum("project_phase", [
+  "current_work",
+  "early_work",
+]);
+
 export const proofTypeEnum = pgEnum("proof_type", [
   "github",
   "youtube",

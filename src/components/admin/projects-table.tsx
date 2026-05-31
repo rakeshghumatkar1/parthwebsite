@@ -13,6 +13,7 @@ import {
 import { AdminTableShell } from "./ui/admin-table-shell";
 import {
   ProjectFeaturedFlags,
+  ProjectPhaseLabel,
   ProjectStatusBadge,
   ProjectStatusLabel,
   ProjectTypeLabel,
@@ -63,6 +64,7 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
         <thead className="bg-slate-50">
           <tr>
             <th className={adminTableHeadCellClass}>Title</th>
+            <th className={adminTableHeadCellClass}>Phase</th>
             <th className={adminTableHeadCellClass}>Type</th>
             <th className={adminTableHeadCellClass}>Status</th>
             <th className={adminTableHeadCellClass}>Visibility</th>
@@ -78,6 +80,9 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
               <td className={adminTableBodyCellClass}>
                 <div className="font-medium">{project.title}</div>
                 <div className="text-xs text-tb-text-muted">{project.slug}</div>
+              </td>
+              <td className={adminTableBodyCellClass}>
+                <ProjectPhaseLabel value={project.projectPhase} />
               </td>
               <td className={adminTableBodyCellClass}>
                 <ProjectTypeLabel value={project.projectType} />

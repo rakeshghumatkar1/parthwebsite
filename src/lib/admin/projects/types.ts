@@ -6,6 +6,7 @@ export type ProjectFormValues = {
   shortDescription: string;
   fullDescription: string;
   projectType: string;
+  projectPhase: string;
   status: string;
   techStack: string;
   problemSolved: string;

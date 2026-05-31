@@ -165,6 +165,7 @@ export const FIELD_HINTS = {
   shortDescription: "One or two sentences for cards. Required for projects.",
   fullDescription: "Optional longer text for detail pages.",
   projectType: "Category: internal tool, AI system, automation, data platform, SaaS, content/media, other.",
+  projectPhase: "Timeline classification: Current Work (recent software systems) or Early Work (childhood/early builds).",
   status: "Lifecycle: active, experiment, archived, or concept.",
   proofType: "Evidence type: GitHub, screenshot, PDF, recognition, presentation, etc.",
   updateType: "What changed: new project, repo, video, proof, feature, technical note, status change.",

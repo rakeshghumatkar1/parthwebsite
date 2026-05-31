@@ -1,4 +1,5 @@
 import {
+  PROJECT_PHASE_OPTIONS,
   PROJECT_STATUS_OPTIONS,
   PROJECT_TYPE_OPTIONS,
 } from "@/lib/admin/projects/constants";
@@ -6,6 +7,9 @@ import { AdminBadge } from "./ui/admin-badge";
 
 const typeLabels = Object.fromEntries(
   PROJECT_TYPE_OPTIONS.map((o) => [o.value, o.label]),
+);
+const phaseLabels = Object.fromEntries(
+  PROJECT_PHASE_OPTIONS.map((o) => [o.value, o.label]),
 );
 const statusLabels = Object.fromEntries(
   PROJECT_STATUS_OPTIONS.map((o) => [o.value, o.label]),
@@ -41,6 +45,10 @@ export function ProjectStatusBadge({
 
 export function ProjectTypeLabel({ value }: { value: string }) {
   return <>{typeLabels[value] ?? value}</>;
+}
+
+export function ProjectPhaseLabel({ value }: { value: string }) {
+  return <>{phaseLabels[value] ?? value}</>;
 }
 
 export function ProjectStatusLabel({ value }: { value: string }) {

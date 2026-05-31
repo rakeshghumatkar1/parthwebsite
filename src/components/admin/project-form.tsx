@@ -19,6 +19,7 @@ import {
   updateProjectAction,
 } from "@/lib/admin/projects/actions";
 import {
+  PROJECT_PHASE_OPTIONS,
   PROJECT_STATUS_OPTIONS,
   PROJECT_TYPE_OPTIONS,
 } from "@/lib/admin/projects/constants";
@@ -31,6 +32,7 @@ const emptyValues: ProjectFormValues = {
   shortDescription: "",
   fullDescription: "",
   projectType: "",
+  projectPhase: "current_work",
   status: "active",
   techStack: "",
   problemSolved: "",
@@ -169,20 +171,19 @@ export function ProjectForm({
               </AdminField>
 
               <AdminField
-                id="status"
-                label="Status"
-                error={errors.status}
-                hint={FIELD_HINTS.status}
+                id="projectPhase"
+                label="Project phase"
+                error={errors.projectPhase}
+                hint={FIELD_HINTS.projectPhase}
               >
                 <select
-                  id="status"
-                  name="status"
-                  defaultValue={values.status}
-                  className={adminInputClassName(Boolean(errors.status))}
+                  id="projectPhase"
+                  name="projectPhase"
+                  defaultValue={values.projectPhase || "current_work"}
+                  className={adminInputClassName(Boolean(errors.projectPhase))}
                   required
                 >
-                  <option value="">Select status</option>
-                  {PROJECT_STATUS_OPTIONS.map((option) => (
+                  {PROJECT_PHASE_OPTIONS.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -190,6 +191,28 @@ export function ProjectForm({
                 </select>
               </AdminField>
             </div>
+
+            <AdminField
+              id="status"
+              label="Status"
+              error={errors.status}
+              hint={FIELD_HINTS.status}
+            >
+              <select
+                id="status"
+                name="status"
+                defaultValue={values.status}
+                className={adminInputClassName(Boolean(errors.status))}
+                required
+              >
+                <option value="">Select status</option>
+                {PROJECT_STATUS_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </AdminField>
           </AdminFormSection>
 
           <AdminFormSection

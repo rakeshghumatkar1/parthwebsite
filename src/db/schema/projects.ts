@@ -7,7 +7,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { projectStatusEnum, projectTypeEnum } from "./enums";
+import { projectPhaseEnum, projectStatusEnum, projectTypeEnum } from "./enums";
 import { media } from "./media";
 
 export const projects = pgTable(
@@ -19,6 +19,7 @@ export const projects = pgTable(
     shortDescription: text("short_description").notNull(),
     fullDescription: text("full_description"),
     projectType: projectTypeEnum("project_type").notNull(),
+    projectPhase: projectPhaseEnum("project_phase").notNull().default("current_work"),
     status: projectStatusEnum("status").notNull(),
     featuredOnHome: boolean("featured_on_home").notNull().default(false),
     featuredOnAbout: boolean("featured_on_about").notNull().default(false),

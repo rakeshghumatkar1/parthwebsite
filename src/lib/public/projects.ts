@@ -19,6 +19,7 @@ export type PublicProject = {
   shortDescription: string;
   fullDescription: string | null;
   projectType: string;
+  projectPhase: string;
   status: string;
   techStack: string[];
   problemSolved: string | null;
@@ -55,6 +56,11 @@ export const PROJECT_STATUS_LABELS: Record<string, string> = {
   concept: "Concept",
 };
 
+export const PROJECT_PHASE_LABELS: Record<string, string> = {
+  current_work: "Current Work",
+  early_work: "Early Work",
+};
+
 function mapProject(row: Project): PublicProject {
   return {
     id: row.id,
@@ -63,6 +69,7 @@ function mapProject(row: Project): PublicProject {
     shortDescription: row.shortDescription,
     fullDescription: row.fullDescription,
     projectType: row.projectType,
+    projectPhase: row.projectPhase,
     status: row.status,
     techStack: row.techStack ?? [],
     problemSolved: row.problemSolved,
@@ -198,6 +205,10 @@ export function projectTypeLabel(value: string): string {
 
 export function projectStatusLabel(value: string): string {
   return PROJECT_STATUS_LABELS[value] ?? value;
+}
+
+export function projectPhaseLabel(value: string): string {
+  return PROJECT_PHASE_LABELS[value] ?? value;
 }
 
 export function projectHasLinks(project: PublicProject): boolean {

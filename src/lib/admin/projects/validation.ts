@@ -1,4 +1,5 @@
 import {
+  PROJECT_PHASE_VALUES,
   PROJECT_STATUS_VALUES,
   PROJECT_TYPE_VALUES,
   RESERVED_SLUGS,
@@ -44,6 +45,7 @@ export function formDataToValues(formData: FormData): ProjectFormValues {
     shortDescription: String(formData.get("shortDescription") ?? ""),
     fullDescription: String(formData.get("fullDescription") ?? ""),
     projectType: String(formData.get("projectType") ?? ""),
+    projectPhase: String(formData.get("projectPhase") ?? "current_work"),
     status: String(formData.get("status") ?? ""),
     techStack: String(formData.get("techStack") ?? ""),
     problemSolved: String(formData.get("problemSolved") ?? ""),
@@ -68,6 +70,7 @@ export function projectToFormValues(project: {
   shortDescription: string;
   fullDescription: string | null;
   projectType: string;
+  projectPhase: string;
   status: string;
   techStack: string[] | null;
   problemSolved: string | null;
@@ -90,6 +93,7 @@ export function projectToFormValues(project: {
     shortDescription: project.shortDescription,
     fullDescription: project.fullDescription ?? "",
     projectType: project.projectType,
+    projectPhase: project.projectPhase,
     status: project.status,
     techStack: techStackToInput(project.techStack),
     problemSolved: project.problemSolved ?? "",
@@ -136,6 +140,12 @@ export function validateProjectForm(
     errors.projectType = "Select a valid project type.";
   }
 
+  if (!values.projectPhase) {
+    errors.projectPhase = "Project phase is required.";
+  } else if (!PROJECT_PHASE_VALUES.includes(values.projectPhase as never)) {
+    errors.projectPhase = "Select a valid project phase.";
+  }
+
   if (!values.status) {
     errors.status = "Status is required.";
   } else if (!PROJECT_STATUS_VALUES.includes(values.status as never)) {
@@ -170,6 +180,9 @@ export function validateProjectForm(
     if (!values.projectType) {
       errors.projectType = "Project type is required to publish.";
     }
+    if (!values.projectPhase) {
+      errors.projectPhase = "Project phase is required to publish.";
+    }
     if (!values.status) errors.status = "Status is required to publish.";
   }
 
@@ -187,6 +200,7 @@ export function valuesToDbPayload(values: ProjectFormValues) {
     shortDescription: values.shortDescription.trim(),
     fullDescription: values.fullDescription.trim() || null,
     projectType: values.projectType as (typeof PROJECT_TYPE_VALUES)[number],
+    projectPhase: values.projectPhase as (typeof PROJECT_PHASE_VALUES)[number],
     status: values.status as (typeof PROJECT_STATUS_VALUES)[number],
     techStack: techStack.length > 0 ? techStack : null,
     problemSolved: values.problemSolved.trim() || null,
