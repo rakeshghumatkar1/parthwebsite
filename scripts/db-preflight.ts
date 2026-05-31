@@ -43,7 +43,9 @@ async function main() {
           'milestones',
           'updates',
           'media',
-          'page_sections'
+          'page_sections',
+          'admin_users',
+          'admin_sessions'
         )
       ORDER BY table_name
     `;

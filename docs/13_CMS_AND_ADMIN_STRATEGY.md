@@ -209,6 +209,24 @@ For editable eyebrows/headlines without full page redeploy.
 
 ---
 
+## Admin auth (Phase 2.3B — implemented)
+
+| Decision | Choice |
+|----------|--------|
+| **First admin** | One-time setup at `/admin/setup` when zero active admin users exist |
+| **After setup** | `/admin/setup` locked — shows “Setup already completed” |
+| **Login** | `/admin/login` for existing admins |
+| **Sessions** | Database-backed opaque tokens (`admin_sessions`); raw token in httpOnly cookie only |
+| **Password storage** | scrypt with per-user salt in `admin_users.password_hash` |
+| **Env vars** | No `AUTH_SECRET`, no `ADMIN_EMAIL`, no `ADMIN_PASSWORD` |
+| **Public signup** | Not available |
+
+Tables: `admin_users`, `admin_sessions` (append-only migration). Protected routes: `/admin`, `/admin/help`. Logout: `/admin/logout`.
+
+**Blob prefix rule (unchanged):** all Parth uploads must use `parthwebsite/` in the shared Think Big blob store. Upload UI not built in this phase.
+
+---
+
 ## Admin UX rules
 
 ### Layout
@@ -285,7 +303,7 @@ Otherwise link to approved GitHub profile only.
 ## Gaps / decisions needed
 
 - Rich text sanitizer (server-safe on Vercel)  
-- Admin auth (password gate vs SSO)  
+- Additional admin users / SSO (deferred)  
 - Image CDN (Vercel Blob for uploads — metadata table exists)  
 - Draft preview URL strategy  
 - Production Neon migrate approval workflow  

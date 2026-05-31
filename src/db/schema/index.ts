@@ -6,3 +6,4 @@ export * from "./proof-items";
 export * from "./videos";
 export * from "./updates";
 export * from "./page-sections";
+export * from "./admin-auth";

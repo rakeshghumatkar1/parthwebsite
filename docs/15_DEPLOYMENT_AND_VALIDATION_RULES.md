@@ -46,6 +46,18 @@ npm run db:studio      # Drizzle Studio (optional)
 
 **Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
 
+**Admin auth validation (Phase 2.3B+):**
+
+- `admin_users` and `admin_sessions` tables exist after migration  
+- First admin setup works once at `/admin/setup`  
+- Login creates session; logout clears session and cookie  
+- `/admin` and `/admin/help` require login  
+- No `AUTH_SECRET` / `ADMIN_EMAIL` / `ADMIN_PASSWORD` in env  
+
+```bash
+npm run db:preflight   # includes admin table check when migrated
+```
+
 **Static-only / schema-only commits:** DB validation not required if no public route imports `getDb()`.
 
 ---
