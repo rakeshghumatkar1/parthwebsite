@@ -46,6 +46,17 @@ npm run db:studio      # Drizzle Studio (optional)
 
 **Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
 
+**Blob upload validation (Phase 2.9+):**
+
+- `/admin/media/new` offers URL and Upload modes  
+- Unauthenticated upload returns 401  
+- Upload path starts with `parthwebsite/`  
+- Unsupported types and oversized files rejected  
+- Successful upload creates Neon media record  
+- Media list shows Uploaded vs External URL; no Blob store browser  
+- BLOB_READ_WRITE_TOKEN stays server-only  
+- No Blob delete; no public page changes  
+
 **Remaining CMS public pages validation (Phase 2.8+):**
 
 - `/proof`, `/videos`, `/updates`, `/about-parth` load with clean empty states when no published records  

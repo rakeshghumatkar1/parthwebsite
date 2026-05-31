@@ -85,10 +85,11 @@ export function MediaForm({
       <AdminCmsNotice />
       <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.media.formIntro}</p>
 
-      <AdminHelpBox title="URL-only media">
+      <AdminHelpBox title="Media sources">
         <p>
-          Paste approved file URLs only — there is no upload in this phase.{" "}
-          {BLOB_PREFIX_RULE}
+          Paste approved external URLs, or use <strong>Upload to Blob</strong> to
+          store files in the shared thinkbigdigital-blob store under parthwebsite/
+          only. {BLOB_PREFIX_RULE}
         </p>
       </AdminHelpBox>
 

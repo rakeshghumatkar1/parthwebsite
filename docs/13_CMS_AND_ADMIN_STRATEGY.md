@@ -257,7 +257,7 @@ Recommended data entry order: projects → proof/media/videos → milestones →
 
 ## Admin UX guidance (Phase 2.6 — implemented)
 
-Non-technical admin support added: dashboard workflow, per-module help boxes, field-level hints, empty-state guidance, practical Help page. **All primary CMS public pages connected (Phase 2.7–2.8).** Media remains URL-only; future Blob prefix remains `parthwebsite/`.
+Non-technical admin support added: dashboard workflow, per-module help boxes, field-level hints, empty-state guidance, practical Help page. **All primary CMS public pages connected (Phase 2.7–2.8).** Blob upload added in Phase 2.9 under `parthwebsite/` prefix.
 
 ---
 
@@ -271,8 +271,22 @@ Non-technical admin support added: dashboard workflow, per-module help boxes, fi
 | **About Parth** | `/about-parth` — CMS milestones (featured first, else all published) + featured projects/proof/videos |
 | **Public queries** | `src/lib/public/proof.ts`, `videos.ts`, `updates.ts`, `about.ts`, `media.ts` |
 | **Seed data** | None added |
-| **Blob upload** | Not built |
 | **Home CMS for proof/updates** | Not connected in this phase |
+
+---
+
+## Blob upload (Phase 2.9 — implemented)
+
+| Item | Status |
+|------|--------|
+| **Media admin** | URL-only records retained; Upload to Blob mode at `/admin/media/new?mode=upload` |
+| **Upload route** | Protected `POST /admin/media/upload` — admin session required |
+| **Prefix enforcement** | Server constructs paths under `parthwebsite/{folder}/` only |
+| **Allowed folders** | projects, proof, videos, downloads, profile, og |
+| **File rules** | Images, PDF, plain/markdown text; max 10 MB; no SVG |
+| **Listing** | Neon `media` table only — no shared-store file browser |
+| **Delete** | Not implemented — no Blob or hard media delete |
+| **Public pages** | Unchanged — no content seeded |
 
 ---
 
@@ -285,7 +299,6 @@ Non-technical admin support added: dashboard workflow, per-module help boxes, fi
 | **Public detail** | `/projects/[slug]` — `notFound()` for draft/hidden/archived/missing |
 | **Public queries** | `src/lib/public/projects.ts` — separate from admin queries |
 | **Seed data** | None added |
-| **Blob upload** | Not built |
 | **Proof / Videos / Updates public** | Built in Phase 2.8 |
 
 ---

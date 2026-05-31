@@ -46,15 +46,18 @@ export default async function AdminMediaPage({ searchParams }: PageProps) {
             <h1 className="text-2xl font-semibold tracking-tight">{guidance.title}</h1>
             <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">{guidance.subtitle}</p>
           </div>
-          <Link href="/admin/media/new" className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-tb-blue-hover">Add media record</Link>
+          <Link href="/admin/media/new" className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-tb-blue-hover">Add media</Link>
         </div>
         <AdminCmsNotice variant="info">
-          <p className="font-medium">URL-only — no upload yet</p>
-          <p className="mt-1 opacity-90">Paste approved public URLs. Upload support will be added later.</p>
+          <p className="font-medium">URL or Blob upload</p>
+          <p className="mt-1 opacity-90">
+            Paste approved URLs or upload files to parthwebsite/ in the shared Blob
+            store. Only Neon media records are listed — never other sites&apos; files.
+          </p>
         </AdminCmsNotice>
         <AdminModuleGuide module="media" />
-        <AdminHelpBox title="Blob storage rule (future uploads)">
-          {BLOB_PREFIX_RULE}
+        <AdminHelpBox title="Blob storage rule">
+          {BLOB_PREFIX_RULE} Delete from Blob is not available in this phase.
         </AdminHelpBox>
         <MediaFilters filters={filters} projectOptions={projectOptions} />
         {mediaRecords.length === 0 ? (

@@ -41,16 +41,15 @@ export default async function AdminHelpPage() {
             <li>Admin login and secure sessions</li>
             <li>Projects, Proof Library, Videos, Milestones, Updates, Media Library CRUD</li>
             <li>List, search, filter, create, edit, publish/hide controls</li>
-            <li>Media Library is URL-only (paste links — no upload button)</li>
+            <li>Media Library supports URL records and Blob upload under parthwebsite/</li>
           </ul>
         </section>
 
         <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
           <h2 className="text-lg font-semibold">What is not connected yet</h2>
           <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
-            <li>Home page still uses static content — not CMS-driven</li>
-            <li>No public Projects, Proof, Videos, or Updates pages</li>
-            <li>No Blob file upload or file browser</li>
+            <li>Home proof/updates sections still use static content</li>
+            <li>No Blob file browser or delete — only Neon media records are listed</li>
             <li>No automatic seed data — content must be entered manually when approved</li>
           </ul>
         </section>
@@ -116,18 +115,26 @@ export default async function AdminHelpPage() {
         <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
           <h2 className="text-lg font-semibold">Media and Blob rule</h2>
           <p className="text-sm text-tb-text-muted">
-            Media Library is URL-only today. Paste approved public URLs for
-            images, PDFs, and documents. Upload will be added later.
+            Media Library supports approved public URLs and admin file upload to
+            Vercel Blob. Uploaded files go to the shared thinkbigdigital-blob
+            store under parthwebsite/ only.
           </p>
-          <AdminHelpBox title="Future upload prefix">{BLOB_PREFIX_RULE}</AdminHelpBox>
+          <AdminHelpBox title="Upload prefix and safety">{BLOB_PREFIX_RULE}</AdminHelpBox>
+          <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
+            <li>Use image alt text for accessibility.</li>
+            <li>PDFs are allowed only for public downloads and proof.</li>
+            <li>Do not upload private or sensitive files.</li>
+            <li>Other website Blob files must never be touched or listed.</li>
+            <li>Blob delete is not implemented — media records can be edited but files remain in Blob.</li>
+          </ul>
         </section>
 
         <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
           <h2 className="text-lg font-semibold">What not to do</h2>
           <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
             <li>Do not invent GitHub, demo, video, or download links</li>
-            <li>Do not upload files — there is no upload UI yet</li>
-            <li>Do not add final launch content before public pages are connected</li>
+            <li>Do not upload private, sensitive, or non-public files</li>
+            <li>Do not add final launch content before it is approved</li>
             <li>Do not add random blog-style updates unrelated to real project progress</li>
           </ul>
         </section>
