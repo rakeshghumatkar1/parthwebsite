@@ -82,10 +82,24 @@ export default async function AdminHelpPage() {
         </section>
 
         <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
+          <h2 className="text-lg font-semibold">Projects CMS</h2>
+          <p className="text-sm leading-relaxed text-tb-text-muted">
+            Projects CRUD is available at{" "}
+            <code className="rounded bg-tb-surface-muted px-1 py-0.5 text-xs">
+              /admin/projects
+            </code>
+            . Create, edit, publish, hide, archive, and set featured flags. Public
+            Home and Projects pages are not connected yet. No seed data has been
+            added.
+          </p>
+        </section>
+
+        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
           <h2 className="text-lg font-semibold">What is not connected yet</h2>
           <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
             <li>Home page still uses static launch content — not CMS-driven</li>
-            <li>No CRUD screens for projects, proof, videos, or updates yet</li>
+            <li>Projects admin CRUD is available — public pages not connected yet</li>
+            <li>No CRUD screens for proof, videos, or updates yet</li>
             <li>No blob upload or media picker yet</li>
           </ul>
         </section>

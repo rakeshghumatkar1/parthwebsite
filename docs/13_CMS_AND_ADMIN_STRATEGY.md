@@ -227,6 +227,18 @@ Tables: `admin_users`, `admin_sessions` (append-only migration). Protected route
 
 ---
 
+## Projects CMS (Phase 2.4 — implemented)
+
+| Item | Status |
+|------|--------|
+| **Admin routes** | `/admin/projects`, `/admin/projects/new`, `/admin/projects/[id]` |
+| **CRUD** | Create, edit, list, search/filter, publish/hide/archive toggles |
+| **Public connection** | Not connected — Home and `/projects` unchanged |
+| **Seed data** | Not seeded in this phase |
+| **Blob upload** | Not built — URL fields only; cover uses `cover_media_id` when media library exists |
+
+---
+
 ## Admin UX rules
 
 ### Layout

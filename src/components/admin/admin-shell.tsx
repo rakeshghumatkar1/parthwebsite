@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { AdminUser } from "@/db/schema/admin-auth";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", exact: true },
+  { href: "/admin", label: "Dashboard" },
+  { href: "/admin/projects", label: "Projects" },
   { href: "/admin/help", label: "Help" },
 ];
 
