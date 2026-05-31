@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio",
-    "db:preflight": "npx tsx scripts/db-preflight.ts"
+    "db:generate": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs generate",
+    "db:migrate": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs migrate",
+    "db:studio": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs studio",
+    "db:preflight": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/db-preflight.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

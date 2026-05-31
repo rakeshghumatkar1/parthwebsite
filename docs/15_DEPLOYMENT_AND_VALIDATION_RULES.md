@@ -42,6 +42,8 @@ npm run db:preflight   # verify DATABASE_URL and connectivity
 npm run db:studio      # Drizzle Studio (optional)
 ```
 
+**Local env:** DB scripts load `.env.local` automatically via `node --env-file=.env.local` (Node 20+). Vercel/production uses project env vars directly — no `.env.local` file required.
+
 **Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
 
 **Static-only / schema-only commits:** DB validation not required if no public route imports `getDb()`.
