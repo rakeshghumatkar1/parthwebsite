@@ -1,8 +1,11 @@
+import Link from "next/link";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
+import { Button } from "@/components/ui/button";
 import { IconCheck, IconLayers, IconSystems } from "@/components/ui/icons";
 import {
   BUILD_JOURNEY_EARLY_PROJECTS,
+  BUILD_JOURNEY_EARLY_PROJECTS_INTRO,
   BUILD_JOURNEY_EXPERIMENTS,
 } from "@/lib/build-journey-page-content";
 
@@ -12,8 +15,9 @@ export function BuildJourneyEarlyProjectsSection() {
   return (
     <Section tone="light">
       <SectionHeader
-        eyebrow="Notable Early Projects"
-        title="These were not just coding exercises. They were working systems."
+        eyebrow="Selected Early Builds"
+        title="Early builds that shaped the foundation."
+        description={BUILD_JOURNEY_EARLY_PROJECTS_INTRO}
       />
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -24,19 +28,14 @@ export function BuildJourneyEarlyProjectsSection() {
               key={project.title}
               className="flex h-full flex-col rounded-2xl border border-slate-200/90 bg-white shadow-sm ring-1 ring-slate-100"
             >
-              <div className="flex items-center justify-center border-b border-slate-200/80 bg-gradient-to-br from-tb-surface-muted to-white px-6 py-10">
-                <div className="flex flex-col items-center gap-3 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-tb-blue/10 text-tb-blue ring-1 ring-tb-blue/20">
-                    <Icon className="h-8 w-8" />
-                  </div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-tb-text-muted">
-                    Icon / diagram treatment
-                  </p>
+              <div className="flex items-center justify-center border-b border-slate-200/80 bg-gradient-to-br from-tb-surface-muted to-white px-6 py-8">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-tb-blue/10 text-tb-blue ring-1 ring-tb-blue/20">
+                  <Icon className="h-7 w-7" />
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-6 sm:p-7">
                 <h3 className="text-xl font-semibold text-tb-text">{project.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-tb-text-muted sm:text-base">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-tb-text-muted sm:text-base">
                   {project.description}
                 </p>
                 <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-tb-blue">
@@ -59,20 +58,32 @@ export function BuildJourneyEarlyProjectsSection() {
         })}
       </div>
 
-      <div className="mt-10">
+      <div className="mt-8">
         <p className="text-xs font-semibold uppercase tracking-wide text-tb-text-muted">
-          Other Early Experiments
+          Other early experiments
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {BUILD_JOURNEY_EXPERIMENTS.map((item) => (
             <span
               key={item}
-              className="rounded-full border border-slate-200/90 bg-white px-4 py-2 text-sm font-medium text-tb-text shadow-sm ring-1 ring-slate-100"
+              className="rounded-full border border-slate-200/90 bg-white px-3.5 py-1.5 text-sm font-medium text-tb-text shadow-sm ring-1 ring-slate-100"
             >
               {item}
             </span>
           ))}
         </div>
+      </div>
+
+      <div className="mt-10 flex flex-wrap items-center gap-4">
+        <Button href="/projects/early-work" variant="primary" size="lg">
+          View Early Work
+        </Button>
+        <Link
+          href="/projects"
+          className="text-sm font-medium text-tb-blue hover:underline"
+        >
+          View Current Projects
+        </Link>
       </div>
     </Section>
   );

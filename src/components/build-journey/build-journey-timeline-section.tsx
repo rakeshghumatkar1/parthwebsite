@@ -7,7 +7,7 @@ export function BuildJourneyTimelineSection() {
     <Section tone="muted">
       <SectionHeader
         eyebrow="Early Journey Timeline"
-        title="The early path, step by step."
+        title="The early path, in nine steps."
       />
 
       <div className="relative mt-2">

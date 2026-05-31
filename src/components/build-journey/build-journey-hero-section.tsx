@@ -43,19 +43,19 @@ export function BuildJourneyHeroSection() {
             <span className="text-tb-blue">journey</span> behind the builder.
           </h1>
           <p className="mt-6 text-base leading-relaxed text-tb-text-on-dark sm:text-lg">
-            A deeper look at how football, a knee problem, YouTube, electronics,
-            robotics, Arduino, drones, and early public proof shaped Parth&apos;s
-            technical path.
+            How football, YouTube, electronics, robotics, Arduino, drones, and
+            early builds shaped Parth&apos;s technical path — and how that foundation
+            connects to current software systems work.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
             <Button href="/about-us" variant="primary" dark size="lg">
               Back to About Us
             </Button>
-            <Button href="/videos" variant="secondary" dark size="lg">
-              Watch Early Videos
+            <Button href="/projects/early-work" variant="secondary" dark size="lg">
+              View Early Work
             </Button>
-            <Button href="/proof" variant="secondary" dark size="lg">
-              Review Early Proof
+            <Button href="/projects" variant="secondary" dark size="lg">
+              View Current Projects
             </Button>
           </div>
         </div>

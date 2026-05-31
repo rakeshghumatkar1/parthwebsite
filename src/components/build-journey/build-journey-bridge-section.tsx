@@ -41,6 +41,15 @@ export function BuildJourneyBridgeSection() {
             Back to About Us
           </Button>
           <Button
+            href="/projects/early-work"
+            variant="secondary"
+            dark
+            size="lg"
+            className="w-full justify-center sm:w-auto"
+          >
+            View Early Work
+          </Button>
+          <Button
             href="/projects"
             variant="secondary"
             dark
@@ -48,15 +57,6 @@ export function BuildJourneyBridgeSection() {
             className="w-full justify-center sm:w-auto"
           >
             View Current Projects
-          </Button>
-          <Button
-            href="/videos"
-            variant="secondary"
-            dark
-            size="lg"
-            className="w-full justify-center sm:w-auto"
-          >
-            Explore Videos
           </Button>
         </div>
       </div>

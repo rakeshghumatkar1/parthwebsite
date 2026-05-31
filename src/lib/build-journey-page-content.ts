@@ -5,7 +5,7 @@ export const BUILD_JOURNEY_EARLY_ERA_CUTOFF = "2021-12-31";
 export const BUILD_JOURNEY_METADATA = {
   title: "Build Journey | Think Big AI Systems",
   description:
-    "Parth Ghumatkar's early build journey — from football and YouTube curiosity through robotics, Arduino, drones, and 2018 public proof.",
+    "How Parth's early curiosity, robotics exposure, electronics experiments, and build-led learning shaped the foundation for current AI software systems work.",
 } as const;
 
 export const BUILD_JOURNEY_ORIGIN_CHAIN = [
@@ -47,13 +47,9 @@ export const BUILD_JOURNEY_TECHNICAL_BASE = [
   "Raspberry Pi",
   "Sensors",
   "Automation",
-  "Bluetooth control",
   "RFID systems",
   "Home automation",
-  "Water-level projects",
-  "Hardware assembly",
-  "Soldering and components",
-  "Mobile and computer-control experiments",
+  "Lego Advanced Robotics",
 ] as const;
 
 export const BUILD_JOURNEY_EARLY_PROJECTS = [
@@ -77,10 +73,12 @@ export const BUILD_JOURNEY_EARLY_PROJECTS = [
       "Calibration",
       "Troubleshooting",
       "Physical system control",
-      "Repeated testing",
     ],
   },
 ] as const;
+
+export const BUILD_JOURNEY_EARLY_PROJECTS_INTRO =
+  "A few early project examples from the robotics, electronics, Arduino, drone, and home-automation years. The full early-work list can be managed through the Projects CMS." as const;
 
 export const BUILD_JOURNEY_EXPERIMENTS = [
   "RFID attendance",
@@ -110,15 +108,15 @@ export const BUILD_JOURNEY_2018_PROOF = [
     key: "nelkinda2018" as const,
     title: "Nelkinda Tech Kids Meetup 2018",
     description:
-      "Presented as \"An Accidental Coder at the age of 11\" and explained early work across electronics, robotics, Arduino, C++, drones, IoT, Python, Alexa Home Automation, RFID attendance, and more.",
-    ctaLabel: "View Presentation Material",
+      "Presented as \"An Accidental Coder at the age of 11\" — covering electronics, robotics, Arduino, C++, drones, IoT, and early automation work.",
+    ctaLabel: "View presentation material",
   },
   {
     key: "coderetreat2018" as const,
-    title: "Global Day of Coderetreat 2018 Recognition",
+    title: "Global Day of Coderetreat 2018",
     description:
-      "Recognized in a Global Day of Coderetreat 2018 environment, where his logical and problem-solving ability was appreciated in the presence of experienced software professionals.",
-    ctaLabel: "View Recognition",
+      "Recognized for logical and problem-solving ability in a room of experienced software professionals.",
+    ctaLabel: "View recognition",
   },
 ] as const;
 
@@ -131,21 +129,15 @@ export const BUILD_JOURNEY_TIMELINE = [
   "Football interest",
   "Knee issue and time away from playground",
   "YouTube discovery",
-  "Motor-based pencil sharpener video",
+  "Motor/electronics curiosity",
   "Robotics class in Pune",
-  "Lego Advanced Robotics — 3 levels",
-  "Arduino / C++ / electronics",
-  "IoT and sensors",
-  "Alexa Home Automation",
-  "Drone work",
-  "RFID / automation experiments",
+  "Arduino, C++, electronics",
+  "Drones, IoT, automation",
   "2018 public presentation and recognition",
-  "YouTube demos and GitHub proof",
+  "Early builds leading into current software systems",
 ] as const;
 
-export const BUILD_JOURNEY_EMPTY_COPY = {
-  proofLibrary:
-    "Early proof documents and presentation material will be added here.",
-} as const;
+export const BUILD_JOURNEY_EARLY_WORK_BRIDGE =
+  "Early project entries will be available under Early Work as they are published." as const;
 
 export const BUILD_JOURNEY_STRUCTURED_EXPOSURE_ANCHOR = "early-builder-stack";
