@@ -22,13 +22,6 @@ export const launchProjects: ProjectRecord[] = [
     techStack: ["Python", "PostgreSQL", "Astro", "Docker"],
   },
   {
-    id: "tradepre",
-    title: "TradePre",
-    slug: "tradepre",
-    shortDescription: "ML trading prediction system with backtesting.",
-    techStack: ["Python", "XGBoost", "ML", "Plotly"],
-  },
-  {
     id: "instagram-ai-news",
     title: "Instagram AI News Generator",
     slug: "instagram-ai-news-generator",
@@ -58,31 +51,31 @@ export type ReviewTrailCard = {
   description: string;
 };
 
-/** Work You Can Review — static trail cards */
+/** Project evidence blocks — homepage, not Proof Library */
 export const homeReviewTrailCards: ReviewTrailCard[] = [
   {
     id: "repository-trail",
     title: "Repository Trail",
     description:
-      "Public GitHub repositories showing code, tools, experiments, and software builds across different stages of work.",
+      "Code repositories and software builds linked from project records where available.",
   },
   {
-    id: "demo-trail",
-    title: "Demo Trail",
+    id: "build-record",
+    title: "Build Record",
     description:
-      "Project videos and walkthroughs that show how selected tools, automations, and applications were built or tested.",
+      "Project walkthroughs and technical notes attached to individual project pages.",
   },
   {
     id: "build-documentation",
     title: "Build Documentation",
     description:
-      "Readmes, notes, screenshots, architecture references, and project explanations where available.",
+      "Readmes, architecture notes, and explanations published alongside each build.",
   },
   {
-    id: "working-systems",
-    title: "Working Systems",
+    id: "data-systems",
+    title: "Data & Systems",
     description:
-      "Applications, platforms, dashboards, content workflows, and data systems that go beyond presentation-only concepts.",
+      "Dashboards, data platforms, and working applications shown as project outcomes.",
   },
 ];
 
@@ -90,32 +83,22 @@ export const homeCapabilityCards = [
   {
     title: "Internal Tools",
     description:
-      "Custom tools for business processes, forms, users, data, admin workflows, requests, and repeated internal tasks.",
+      "Custom tools for business processes, forms, users, data, admin workflows, product-style utilities, and repeated internal tasks.",
   },
   {
     title: "AI-Assisted Workflow Applications",
     description:
-      "Applications where AI supports analysis, summarization, classification, reporting, research, content creation, or decision support inside a defined workflow.",
+      "Applications where AI supports analysis, summarization, classification, reporting, research, content creation, media workflows, or decision support inside a defined workflow.",
   },
   {
     title: "Automation Systems",
     description:
-      "Workflows that connect APIs, databases, AI models, files, media tools, forms, dashboards, and business operations.",
+      "Workflows that connect APIs, databases, AI models, files, forms, dashboards, and business operations — including content and media pipelines.",
   },
   {
     title: "Data and Reporting Platforms",
     description:
-      "Systems that collect, structure, analyze, display, and publish data through dashboards, reports, static pages, or searchable interfaces.",
-  },
-  {
-    title: "SaaS-Style Tools",
-    description:
-      "Product-style tools such as report generators, booking systems, lead-capture tools, user portals, and business utilities.",
-  },
-  {
-    title: "Content and Media Automation",
-    description:
-      "Pipelines that help create, process, format, caption, render, or publish content using AI, APIs, templates, and media tools.",
+      "Systems that collect, structure, analyze, display, and publish data through dashboards, reports, SaaS-style interfaces, static pages, or searchable views.",
   },
 ] as const;
 
@@ -174,60 +157,58 @@ export const founderCredibilityPoints: FounderCredibilityPoint[] = [
   {
     title: "Independent technical learning",
     description:
-      "Years of self-led building across hardware, software, automation, and AI workflow experiments.",
+      "Self-led building across hardware, software, automation, and AI workflow experiments.",
   },
   {
     title: "Project-led development",
     description:
-      "Learning through working builds, debugging, testing, documentation, and repeated improvement.",
+      "Learning through working builds, debugging, testing, documentation, and improvement.",
   },
   {
     title: "Public technical history",
     description:
-      "GitHub repositories, YouTube demos, presentations, recognitions, and documented build material.",
+      "GitHub repositories, demos, presentations, and documented build material.",
   },
   {
     title: "Current software ownership",
     description:
-      "Recent work shows full-project ownership across selected software, AI workflow, automation, and data-system builds.",
-  },
-  {
-    title: "Think Big delivery structure",
-    description:
-      "For client-facing or business-critical work, review, QA, documentation, deployment discipline, and delivery oversight can be added through Think Big.",
+      "Full-project ownership across software, AI workflow, automation, and data-system builds.",
   },
 ];
+
+export const founderDeliveryNote =
+  "Review, QA, documentation, deployment discipline, and delivery oversight can be added through Think Big when needed.";
 
 export const processSteps = [
   {
     step: "01",
     title: "Understand the workflow",
     description:
-      "Clarify what the system needs to support, who will use it, what information moves through it, and what manual work or confusion should reduce.",
+      "Clarify users, inputs, outputs, and current manual steps.",
   },
   {
     step: "02",
     title: "Define the system",
     description:
-      "Turn the idea into screens, flows, data needs, AI use cases, automation logic, integrations, and technical structure.",
+      "Map screens, data, logic, integrations, and technical structure.",
   },
   {
     step: "03",
     title: "Build the first version",
     description:
-      "Create a working version with the required software, interface, database, automation, API, AI, or reporting layer.",
+      "Create a working version with the required software, data, or automation layer.",
   },
   {
     step: "04",
     title: "Test and improve",
     description:
-      "Debug, simplify, improve flows, adjust the system, and refine the experience based on actual use and technical behavior.",
+      "Debug, simplify, refine, and improve based on actual use.",
   },
   {
     step: "05",
     title: "Review for serious delivery",
     description:
-      "For larger or client-critical systems, Think Big can add review, QA, documentation, security checks, deployment discipline, and delivery oversight.",
+      "Add review, documentation, security checks, and delivery oversight where needed.",
   },
 ] as const;
 

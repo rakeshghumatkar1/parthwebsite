@@ -15,16 +15,17 @@ export function LatestUpdatesSection({ updates }: LatestUpdatesSectionProps) {
   }
 
   return (
-    <Section id="latest-updates" tone="light">
+    <Section id="latest-updates" tone="light" dense>
       <SectionHeader
+        dense
         eyebrow="Latest Updates"
-        title="Follow recent project updates, build notes, technical observations, and new proof added to the site."
+        title="Follow recent project updates, build notes, and technical observations."
       />
-      <ul className="space-y-4">
+      <ul className="space-y-3">
         {updates.map((update) => (
           <li
             key={update.id}
-            className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+            className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
           >
             <time className="text-xs font-medium text-tb-text-muted">
               {update.date}

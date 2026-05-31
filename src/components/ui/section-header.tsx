@@ -19,13 +19,13 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   const alignClass = align === "center" ? "text-center mx-auto" : "text-left";
   const maxDesc = align === "center" ? "max-w-2xl mx-auto" : "max-w-3xl";
-  const spacing = dense ? "mb-8 sm:mb-9" : "mb-12 sm:mb-14";
+  const spacing = dense ? "mb-4 sm:mb-5" : "mb-12 sm:mb-14";
 
   return (
     <header className={`${spacing} ${alignClass} ${className}`}>
       {eyebrow ? (
         <p
-          className={`mb-3 text-xs font-semibold uppercase tracking-[0.2em] ${
+          className={`mb-2 text-xs font-semibold uppercase tracking-[0.2em] ${
             dark ? "text-tb-cyan" : "text-tb-blue"
           }`}
         >
@@ -33,7 +33,7 @@ export function SectionHeader({
         </p>
       ) : null}
       <h2
-        className={`text-balance text-2xl font-semibold leading-[1.15] tracking-tight sm:text-3xl lg:text-[2.35rem] lg:leading-[1.12] ${
+        className={`text-balance text-2xl font-semibold leading-[1.15] tracking-tight sm:text-[1.75rem] lg:text-[2rem] lg:leading-[1.12] ${
           dark ? "text-white" : "text-tb-text"
         }`}
       >
@@ -41,7 +41,7 @@ export function SectionHeader({
       </h2>
       {description ? (
         <p
-          className={`mt-4 text-base leading-relaxed sm:text-lg ${
+          className={`mt-3 text-sm leading-relaxed sm:text-base ${
             dark ? "text-tb-text-on-dark-muted" : "text-tb-text-muted"
           } ${maxDesc}`}
         >

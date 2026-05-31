@@ -26,20 +26,20 @@ export function FeatureCard({
   variant = "default",
   compact = false,
 }: FeatureCardProps) {
-  const padding = compact ? "p-5 sm:p-6" : "p-7 sm:p-8";
-  const minHeight = compact ? "min-h-[180px]" : "min-h-[220px]";
+  const padding = compact ? "p-3 sm:p-3.5" : "p-7 sm:p-8";
+  const minHeight = compact ? "min-h-[118px]" : "min-h-[220px]";
 
   return (
     <article className={`flex h-full flex-col ${minHeight} ${variantStyles[variant]} ${padding}`}>
       {icon ? (
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200/90 bg-slate-50/90 text-tb-blue">
+        <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-md border border-slate-200/90 bg-slate-50/90 text-tb-blue">
           {icon}
         </div>
       ) : null}
-      <h3 className="text-base font-semibold leading-snug text-tb-text sm:text-lg">
+      <h3 className="text-sm font-semibold leading-snug text-tb-text sm:text-base">
         {title}
       </h3>
-      <p className="mt-2.5 flex-1 text-sm leading-relaxed text-tb-text-muted">
+      <p className="mt-1.5 flex-1 text-sm leading-relaxed text-tb-text-muted">
         {description}
       </p>
     </article>

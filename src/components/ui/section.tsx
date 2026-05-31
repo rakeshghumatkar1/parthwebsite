@@ -28,7 +28,7 @@ export function Section({
   dense = false,
 }: SectionProps) {
   const padding = dense
-    ? "px-6 py-12 sm:px-8 sm:py-14 lg:py-16"
+    ? "px-6 py-6 sm:px-8 sm:py-7 lg:py-8"
     : compact
       ? "px-6 py-14 sm:px-8 sm:py-16 lg:py-20"
       : "px-6 py-20 sm:px-8 sm:py-24 lg:py-28";

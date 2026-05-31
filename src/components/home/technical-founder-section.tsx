@@ -1,67 +1,89 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { founderCredibilityPoints } from "@/lib/home-data";
+import {
+  IconBranch,
+  IconCheck,
+  IconChip,
+  IconTerminal,
+} from "@/components/ui/icons";
+import {
+  founderCredibilityPoints,
+  founderDeliveryNote,
+} from "@/lib/home-data";
+import type { ComponentType } from "react";
+
+const founderIcons: ComponentType<{ className?: string }>[] = [
+  IconChip,
+  IconTerminal,
+  IconBranch,
+  IconCheck,
+];
 
 export function TechnicalFounderSection() {
   return (
-    <Section id="technical-founder" tone="light" dense>
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start lg:gap-10 xl:grid-cols-[minmax(0,26rem)_1fr]">
-        <div className="max-w-xl lg:max-w-none">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
-            Technical Founder Layer
+    <Section id="technical-founder" tone="muted" dense>
+      <div className="max-w-3xl">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
+          Technical Founder Layer
+        </p>
+        <h2 className="mt-1.5 text-balance text-xl font-semibold leading-snug tracking-tight text-tb-text sm:text-2xl">
+          Self-built credibility shaped through building, testing, and improving.
+        </h2>
+
+        <div className="mt-2 space-y-2 text-sm leading-relaxed text-tb-text-muted sm:text-base">
+          <p>
+            Parth’s technical path started with curiosity, electronics, YouTube
+            learning, robotics, Arduino, C++, IoT, drones, Python, Raspberry Pi,
+            and public project demos.
           </p>
-          <h2 className="mt-3 max-w-md text-balance text-2xl font-semibold leading-snug tracking-tight text-tb-text sm:text-[1.75rem] lg:text-3xl">
-            Self-built credibility shaped through years of building, testing, and
-            improving.
-          </h2>
-
-          <div className="mt-6 max-w-prose space-y-4 text-base leading-relaxed text-tb-text-muted">
-            <p>
-              Parth’s technical path did not begin with a formal job title or a
-              college brand. It began with curiosity, electronics, YouTube learning,
-              robotics, Arduino, C++, IoT, drones, Python, Raspberry Pi, sensors,
-              automation, and public project demos.
-            </p>
-            <p>
-              Over time, that early technical exposure moved into software systems,
-              AI-assisted workflows, data platforms, internal tools, and
-              business-facing applications.
-            </p>
-            <p className="font-medium text-tb-text">
-              The important point is not only that he started young. The stronger
-              point is that he kept building.
-            </p>
-          </div>
-
-          <div className="mt-6 lg:mt-8">
-            <Button href="#technical-founder" variant="ghost">
-              Read About Parth
-            </Button>
-          </div>
+          <p>
+            Over time, that foundation moved into software systems, AI-assisted
+            workflows, data platforms, internal tools, and business-facing
+            applications.
+          </p>
+          <p className="font-medium text-tb-text">
+            The stronger point is not that he started young. It is that he kept
+            building.
+          </p>
         </div>
 
-        <ul className="grid auto-rows-fr gap-3.5 sm:grid-cols-2 lg:gap-4">
-          {founderCredibilityPoints.map((point, index) => (
-            <li
-              key={point.title}
-              className={`flex ${
-                index === founderCredibilityPoints.length - 1 &&
-                founderCredibilityPoints.length % 2 !== 0
-                  ? "sm:col-span-2"
-                  : ""
-              }`}
-            >
-              <article className="flex h-full w-full flex-col rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm ring-1 ring-slate-100/80 sm:p-6">
-                <h3 className="text-base font-semibold leading-snug text-tb-text sm:text-lg">
-                  {point.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-tb-text-muted sm:text-[15px]">
-                  {point.description}
-                </p>
-              </article>
-            </li>
-          ))}
+        <div className="mt-3">
+          <Button href="/about-parth" variant="ghost">
+            Read About Parth
+          </Button>
+        </div>
+      </div>
+
+      <div className="mt-3.5 overflow-hidden rounded-lg border border-slate-200/90 bg-white shadow-sm">
+        <ul className="grid divide-y divide-slate-200/90 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
+          {founderCredibilityPoints.map((point, index) => {
+            const Icon = founderIcons[index];
+            return (
+              <li key={point.title} className="flex">
+                <article className="flex w-full flex-col p-3 sm:p-3.5">
+                  <div className="mb-2 flex h-7 w-7 items-center justify-center rounded border border-slate-200/90 bg-slate-50 text-tb-blue">
+                    <Icon className="h-3.5 w-3.5" />
+                  </div>
+                  <h3 className="text-sm font-semibold leading-snug text-tb-text">
+                    {point.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-tb-text-muted">
+                    {point.description}
+                  </p>
+                </article>
+              </li>
+            );
+          })}
         </ul>
+      </div>
+
+      <div className="mt-2.5 flex gap-3 rounded-lg border border-slate-200/90 border-l-[3px] border-l-tb-blue bg-white px-3.5 py-2.5 sm:items-center sm:px-4">
+        <p className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.14em] text-tb-blue sm:text-xs">
+          Think Big delivery
+        </p>
+        <p className="text-sm leading-relaxed text-tb-text-muted">
+          {founderDeliveryNote}
+        </p>
       </div>
     </Section>
   );
