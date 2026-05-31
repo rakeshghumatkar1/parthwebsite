@@ -15,21 +15,21 @@ export function AboutBeyondCodeSection() {
         }}
         aria-hidden
       />
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-20 sm:px-8 sm:py-24 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
-          <div className="lg:pr-4">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-10 sm:px-8 sm:py-12 lg:py-14">
+        <div className="grid gap-5 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-6">
+          <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-cyan sm:text-sm">
               Beyond Code
             </p>
-            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+            <h2 className="mt-2 text-xl font-semibold tracking-tight text-white sm:text-2xl">
               Beyond code.
             </h2>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-tb-text-on-dark-muted sm:text-lg">
+            <p className="mt-3 max-w-lg text-sm leading-relaxed text-tb-text-on-dark-muted sm:text-base">
               Away from the screen, biking became one of Parth&apos;s personal
               passions — a different expression of focus, control, and machine
               curiosity.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-wrap gap-2.5">
               <Button href="/about-us/build-journey" variant="secondary" dark size="lg">
                 Explore Build Journey
               </Button>
@@ -37,39 +37,29 @@ export function AboutBeyondCodeSection() {
                 href={ABOUT_CONTACT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/25 bg-transparent px-6 py-3 text-sm font-medium text-tb-text-on-dark transition-colors hover:border-white/50 hover:bg-white/5 sm:px-8 sm:py-3.5 sm:text-base"
+                className="inline-flex items-center justify-center rounded-full border border-white/25 bg-transparent px-5 py-2.5 text-sm font-medium text-tb-text-on-dark transition-colors hover:border-white/50 hover:bg-white/5 sm:px-6 sm:py-3"
               >
                 Discuss a Use Case
               </Link>
             </div>
           </div>
 
-          <div className="relative">
-            <div
-              className="pointer-events-none absolute -inset-2 rounded-2xl bg-gradient-to-br from-tb-cyan/10 via-transparent to-tb-blue/10 opacity-80"
-              aria-hidden
-            />
-            <div className="relative overflow-hidden rounded-2xl border border-tb-navy-border/90 shadow-2xl shadow-black/40 ring-1 ring-tb-cyan/15">
-              <div className="relative aspect-[16/10] w-full min-h-[220px] sm:min-h-[280px] lg:aspect-[5/3] lg:min-h-[320px]">
-                <Image
-                  src={ABOUT_IMAGE_PATHS.bike}
-                  alt="Parth Ghumatkar with motorcycle"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 640px"
-                  className="object-cover object-[center_55%]"
-                />
-                <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-tb-navy/70 via-tb-navy/10 to-transparent"
-                  aria-hidden
-                />
-                <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-r from-tb-navy/30 via-transparent to-transparent"
-                  aria-hidden
-                />
-              </div>
-              <div className="border-t border-tb-navy-border/60 bg-tb-navy/80 px-4 py-2.5 text-center text-xs text-tb-text-on-dark-muted">
-                Focus, control, and machine curiosity off the screen
-              </div>
+          <div className="relative overflow-hidden rounded-xl border border-tb-navy-border/90 shadow-xl shadow-black/40 ring-1 ring-tb-cyan/15">
+            <div className="relative aspect-[4/5] w-full max-h-[420px] sm:max-h-[460px] lg:max-h-[480px]">
+              <Image
+                src={ABOUT_IMAGE_PATHS.bike}
+                alt="Parth Ghumatkar with motorcycle"
+                fill
+                sizes="(max-width: 1024px) 100vw, 480px"
+                className="object-cover object-[center_62%]"
+              />
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-tb-navy/55 to-transparent"
+                aria-hidden
+              />
+            </div>
+            <div className="border-t border-tb-navy-border/60 bg-tb-navy/80 px-3 py-2 text-center text-[11px] text-tb-text-on-dark-muted sm:text-xs">
+              Focus, control, and machine curiosity off the screen
             </div>
           </div>
         </div>

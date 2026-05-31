@@ -16,19 +16,19 @@ function OwnershipCard({
 }) {
   const accentClass =
     accent === "blue"
-      ? "border-tb-blue/30 bg-blue-50/50"
-      : "border-amber-200/80 bg-amber-50/40";
+      ? "border-tb-blue/25 bg-blue-50/40"
+      : "border-amber-200/70 bg-amber-50/35";
 
   return (
-    <article className={`rounded-2xl border p-6 sm:p-8 ${accentClass}`}>
-      <h3 className="text-lg font-semibold text-tb-text">{title}</h3>
-      <ul className="mt-5 space-y-2.5">
+    <article className={`rounded-lg border p-3.5 sm:p-4 ${accentClass}`}>
+      <h3 className="text-base font-semibold text-tb-text">{title}</h3>
+      <ul className="mt-3 space-y-1.5">
         {items.map((item) => (
           <li
             key={item}
-            className="flex gap-2 text-sm leading-relaxed text-tb-text-muted sm:text-base"
+            className="flex gap-2 text-sm leading-relaxed text-tb-text-muted"
           >
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tb-blue" aria-hidden />
+            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-tb-blue" aria-hidden />
             {item}
           </li>
         ))}
@@ -39,28 +39,33 @@ function OwnershipCard({
 
 export function AboutOwnershipSection() {
   return (
-    <Section tone="light">
+    <Section tone="muted" dense>
       <SectionHeader
+        dense
         eyebrow="Full-Project Ownership, With Review"
         title="Technical building capability with delivery structure."
       />
-      <div className="grid gap-6 lg:grid-cols-2">
-        <OwnershipCard
-          title="What Parth can own"
-          items={ABOUT_OWNERSHIP_LEFT}
-          accent="blue"
-        />
-        <OwnershipCard
-          title="Where serious delivery needs structure"
-          items={ABOUT_OWNERSHIP_RIGHT}
-          accent="amber"
-        />
+      <div className="overflow-hidden rounded-lg border border-slate-200/90 bg-white shadow-sm">
+        <div className="grid divide-y divide-slate-200/90 lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+          <OwnershipCard
+            title="What Parth can own"
+            items={ABOUT_OWNERSHIP_LEFT}
+            accent="blue"
+          />
+          <OwnershipCard
+            title="Where serious delivery needs structure"
+            items={ABOUT_OWNERSHIP_RIGHT}
+            accent="amber"
+          />
+        </div>
+        <div className="border-t border-slate-200/90 border-l-[3px] border-l-tb-blue bg-slate-50/80 px-3.5 py-2.5 sm:px-4">
+          <p className="text-sm leading-relaxed text-tb-text-muted">
+            Parth brings technical building capability. Think Big provides business
+            direction, review discipline, client communication, documentation, and
+            delivery support.
+          </p>
+        </div>
       </div>
-      <p className="mt-8 rounded-2xl border border-slate-200 bg-tb-surface-muted px-6 py-5 text-sm leading-relaxed text-tb-text-muted sm:text-base">
-        Parth brings technical building capability. Think Big provides business
-        direction, review discipline, client communication, documentation, and
-        delivery support.
-      </p>
     </Section>
   );
 }

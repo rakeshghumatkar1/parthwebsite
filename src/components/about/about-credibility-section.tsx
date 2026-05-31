@@ -1,52 +1,42 @@
 import { Section } from "@/components/ui/section";
-import { SectionHeader } from "@/components/ui/section-header";
 import { IconCheck } from "@/components/ui/icons";
 import { ABOUT_CREDIBILITY_CHIPS } from "@/lib/about-page-content";
 
 export function AboutCredibilitySection() {
   return (
-    <Section tone="muted">
-      <SectionHeader
-        eyebrow="Self-Built Credibility"
-        title="Not only borrowed credentials."
-        description="Many people lead with the institution they came from. Parth's stronger signal is the work he kept building before any institution could define him."
-      />
-      <div className="relative mx-auto max-w-4xl">
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {ABOUT_CREDIBILITY_CHIPS.map((chip) => (
-            <span
-              key={chip}
-              className="rounded-full border border-slate-200/90 bg-white px-4 py-2 text-sm font-medium text-tb-text shadow-sm ring-1 ring-slate-100"
-            >
-              {chip}
-            </span>
-          ))}
+    <Section tone="muted" dense>
+      <div className="overflow-hidden rounded-lg border border-slate-200/90 bg-white shadow-sm">
+        <div className="border-b border-slate-100 px-3.5 py-3 sm:px-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
+            Self-Built Credibility
+          </p>
+          <h2 className="mt-1.5 text-xl font-semibold tracking-tight text-tb-text sm:text-2xl">
+            Not only borrowed credentials.
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-tb-text-muted sm:text-base">
+            Many people lead with the institution they came from. Parth&apos;s
+            stronger signal is the work he kept building before any institution
+            could define him.
+          </p>
         </div>
 
-        {/* Connector diagram — desktop */}
-        <div
-          className="relative mx-auto mt-6 hidden h-14 max-w-2xl md:block"
-          aria-hidden
-        >
-          <div className="absolute left-[12%] top-0 h-full w-px bg-gradient-to-b from-slate-300 to-tb-blue/40" />
-          <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-slate-300 to-tb-blue/50" />
-          <div className="absolute right-[12%] top-0 h-full w-px bg-gradient-to-b from-slate-300 to-tb-blue/40" />
-          <div className="absolute bottom-0 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-tb-blue/30 to-transparent" />
-        </div>
+        <div className="px-3.5 py-3 sm:px-4">
+          <div className="flex flex-wrap gap-1.5">
+            {ABOUT_CREDIBILITY_CHIPS.map((chip) => (
+              <span
+                key={chip}
+                className="rounded-full border border-slate-200/90 bg-slate-50 px-3 py-1 text-xs font-medium text-tb-text sm:text-sm"
+              >
+                {chip}
+              </span>
+            ))}
+          </div>
 
-        {/* Connector — mobile */}
-        <div className="mx-auto my-5 h-8 w-px bg-gradient-to-b from-slate-300 to-tb-blue/40 md:hidden" aria-hidden />
-
-        <div className="relative mx-auto max-w-2xl">
-          <div
-            className="pointer-events-none absolute -inset-1 rounded-2xl bg-gradient-to-br from-tb-blue/10 via-transparent to-tb-cyan/10"
-            aria-hidden
-          />
-          <div className="relative rounded-2xl border-2 border-tb-blue/20 bg-white px-6 py-6 text-center shadow-md ring-1 ring-tb-blue/10 sm:px-8 sm:py-7">
-            <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-tb-blue/10 text-tb-blue">
-              <IconCheck className="h-5 w-5" />
+          <div className="mt-3 flex items-start gap-3 rounded-md border border-tb-blue/15 bg-blue-50/40 px-3.5 py-3">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-tb-blue/20 bg-white text-tb-blue">
+              <IconCheck className="h-4 w-4" />
             </div>
-            <p className="text-lg font-semibold leading-snug text-tb-text sm:text-xl">
+            <p className="text-sm font-semibold leading-snug text-tb-text sm:text-base">
               Visible work built over years of consistent building.
             </p>
           </div>
