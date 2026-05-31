@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { PublicProject } from "@/lib/public/projects";
 import {
+  industryLabel,
   projectHasLinks,
   projectStatusLabel,
   projectTypeLabel,
 } from "@/lib/public/projects";
+import { domainLabels } from "@/lib/projects/taxonomy";
 
 type ProjectCardProps = {
   project: PublicProject;
@@ -15,6 +17,17 @@ export function ProjectCard({ project, dark = false }: ProjectCardProps) {
   const border = dark
     ? "border-tb-navy-border/80 bg-tb-navy-elevated/90 hover:border-tb-cyan/20"
     : "border-slate-200 bg-white hover:border-tb-blue/30 shadow-sm";
+
+  const mutedText = dark ? "text-tb-text-on-dark-muted" : "text-tb-text-muted";
+  const domainLabelList = domainLabels(project.domains);
+  const visibleDomains = domainLabelList.slice(0, 2);
+  const extraDomainCount = domainLabelList.length - visibleDomains.length;
+  const domainsText =
+    visibleDomains.length === 0
+      ? "—"
+      : extraDomainCount > 0
+        ? `${visibleDomains.join(", ")} +${extraDomainCount}`
+        : visibleDomains.join(", ");
 
   return (
     <article
@@ -50,12 +63,26 @@ export function ProjectCard({ project, dark = false }: ProjectCardProps) {
         {project.title}
       </h3>
       <p
-        className={`mt-3 flex-1 text-sm leading-relaxed sm:text-base ${dark ? "text-tb-text-on-dark-muted" : "text-tb-text-muted"}`}
+        className={`mt-3 flex-1 text-sm leading-relaxed sm:text-base ${mutedText}`}
       >
         {project.shortDescription}
       </p>
+      <div className={`mt-4 space-y-1.5 text-xs leading-relaxed ${mutedText}`}>
+        <p>
+          <span className={`font-medium ${dark ? "text-tb-text-on-dark" : "text-tb-text"}`}>
+            Industry:
+          </span>{" "}
+          {industryLabel(project.industry)}
+        </p>
+        <p className="break-words">
+          <span className={`font-medium ${dark ? "text-tb-text-on-dark" : "text-tb-text"}`}>
+            Domains:
+          </span>{" "}
+          {domainsText}
+        </p>
+      </div>
       {project.techStack.length > 0 ? (
-        <ul className="mt-6 flex flex-wrap gap-2">
+        <ul className="mt-4 flex flex-wrap gap-2">
           {project.techStack.map((tag) => (
             <li
               key={tag}

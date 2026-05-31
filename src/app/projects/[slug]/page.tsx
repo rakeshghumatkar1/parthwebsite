@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import {
+  ProjectContextPanel,
   ProjectDetailHeader,
   ProjectDetailSection,
   ProjectLinksPanel,
@@ -68,6 +69,9 @@ export default async function ProjectDetailPage({
           <div className="grid gap-10 lg:grid-cols-[1fr_280px] lg:items-start">
             <div className="space-y-8">
               <ProjectDetailHeader project={project} />
+              <div className="lg:hidden">
+                <ProjectContextPanel project={project} />
+              </div>
               {youtubeEmbed ? (
                 <ProjectVideoEmbed project={project} embed={youtubeEmbed} />
               ) : null}
@@ -81,7 +85,12 @@ export default async function ProjectDetailPage({
                 </div>
               ) : null}
             </div>
-            <ProjectLinksPanel project={project} youtubeEmbed={youtubeEmbed} />
+            <div className="space-y-6">
+              <div className="hidden lg:block">
+                <ProjectContextPanel project={project} />
+              </div>
+              <ProjectLinksPanel project={project} youtubeEmbed={youtubeEmbed} />
+            </div>
           </div>
         </Section>
       </main>

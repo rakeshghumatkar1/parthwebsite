@@ -1,7 +1,10 @@
 import Link from "next/link";
 import type { PublicProject } from "@/lib/public/projects";
 import {
+  domainLabels,
+  industryLabel,
   projectHasLinks,
+  projectPhaseLabel,
   projectStatusLabel,
   projectTypeLabel,
 } from "@/lib/public/projects";
@@ -43,6 +46,69 @@ export function ProjectLinksPanel({ project, youtubeEmbed }: ProjectLinksPanelPr
           </li>
         ))}
       </ul>
+    </aside>
+  );
+}
+
+type ProjectContextRowProps = {
+  label: string;
+  children: React.ReactNode;
+};
+
+function ProjectContextRow({ label, children }: ProjectContextRowProps) {
+  return (
+    <div>
+      <dt className="text-xs font-semibold uppercase tracking-wide text-tb-text-muted">
+        {label}
+      </dt>
+      <dd className="mt-1.5 text-sm text-tb-text">{children}</dd>
+    </div>
+  );
+}
+
+function ProjectTagList({ tags }: { tags: string[] }) {
+  if (tags.length === 0) {
+    return <span className="text-tb-text-muted">—</span>;
+  }
+
+  return (
+    <ul className="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <li
+          key={tag}
+          className="max-w-full rounded-full border border-slate-200 bg-tb-surface-muted px-3 py-1 text-xs font-medium text-tb-text break-words sm:text-sm"
+        >
+          {tag}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function ProjectContextPanel({ project }: { project: PublicProject }) {
+  return (
+    <aside className="rounded-2xl border border-slate-200 bg-white p-6">
+      <h2 className="text-lg font-semibold text-tb-text">Project context</h2>
+      <dl className="mt-4 space-y-4">
+        <ProjectContextRow label="Phase">
+          {projectPhaseLabel(project.projectPhase)}
+        </ProjectContextRow>
+        <ProjectContextRow label="Type">
+          {projectTypeLabel(project.projectType)}
+        </ProjectContextRow>
+        <ProjectContextRow label="Status">
+          {projectStatusLabel(project.status)}
+        </ProjectContextRow>
+        <ProjectContextRow label="Industry">
+          {industryLabel(project.industry)}
+        </ProjectContextRow>
+        <ProjectContextRow label="Domains">
+          <ProjectTagList tags={domainLabels(project.domains)} />
+        </ProjectContextRow>
+        <ProjectContextRow label="Tech stack">
+          <ProjectTagList tags={project.techStack} />
+        </ProjectContextRow>
+      </dl>
     </aside>
   );
 }
@@ -118,14 +184,6 @@ export function ProjectDetailHeader({ project }: { project: PublicProject }) {
       >
         ← {backLabel}
       </Link>
-      <div className="flex flex-wrap gap-2">
-        <span className="rounded-full bg-tb-surface-muted px-3 py-1 text-xs font-medium text-tb-text-muted">
-          {projectTypeLabel(project.projectType)}
-        </span>
-        <span className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-tb-text-muted">
-          {projectStatusLabel(project.status)}
-        </span>
-      </div>
       <div>
         <h1 className="text-3xl font-semibold tracking-tight text-tb-text sm:text-4xl">
           {project.title}
@@ -134,18 +192,6 @@ export function ProjectDetailHeader({ project }: { project: PublicProject }) {
           {project.shortDescription}
         </p>
       </div>
-      {project.techStack.length > 0 ? (
-        <ul className="flex flex-wrap gap-2">
-          {project.techStack.map((tag) => (
-            <li
-              key={tag}
-              className="rounded-full border border-slate-200 bg-tb-surface-muted px-3 py-1 text-xs font-medium text-tb-text sm:text-sm"
-            >
-              {tag}
-            </li>
-          ))}
-        </ul>
-      ) : null}
     </div>
   );
 }
