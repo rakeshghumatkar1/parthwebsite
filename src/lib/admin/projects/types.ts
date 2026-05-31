@@ -32,6 +32,8 @@ export type ProjectFormState = {
   errors?: ProjectFormErrors;
   values?: ProjectFormValues;
   success?: boolean;
+  /** Bumps on failed save so defaultValue/defaultChecked fields remount with submitted values. */
+  resetKey?: number;
 };
 
 export type ProjectListFilters = {

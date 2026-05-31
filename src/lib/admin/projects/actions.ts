@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAdminSession } from "@/lib/admin/page-guard";
+import { buildProjectFormFailureState } from "./form-state";
 import {
   createProjectRecord,
   getProjectById,
@@ -10,6 +11,7 @@ import {
   updateProjectFlags,
   updateProjectRecord,
 } from "./queries";
+import { mapDatabaseErrorToFormErrors } from "./save-errors";
 import type { ProjectFormState } from "./types";
 import {
   formDataToValues,
@@ -24,47 +26,49 @@ async function saveProjectFromForm(
   await requireAdminSession();
 
   const values = formDataToValues(formData);
-  const errors = validateProjectForm(values);
+  const validationErrors = validateProjectForm(values);
 
-  if (Object.keys(errors).length > 0) {
-    return { errors, values };
+  if (Object.keys(validationErrors).length > 0) {
+    return buildProjectFormFailureState(validationErrors, values);
   }
 
   const payload = valuesToDbPayload(values);
   const slugTaken = await isSlugTaken(payload.slug, projectId);
 
   if (slugTaken) {
-    return {
-      errors: { slug: "This slug is already in use. Choose another." },
+    return buildProjectFormFailureState(
+      { slug: "This slug is already used. Choose a different slug." },
       values,
-    };
+    );
   }
+
+  let redirectUrl: string;
 
   try {
     if (projectId) {
       const updated = await updateProjectRecord(projectId, payload);
       if (!updated) {
-        return {
-          errors: { form: "Project not found. It may have been removed." },
+        return buildProjectFormFailureState(
+          { form: "Project not found. It may have been removed." },
           values,
-        };
+        );
       }
       revalidatePath("/admin/projects");
       revalidatePath(`/admin/projects/${projectId}`);
-      redirect(`/admin/projects/${projectId}?saved=1`);
+      redirectUrl = `/admin/projects/${projectId}?saved=1`;
+    } else {
+      const created = await createProjectRecord(payload);
+      revalidatePath("/admin/projects");
+      redirectUrl = `/admin/projects/${created.id}?saved=1`;
     }
-
-    const created = await createProjectRecord(payload);
-    revalidatePath("/admin/projects");
-    redirect(`/admin/projects/${created.id}?saved=1`);
-  } catch {
-    return {
-      errors: {
-        form: "Could not save the project. Check your entries and try again.",
-      },
+  } catch (error) {
+    return buildProjectFormFailureState(
+      mapDatabaseErrorToFormErrors(error),
       values,
-    };
+    );
   }
+
+  redirect(redirectUrl);
 }
 
 export async function createProjectAction(
@@ -80,10 +84,10 @@ export async function updateProjectAction(
 ): Promise<ProjectFormState> {
   const projectId = String(formData.get("projectId") ?? "");
   if (!projectId) {
-    return {
-      errors: { form: "Missing project ID." },
-      values: formDataToValues(formData),
-    };
+    return buildProjectFormFailureState(
+      { form: "Missing project ID." },
+      formDataToValues(formData),
+    );
   }
   return saveProjectFromForm(formData, projectId);
 }

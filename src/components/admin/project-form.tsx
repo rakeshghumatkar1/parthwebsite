@@ -70,8 +70,13 @@ export function ProjectForm({
 
   const values = state.values ?? initialValues ?? emptyValues;
   const errors = state.errors ?? {};
+  const formKey = state.resetKey ?? "initial";
 
-  const [slugTouched, setSlugTouched] = useState(mode === "edit");
+  const [slugEditedManually, setSlugEditedManually] = useState(mode === "edit");
+  const slugTouched =
+    mode === "edit" ||
+    slugEditedManually ||
+    Boolean(state.resetKey && values.slug);
 
   function handleTitleChange(title: string) {
     if (!slugTouched && mode === "create") {
@@ -83,7 +88,7 @@ export function ProjectForm({
   }
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form key={formKey} action={formAction} className="space-y-6">
       {mode === "edit" && projectId ? (
         <input type="hidden" name="projectId" value={projectId} />
       ) : null}
@@ -101,7 +106,7 @@ export function ProjectForm({
           >
             <AdminField
               id="title"
-              label="Title"
+              label="Title (required)"
               error={errors.title}
               hint={FIELD_HINTS.title}
             >
@@ -117,7 +122,7 @@ export function ProjectForm({
 
             <AdminField
               id="slug"
-              label="Slug"
+              label="Slug (required)"
               error={errors.slug}
               hint={FIELD_HINTS.slug}
             >
@@ -125,7 +130,7 @@ export function ProjectForm({
                 id="slug"
                 name="slug"
                 defaultValue={values.slug}
-                onChange={() => setSlugTouched(true)}
+                onChange={() => setSlugEditedManually(true)}
                 className={adminInputClassName(Boolean(errors.slug))}
                 required
               />
@@ -133,7 +138,7 @@ export function ProjectForm({
 
             <AdminField
               id="shortDescription"
-              label="Short description"
+              label="Short description (required)"
               error={errors.shortDescription}
               hint={FIELD_HINTS.shortDescription}
             >
@@ -150,7 +155,7 @@ export function ProjectForm({
             <div className="grid gap-4 sm:grid-cols-2">
               <AdminField
                 id="projectType"
-                label="Project type"
+                label="Project type (required)"
                 error={errors.projectType}
                 hint={FIELD_HINTS.projectType}
               >
@@ -172,7 +177,7 @@ export function ProjectForm({
 
               <AdminField
                 id="projectPhase"
-                label="Project phase"
+                label="Project phase (required)"
                 error={errors.projectPhase}
                 hint={FIELD_HINTS.projectPhase}
               >
@@ -194,7 +199,7 @@ export function ProjectForm({
 
             <AdminField
               id="status"
-              label="Status"
+              label="Status (required)"
               error={errors.status}
               hint={FIELD_HINTS.status}
             >

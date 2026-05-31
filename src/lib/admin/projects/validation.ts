@@ -10,20 +10,23 @@ import type { ProjectFormErrors, ProjectFormValues } from "./types";
 const URL_PATTERN =
   /^(https?:\/\/)[\w\-._~:/?#[\]@!$&'()*+,;=%]+$/i;
 
-function validateOptionalUrl(value: string, field: string): string | null {
+function validateOptionalUrl(value: string): string | null {
   const trimmed = value.trim();
   if (!trimmed) return null;
+  if (!/^https?:\/\//i.test(trimmed)) {
+    return "Use the full URL, starting with https://";
+  }
   try {
     const url = new URL(trimmed);
     if (!["http:", "https:"].includes(url.protocol)) {
-      return `${field} must start with http:// or https://.`;
+      return "Use the full URL, starting with https://";
     }
     if (!URL_PATTERN.test(trimmed)) {
-      return `${field} is not a valid URL.`;
+      return "Use the full URL, starting with https://";
     }
     return null;
   } catch {
-    return `${field} is not a valid URL.`;
+    return "Use the full URL, starting with https://";
   }
 }
 
@@ -157,15 +160,15 @@ export function validateProjectForm(
     errors.displayOrder = "Display order must be a whole number.";
   }
 
-  const urlChecks: Array<[keyof ProjectFormValues, string]> = [
-    ["githubUrl", "GitHub URL"],
-    ["demoUrl", "Demo URL"],
-    ["videoUrl", "Video URL"],
-    ["pdfDownloadUrl", "PDF download URL"],
+  const urlFields: Array<keyof ProjectFormValues> = [
+    "githubUrl",
+    "demoUrl",
+    "videoUrl",
+    "pdfDownloadUrl",
   ];
 
-  for (const [field, label] of urlChecks) {
-    const message = validateOptionalUrl(String(values[field]), label);
+  for (const field of urlFields) {
+    const message = validateOptionalUrl(String(values[field]));
     if (message) {
       errors[field] = message;
     }
