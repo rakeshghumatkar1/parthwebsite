@@ -10,9 +10,9 @@ export function AboutCurrentSystemsSection() {
   return (
     <Section tone="light">
       <SectionHeader
-        eyebrow="From Early Experiments to Software Systems"
-        title="The foundation was experiments. The impact is in current systems."
-        description="The early story explains the foundation. The current proof is in the systems being built now."
+        eyebrow="Current Capability"
+        title="Systems Parth builds today."
+        description="AI-assisted software, automation pipelines, internal tools, and data systems — project-oriented builds you can review on the portfolio."
       />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {ABOUT_CURRENT_SYSTEMS.map((item, index) => {

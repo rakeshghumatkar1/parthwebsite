@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ABOUT_CONTACT_URL } from "@/lib/about-page-content";
 
 export function AboutFinalCtaSection() {
   return (
@@ -24,9 +26,9 @@ export function AboutFinalCtaSection() {
           Review the work, not just the story.
         </h2>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-tb-text-on-dark-muted sm:text-lg">
-          The best way to understand Parth&apos;s capability is to review the
-          project trail — GitHub repositories, YouTube demos, proof material,
-          current systems, screenshots, build notes, and project documentation.
+          The best way to understand Parth&apos;s capability is to review current
+          projects, explore the early build journey, and see how Think Big
+          supports delivery with review structure and accountability.
         </p>
 
         <div className="mt-10 max-w-3xl space-y-3">
@@ -40,15 +42,32 @@ export function AboutFinalCtaSection() {
             View Current Projects
           </Button>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Button href="/videos" variant="secondary" dark size="lg" className="w-full justify-center">
-              Watch YouTube Demos
+            <Button
+              href="/about-us/build-journey"
+              variant="secondary"
+              dark
+              size="lg"
+              className="w-full justify-center"
+            >
+              Explore Build Journey
             </Button>
-            <Button href="/proof" variant="secondary" dark size="lg" className="w-full justify-center">
-              Review Proof Library
+            <Button
+              href="/projects/early-work"
+              variant="secondary"
+              dark
+              size="lg"
+              className="w-full justify-center"
+            >
+              View Early Work
             </Button>
-            <Button href="/#contact" variant="secondary" dark size="lg" className="w-full justify-center sm:col-span-1">
+            <Link
+              href={ABOUT_CONTACT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center rounded-full border border-white/25 bg-transparent px-6 py-3 text-sm font-medium text-tb-text-on-dark transition-colors hover:border-white/50 hover:bg-white/5 sm:px-8 sm:py-3.5 sm:text-base"
+            >
               Discuss a Software Use Case
-            </Button>
+            </Link>
           </div>
         </div>
       </div>

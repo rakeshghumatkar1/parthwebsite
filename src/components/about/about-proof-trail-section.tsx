@@ -3,30 +3,30 @@ import {
   IconAward,
   IconDocumentation,
   IconGitHub,
-  IconPlay,
+  IconLayers,
   IconSystems,
 } from "@/components/ui/icons";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
-import { ABOUT_PROOF_TRAIL } from "@/lib/about-page-content";
+import { ABOUT_WORK_TRAIL } from "@/lib/about-page-content";
 
 const trailIcons = [
-  IconGitHub,
-  IconPlay,
-  IconDocumentation,
-  IconAward,
   IconSystems,
+  IconDocumentation,
+  IconGitHub,
+  IconLayers,
+  IconAward,
 ];
 
 export function AboutProofTrailSection() {
   return (
     <Section tone="light">
       <SectionHeader
-        eyebrow="Proof Before Claims"
+        eyebrow="Work Before Claims"
         title="The story matters. The work matters more."
       />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        {ABOUT_PROOF_TRAIL.map((item, index) => {
+        {ABOUT_WORK_TRAIL.map((item, index) => {
           const Icon = trailIcons[index] ?? IconSystems;
           return (
             <FeatureCard

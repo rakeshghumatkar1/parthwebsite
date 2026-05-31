@@ -2,16 +2,16 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   IconAward,
-  IconGitHub,
-  IconPlay,
+  IconLayers,
   IconSystems,
+  IconWorkflow,
 } from "@/components/ui/icons";
 import {
   ABOUT_HERO_BADGES,
   ABOUT_IMAGE_PATHS,
 } from "@/lib/about-page-content";
 
-const badgeIcons = [IconAward, IconGitHub, IconPlay, IconSystems, IconSystems];
+const badgeIcons = [IconAward, IconSystems, IconWorkflow, IconLayers, IconSystems];
 
 function HeroGridOverlay() {
   return (
@@ -47,10 +47,10 @@ export function AboutHeroSection() {
             <span className="block text-tb-blue">Builder by Choice.</span>
           </h1>
           <p className="mt-6 text-base leading-relaxed text-tb-text-on-dark sm:text-lg">
-            Parth Ghumatkar&apos;s technical credibility is self-built. It does not
-            depend only on a college name, formal credential, or job title. His
-            proof comes from years of building, debugging, documenting, and
-            improving real technology projects.
+            Parth Ghumatkar builds AI-assisted software systems, automation
+            workflows, and project-oriented tools. His credibility comes from
+            years of building, debugging, documenting, and improving real
+            technology work — not from borrowed credentials alone.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
             <Button href="/projects" variant="primary" dark size="lg">
@@ -58,6 +58,9 @@ export function AboutHeroSection() {
             </Button>
             <Button href="/about-us/build-journey" variant="secondary" dark size="lg">
               Explore Build Journey
+            </Button>
+            <Button href="/projects/early-work" variant="secondary" dark size="lg">
+              View Early Work
             </Button>
           </div>
         </div>

@@ -21,11 +21,12 @@ export function AboutFeaturedProjectsSection({
         <SectionHeader
           eyebrow="Current Project Evidence"
           title="Current systems you can review."
+          description="Featured current-work projects from the portfolio. Early builds are listed separately under Early Work."
           dark
           className="mb-0 lg:max-w-2xl"
         />
         <Button href="/projects" variant="secondary" dark size="lg" className="shrink-0">
-          View Project Portfolio
+          View Current Projects
         </Button>
       </div>
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

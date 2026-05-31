@@ -16,11 +16,13 @@ import { getPublicFeaturedAboutProjects } from "@/lib/public/projects";
 export const metadata: Metadata = {
   title: "About Us | Think Big AI Systems",
   description:
-    "Parth Ghumatkar's self-built technical credibility — software systems, AI-assisted workflows, automation, and project proof under Think Big Digital Solutions.",
+    "Parth Ghumatkar — current AI-assisted software systems, automation, internal tools, and project-oriented build capability under Think Big Digital Solutions.",
 };
 
 export default async function AboutUsPage() {
-  const featuredProjects = await getPublicFeaturedAboutProjects(3);
+  const featuredProjects = (await getPublicFeaturedAboutProjects(6))
+    .filter((project) => project.projectPhase === "current_work")
+    .slice(0, 3);
 
   return (
     <div className="flex min-h-full flex-col">

@@ -47,7 +47,7 @@ export function AboutCredibilitySection() {
               <IconCheck className="h-5 w-5" />
             </div>
             <p className="text-lg font-semibold leading-snug text-tb-text sm:text-xl">
-              Visible proof built over years of consistent work.
+              Visible work built over years of consistent building.
             </p>
           </div>
         </div>

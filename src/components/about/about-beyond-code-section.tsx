@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ABOUT_IMAGE_PATHS } from "@/lib/about-page-content";
+import { ABOUT_CONTACT_URL, ABOUT_IMAGE_PATHS } from "@/lib/about-page-content";
 
 export function AboutBeyondCodeSection() {
   return (
@@ -28,10 +29,18 @@ export function AboutBeyondCodeSection() {
               passions — a different expression of focus, control, and machine
               curiosity.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/about-us/build-journey" variant="secondary" dark size="lg">
                 Explore Build Journey
               </Button>
+              <Link
+                href={ABOUT_CONTACT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border border-white/25 bg-transparent px-6 py-3 text-sm font-medium text-tb-text-on-dark transition-colors hover:border-white/50 hover:bg-white/5 sm:px-8 sm:py-3.5 sm:text-base"
+              >
+                Discuss a Use Case
+              </Link>
             </div>
           </div>
 
