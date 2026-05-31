@@ -37,7 +37,37 @@ export type PublicProjectListFilters = {
   projectType?: string;
   status?: string;
   q?: string;
+  projectPhase?: "current_work" | "early_work";
 };
+
+function buildPublicProjectListConditions(
+  filters: PublicProjectListFilters,
+): SQL | undefined {
+  const conditions: SQL[] = [];
+
+  if (filters.projectPhase) {
+    conditions.push(eq(projects.projectPhase, filters.projectPhase));
+  }
+  if (filters.projectType) {
+    conditions.push(eq(projects.projectType, filters.projectType as never));
+  }
+  if (filters.status) {
+    conditions.push(eq(projects.status, filters.status as never));
+  }
+  const q = filters.q?.trim();
+  if (q) {
+    const pattern = `%${q}%`;
+    conditions.push(
+      or(
+        ilike(projects.title, pattern),
+        ilike(projects.shortDescription, pattern),
+        ilike(projects.slug, pattern),
+      )!,
+    );
+  }
+
+  return conditions.length > 0 ? and(...conditions) : undefined;
+}
 
 export const PROJECT_TYPE_LABELS: Record<string, string> = {
   internal_tool: "Internal Tool",
@@ -136,42 +166,24 @@ export async function getPublicProjects(
     return [];
   }
 
-  const conditions: SQL[] = [];
-
-  if (filters.projectType) {
-    conditions.push(eq(projects.projectType, filters.projectType as never));
-  }
-  if (filters.status) {
-    conditions.push(eq(projects.status, filters.status as never));
-  }
-  const q = filters.q?.trim();
-  if (q) {
-    const pattern = `%${q}%`;
-    conditions.push(
-      or(
-        ilike(projects.title, pattern),
-        ilike(projects.shortDescription, pattern),
-        ilike(projects.slug, pattern),
-      )!,
-    );
-  }
-
-  const extra = conditions.length > 0 ? and(...conditions) : undefined;
-  return queryPublicProjects(extra);
+  return queryPublicProjects(buildPublicProjectListConditions(filters));
 }
 
-/** Total published public projects (no list filters applied). */
-export async function getPublicProjectsCount(): Promise<number> {
+/** Total published public projects, optionally filtered by phase. */
+export async function getPublicProjectsCount(
+  filters: Pick<PublicProjectListFilters, "projectPhase"> = {},
+): Promise<number> {
   if (!isDatabaseConfigured()) {
     return 0;
   }
 
   try {
     const db = getDb();
+    const extra = buildPublicProjectListConditions(filters);
     const [row] = await db
       .select({ count: count() })
       .from(projects)
-      .where(publicProjectConditions());
+      .where(publicProjectConditions(extra));
     return row?.count ?? 0;
   } catch {
     return 0;

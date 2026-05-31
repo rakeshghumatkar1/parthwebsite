@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -22,15 +23,16 @@ import {
 } from "@/lib/public/projects";
 
 export const metadata: Metadata = {
-  title: "Current Projects | Think Big AI Systems",
+  title: "Early Work | Think Big AI Systems",
   description:
-    "Software systems, AI-assisted workflows, automation builds, internal tools, and data products created through Parth's current build process.",
+    "Early robotics, Arduino, IoT, drone, automation, and learning-era builds from Parth's formative technical years.",
 };
 
 const FILTER_KEYS = ["q", "projectType", "status"] as const;
-const CURRENT_WORK_PHASE = "current_work" as const;
+const EARLY_WORK_PHASE = "early_work" as const;
+const BASE_PATH = "/projects/early-work";
 
-type ProjectsPageProps = {
+type EarlyWorkPageProps = {
   searchParams: Promise<{
     q?: string;
     projectType?: string;
@@ -38,10 +40,12 @@ type ProjectsPageProps = {
   }>;
 };
 
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
+export default async function EarlyWorkProjectsPage({
+  searchParams,
+}: EarlyWorkPageProps) {
   const params = await searchParams;
   const filters: PublicProjectListFilters = {
-    projectPhase: CURRENT_WORK_PHASE,
+    projectPhase: EARLY_WORK_PHASE,
     q: params.q,
     projectType: params.projectType,
     status: params.status,
@@ -50,7 +54,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 
   const [projects, totalCount] = await Promise.all([
     getPublicProjects(filters),
-    getPublicProjectsCount({ projectPhase: CURRENT_WORK_PHASE }),
+    getPublicProjectsCount({ projectPhase: EARLY_WORK_PHASE }),
   ]);
 
   const showFilters = shouldShowPublicFilters(totalCount, hasActiveFilters);
@@ -63,13 +67,27 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
       <main>
         <Section tone="light">
           <SectionHeader
-            title="Current Projects"
-            description="Software systems, AI-assisted workflows, automation builds, internal tools, and data products created through Parth's current build process."
+            title="Early Work"
+            description="Early projects from Parth's robotics, electronics, Arduino, IoT, drone, and home-automation learning years. These entries support the Build Journey and show how the technical foundation developed over time."
           />
+          <div className="mb-10 flex flex-wrap gap-4 sm:mb-12">
+            <Link
+              href="/about-us/build-journey"
+              className="text-sm font-medium text-tb-blue hover:underline"
+            >
+              Back to Build Journey
+            </Link>
+            <Link
+              href="/projects"
+              className="text-sm font-medium text-tb-blue hover:underline"
+            >
+              View Current Projects
+            </Link>
+          </div>
           {showFilters ? (
             <PublicListingFiltersShell>
               <Suspense fallback={null}>
-                <ProjectsFilters />
+                <ProjectsFilters basePath={BASE_PATH} />
               </Suspense>
             </PublicListingFiltersShell>
           ) : null}
@@ -87,10 +105,10 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               className={showFilters ? "mt-6" : "mt-10"}
               message={
                 hasActiveFilters
-                  ? "No current projects match the current filters. Clear filters to see all published current projects."
-                  : "Current project entries will appear here after selected builds are published."
+                  ? "No early work projects match the current filters. Clear filters to see all published early work projects."
+                  : "Early work entries will appear here after selected childhood and learning-era builds are published."
               }
-              clearHref={hasActiveFilters ? "/projects" : undefined}
+              clearHref={hasActiveFilters ? BASE_PATH : undefined}
             />
           )}
         </Section>

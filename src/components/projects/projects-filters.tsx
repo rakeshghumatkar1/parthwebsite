@@ -9,7 +9,11 @@ import {
 const inputClassName =
   "block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tb-blue/30";
 
-export function ProjectsFilters() {
+type ProjectsFiltersProps = {
+  basePath?: string;
+};
+
+export function ProjectsFilters({ basePath = "/projects" }: ProjectsFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -22,7 +26,7 @@ export function ProjectsFilters() {
         params.set(key, value.trim());
       }
     }
-    router.push(`/projects${params.size ? `?${params.toString()}` : ""}`);
+    router.push(`${basePath}${params.size ? `?${params.toString()}` : ""}`);
   }
 
   return (
@@ -90,7 +94,7 @@ export function ProjectsFilters() {
         </button>
         <button
           type="button"
-          onClick={() => router.push("/projects")}
+          onClick={() => router.push(basePath)}
           className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-tb-text hover:bg-tb-surface-muted"
         >
           Clear

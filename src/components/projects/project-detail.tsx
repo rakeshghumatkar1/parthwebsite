@@ -63,13 +63,17 @@ export function ProjectDetailSection({
 }
 
 export function ProjectDetailHeader({ project }: { project: PublicProject }) {
+  const isEarlyWork = project.projectPhase === "early_work";
+  const backHref = isEarlyWork ? "/projects/early-work" : "/projects";
+  const backLabel = isEarlyWork ? "Back to early work" : "Back to current projects";
+
   return (
     <div className="space-y-6">
       <Link
-        href="/projects"
+        href={backHref}
         className="inline-flex text-sm font-medium text-tb-blue hover:underline"
       >
-        ← Back to projects
+        ← {backLabel}
       </Link>
       <div className="flex flex-wrap gap-2">
         <span className="rounded-full bg-tb-surface-muted px-3 py-1 text-xs font-medium text-tb-text-muted">
