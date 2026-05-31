@@ -16,7 +16,7 @@ import {
 } from "@/components/admin/admin-form-section";
 import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
 import { PublishingSidebar } from "@/components/admin/publishing-sidebar";
-import { FIELD_HINTS, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
+import { FIELD_HINTS, MODULE_GUIDANCE, PROJECT_TAXONOMY_OTHER_NOTE } from "@/lib/admin/cms-guidance";
 import {
   createProjectAction,
   updateProjectAction,
@@ -352,6 +352,7 @@ export function ProjectForm({
                 ))}
               </div>
             </AdminField>
+            <AdminFieldHint>{PROJECT_TAXONOMY_OTHER_NOTE}</AdminFieldHint>
           </AdminFormSection>
 
           <AdminCollapsibleFormSection

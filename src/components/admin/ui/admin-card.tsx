@@ -2,20 +2,23 @@ import Link from "next/link";
 import { adminCardClass } from "@/lib/admin/admin-ui";
 import { AdminBadge } from "./admin-badge";
 
+type AdminCardBadge = {
+  label: string;
+  variant?: "success" | "warning" | "neutral" | "info" | "draft";
+};
+
 type AdminCardProps = {
   title: string;
   description: string;
   href: string;
-  statusLabel: string;
-  statusNote?: string;
+  badges: AdminCardBadge[];
 };
 
 export function AdminCard({
   title,
   description,
   href,
-  statusLabel,
-  statusNote,
+  badges,
 }: AdminCardProps) {
   return (
     <Link
@@ -27,8 +30,11 @@ export function AdminCard({
           {title}
         </h3>
         <div className="flex flex-wrap gap-1">
-          <AdminBadge variant="success">{statusLabel}</AdminBadge>
-          {statusNote ? <AdminBadge variant="neutral">{statusNote}</AdminBadge> : null}
+          {badges.map((badge) => (
+            <AdminBadge key={badge.label} variant={badge.variant ?? "neutral"}>
+              {badge.label}
+            </AdminBadge>
+          ))}
         </div>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-tb-text-muted">

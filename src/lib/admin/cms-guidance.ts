@@ -5,15 +5,36 @@ export const BLOB_PREFIX_RULE =
   "All Parth uploads must use the parthwebsite/ prefix in the shared Blob store. Never edit or delete files from other websites in that store.";
 
 export const WORKFLOW_STEPS = [
-  { step: 1, label: "Projects", note: "Start here — core portfolio records." },
-  { step: 2, label: "Media Library", note: "Upload or paste URLs for images and PDFs." },
-  { step: 3, label: "Proof Library", note: "Add evidence linked to projects." },
-  { step: 4, label: "Videos", note: "Add approved YouTube or demo URLs." },
-  { step: 5, label: "Timeline / Milestones", note: "Add About-page timeline markers." },
-  { step: 6, label: "Updates / Build Notes", note: "Add progress notes when ready." },
-  { step: 7, label: "Review public pages", note: "Check /projects, /proof, /videos, /updates, /about-parth." },
-  { step: 8, label: "Home featured flags", note: "Mark featured_on_home only when ready for Home." },
-  { step: 9, label: "Publish", note: "Publish only approved records; keep drafts hidden until ready." },
+  {
+    step: 1,
+    label: "Projects",
+    note: "Start here. Add Current Work and Early Work project records.",
+  },
+  {
+    step: 2,
+    label: "Media Library",
+    note: "Upload or paste URLs for images, PDFs, thumbnails, and documents when needed.",
+  },
+  {
+    step: 3,
+    label: "Updates / Build Notes",
+    note: "Add progress notes only when ready.",
+  },
+  {
+    step: 4,
+    label: "Review public pages",
+    note: "Check /projects, /projects/early-work, /about-us, /about-us/build-journey, and /downloads.",
+  },
+  {
+    step: 5,
+    label: "Featured flags",
+    note: "Mark Featured on Home / Featured on About only when the project is ready to appear in those sections.",
+  },
+  {
+    step: 6,
+    label: "Publish",
+    note: "Publish only approved records; keep drafts hidden until ready.",
+  },
 ] as const;
 
 export type ModuleKey =
@@ -214,15 +235,55 @@ export const FIELD_HINTS = {
   thumbnailMediaId: "Media Library item for video thumbnail.",
 } as const;
 
-export const DASHBOARD_MODULES = [
-  { key: "projects" as const, href: "/admin/projects" },
-  { key: "media" as const, href: "/admin/media" },
+export const PROJECT_TAXONOMY_OTHER_NOTE =
+  "If the correct industry or domain is not available, select Other for now and note the correct category in the project description. Add the new taxonomy option in code during the next taxonomy update.";
+
+export type DashboardBadgeVariant = "success" | "warning" | "neutral" | "info" | "draft";
+
+export type DashboardModuleCard = {
+  key: ModuleKey;
+  href: string;
+  description: string;
+  badges: Array<{ label: string; variant?: DashboardBadgeVariant }>;
+};
+
+export const DASHBOARD_ACTIVE_MODULES: DashboardModuleCard[] = [
+  {
+    key: "projects",
+    href: "/admin/projects",
+    description: "Main CMS for Current Work and Early Work project records.",
+    badges: [
+      { label: "Available", variant: "success" },
+      { label: "Main CMS", variant: "info" },
+      { label: "Public pages live", variant: "neutral" },
+    ],
+  },
+  {
+    key: "media",
+    href: "/admin/media",
+    description:
+      "Upload or store image, PDF, thumbnail, and document URLs for use across project records.",
+    badges: [
+      { label: "Available", variant: "success" },
+      { label: "Support files", variant: "neutral" },
+    ],
+  },
+  {
+    key: "updates",
+    href: "/admin/updates",
+    description: "Notes about launches, improvements, and technical progress when ready.",
+    badges: [
+      { label: "Available", variant: "success" },
+      { label: "Optional", variant: "neutral" },
+    ],
+  },
+];
+
+export const DASHBOARD_ARCHIVED_MODULES = [
   { key: "proof" as const, href: "/admin/proof" },
   { key: "videos" as const, href: "/admin/videos" },
   { key: "milestones" as const, href: "/admin/milestones" },
-  { key: "updates" as const, href: "/admin/updates" },
 ];
 
-export function moduleStatusLabel(status: ModuleGuidance["status"]): string {
-  return status === "url-only" ? "URL-only" : "Available";
-}
+export const DASHBOARD_ARCHIVED_NOTE =
+  "Older CMS modules kept for reference. Use Projects for current and early project entries.";

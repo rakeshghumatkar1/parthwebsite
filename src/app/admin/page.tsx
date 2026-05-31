@@ -6,10 +6,11 @@ import { AdminPageHeader } from "@/components/admin/ui/admin-page-header";
 import { AdminCard } from "@/components/admin/ui/admin-card";
 import {
   CMS_CONTENT_CAUTION,
-  DASHBOARD_MODULES,
+  DASHBOARD_ACTIVE_MODULES,
+  DASHBOARD_ARCHIVED_MODULES,
+  DASHBOARD_ARCHIVED_NOTE,
   MODULE_GUIDANCE,
   WORKFLOW_STEPS,
-  moduleStatusLabel,
 } from "@/lib/admin/cms-guidance";
 import { adminPageStackClass } from "@/lib/admin/admin-ui";
 import { requireAdminSession } from "@/lib/admin/page-guard";
@@ -47,29 +48,44 @@ export default async function AdminDashboardPage() {
             CMS modules
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {DASHBOARD_MODULES.map(({ key, href }) => {
+            {DASHBOARD_ACTIVE_MODULES.map(({ key, href, description, badges }) => {
               const area = MODULE_GUIDANCE[key];
               return (
                 <AdminCard
                   key={key}
                   href={href}
                   title={area.title}
-                  description={area.subtitle}
-                  statusLabel={moduleStatusLabel(area.status)}
-                  statusNote={area.statusNote}
+                  description={description}
+                  badges={badges}
                 />
               );
             })}
           </div>
         </div>
 
-        <p className="text-xs text-tb-text-muted">
-          Need field definitions? Open{" "}
-          <Link href="/admin/help" className="font-medium text-tb-blue hover:underline">
-            Help
-          </Link>
-          .
-        </p>
+        <div className="rounded-lg border border-dashed border-slate-200 bg-slate-50/70 p-4">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-tb-text-muted">
+            Archived modules
+          </h2>
+          <p className="mt-1 text-xs leading-relaxed text-tb-text-muted">
+            {DASHBOARD_ARCHIVED_NOTE}
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+            {DASHBOARD_ARCHIVED_MODULES.map(({ key, href }) => {
+              const area = MODULE_GUIDANCE[key];
+              return (
+                <li key={key}>
+                  <Link
+                    href={href}
+                    className="text-sm font-medium text-tb-text-muted transition hover:text-tb-blue hover:underline"
+                  >
+                    {area.title}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </AdminShell>
   );

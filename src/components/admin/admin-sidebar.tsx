@@ -27,8 +27,6 @@ const archivedItems: NavItem[] = [
   { href: "/admin/milestones", label: "Timeline" },
 ];
 
-const supportItems: NavItem[] = [{ href: "/admin/help", label: "Help" }];
-
 function isActive(pathname: string, href: string, exact?: boolean) {
   if (exact) {
     return pathname === href;
@@ -138,10 +136,6 @@ export function AdminSidebar({ admin }: AdminSidebarProps) {
             </div>
           ) : null}
         </div>
-
-        <NavGroup label="Support">
-          <NavLinkList items={supportItems} pathname={pathname} />
-        </NavGroup>
       </nav>
 
       <div className="border-t border-slate-100 px-4 py-4">
