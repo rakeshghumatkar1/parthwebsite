@@ -1,13 +1,30 @@
 import Link from "next/link";
 import type { FooterLink, FooterLinkGroup } from "@/lib/home-data";
 
+const CONTACT_URL = "https://thinkbigdigital.co/contact";
+
 /** Simplified footer nav — only safe anchors; unbuilt items stay muted text */
 const footerNavGroups: FooterLinkGroup[] = [
   {
     title: "Company",
     links: [
       { label: "About Us", href: "/about-us" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Build Journey", href: "/about-us/build-journey" },
+    ],
+  },
+  {
+    title: "Work",
+    links: [
+      { label: "Projects", href: "/projects" },
+      { label: "Proof", href: "/proof" },
+      { label: "Updates", href: "/updates" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Downloads", href: "/downloads" },
+      { label: "GitHub" },
     ],
   },
   {
@@ -20,30 +37,24 @@ const footerNavGroups: FooterLinkGroup[] = [
     ],
   },
   {
-    title: "Resources",
-    links: [
-      { label: "GitHub" },
-      { label: "Videos", href: "/videos" },
-      { label: "Updates", href: "/updates" },
-      { label: "Proof Library", href: "/proof" },
-      { label: "All Projects", href: "/projects" },
-    ],
-  },
-  {
     title: "Connect",
     links: [
-      { label: "Discuss a Software Use Case", href: "/#contact" },
-      { label: "Email" },
+      { label: "Discuss a Software Use Case", href: CONTACT_URL },
     ],
   },
 ];
 
 function FooterLinkItem({ link }: { link: FooterLink }) {
   if (link.href) {
+    const isExternal = link.href.startsWith("http");
+
     return (
       <Link
         href={link.href}
         className="text-sm text-tb-text-on-dark transition-colors hover:text-white sm:text-[15px]"
+        {...(isExternal
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : undefined)}
       >
         {link.label}
       </Link>
@@ -81,20 +92,24 @@ export function SiteFooter() {
             </p>
           </div>
 
-          {footerNavGroups.map((group) => (
-            <div key={group.title} className="min-w-0 lg:col-span-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-tb-text-on-dark-muted">
-                {group.title}
-              </p>
-              <ul className="mt-4 space-y-2.5">
-                {group.links.map((link) => (
-                  <li key={link.label}>
-                    <FooterLinkItem link={link} />
-                  </li>
-                ))}
-              </ul>
+          <div className="sm:col-span-2 lg:col-span-8">
+            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+              {footerNavGroups.map((group) => (
+                <div key={group.title} className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-tb-text-on-dark-muted">
+                    {group.title}
+                  </p>
+                  <ul className="mt-4 space-y-2.5">
+                    {group.links.map((link) => (
+                      <li key={link.label}>
+                        <FooterLinkItem link={link} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-tb-navy-border/80 pt-8 text-sm text-tb-text-on-dark-muted sm:flex-row sm:items-center sm:justify-between">
