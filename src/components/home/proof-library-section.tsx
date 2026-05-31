@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { FeatureCard } from "@/components/ui/feature-card";
 import {
   IconAward,
+  IconBranch,
   IconDocumentation,
   IconDownload,
-  IconGitHub,
   IconImage,
   IconPlay,
 } from "@/components/ui/icons";
@@ -19,7 +19,7 @@ type ProofLibrarySectionProps = {
 };
 
 const categoryIcons = [
-  IconGitHub,
+  IconBranch,
   IconPlay,
   IconImage,
   IconDocumentation,
@@ -39,19 +39,20 @@ export function ProofLibrarySection({
   }
 
   return (
-    <Section id="proof-library" tone="muted">
+    <Section id="proof-library" tone="muted" dense>
       <SectionHeader
+        dense
         eyebrow="Proof Library"
         title="Repositories, demos, screenshots, downloads, and build notes behind the work."
         description="The Proof Library brings together material that helps visitors understand the project history and current work: repositories, demos, screenshots, presentations, recognition proof, downloads, PDFs, and technical notes."
       />
-      <p className="-mt-8 mb-12 max-w-3xl text-base leading-relaxed text-tb-text-muted sm:text-lg">
+      <p className="-mt-5 mb-8 max-w-3xl text-sm leading-relaxed text-tb-text-muted sm:text-base">
         This section gives visitors a path to review supporting material when
         they want more detail.
       </p>
 
       {hasCategories ? (
-        <div className="grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {categories.map((category, index) => {
             const Icon = categoryIcons[index % categoryIcons.length];
             return (
@@ -59,8 +60,9 @@ export function ProofLibrarySection({
                 key={category.id}
                 title={category.title}
                 description={category.description}
-                icon={<Icon className="h-6 w-6" />}
+                icon={<Icon className="h-5 w-5" />}
                 variant="library"
+                compact
               />
             );
           })}
@@ -68,16 +70,16 @@ export function ProofLibrarySection({
       ) : null}
 
       {hasItems ? (
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <article
               key={item.id}
-              className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+              className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-tb-blue">
                 {item.proofType}
               </p>
-              <h3 className="mt-2 text-lg font-semibold text-tb-text">
+              <h3 className="mt-2 text-base font-semibold text-tb-text sm:text-lg">
                 {item.title}
               </h3>
               {item.shortDescription ? (
@@ -90,7 +92,7 @@ export function ProofLibrarySection({
         </div>
       ) : null}
 
-      <div className="mt-12">
+      <div className="mt-8">
         <Button href="#proof-library" variant="ghost">
           Review Proof Library
         </Button>

@@ -4,8 +4,8 @@ import { founderCredibilityPoints } from "@/lib/home-data";
 
 export function TechnicalFounderSection() {
   return (
-    <Section id="technical-founder" tone="light">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start lg:gap-12 xl:grid-cols-[minmax(0,26rem)_1fr] xl:gap-16">
+    <Section id="technical-founder" tone="light" dense>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start lg:gap-10 xl:grid-cols-[minmax(0,26rem)_1fr]">
         <div className="max-w-xl lg:max-w-none">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
             Technical Founder Layer
@@ -33,14 +33,14 @@ export function TechnicalFounderSection() {
             </p>
           </div>
 
-          <div className="mt-8 lg:mt-10">
+          <div className="mt-6 lg:mt-8">
             <Button href="#technical-founder" variant="ghost">
               Read About Parth
             </Button>
           </div>
         </div>
 
-        <ul className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:gap-5">
+        <ul className="grid auto-rows-fr gap-3.5 sm:grid-cols-2 lg:gap-4">
           {founderCredibilityPoints.map((point, index) => (
             <li
               key={point.title}
@@ -51,7 +51,7 @@ export function TechnicalFounderSection() {
                   : ""
               }`}
             >
-              <article className="flex h-full w-full flex-col rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ring-1 ring-slate-100/80 sm:p-7">
+              <article className="flex h-full w-full flex-col rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm ring-1 ring-slate-100/80 sm:p-6">
                 <h3 className="text-base font-semibold leading-snug text-tb-text sm:text-lg">
                   {point.title}
                 </h3>

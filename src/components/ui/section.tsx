@@ -15,6 +15,8 @@ type SectionProps = {
   className?: string;
   /** Tighter vertical padding for nested bands */
   compact?: boolean;
+  /** Denser rhythm for homepage-style sections */
+  dense?: boolean;
 };
 
 export function Section({
@@ -23,10 +25,13 @@ export function Section({
   children,
   className = "",
   compact = false,
+  dense = false,
 }: SectionProps) {
-  const padding = compact
-    ? "px-6 py-14 sm:px-8 sm:py-16 lg:py-20"
-    : "px-6 py-20 sm:px-8 sm:py-24 lg:py-28";
+  const padding = dense
+    ? "px-6 py-12 sm:px-8 sm:py-14 lg:py-16"
+    : compact
+      ? "px-6 py-14 sm:px-8 sm:py-16 lg:py-20"
+      : "px-6 py-20 sm:px-8 sm:py-24 lg:py-28";
 
   return (
     <section id={id} className={`${toneClasses[tone]} ${className}`}>

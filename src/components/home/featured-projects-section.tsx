@@ -24,6 +24,7 @@ export function FeaturedProjectsSection({
     <Section
       id="selected-project-builds"
       tone="dark"
+      dense
       className="relative overflow-hidden"
     >
       <div
@@ -32,35 +33,36 @@ export function FeaturedProjectsSection({
       />
       <div className="relative">
         <SectionHeader
+          dense
           dark
           eyebrow="Selected Project Builds"
           title="Working applications, project notes, repositories, and demos in one place."
           description="Featured projects show how the work moves from idea to system: the problem, the software approach, the AI or automation layer where relevant, and the material available for review."
         />
-        <p className="-mt-8 mb-12 max-w-3xl text-base leading-relaxed text-tb-text-on-dark-muted">
+        <p className="-mt-5 mb-8 max-w-3xl text-sm leading-relaxed text-tb-text-on-dark-muted">
           Some projects may include live links, GitHub repositories, screenshots,
           videos, downloads, or build notes. Some may be shown in limited form
           where code, data, or client context cannot be shared.
         </p>
 
-        <div className="grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {projects.map((project) => (
             <article
               key={project.id}
-              className="flex min-h-[200px] flex-col rounded-2xl border border-tb-navy-border/80 bg-tb-navy-elevated/90 p-7 shadow-lg shadow-black/15 transition-colors hover:border-tb-cyan/20 sm:p-8"
+              className="flex min-h-[180px] flex-col rounded-xl border border-tb-navy-border/80 bg-tb-navy-elevated/90 p-5 shadow-lg shadow-black/15 transition-colors hover:border-tb-cyan/20 sm:p-6"
             >
               <div
-                className="mb-5 h-1 w-12 rounded-full bg-gradient-to-r from-tb-blue to-tb-cyan"
+                className="mb-4 h-1 w-10 rounded-full bg-gradient-to-r from-tb-blue to-tb-cyan"
                 aria-hidden
               />
-              <h3 className="text-xl font-semibold leading-snug text-white">
+              <h3 className="text-lg font-semibold leading-snug text-white sm:text-xl">
                 {project.title}
               </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-tb-text-on-dark-muted sm:text-base">
+              <p className="mt-2.5 flex-1 text-sm leading-relaxed text-tb-text-on-dark-muted">
                 {project.shortDescription}
               </p>
               {project.techStack.length > 0 ? (
-                <ul className="mt-6 flex flex-wrap gap-2">
+                <ul className="mt-4 flex flex-wrap gap-1.5">
                   {project.techStack.map((tag) => (
                     <li
                       key={tag}
@@ -72,7 +74,7 @@ export function FeaturedProjectsSection({
                 </ul>
               ) : null}
               {showDetailLinks ? (
-                <div className="mt-6">
+                <div className="mt-4">
                   <Link
                     href={`/projects/${project.slug}`}
                     className="text-sm font-medium text-tb-cyan hover:underline"
@@ -85,7 +87,7 @@ export function FeaturedProjectsSection({
           ))}
         </div>
 
-        <div className="mt-12">
+        <div className="mt-8">
           <Button href="/projects" variant="secondary" dark size="lg">
             Explore All Projects
           </Button>

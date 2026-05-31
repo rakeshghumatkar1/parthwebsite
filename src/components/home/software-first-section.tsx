@@ -3,16 +3,16 @@ import { SoftwareFirstDiagram } from "@/components/home/workflow-diagram";
 
 export function SoftwareFirstSection() {
   return (
-    <Section id="software-first" tone="light">
-      <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
+    <Section id="software-first" tone="light" dense>
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
         <div className="max-w-lg">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
             Software First
           </p>
-          <h2 className="mt-3 max-w-md text-balance text-2xl font-semibold leading-snug tracking-tight text-tb-text sm:text-[1.65rem] lg:text-[1.85rem]">
+          <h2 className="mt-2.5 max-w-md text-balance text-2xl font-semibold leading-snug tracking-tight text-tb-text sm:text-[1.65rem] lg:text-[1.85rem]">
             AI works best when the surrounding system is clear.
           </h2>
-          <div className="mt-5 max-w-prose space-y-3.5 text-sm leading-relaxed text-tb-text-muted sm:text-base">
+          <div className="mt-4 max-w-prose space-y-3 text-sm leading-relaxed text-tb-text-muted sm:text-base">
             <p>
               AI can support analysis, summaries, classification, routing,
               research, content creation, reporting, and workflow automation.
@@ -29,8 +29,8 @@ export function SoftwareFirstSection() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-slate-200/90 bg-gradient-to-br from-slate-50/80 via-white to-blue-50/30 p-5 sm:p-6">
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-tb-blue">
+        <div className="rounded-xl border border-slate-200/90 bg-gradient-to-br from-slate-50/80 via-white to-blue-50/30 p-4 sm:p-5">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-tb-blue">
             Workflow line
           </p>
           <SoftwareFirstDiagram />

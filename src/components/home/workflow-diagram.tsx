@@ -1,4 +1,4 @@
-/** Hero system/workflow diagram — live SVG labels, not a baked image */
+/** Hero system/workflow diagram — live SVG architecture, not a baked image */
 
 const mainFlow = [
   "Business problem",
@@ -28,12 +28,12 @@ function FlowNode({
 }) {
   return (
     <div
-      className={`rounded-xl border px-3 py-2.5 text-center font-medium ${
-        compact ? "text-xs sm:text-sm" : "text-sm sm:text-base"
+      className={`rounded-lg border px-2.5 py-2 text-center font-medium ${
+        compact ? "text-[11px] sm:text-xs" : "text-xs sm:text-sm"
       } ${
         highlight
-          ? "border-tb-cyan/60 bg-tb-blue/25 text-tb-cyan shadow-sm shadow-tb-cyan/10"
-          : "border-tb-navy-border bg-tb-navy-elevated/90 text-tb-text-on-dark"
+          ? "border-tb-cyan/60 bg-tb-blue/30 text-tb-cyan shadow-sm shadow-tb-cyan/10"
+          : "border-tb-navy-border bg-tb-navy/80 text-tb-text-on-dark"
       }`}
     >
       {label}
@@ -44,33 +44,72 @@ function FlowNode({
 export function WorkflowDiagram() {
   return (
     <div
-      className="relative w-full min-h-[280px] overflow-hidden rounded-2xl border border-tb-navy-border bg-tb-navy-elevated/90 p-5 shadow-xl shadow-black/20 sm:min-h-[320px] sm:p-7 lg:min-h-[380px] lg:p-8"
-      aria-label="Software workflow diagram: business problem through software and AI layers to a usable product"
+      className="relative w-full overflow-hidden rounded-xl border border-tb-navy-border bg-tb-navy-elevated/95 p-4 shadow-xl shadow-black/25 sm:p-5"
+      aria-label="System architecture diagram: business problem through software and AI layers to a usable product"
     >
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-tb-blue/10 via-transparent to-tb-cyan/5"
         aria-hidden
       />
-      <div className="relative flex flex-col gap-6">
-        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-2">
+      <p className="relative mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-tb-cyan/90 sm:text-[11px]">
+        System architecture
+      </p>
+      <div className="relative space-y-4">
+        <div className="hidden sm:block">
+          <svg
+            viewBox="0 0 520 88"
+            className="h-auto w-full"
+            aria-hidden
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <defs>
+              <marker
+                id="flow-arrow"
+                markerWidth="6"
+                markerHeight="6"
+                refX="5"
+                refY="3"
+                orient="auto"
+              >
+                <path d="M0,0 L6,3 L0,6 Z" fill="rgba(148,163,184,0.8)" />
+              </marker>
+            </defs>
+            {[0, 1, 2, 3].map((index) => {
+              const x1 = 20 + index * 104;
+              const x2 = x1 + 84;
+              return (
+                <line
+                  key={index}
+                  x1={x1}
+                  y1="44"
+                  x2={x2}
+                  y2="44"
+                  stroke="rgba(148,163,184,0.45)"
+                  strokeWidth="1.5"
+                  markerEnd="url(#flow-arrow)"
+                />
+              );
+            })}
+          </svg>
+        </div>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-5 sm:gap-2">
           {mainFlow.map((label, index) => (
-            <div key={label} className="flex items-center gap-2">
-              <FlowNode label={label} highlight={index === 3} />
-              {index < mainFlow.length - 1 ? (
-                <span
-                  className="hidden shrink-0 text-tb-text-on-dark-muted sm:inline"
-                  aria-hidden
-                >
-                  →
-                </span>
-              ) : null}
-            </div>
+            <FlowNode key={label} label={label} highlight={index === 3} />
           ))}
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-          {satellites.map((label) => (
-            <FlowNode key={label} label={label} compact />
-          ))}
+        <div className="relative pt-1">
+          <div
+            className="pointer-events-none absolute left-1/2 top-0 hidden h-3 w-px -translate-x-1/2 bg-tb-cyan/40 sm:block"
+            aria-hidden
+          />
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-tb-text-on-dark-muted sm:text-[11px]">
+            Supporting layers
+          </p>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {satellites.map((label) => (
+              <FlowNode key={label} label={label} compact />
+            ))}
+          </div>
         </div>
       </div>
     </div>
