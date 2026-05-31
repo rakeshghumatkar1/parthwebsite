@@ -6,7 +6,7 @@ const footerNavGroups: FooterLinkGroup[] = [
   {
     title: "Company",
     links: [
-      { label: "About Parth", href: "/about-parth" },
+      { label: "About Us", href: "/about-us" },
       { label: "Contact", href: "/#contact" },
     ],
   },

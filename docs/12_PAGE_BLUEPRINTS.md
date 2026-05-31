@@ -6,7 +6,7 @@ Reusable structure for future Parth microsite pages—purpose, sections, CMS nee
 
 **Tone:** Mature, proof-led, technical founder—not student portfolio or prodigy narrative.
 
-**Site navigation (Phase 3.2):** `SiteHeader` links to built public routes (`/`, `/projects`, `/proof`, `/videos`, `/about-parth`, `/updates`); CTA → `/#contact`. `SiteFooter` mirrors built routes plus root-aware home anchors for Systems and Contact. No new pages created in this phase.
+**Site navigation (Phase 3.2+):** `SiteHeader` links to built public routes including **About Us** → `/about-us`. Legacy `/about-parth` redirects to `/about-us`.
 
 **Public listing filters (Phase 3.3):** Conditional filter panels on CMS listing pages — hidden when empty or low content (&lt; 6 records), shown when enough content exists or query params are active. Admin filters unchanged.
 
@@ -44,7 +44,7 @@ Reusable structure for future Parth microsite pages—purpose, sections, CMS nee
 
 ## About Parth page
 
-**Status:** Built (Phase 2.8) at `/about-parth`. CMS-backed milestones and featured sections with empty-safe states; no fake biography.
+**Status:** Built at `/about-us` (Page 1 — identity, proof trail, path snapshot, CMS featured projects, build-journey stub). `/about-parth` redirects. CMS-backed featured projects with section hidden when empty; no fake biography.
 
 ### Purpose
 
