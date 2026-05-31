@@ -14,6 +14,11 @@ import {
   FIELD_HINTS,
 } from "@/lib/admin/cms-guidance";
 import {
+  adminBtnPrimaryClass,
+  adminBtnSecondaryClass,
+  adminActionRailClass,
+} from "@/lib/admin/admin-ui";
+import {
   MEDIA_DISPLAY_MODE_OPTIONS,
   MEDIA_ROLE_OPTIONS,
 } from "@/lib/admin/media/constants";
@@ -209,17 +214,14 @@ export function MediaUploadForm({
         />
       </AdminFormSection>
 
-      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-tb-navy-border bg-tb-surface p-5">
-        <Link
-          href="/admin/media"
-          className="rounded-md border border-tb-navy-border px-4 py-2.5 text-sm font-medium hover:bg-tb-surface-muted"
-        >
+      <div className={`${adminActionRailClass} flex flex-wrap items-center gap-3`}>
+        <Link href="/admin/media" className={adminBtnSecondaryClass}>
           Back to media
         </Link>
         <button
           type="submit"
           disabled={!uploadConfigured}
-          className="ml-auto rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white transition hover:bg-tb-blue-hover disabled:opacity-60"
+          className={`ml-auto disabled:opacity-60 ${adminBtnPrimaryClass}`}
         >
           Upload file
         </button>

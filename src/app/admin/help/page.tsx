@@ -1,5 +1,7 @@
 import { AdminShell } from "@/components/admin/admin-shell";
 import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminPageHeader } from "@/components/admin/ui/admin-page-header";
+import { AdminBadge } from "@/components/admin/ui/admin-badge";
 import {
   BLOB_PREFIX_RULE,
   CMS_CONTENT_CAUTION,
@@ -7,92 +9,89 @@ import {
   MODULE_GUIDANCE,
   WORKFLOW_STEPS,
 } from "@/lib/admin/cms-guidance";
+import { adminCardClass, adminPageStackClass } from "@/lib/admin/admin-ui";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 
 export const metadata = {
   title: "Help | Parth Admin",
 };
 
+function HelpSection({
+  title,
+  children,
+  variant,
+}: {
+  title: string;
+  children: React.ReactNode;
+  variant?: "caution";
+}) {
+  const className =
+    variant === "caution"
+      ? "rounded-lg border border-amber-200 bg-amber-50/80 p-4"
+      : `${adminCardClass} p-4`;
+
+  return (
+    <section className={className}>
+      <h2 className="text-sm font-semibold text-tb-text">{title}</h2>
+      <div className="mt-2 space-y-2 text-sm text-tb-text-muted">{children}</div>
+    </section>
+  );
+}
+
 export default async function AdminHelpPage() {
   const admin = await requireAdminSession();
 
   return (
     <AdminShell admin={admin}>
-      <div className="mx-auto max-w-3xl space-y-8">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
-            How to use this CMS
-          </h1>
-          <p className="mt-2 text-sm text-tb-text-muted">
-            Practical guide for managing Parth website content. Written for
-            non-technical admins — you should not need to guess what each field
-            means.
-          </p>
-        </div>
+      <div className={`mx-auto max-w-3xl ${adminPageStackClass}`}>
+        <AdminPageHeader
+          title="Help"
+          description="Practical guide for managing Parth website content. Written for non-technical admins — you should not need to guess what each field means."
+        />
 
-        <section className="space-y-3 rounded-lg border border-amber-200 bg-amber-50 p-6">
-          <h2 className="text-lg font-semibold text-amber-950">Current CMS status</h2>
-          <p className="text-sm text-amber-900">{CMS_CONTENT_CAUTION}</p>
-        </section>
+        <HelpSection title="Current CMS status" variant="caution">
+          <p className="text-amber-950">{CMS_CONTENT_CAUTION}</p>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">What is already built</h2>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
+        <HelpSection title="What is ready">
+          <ul className="list-disc space-y-1 pl-4">
             <li>Admin login and secure sessions</li>
-            <li>Projects, Proof Library, Videos, Milestones, Updates, Media Library CRUD</li>
+            <li>Projects, Proof, Videos, Milestones, Updates, Media Library CRUD</li>
             <li>List, search, filter, create, edit, publish/hide controls</li>
-            <li>Media Library supports URL records and Blob upload under parthwebsite/</li>
+            <li>Public pages live at /projects, /proof, /videos, /updates, /about-parth</li>
+            <li>Media Library: URL records and Blob upload under parthwebsite/</li>
           </ul>
-        </section>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">What is not connected yet</h2>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
-            <li>Home proof/updates sections still use static content</li>
+        <HelpSection title="Known limitations">
+          <ul className="list-disc space-y-1 pl-4">
+            <li>Home proof/updates sections still use static content until featured items are set</li>
             <li>No Blob file browser or delete — only Neon media records are listed</li>
             <li>No automatic seed data — content must be entered manually when approved</li>
           </ul>
-        </section>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">Recommended content entry order</h2>
-          <ol className="list-decimal space-y-2 pl-5 text-sm text-tb-text-muted">
+        <HelpSection title="Recommended content entry order">
+          <ol className="list-decimal space-y-1.5 pl-4">
             {WORKFLOW_STEPS.map((step) => (
               <li key={step.step}>
-                <strong>{step.label}</strong> — {step.note}
+                <span className="font-medium text-tb-text">{step.label}</span>
+                {" — "}
+                {step.note}
               </li>
             ))}
           </ol>
-        </section>
+        </HelpSection>
 
-        {(
-          Object.entries(MODULE_GUIDANCE) as Array<
-            [keyof typeof MODULE_GUIDANCE, (typeof MODULE_GUIDANCE)[keyof typeof MODULE_GUIDANCE]]
-          >
-        ).map(([key, mod]) => (
-          <section
-            key={key}
-            className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6"
-          >
-            <h2 className="text-lg font-semibold">{mod.title}</h2>
-            <p className="text-sm text-tb-text-muted">{mod.subtitle}</p>
-            <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
-              {mod.listHelpBullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-            <p className="text-sm font-medium">Where it appears later:</p>
-            <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
-              {mod.whereAppears.map((w) => (
-                <li key={w}>{w}</li>
-              ))}
-            </ul>
-          </section>
-        ))}
-
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">Publishing flags explained</h2>
-          <ul className="list-disc space-y-2 pl-5 text-sm text-tb-text-muted">
+        <HelpSection title="Publishing flags">
+          <div className="flex flex-wrap gap-2">
+            <AdminBadge variant="success">Published</AdminBadge>
+            <AdminBadge variant="warning">Hidden</AdminBadge>
+            <AdminBadge variant="neutral">Archived</AdminBadge>
+            <AdminBadge variant="info">Featured</AdminBadge>
+            <AdminBadge variant="draft">Draft</AdminBadge>
+          </div>
+          <ul className="mt-3 list-disc space-y-1.5 pl-4">
             <li><strong>Published</strong> — {FIELD_HINTS.published}</li>
             <li><strong>Hidden</strong> — {FIELD_HINTS.hidden}</li>
             <li><strong>Archived</strong> (projects) — {FIELD_HINTS.archived}</li>
@@ -100,71 +99,84 @@ export default async function AdminHelpPage() {
             <li><strong>Featured on About</strong> — {FIELD_HINTS.featuredOnAbout}</li>
             <li><strong>Display order</strong> — {FIELD_HINTS.displayOrder}</li>
           </ul>
-        </section>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">Relation fields explained</h2>
-          <ul className="list-disc space-y-2 pl-5 text-sm text-tb-text-muted">
+        <HelpSection title="Relation fields">
+          <ul className="list-disc space-y-1.5 pl-4">
             <li><strong>Related project</strong> — {FIELD_HINTS.relatedProjectId}</li>
             <li><strong>Related proof</strong> — {FIELD_HINTS.relatedProofId}</li>
             <li><strong>Related video</strong> — {FIELD_HINTS.relatedVideoId}</li>
             <li><strong>Related milestone</strong> — {FIELD_HINTS.relatedMilestoneId}</li>
           </ul>
-        </section>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">Media and Blob rule</h2>
-          <p className="text-sm text-tb-text-muted">
+        <HelpSection title="Media and Blob rule">
+          <p>
             Media Library supports approved public URLs and admin file upload to
             Vercel Blob. Uploaded files go to the shared thinkbigdigital-blob
             store under parthwebsite/ only.
           </p>
           <AdminHelpBox title="Upload prefix and safety">{BLOB_PREFIX_RULE}</AdminHelpBox>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
+          <ul className="list-disc space-y-1 pl-4">
             <li>Use image alt text for accessibility.</li>
             <li>PDFs are allowed only for public downloads and proof.</li>
             <li>Do not upload private or sensitive files.</li>
             <li>Other website Blob files must never be touched or listed.</li>
             <li>Blob delete is not implemented — media records can be edited but files remain in Blob.</li>
           </ul>
-        </section>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">What not to do</h2>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-tb-text-muted">
+        <div className="grid gap-3 sm:grid-cols-2">
+          {(
+            Object.entries(MODULE_GUIDANCE) as Array<
+              [keyof typeof MODULE_GUIDANCE, (typeof MODULE_GUIDANCE)[keyof typeof MODULE_GUIDANCE]]
+            >
+          ).map(([key, mod]) => (
+            <section key={key} className={`${adminCardClass} p-4`}>
+              <h2 className="text-sm font-semibold text-tb-text">{mod.title}</h2>
+              <p className="mt-1 text-xs text-tb-text-muted">{mod.subtitle}</p>
+              <ul className="mt-2 list-disc space-y-0.5 pl-4 text-xs text-tb-text-muted">
+                {mod.listHelpBullets.slice(0, 3).map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+
+        <HelpSection title="What not to do">
+          <ul className="list-disc space-y-1 pl-4">
             <li>Do not invent GitHub, demo, video, or download links</li>
             <li>Do not upload private, sensitive, or non-public files</li>
             <li>Do not add final launch content before it is approved</li>
             <li>Do not add random blog-style updates unrelated to real project progress</li>
           </ul>
-        </section>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">Troubleshooting</h2>
-          <dl className="space-y-3 text-sm text-tb-text-muted">
+        <HelpSection title="Troubleshooting">
+          <dl className="space-y-2">
             <div>
               <dt className="font-medium text-tb-text">Cannot see a module</dt>
-              <dd className="mt-1">Use the left sidebar. All modules are listed there when logged in.</dd>
+              <dd className="mt-0.5">Use the left sidebar. All modules are listed there when logged in.</dd>
             </div>
             <div>
               <dt className="font-medium text-tb-text">Validation error on save</dt>
-              <dd className="mt-1">Read the red messages under each field. Required fields must be filled. URLs must be valid http/https links.</dd>
+              <dd className="mt-0.5">Read the red messages under each field. Required fields must be filled. URLs must be valid http/https links.</dd>
             </div>
             <div>
               <dt className="font-medium text-tb-text">Duplicate slug error</dt>
-              <dd className="mt-1">Each slug must be unique. Edit the slug to a different lowercase hyphenated value.</dd>
+              <dd className="mt-0.5">Each slug must be unique. Edit the slug to a different lowercase hyphenated value.</dd>
             </div>
             <div>
               <dt className="font-medium text-tb-text">Logged out unexpectedly</dt>
-              <dd className="mt-1">Sessions expire after seven days. Sign in again at /admin/login.</dd>
+              <dd className="mt-0.5">Sessions expire after seven days. Sign in again at /admin/login.</dd>
             </div>
           </dl>
-        </section>
+        </HelpSection>
 
-        <section className="space-y-3 rounded-lg border border-tb-navy-border bg-tb-surface p-6">
-          <h2 className="text-lg font-semibold">Signed in as</h2>
-          <p className="text-sm text-tb-text-muted">{admin.email}</p>
-        </section>
+        <HelpSection title="Signed in as">
+          <p>{admin.email}</p>
+        </HelpSection>
       </div>
     </AdminShell>
   );

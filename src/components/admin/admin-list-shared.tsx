@@ -1,5 +1,6 @@
 import type { RelationOption } from "@/lib/admin/shared/relation-options";
 import { adminInputClassName } from "./admin-auth-panel";
+import { AdminBadge } from "./ui/admin-badge";
 
 type RelationSelectProps = {
   id: string;
@@ -56,24 +57,12 @@ export function VisibilityBadges({
   hidden: boolean;
 }) {
   if (hidden) {
-    return (
-      <span className="inline-flex rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-800">
-        Hidden
-      </span>
-    );
+    return <AdminBadge variant="warning">Hidden</AdminBadge>;
   }
   if (published) {
-    return (
-      <span className="inline-flex rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-800">
-        Published
-      </span>
-    );
+    return <AdminBadge variant="success">Published</AdminBadge>;
   }
-  return (
-    <span className="inline-flex rounded-full bg-tb-surface-muted px-2 py-0.5 text-xs font-medium text-tb-text-muted">
-      Draft
-    </span>
-  );
+  return <AdminBadge variant="draft">Draft</AdminBadge>;
 }
 
 export function FeaturedFlags({
@@ -92,5 +81,5 @@ export function FeaturedFlags({
 
 export function UrlStatus({ url }: { url: string | null | undefined }) {
   if (!url) return <span className="text-tb-text-muted">No URL</span>;
-  return <span className="text-emerald-700">URL set</span>;
+  return <AdminBadge variant="success">URL set</AdminBadge>;
 }

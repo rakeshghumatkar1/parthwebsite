@@ -27,6 +27,11 @@ import {
 } from "@/lib/admin/media/constants";
 import type { RelationOption } from "@/lib/admin/shared/relation-options";
 import type { MediaFormState, MediaFormValues } from "@/lib/admin/media/types";
+import {
+  adminActionRailClass,
+  adminBtnPrimaryClass,
+  adminBtnSecondaryClass,
+} from "@/lib/admin/admin-ui";
 
 const emptyValues: MediaFormValues = {
   fileUrl: "",
@@ -324,21 +329,18 @@ export function MediaForm({
         </AdminField>
       </AdminFormSection>
 
-      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-tb-navy-border bg-tb-surface p-5">
+      <div className={`${adminActionRailClass} flex flex-wrap items-center gap-3`}>
         {updatedAt ? (
           <p className="text-xs text-tb-text-muted">Last updated: {updatedAt}</p>
         ) : null}
-        <div className="ml-auto flex flex-wrap gap-3">
-          <Link
-            href="/admin/media"
-            className="rounded-md border border-tb-navy-border px-4 py-2.5 text-sm font-medium hover:bg-tb-surface-muted"
-          >
+        <div className="ml-auto flex flex-wrap gap-2">
+          <Link href="/admin/media" className={adminBtnSecondaryClass}>
             Back to media
           </Link>
           <button
             type="submit"
             disabled={pending}
-            className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white transition hover:bg-tb-blue-hover disabled:opacity-60"
+            className={`disabled:opacity-60 ${adminBtnPrimaryClass}`}
           >
             {pending
               ? "Saving…"

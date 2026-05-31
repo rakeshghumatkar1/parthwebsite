@@ -1,11 +1,13 @@
-import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminEmptyState } from "@/components/admin/admin-empty-state";
 import { AdminModuleGuide } from "@/components/admin/admin-module-guide";
 import { ProofFilters } from "@/components/admin/proof-filters";
 import { ProofTable } from "@/components/admin/proof-table";
+import { AdminCreateLink } from "@/components/admin/ui/admin-create-link";
+import { AdminPageHeader } from "@/components/admin/ui/admin-page-header";
 import { MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
+import { adminPageStackClass } from "@/lib/admin/admin-ui";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 import { listProofItems } from "@/lib/admin/proof/queries";
 import type { ProofListFilters } from "@/lib/admin/proof/types";
@@ -50,25 +52,14 @@ export default async function AdminProofPage({ searchParams }: PageProps) {
 
   return (
     <AdminShell admin={admin}>
-      <div className="space-y-6">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">
-              {guidance.title}
-            </h1>
-            <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">
-              {guidance.subtitle}
-            </p>
-          </div>
-          <Link
-            href="/admin/proof/new"
-            className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white transition hover:bg-tb-blue-hover"
-          >
-            Create proof item
-          </Link>
-        </div>
+      <div className={adminPageStackClass}>
+        <AdminPageHeader
+          title={guidance.title}
+          description={guidance.subtitle}
+          action={<AdminCreateLink href="/admin/proof/new">Create proof item</AdminCreateLink>}
+        />
 
-        <AdminCmsNotice />
+        <AdminCmsNotice variant="info" />
         <AdminModuleGuide module="proof" />
         <ProofFilters filters={filters} projectOptions={projectOptions} />
 
@@ -78,12 +69,7 @@ export default async function AdminProofPage({ searchParams }: PageProps) {
             description={guidance.emptyDescription}
             waitNote={guidance.emptyWaitNote}
             action={
-              <Link
-                href="/admin/proof/new"
-                className="inline-flex rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover"
-              >
-                Create proof item
-              </Link>
+              <AdminCreateLink href="/admin/proof/new">Create proof item</AdminCreateLink>
             }
           />
         ) : (

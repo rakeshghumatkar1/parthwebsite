@@ -235,8 +235,8 @@ export function ProofForm({
             </AdminField>
 
             <AdminFieldHint>
-              Prefer linking a media library record when available. Direct file
-              URLs are fine until uploads ship.
+              Prefer linking a media library record when available. Upload files
+              in Media Library or paste approved public URLs.
             </AdminFieldHint>
           </AdminFormSection>
 

@@ -6,6 +6,12 @@ import {
 } from "@/lib/admin/projects/actions";
 import type { Project } from "@/lib/admin/projects/types";
 import {
+  adminTableBodyCellClass,
+  adminTableHeadCellClass,
+  adminBtnGhostClass,
+} from "@/lib/admin/admin-ui";
+import { AdminTableShell } from "./ui/admin-table-shell";
+import {
   ProjectFeaturedFlags,
   ProjectStatusBadge,
   ProjectStatusLabel,
@@ -52,56 +58,53 @@ function QuickToggleForm({
 
 export function ProjectsTable({ projects }: ProjectsTableProps) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-tb-navy-border bg-tb-surface">
-      <table className="min-w-full divide-y divide-tb-navy-border text-sm">
-        <thead className="bg-tb-surface-muted">
+    <AdminTableShell>
+      <table className="min-w-full divide-y divide-slate-100 text-sm">
+        <thead className="bg-slate-50">
           <tr>
-            <th className="px-4 py-3 text-left font-medium">Title</th>
-            <th className="px-4 py-3 text-left font-medium">Type</th>
-            <th className="px-4 py-3 text-left font-medium">Status</th>
-            <th className="px-4 py-3 text-left font-medium">Visibility</th>
-            <th className="px-4 py-3 text-left font-medium">Featured</th>
-            <th className="px-4 py-3 text-left font-medium">Order</th>
-            <th className="px-4 py-3 text-left font-medium">Updated</th>
-            <th className="px-4 py-3 text-left font-medium">Actions</th>
+            <th className={adminTableHeadCellClass}>Title</th>
+            <th className={adminTableHeadCellClass}>Type</th>
+            <th className={adminTableHeadCellClass}>Status</th>
+            <th className={adminTableHeadCellClass}>Visibility</th>
+            <th className={adminTableHeadCellClass}>Featured</th>
+            <th className={adminTableHeadCellClass}>Order</th>
+            <th className={adminTableHeadCellClass}>Updated</th>
+            <th className={adminTableHeadCellClass}>Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-tb-navy-border">
+        <tbody className="divide-y divide-slate-100">
           {projects.map((project) => (
-            <tr key={project.id} className="align-top">
-              <td className="px-4 py-3">
+            <tr key={project.id} className="hover:bg-slate-50/80">
+              <td className={adminTableBodyCellClass}>
                 <div className="font-medium">{project.title}</div>
                 <div className="text-xs text-tb-text-muted">{project.slug}</div>
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <ProjectTypeLabel value={project.projectType} />
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <ProjectStatusLabel value={project.status} />
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <ProjectStatusBadge
                   published={project.published}
                   hidden={project.hidden}
                   archived={project.archived}
                 />
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <ProjectFeaturedFlags
                   featuredOnHome={project.featuredOnHome}
                   featuredOnAbout={project.featuredOnAbout}
                 />
               </td>
-              <td className="px-4 py-3">{project.displayOrder}</td>
-              <td className="px-4 py-3 whitespace-nowrap text-tb-text-muted">
+              <td className={adminTableBodyCellClass}>{project.displayOrder}</td>
+              <td className={`${adminTableBodyCellClass} whitespace-nowrap text-tb-text-muted`}>
                 {formatDate(project.updatedAt)}
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <div className="flex flex-col gap-1">
-                  <Link
-                    href={`/admin/projects/${project.id}`}
-                    className="font-medium text-tb-blue hover:underline"
-                  >
+                  <Link href={`/admin/projects/${project.id}`} className={adminBtnGhostClass}>
                     Edit
                   </Link>
                   <QuickToggleForm
@@ -131,6 +134,6 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
           ))}
         </tbody>
       </table>
-    </div>
+    </AdminTableShell>
   );
 }

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminEmptyState } from "@/components/admin/admin-empty-state";
@@ -6,7 +5,10 @@ import { AdminHelpBox } from "@/components/admin/admin-help-box";
 import { AdminModuleGuide } from "@/components/admin/admin-module-guide";
 import { MediaFilters } from "@/components/admin/media-filters";
 import { MediaTable } from "@/components/admin/media-table";
+import { AdminCreateLink } from "@/components/admin/ui/admin-create-link";
+import { AdminPageHeader } from "@/components/admin/ui/admin-page-header";
 import { BLOB_PREFIX_RULE, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
+import { adminPageStackClass } from "@/lib/admin/admin-ui";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 import { getProjectOptions } from "@/lib/admin/shared/relation-options";
 import { listMediaRecords } from "@/lib/admin/media/queries";
@@ -40,14 +42,12 @@ export default async function AdminMediaPage({ searchParams }: PageProps) {
 
   return (
     <AdminShell admin={admin}>
-      <div className="space-y-6">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">{guidance.title}</h1>
-            <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">{guidance.subtitle}</p>
-          </div>
-          <Link href="/admin/media/new" className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-tb-blue-hover">Add media</Link>
-        </div>
+      <div className={adminPageStackClass}>
+        <AdminPageHeader
+          title={guidance.title}
+          description={guidance.subtitle}
+          action={<AdminCreateLink href="/admin/media/new">Add media</AdminCreateLink>}
+        />
         <AdminCmsNotice variant="info">
           <p className="font-medium">URL or Blob upload</p>
           <p className="mt-1 opacity-90">
@@ -61,7 +61,12 @@ export default async function AdminMediaPage({ searchParams }: PageProps) {
         </AdminHelpBox>
         <MediaFilters filters={filters} projectOptions={projectOptions} />
         {mediaRecords.length === 0 ? (
-          <AdminEmptyState title={guidance.emptyTitle} description={guidance.emptyDescription} waitNote={guidance.emptyWaitNote} action={<Link href="/admin/media/new" className="inline-flex rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover">Add media record</Link>} />
+          <AdminEmptyState
+            title={guidance.emptyTitle}
+            description={guidance.emptyDescription}
+            waitNote={guidance.emptyWaitNote}
+            action={<AdminCreateLink href="/admin/media/new">Add media record</AdminCreateLink>}
+          />
         ) : (
           <MediaTable mediaRecords={mediaRecords} projectOptions={projectOptions} />
         )}

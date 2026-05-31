@@ -11,9 +11,15 @@ import {
 import { PROOF_TYPE_LABELS } from "@/lib/admin/proof/constants";
 import type { ProofItem } from "@/lib/admin/proof/types";
 import {
+  adminBtnGhostClass,
+  adminTableBodyCellClass,
+  adminTableHeadCellClass,
+} from "@/lib/admin/admin-ui";
+import {
   optionLabel,
   type RelationOption,
 } from "@/lib/admin/shared/relation-options";
+import { AdminTableShell } from "./ui/admin-table-shell";
 
 type ProofTableProps = {
   items: ProofItem[];
@@ -29,55 +35,52 @@ function formatDate(value: Date): string {
 
 export function ProofTable({ items, projectOptions }: ProofTableProps) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-tb-navy-border bg-tb-surface">
-      <table className="min-w-full divide-y divide-tb-navy-border text-sm">
-        <thead className="bg-tb-surface-muted">
+    <AdminTableShell>
+      <table className="min-w-full divide-y divide-slate-100 text-sm">
+        <thead className="bg-slate-50">
           <tr>
-            <th className="px-4 py-3 text-left font-medium">Title</th>
-            <th className="px-4 py-3 text-left font-medium">Type</th>
-            <th className="px-4 py-3 text-left font-medium">Project</th>
-            <th className="px-4 py-3 text-left font-medium">Visibility</th>
-            <th className="px-4 py-3 text-left font-medium">Featured</th>
-            <th className="px-4 py-3 text-left font-medium">Order</th>
-            <th className="px-4 py-3 text-left font-medium">Updated</th>
-            <th className="px-4 py-3 text-left font-medium">Actions</th>
+            <th className={adminTableHeadCellClass}>Title</th>
+            <th className={adminTableHeadCellClass}>Type</th>
+            <th className={adminTableHeadCellClass}>Project</th>
+            <th className={adminTableHeadCellClass}>Visibility</th>
+            <th className={adminTableHeadCellClass}>Featured</th>
+            <th className={adminTableHeadCellClass}>Order</th>
+            <th className={adminTableHeadCellClass}>Updated</th>
+            <th className={adminTableHeadCellClass}>Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-tb-navy-border">
+        <tbody className="divide-y divide-slate-100">
           {items.map((item) => (
-            <tr key={item.id} className="align-top">
-              <td className="px-4 py-3">
+            <tr key={item.id} className="hover:bg-slate-50/80">
+              <td className={adminTableBodyCellClass}>
                 <div className="font-medium">{item.title}</div>
                 <div className="text-xs text-tb-text-muted">{item.slug}</div>
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 {PROOF_TYPE_LABELS[item.proofType] ?? item.proofType}
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 {optionLabel(projectOptions, item.relatedProjectId)}
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <VisibilityBadges
                   published={item.published}
                   hidden={item.hidden}
                 />
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <FeaturedFlags
                   featuredOnHome={item.featuredOnHome}
                   featuredOnAbout={item.featuredOnAbout}
                 />
               </td>
-              <td className="px-4 py-3">{item.displayOrder}</td>
-              <td className="px-4 py-3 whitespace-nowrap text-tb-text-muted">
+              <td className={adminTableBodyCellClass}>{item.displayOrder}</td>
+              <td className={`${adminTableBodyCellClass} whitespace-nowrap text-tb-text-muted`}>
                 {formatDate(item.updatedAt)}
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <div className="flex flex-col gap-1">
-                  <Link
-                    href={`/admin/proof/${item.id}`}
-                    className="font-medium text-tb-blue hover:underline"
-                  >
+                  <Link href={`/admin/proof/${item.id}`} className={adminBtnGhostClass}>
                     Edit
                   </Link>
                   <QuickToggleForm
@@ -100,6 +103,6 @@ export function ProofTable({ items, projectOptions }: ProofTableProps) {
           ))}
         </tbody>
       </table>
-    </div>
+    </AdminTableShell>
   );
 }

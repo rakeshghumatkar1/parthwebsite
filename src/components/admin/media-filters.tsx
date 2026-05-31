@@ -5,7 +5,9 @@ import {
 } from "@/lib/admin/media/constants";
 import type { MediaListFilters } from "@/lib/admin/media/types";
 import type { RelationOption } from "@/lib/admin/shared/relation-options";
+import { adminBtnPrimaryClass, adminBtnSecondaryClass } from "@/lib/admin/admin-ui";
 import { adminInputClassName } from "./admin-auth-panel";
+import { AdminFilterPanel } from "./ui/admin-filter-panel";
 
 type MediaFiltersProps = {
   filters: MediaListFilters;
@@ -14,8 +16,9 @@ type MediaFiltersProps = {
 
 export function MediaFilters({ filters, projectOptions }: MediaFiltersProps) {
   return (
-    <form method="get" className="space-y-4 rounded-lg border border-tb-navy-border bg-tb-surface p-4">
-      <div className="grid gap-4 lg:grid-cols-4">
+    <AdminFilterPanel>
+      <form method="get" className="space-y-3">
+      <div className="grid gap-3 lg:grid-cols-4">
         <div>
           <label htmlFor="q" className="mb-1 block text-sm font-medium">
             Search
@@ -84,7 +87,7 @@ export function MediaFilters({ filters, projectOptions }: MediaFiltersProps) {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-4">
+      <div className="grid gap-3 lg:grid-cols-4">
         <div>
           <label
             htmlFor="relatedProjectId"
@@ -108,20 +111,15 @@ export function MediaFilters({ filters, projectOptions }: MediaFiltersProps) {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-3">
-        <button
-          type="submit"
-          className="rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover"
-        >
+      <div className="flex flex-wrap gap-2">
+        <button type="submit" className={adminBtnPrimaryClass}>
           Apply filters
         </button>
-        <Link
-          href="/admin/media"
-          className="rounded-md border border-tb-navy-border px-4 py-2 text-sm font-medium hover:bg-tb-surface-muted"
-        >
+        <Link href="/admin/media" className={adminBtnSecondaryClass}>
           Clear
         </Link>
       </div>
-    </form>
+      </form>
+    </AdminFilterPanel>
   );
 }

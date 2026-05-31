@@ -9,13 +9,13 @@ export function AdminModuleGuide({ module }: AdminModuleGuideProps) {
   const guidance = MODULE_GUIDANCE[module];
 
   return (
-    <AdminHelpBox title={guidance.listHelpTitle}>
-      <ul className="list-disc space-y-1.5 pl-4">
+    <AdminHelpBox title={guidance.listHelpTitle} compact>
+      <ul className="list-disc space-y-1 pl-4">
         {guidance.listHelpBullets.map((bullet) => (
           <li key={bullet}>{bullet}</li>
         ))}
       </ul>
-      <p className="mt-3 font-medium text-tb-text">{guidance.listNextAction}</p>
+      <p className="mt-2 font-medium text-tb-text">{guidance.listNextAction}</p>
     </AdminHelpBox>
   );
 }

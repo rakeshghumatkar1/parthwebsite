@@ -2,6 +2,7 @@ import {
   PROJECT_STATUS_OPTIONS,
   PROJECT_TYPE_OPTIONS,
 } from "@/lib/admin/projects/constants";
+import { AdminBadge } from "./ui/admin-badge";
 
 const typeLabels = Object.fromEntries(
   PROJECT_TYPE_OPTIONS.map((o) => [o.value, o.label]),
@@ -21,42 +22,21 @@ export function ProjectStatusBadge({
   hidden,
   archived,
 }: ProjectStatusBadgeProps) {
-  const badges: Array<{ label: string; className: string }> = [];
+  let variant: "neutral" | "warning" | "success" | "draft" = "draft";
+  let label = "Draft";
 
   if (archived) {
-    badges.push({
-      label: "Archived",
-      className: "bg-slate-100 text-slate-700",
-    });
+    variant = "neutral";
+    label = "Archived";
   } else if (hidden) {
-    badges.push({
-      label: "Hidden",
-      className: "bg-amber-50 text-amber-800",
-    });
+    variant = "warning";
+    label = "Hidden";
   } else if (published) {
-    badges.push({
-      label: "Published",
-      className: "bg-emerald-50 text-emerald-800",
-    });
-  } else {
-    badges.push({
-      label: "Draft",
-      className: "bg-tb-surface-muted text-tb-text-muted",
-    });
+    variant = "success";
+    label = "Published";
   }
 
-  return (
-    <div className="flex flex-wrap gap-1">
-      {badges.map((badge) => (
-        <span
-          key={badge.label}
-          className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${badge.className}`}
-        >
-          {badge.label}
-        </span>
-      ))}
-    </div>
-  );
+  return <AdminBadge variant={variant}>{label}</AdminBadge>;
 }
 
 export function ProjectTypeLabel({ value }: { value: string }) {

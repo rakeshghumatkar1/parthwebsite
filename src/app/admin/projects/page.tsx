@@ -1,11 +1,13 @@
-import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminEmptyState } from "@/components/admin/admin-empty-state";
 import { AdminModuleGuide } from "@/components/admin/admin-module-guide";
 import { ProjectsFilters } from "@/components/admin/projects-filters";
 import { ProjectsTable } from "@/components/admin/projects-table";
+import { AdminCreateLink } from "@/components/admin/ui/admin-create-link";
+import { AdminPageHeader } from "@/components/admin/ui/admin-page-header";
 import { MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
+import { adminPageStackClass } from "@/lib/admin/admin-ui";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 import { listProjects } from "@/lib/admin/projects/queries";
 import type { ProjectListFilters } from "@/lib/admin/projects/types";
@@ -47,25 +49,14 @@ export default async function AdminProjectsPage({ searchParams }: PageProps) {
 
   return (
     <AdminShell admin={admin}>
-      <div className="space-y-6">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">
-              {guidance.title}
-            </h1>
-            <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">
-              {guidance.subtitle}
-            </p>
-          </div>
-          <Link
-            href="/admin/projects/new"
-            className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white transition hover:bg-tb-blue-hover"
-          >
-            Create project
-          </Link>
-        </div>
+      <div className={adminPageStackClass}>
+        <AdminPageHeader
+          title={guidance.title}
+          description={guidance.subtitle}
+          action={<AdminCreateLink href="/admin/projects/new">Create project</AdminCreateLink>}
+        />
 
-        <AdminCmsNotice />
+        <AdminCmsNotice variant="info" />
         <AdminModuleGuide module="projects" />
         <ProjectsFilters filters={filters} />
 
@@ -75,12 +66,7 @@ export default async function AdminProjectsPage({ searchParams }: PageProps) {
             description={guidance.emptyDescription}
             waitNote={guidance.emptyWaitNote}
             action={
-              <Link
-                href="/admin/projects/new"
-                className="inline-flex rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover"
-              >
-                Create project
-              </Link>
+              <AdminCreateLink href="/admin/projects/new">Create project</AdminCreateLink>
             }
           />
         ) : (

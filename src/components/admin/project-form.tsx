@@ -1,7 +1,6 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import Link from "next/link";
 import {
   AdminField,
   AdminFormError,
@@ -13,6 +12,7 @@ import {
   AdminFormSection,
 } from "@/components/admin/admin-form-section";
 import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
+import { PublishingSidebar } from "@/components/admin/publishing-sidebar";
 import { FIELD_HINTS, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import {
   createProjectAction,
@@ -54,10 +54,6 @@ type ProjectFormProps = {
   initialValues?: ProjectFormValues;
   updatedAt?: string;
 };
-
-function checkboxClassName() {
-  return "h-4 w-4 rounded border-tb-navy-border text-tb-blue focus:ring-tb-blue/30";
-}
 
 export function ProjectForm({
   mode,
@@ -349,129 +345,30 @@ export function ProjectForm({
             </AdminField>
 
             <AdminFieldHint>
-              Cover image upload is not available yet. Media library and blob
-              uploads will come in a later phase.
+              Add cover images in Media Library, then paste the URL here or link
+              via project detail fields when ready.
             </AdminFieldHint>
           </AdminFormSection>
         </div>
 
-        <aside className="space-y-4">
-          <section className="space-y-4 rounded-lg border border-tb-navy-border bg-tb-surface p-5">
-            <div>
-              <h2 className="text-base font-semibold">Publishing</h2>
-              <p className="mt-1 text-sm text-tb-text-muted">
-                Public pages are not connected yet. These flags prepare projects
-                for future Home, Projects, About, and detail pages.
-              </p>
-            </div>
-
-            <label className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                name="published"
-                defaultChecked={values.published}
-                className={checkboxClassName()}
-              />
-              <span>
-                <span className="font-medium">Published</span>
-                <AdminFieldHint>{FIELD_HINTS.published}</AdminFieldHint>
-              </span>
-            </label>
-
-            <label className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                name="hidden"
-                defaultChecked={values.hidden}
-                className={checkboxClassName()}
-              />
-              <span>
-                <span className="font-medium">Hidden</span>
-                <AdminFieldHint>{FIELD_HINTS.hidden}</AdminFieldHint>
-              </span>
-            </label>
-
-            <label className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                name="archived"
-                defaultChecked={values.archived}
-                className={checkboxClassName()}
-              />
-              <span>
-                <span className="font-medium">Archived</span>
-                <AdminFieldHint>{FIELD_HINTS.archived}</AdminFieldHint>
-              </span>
-            </label>
-
-            <hr className="border-tb-navy-border" />
-
-            <label className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                name="featuredOnHome"
-                defaultChecked={values.featuredOnHome}
-                className={checkboxClassName()}
-              />
-              <span>
-                <span className="font-medium">Featured on Home</span>
-                <AdminFieldHint>{FIELD_HINTS.featuredOnHome}</AdminFieldHint>
-              </span>
-            </label>
-
-            <label className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                name="featuredOnAbout"
-                defaultChecked={values.featuredOnAbout}
-                className={checkboxClassName()}
-              />
-              <span>
-                <span className="font-medium">Featured on About</span>
-                <AdminFieldHint>{FIELD_HINTS.featuredOnAbout}</AdminFieldHint>
-              </span>
-            </label>
-
-            <AdminField
-              id="displayOrder"
-              label="Display order"
-              error={errors.displayOrder}
-              hint={FIELD_HINTS.displayOrder}
-            >
-              <input
-                id="displayOrder"
-                name="displayOrder"
-                type="number"
-                defaultValue={values.displayOrder}
-                className={adminInputClassName(Boolean(errors.displayOrder))}
-              />
-            </AdminField>
-
-            {updatedAt ? (
-              <p className="text-xs text-tb-text-muted">
-                Last updated: {updatedAt}
-              </p>
-            ) : null}
-
-            <button
-              type="submit"
-              disabled={pending}
-              className="w-full rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white transition hover:bg-tb-blue-hover disabled:opacity-60"
-            >
-              {pending
-                ? "Saving…"
-                : mode === "create"
-                  ? "Create project"
-                  : "Save changes"}
-            </button>
-
-            <Link
-              href="/admin/projects"
-              className="block text-center text-sm font-medium text-tb-blue hover:underline"
-            >
-              Back to projects
-            </Link>
-          </section>
+        <aside className="space-y-3">
+          <PublishingSidebar
+            showArchived
+            values={{
+              published: values.published,
+              hidden: values.hidden,
+              archived: values.archived,
+              featuredOnHome: values.featuredOnHome,
+              featuredOnAbout: values.featuredOnAbout,
+              displayOrder: values.displayOrder,
+            }}
+            errors={{ displayOrder: errors.displayOrder }}
+            updatedAt={updatedAt}
+            pending={pending}
+            submitLabel={mode === "create" ? "Create project" : "Save changes"}
+            backHref="/admin/projects"
+            backLabel="Back to projects"
+          />
 
           <AdminWhatAppearsWhere items={MODULE_GUIDANCE.projects.whereAppears} />
         </aside>

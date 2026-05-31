@@ -4,7 +4,9 @@ import {
   PROJECT_TYPE_OPTIONS,
 } from "@/lib/admin/projects/constants";
 import type { ProjectListFilters } from "@/lib/admin/projects/types";
+import { adminBtnPrimaryClass, adminBtnSecondaryClass } from "@/lib/admin/admin-ui";
 import { adminInputClassName } from "./admin-auth-panel";
+import { AdminFilterPanel } from "./ui/admin-filter-panel";
 
 type ProjectsFiltersProps = {
   filters: ProjectListFilters;
@@ -22,8 +24,9 @@ function boolFilterOptions() {
 
 export function ProjectsFilters({ filters }: ProjectsFiltersProps) {
   return (
-    <form method="get" className="space-y-4 rounded-lg border border-tb-navy-border bg-tb-surface p-4">
-      <div className="grid gap-4 lg:grid-cols-4">
+    <AdminFilterPanel>
+      <form method="get" className="space-y-3">
+      <div className="grid gap-3 lg:grid-cols-4">
         <div>
           <label htmlFor="q" className="mb-1 block text-sm font-medium">
             Search
@@ -90,7 +93,7 @@ export function ProjectsFilters({ filters }: ProjectsFiltersProps) {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-4">
+      <div className="grid gap-3 lg:grid-cols-4">
         <div>
           <label htmlFor="hidden" className="mb-1 block text-sm font-medium">
             Hidden
@@ -154,20 +157,15 @@ export function ProjectsFilters({ filters }: ProjectsFiltersProps) {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-3">
-        <button
-          type="submit"
-          className="rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover"
-        >
+      <div className="flex flex-wrap gap-2">
+        <button type="submit" className={adminBtnPrimaryClass}>
           Apply filters
         </button>
-        <Link
-          href="/admin/projects"
-          className="rounded-md border border-tb-navy-border px-4 py-2 text-sm font-medium hover:bg-tb-surface-muted"
-        >
+        <Link href="/admin/projects" className={adminBtnSecondaryClass}>
           Clear
         </Link>
       </div>
-    </form>
+      </form>
+    </AdminFilterPanel>
   );
 }

@@ -1,20 +1,19 @@
 export const CMS_CONTENT_CAUTION =
-  "Do not add final content until the Home page and public pages are connected. You can explore the admin and save drafts, but wait for approval before entering launch content.";
+  "Public pages are live. Enter content carefully — use drafts until approved, then publish only records ready for the website. Do not invent links, proof, or placeholder copy.";
 
 export const BLOB_PREFIX_RULE =
-  "All future Parth uploads must use the parthwebsite/ prefix in the shared Blob store. Never edit or delete files from other websites in that store.";
+  "All Parth uploads must use the parthwebsite/ prefix in the shared Blob store. Never edit or delete files from other websites in that store.";
 
 export const WORKFLOW_STEPS = [
-  { step: 1, label: "Projects", note: "Start here when content entry begins." },
-  { step: 2, label: "Media Library", note: "Add approved file URLs only when files are ready." },
+  { step: 1, label: "Projects", note: "Start here — core portfolio records." },
+  { step: 2, label: "Media Library", note: "Upload or paste URLs for images and PDFs." },
   { step: 3, label: "Proof Library", note: "Add evidence linked to projects." },
   { step: 4, label: "Videos", note: "Add approved YouTube or demo URLs." },
-  { step: 5, label: "Timeline / Milestones", note: "Add story and progress markers." },
-  { step: 6, label: "Updates / Build Notes", note: "Add progress notes." },
-  { step: 7, label: "Home page connection", note: "Not built yet." },
-  { step: 8, label: "Public pages", note: "Not built yet." },
-  { step: 9, label: "Blob uploads", note: "Not built yet — URL-only for now." },
-  { step: 10, label: "Final content entry", note: "Enter launch content after steps 7–9." },
+  { step: 5, label: "Timeline / Milestones", note: "Add About-page timeline markers." },
+  { step: 6, label: "Updates / Build Notes", note: "Add progress notes when ready." },
+  { step: 7, label: "Review public pages", note: "Check /projects, /proof, /videos, /updates, /about-parth." },
+  { step: 8, label: "Home featured flags", note: "Mark featured_on_home only when ready for Home." },
+  { step: 9, label: "Publish", note: "Publish only approved records; keep drafts hidden until ready." },
 ] as const;
 
 export type ModuleKey =
@@ -45,7 +44,7 @@ export const MODULE_GUIDANCE: Record<ModuleKey, ModuleGuidance> = {
     title: "Projects",
     subtitle: "Portfolio projects for future Home, Projects, About, and detail pages.",
     status: "available",
-    statusNote: "Public page not connected yet",
+    statusNote: "Public pages live",
     listHelpTitle: "What projects are for",
     listHelpBullets: [
       "A project is a portfolio piece Parth built — software, automation, AI, or tools.",
@@ -57,7 +56,7 @@ export const MODULE_GUIDANCE: Record<ModuleKey, ModuleGuidance> = {
     listNextAction: "Start with Projects when content entry begins. Drafts are fine for learning the form.",
     emptyTitle: "No projects yet",
     emptyDescription: "No project records exist yet.",
-    emptyWaitNote: "Wait until public pages are connected unless practicing with drafts.",
+    emptyWaitNote: "Create drafts to learn the form, or add approved projects when ready.",
     whereAppears: ["Home featured cards", "Projects page", "Project detail pages", "About Parth highlights"],
     formIntro: "Required fields must be filled to save. Use drafts until content is approved.",
   },
@@ -65,7 +64,7 @@ export const MODULE_GUIDANCE: Record<ModuleKey, ModuleGuidance> = {
     title: "Proof Library",
     subtitle: "Evidence supporting project credibility.",
     status: "available",
-    statusNote: "Public page not connected yet",
+    statusNote: "Public pages live",
     listHelpTitle: "What proof items are for",
     listHelpBullets: [
       "Evidence: GitHub repos, screenshots, PDFs, recognitions, presentations, technical notes.",
@@ -84,7 +83,7 @@ export const MODULE_GUIDANCE: Record<ModuleKey, ModuleGuidance> = {
     title: "Videos",
     subtitle: "Approved YouTube or demo walkthrough URLs.",
     status: "available",
-    statusNote: "Public page not connected yet",
+    statusNote: "Public pages live",
     listHelpTitle: "What videos are for",
     listHelpBullets: [
       "Approved YouTube or demo links — not uploaded files.",
@@ -103,7 +102,7 @@ export const MODULE_GUIDANCE: Record<ModuleKey, ModuleGuidance> = {
     title: "Timeline / Milestones",
     subtitle: "Story moments showing learning, building, and progress.",
     status: "available",
-    statusNote: "Public page not connected yet",
+    statusNote: "Public pages live",
     listHelpTitle: "What milestones are for",
     listHelpBullets: [
       "Timeline story: experiments, builds, recognitions, presentations.",
@@ -122,7 +121,7 @@ export const MODULE_GUIDANCE: Record<ModuleKey, ModuleGuidance> = {
     title: "Updates / Build Notes",
     subtitle: "Notes about launches, improvements, and technical progress.",
     status: "available",
-    statusNote: "Public page not connected yet",
+    statusNote: "Public pages live",
     listHelpTitle: "What updates are for",
     listHelpBullets: [
       "Progress notes: new features, repos, videos, proof, status changes.",
@@ -170,18 +169,18 @@ export const FIELD_HINTS = {
   proofType: "Evidence type: GitHub, screenshot, PDF, recognition, presentation, etc.",
   updateType: "What changed: new project, repo, video, proof, feature, technical note, status change.",
   category: "Groups similar items (demo, walkthrough, hardware, software, etc.).",
-  published: "Ready for future public pages. Leave unchecked for drafts.",
+  published: "Shows on public pages when not hidden (and not archived for projects).",
   hidden: "Hides from public even if published.",
   archived: "Marks older project work without deleting.",
-  featuredOnHome: "Prepares for future Home featured sections. Lower display order = first.",
-  featuredOnAbout: "Prepares for future About Parth featured sections.",
+  featuredOnHome: "Shows in Home featured projects when published and not hidden.",
+  featuredOnAbout: "Shows in About Parth featured sections when published.",
   displayOrder: "List order — lower numbers appear first (e.g. 1 before 100).",
   techStack: "Comma-separated tags, e.g. Python, PostgreSQL, Next.js",
   relatedProjectId: "Links this record to a portfolio project.",
   relatedProofId: "Links to a proof library item.",
   relatedVideoId: "Links to a video record.",
   relatedMilestoneId: "Links to a timeline milestone.",
-  fileUrl: "Direct file link (PDF, image). Approved public URL only. No upload yet.",
+  fileUrl: "Direct file link (PDF, image). Paste URL or upload via Media Library.",
   externalUrl: "External page link (GitHub, YouTube, article). Approved URL only.",
   youtubeUrl: "Full YouTube or demo URL. Required for videos. No fake links.",
   eventDate: "Optional date YYYY-MM-DD for sorting.",

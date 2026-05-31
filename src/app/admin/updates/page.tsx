@@ -1,11 +1,13 @@
-import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminEmptyState } from "@/components/admin/admin-empty-state";
 import { AdminModuleGuide } from "@/components/admin/admin-module-guide";
 import { UpdateFilters } from "@/components/admin/update-filters";
 import { UpdateTable } from "@/components/admin/update-table";
+import { AdminCreateLink } from "@/components/admin/ui/admin-create-link";
+import { AdminPageHeader } from "@/components/admin/ui/admin-page-header";
 import { MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
+import { adminPageStackClass } from "@/lib/admin/admin-ui";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 import { getProjectOptions } from "@/lib/admin/shared/relation-options";
 import { listUpdates } from "@/lib/admin/updates/queries";
@@ -37,19 +39,22 @@ export default async function AdminUpdatesPage({ searchParams }: PageProps) {
 
   return (
     <AdminShell admin={admin}>
-      <div className="space-y-6">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">{guidance.title}</h1>
-            <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">{guidance.subtitle}</p>
-          </div>
-          <Link href="/admin/updates/new" className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-tb-blue-hover">Create update</Link>
-        </div>
-        <AdminCmsNotice />
+      <div className={adminPageStackClass}>
+        <AdminPageHeader
+          title={guidance.title}
+          description={guidance.subtitle}
+          action={<AdminCreateLink href="/admin/updates/new">Create update</AdminCreateLink>}
+        />
+        <AdminCmsNotice variant="info" />
         <AdminModuleGuide module="updates" />
         <UpdateFilters filters={filters} projectOptions={projectOptions} />
         {items.length === 0 ? (
-          <AdminEmptyState title={guidance.emptyTitle} description={guidance.emptyDescription} waitNote={guidance.emptyWaitNote} action={<Link href="/admin/updates/new" className="inline-flex rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover">Create update</Link>} />
+          <AdminEmptyState
+            title={guidance.emptyTitle}
+            description={guidance.emptyDescription}
+            waitNote={guidance.emptyWaitNote}
+            action={<AdminCreateLink href="/admin/updates/new">Create update</AdminCreateLink>}
+          />
         ) : (
           <UpdateTable updates={items} projectOptions={projectOptions} />
         )}

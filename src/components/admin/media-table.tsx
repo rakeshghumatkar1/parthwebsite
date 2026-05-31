@@ -5,9 +5,15 @@ import {
   MEDIA_ROLE_OPTIONS,
 } from "@/lib/admin/media/constants";
 import type { Media } from "@/lib/admin/media/types";
+import {
+  adminBtnGhostClass,
+  adminTableBodyCellClass,
+  adminTableHeadCellClass,
+} from "@/lib/admin/admin-ui";
 import { optionLabel, type RelationOption } from "@/lib/admin/shared/relation-options";
 import { parseParthBlobFolder, isParthBlobUploadUrl } from "@/lib/blob/path";
 import { UPLOAD_FOLDER_OPTIONS } from "@/lib/blob/constants";
+import { AdminTableShell } from "./ui/admin-table-shell";
 
 type MediaTableProps = {
   mediaRecords: Media[];
@@ -43,26 +49,26 @@ function folderLabel(fileUrl: string): string {
 
 export function MediaTable({ mediaRecords, projectOptions }: MediaTableProps) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-tb-navy-border bg-tb-surface">
-      <table className="min-w-full divide-y divide-tb-navy-border text-sm">
-        <thead className="bg-tb-surface-muted">
+    <AdminTableShell>
+      <table className="min-w-full divide-y divide-slate-100 text-sm">
+        <thead className="bg-slate-50">
           <tr>
-            <th className="px-4 py-3 text-left font-medium">File</th>
-            <th className="px-4 py-3 text-left font-medium">Source</th>
-            <th className="px-4 py-3 text-left font-medium">Folder</th>
-            <th className="px-4 py-3 text-left font-medium">Type</th>
-            <th className="px-4 py-3 text-left font-medium">Role</th>
-            <th className="px-4 py-3 text-left font-medium">Display</th>
-            <th className="px-4 py-3 text-left font-medium">Project</th>
-            <th className="px-4 py-3 text-left font-medium">URL</th>
-            <th className="px-4 py-3 text-left font-medium">Updated</th>
-            <th className="px-4 py-3 text-left font-medium">Actions</th>
+            <th className={adminTableHeadCellClass}>File</th>
+            <th className={adminTableHeadCellClass}>Source</th>
+            <th className={adminTableHeadCellClass}>Folder</th>
+            <th className={adminTableHeadCellClass}>Type</th>
+            <th className={adminTableHeadCellClass}>Role</th>
+            <th className={adminTableHeadCellClass}>Display</th>
+            <th className={adminTableHeadCellClass}>Project</th>
+            <th className={adminTableHeadCellClass}>URL</th>
+            <th className={adminTableHeadCellClass}>Updated</th>
+            <th className={adminTableHeadCellClass}>Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-tb-navy-border">
+        <tbody className="divide-y divide-slate-100">
           {mediaRecords.map((record) => (
-            <tr key={record.id} className="align-top">
-              <td className="px-4 py-3">
+            <tr key={record.id} className="hover:bg-slate-50/80">
+              <td className={adminTableBodyCellClass}>
                 <div className="font-medium">
                   {record.fileName || "Untitled"}
                 </div>
@@ -70,27 +76,24 @@ export function MediaTable({ mediaRecords, projectOptions }: MediaTableProps) {
                   {record.fileUrl}
                 </div>
               </td>
-              <td className="px-4 py-3">{sourceLabel(record.fileUrl)}</td>
-              <td className="px-4 py-3">{folderLabel(record.fileUrl)}</td>
-              <td className="px-4 py-3">{record.fileType ?? "—"}</td>
-              <td className="px-4 py-3">{roleLabel(record.imageRole)}</td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>{sourceLabel(record.fileUrl)}</td>
+              <td className={adminTableBodyCellClass}>{folderLabel(record.fileUrl)}</td>
+              <td className={adminTableBodyCellClass}>{record.fileType ?? "—"}</td>
+              <td className={adminTableBodyCellClass}>{roleLabel(record.imageRole)}</td>
+              <td className={adminTableBodyCellClass}>
                 {displayModeLabel(record.imageDisplayMode)}
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 {optionLabel(projectOptions, record.relatedProjectId)}
               </td>
-              <td className="px-4 py-3">
+              <td className={adminTableBodyCellClass}>
                 <UrlStatus url={record.fileUrl} />
               </td>
-              <td className="px-4 py-3 whitespace-nowrap text-tb-text-muted">
+              <td className={`${adminTableBodyCellClass} whitespace-nowrap text-tb-text-muted`}>
                 {formatDate(record.updatedAt)}
               </td>
-              <td className="px-4 py-3">
-                <Link
-                  href={`/admin/media/${record.id}`}
-                  className="font-medium text-tb-blue hover:underline"
-                >
+              <td className={adminTableBodyCellClass}>
+                <Link href={`/admin/media/${record.id}`} className={adminBtnGhostClass}>
                   Edit
                 </Link>
               </td>
@@ -98,6 +101,6 @@ export function MediaTable({ mediaRecords, projectOptions }: MediaTableProps) {
           ))}
         </tbody>
       </table>
-    </div>
+    </AdminTableShell>
   );
 }
