@@ -40,6 +40,8 @@ Reusable structure for future Parth microsite pages—purpose, sections, CMS nee
 
 ## About Parth page
 
+**Status:** Built (Phase 2.8) at `/about-parth`. CMS-backed milestones and featured sections with empty-safe states; no fake biography.
+
 ### Purpose
 
 Explain Parth Ghumatkar as **self-led technical founder**: journey, credibility, how he works with Think Big on delivery—not a family profile or prodigy article.
@@ -182,6 +184,8 @@ Deep proof for one build: problem, solution, role, stack, links.
 
 ## Videos page
 
+**Status:** Built (Phase 2.8). CMS-only listing with empty state; external YouTube links only (no embed).
+
 ### Purpose
 
 YouTube and demo library—hardware history through current software demos.
@@ -208,6 +212,8 @@ YouTube and demo library—hardware history through current software demos.
 ---
 
 ## Proof Library page
+
+**Status:** Built (Phase 2.8). CMS-only listing with empty state; no static fallback.
 
 ### Purpose
 
@@ -254,6 +260,8 @@ If split from Proof Library: quick access to PDFs and files.
 ---
 
 ## Updates / Build Notes page
+
+**Status:** Built (Phase 2.8). CMS-only listing with empty state; no detail pages in this phase.
 
 ### Purpose
 

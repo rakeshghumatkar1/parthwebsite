@@ -46,6 +46,14 @@ npm run db:studio      # Drizzle Studio (optional)
 
 **Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
 
+**Remaining CMS public pages validation (Phase 2.8+):**
+
+- `/proof`, `/videos`, `/updates`, `/about-parth` load with clean empty states when no published records  
+- Public queries enforce `published && !hidden` (projects also `!archived`)  
+- No seed/fake content added unless explicitly scoped  
+- No Blob upload code  
+- Home page unchanged except shared layout/nav  
+
 **Projects public validation (Phase 2.7+):**
 
 - Home featured section uses CMS when featured published projects exist; otherwise static `launchProjects` fallback  

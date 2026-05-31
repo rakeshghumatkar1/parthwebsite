@@ -1,0 +1,87 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { PublicEmptyState } from "@/components/public/empty-state";
+import { Section } from "@/components/ui/section";
+import { SectionHeader } from "@/components/ui/section-header";
+import { VideoCard } from "@/components/videos/video-card";
+import { VideoFilters } from "@/components/videos/video-filters";
+import { getPublicMediaByIds } from "@/lib/public/media";
+import { getPublicProjectFilterOptions } from "@/lib/public/projects";
+import {
+  getPublicVideos,
+  type PublicVideoListFilters,
+} from "@/lib/public/videos";
+
+export const metadata: Metadata = {
+  title: "Videos | Think Big AI Systems",
+  description:
+    "Approved walkthroughs, demos, technical explanations, and project videos from the Parth CMS.",
+};
+
+type VideosPageProps = {
+  searchParams: Promise<{
+    q?: string;
+    category?: string;
+    relatedProjectId?: string;
+  }>;
+};
+
+export default async function VideosPage({ searchParams }: VideosPageProps) {
+  const params = await searchParams;
+  const filters: PublicVideoListFilters = {
+    q: params.q,
+    category: params.category,
+    relatedProjectId: params.relatedProjectId,
+  };
+
+  const [videos, projectOptions] = await Promise.all([
+    getPublicVideos(filters),
+    getPublicProjectFilterOptions(),
+  ]);
+
+  const mediaMap = await getPublicMediaByIds(
+    videos
+      .map((video) => video.thumbnailMediaId)
+      .filter((id): id is string => Boolean(id)),
+  );
+
+  return (
+    <div className="flex min-h-full flex-col">
+      <SiteHeader />
+      <main>
+        <Section tone="light">
+          <SectionHeader
+            title="Videos"
+            description="Approved walkthroughs, demos, technical explanations, and project videos—published through the CMS when ready for review."
+          />
+          <Suspense fallback={null}>
+            <VideoFilters projectOptions={projectOptions} />
+          </Suspense>
+          {videos.length > 0 ? (
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {videos.map((video) => (
+                <VideoCard
+                  key={video.id}
+                  video={video}
+                  thumbnail={
+                    video.thumbnailMediaId
+                      ? mediaMap.get(video.thumbnailMediaId)
+                      : null
+                  }
+                />
+              ))}
+            </div>
+          ) : (
+            <PublicEmptyState
+              className="mt-10"
+              message="Videos will appear here after approved YouTube/demo records are published in the CMS."
+            />
+          )}
+        </Section>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}

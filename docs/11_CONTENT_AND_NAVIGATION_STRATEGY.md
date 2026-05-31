@@ -23,11 +23,12 @@ Do not mix digital-marketing agency pages (SEO services, lead gen) into this mic
 | **Home** | `/` | Positioning, capabilities, founder, process, CMS previews | Partial | **Built** (Phase 1–2); featured projects CMS-backed with static fallback (Phase 2.7) |
 | **Projects** | `/projects` | Directory of software builds | Projects | **Built** (Phase 2.7) |
 | **Project detail** | `/projects/[slug]` | Single project proof + links | Projects | **Built** (Phase 2.7) |
-| **About Parth** | `/about-parth` | Founder story, credibility, timeline | Timeline + static | Planned |
+| **About Parth** | `/about-parth` | Founder story, credibility, timeline | Timeline + CMS featured | **Built** (Phase 2.8) |
 | **Contact** | `/contact` | Discuss a software use case | Static / form later | Planned |
 | **GitHub** | `/github` or external | Repository trail, curated links | Optional repo records | Planned |
-| **Videos** | `/videos` | YouTube / demo library | Videos | Planned |
-| **Proof Library** | `/proof` | Documents, presentations, recognition | Proof / Downloads | Planned |
+| **Videos** | `/videos` | YouTube / demo library | Videos | **Built** (Phase 2.8) |
+| **Proof Library** | `/proof` | Documents, presentations, recognition | Proof / Downloads | **Built** (Phase 2.8) |
+| **Updates / Build Notes** | `/updates` | Build notes and technical progress | Updates | **Built** (Phase 2.8) |
 | **Downloads** | `/downloads` or merged with Proof | PDFs, files | Proof / Downloads | Planned |
 
 **Recommendation:** Merge **Downloads** into Proof Library with `proofType` filter unless downloads volume justifies a separate route.

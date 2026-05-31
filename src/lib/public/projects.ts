@@ -107,6 +107,21 @@ export async function getFeaturedHomeProjects(
   return queryPublicProjects(eq(projects.featuredOnHome, true), limit);
 }
 
+/** Featured about projects — published, visible, not archived, featured_on_about. */
+export async function getPublicFeaturedAboutProjects(
+  limit?: number,
+): Promise<PublicProject[]> {
+  return queryPublicProjects(eq(projects.featuredOnAbout, true), limit);
+}
+
+/** Lightweight options for public filter dropdowns. */
+export async function getPublicProjectFilterOptions(): Promise<
+  { id: string; title: string }[]
+> {
+  const items = await queryPublicProjects();
+  return items.map((project) => ({ id: project.id, title: project.title }));
+}
+
 export async function getPublicProjects(
   filters: PublicProjectListFilters = {},
 ): Promise<PublicProject[]> {

@@ -6,7 +6,7 @@ const footerNavGroups: FooterLinkGroup[] = [
   {
     title: "Company",
     links: [
-      { label: "About Parth", href: "#technical-founder" },
+      { label: "About Parth", href: "/about-parth" },
       { label: "Contact", href: "#contact" },
     ],
   },
@@ -23,9 +23,9 @@ const footerNavGroups: FooterLinkGroup[] = [
     title: "Resources",
     links: [
       { label: "GitHub" },
-      { label: "Videos" },
-      { label: "Downloads" },
-      { label: "Proof Library", href: "#proof-library" },
+      { label: "Videos", href: "/videos" },
+      { label: "Updates", href: "/updates" },
+      { label: "Proof Library", href: "/proof" },
       { label: "All Projects", href: "/projects" },
     ],
   },

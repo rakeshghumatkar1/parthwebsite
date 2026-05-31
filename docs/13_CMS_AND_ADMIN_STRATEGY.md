@@ -257,7 +257,22 @@ Recommended data entry order: projects → proof/media/videos → milestones →
 
 ## Admin UX guidance (Phase 2.6 — implemented)
 
-Non-technical admin support added: dashboard workflow, per-module help boxes, field-level hints, empty-state guidance, practical Help page. **Projects public pages connected (Phase 2.7).** Proof, videos, updates, and about public pages still pending. Media remains URL-only; future Blob prefix remains `parthwebsite/`.
+Non-technical admin support added: dashboard workflow, per-module help boxes, field-level hints, empty-state guidance, practical Help page. **All primary CMS public pages connected (Phase 2.7–2.8).** Media remains URL-only; future Blob prefix remains `parthwebsite/`.
+
+---
+
+## Remaining CMS public pages (Phase 2.8 — implemented)
+
+| Item | Status |
+|------|--------|
+| **Proof Library** | `/proof` — CMS only; empty state when no records |
+| **Videos** | `/videos` — CMS only; external YouTube links; no embed |
+| **Updates** | `/updates` — CMS only; list view with excerpts; no detail route |
+| **About Parth** | `/about-parth` — CMS milestones (featured first, else all published) + featured projects/proof/videos |
+| **Public queries** | `src/lib/public/proof.ts`, `videos.ts`, `updates.ts`, `about.ts`, `media.ts` |
+| **Seed data** | None added |
+| **Blob upload** | Not built |
+| **Home CMS for proof/updates** | Not connected in this phase |
 
 ---
 
@@ -271,7 +286,7 @@ Non-technical admin support added: dashboard workflow, per-module help boxes, fi
 | **Public queries** | `src/lib/public/projects.ts` — separate from admin queries |
 | **Seed data** | None added |
 | **Blob upload** | Not built |
-| **Proof / Videos / Updates public** | Not built in this phase |
+| **Proof / Videos / Updates public** | Built in Phase 2.8 |
 
 ---
 
