@@ -4,6 +4,11 @@ import type { AdminUser } from "@/db/schema/admin-auth";
 const navItems = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/projects", label: "Projects" },
+  { href: "/admin/proof", label: "Proof Library" },
+  { href: "/admin/videos", label: "Videos" },
+  { href: "/admin/milestones", label: "Timeline" },
+  { href: "/admin/updates", label: "Updates" },
+  { href: "/admin/media", label: "Media Library" },
   { href: "/admin/help", label: "Help" },
 ];
 
@@ -17,7 +22,7 @@ export function AdminShell({ admin, children }: AdminShellProps) {
     <div className="admin-shell min-h-screen bg-tb-surface-muted text-tb-text">
       <div className="flex min-h-screen">
         <aside className="admin-sidebar flex w-56 shrink-0 flex-col border-r border-tb-navy-border bg-tb-surface px-4 py-6">
-          <div className="mb-8">
+          <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-tb-text-muted">
               Parth Admin
             </p>

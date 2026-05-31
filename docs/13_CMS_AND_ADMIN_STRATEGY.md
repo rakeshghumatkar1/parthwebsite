@@ -239,6 +239,22 @@ Tables: `admin_users`, `admin_sessions` (append-only migration). Protected route
 
 ---
 
+## Remaining CMS admin modules (Phase 2.5 — implemented)
+
+| Module | Admin routes | Notes |
+|--------|--------------|-------|
+| **Proof Library** | `/admin/proof`, `/admin/proof/new`, `/admin/proof/[id]` | proof_items CRUD; URL fields only |
+| **Videos** | `/admin/videos`, `/admin/videos/new`, `/admin/videos/[id]` | YouTube URL required |
+| **Timeline / Milestones** | `/admin/milestones`, `/admin/milestones/new`, `/admin/milestones/[id]` | No slug field |
+| **Updates / Build Notes** | `/admin/updates`, `/admin/updates/new`, `/admin/updates/[id]` | update_type required |
+| **Media Library** | `/admin/media`, `/admin/media/new`, `/admin/media/[id]` | URL-only metadata; no upload |
+
+All modules: protected by admin session, list/search/filter, create/edit, publish/hide toggles where schema supports it. **No public page connection yet. No seed data. No Blob upload.**
+
+Recommended data entry order: projects → proof/media/videos → milestones → updates.
+
+---
+
 ## Admin UX rules
 
 ### Layout

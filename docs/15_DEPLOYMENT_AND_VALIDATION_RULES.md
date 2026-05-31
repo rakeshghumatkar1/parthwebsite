@@ -46,6 +46,13 @@ npm run db:studio      # Drizzle Studio (optional)
 
 **Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
 
+**Remaining CMS modules validation (Phase 2.5+):**
+
+- `/admin/proof`, `/admin/videos`, `/admin/milestones`, `/admin/updates`, `/admin/media` routes work when logged in  
+- Unauthenticated access redirects to login  
+- Media is URL-only — no Blob upload code  
+- No public page changes; no seed data added unless explicitly scoped  
+
 **Projects CMS validation (Phase 2.4+):**
 
 - `/admin/projects` list, create, and edit routes work when logged in  
