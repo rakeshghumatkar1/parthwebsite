@@ -34,3 +34,13 @@ export const PROJECT_PHASE_OPTIONS = [
 ] as const;
 
 export const PROJECT_PHASE_VALUES = PROJECT_PHASE_OPTIONS.map((o) => o.value);
+
+export {
+  DOMAIN_LABELS,
+  DOMAIN_OPTIONS,
+  DOMAIN_VALUES,
+  INDUSTRY_LABELS,
+  INDUSTRY_OPTIONS,
+  INDUSTRY_VALUES,
+  formatDomainsCompact,
+} from "@/lib/projects/taxonomy";

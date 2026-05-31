@@ -1,8 +1,10 @@
 import {
+  formatDomainsCompact,
   PROJECT_PHASE_OPTIONS,
   PROJECT_STATUS_OPTIONS,
   PROJECT_TYPE_OPTIONS,
 } from "@/lib/admin/projects/constants";
+import { industryLabel } from "@/lib/projects/taxonomy";
 import { AdminBadge } from "./ui/admin-badge";
 
 const typeLabels = Object.fromEntries(
@@ -53,6 +55,14 @@ export function ProjectPhaseLabel({ value }: { value: string }) {
 
 export function ProjectStatusLabel({ value }: { value: string }) {
   return <>{statusLabels[value] ?? value}</>;
+}
+
+export function ProjectIndustryLabel({ value }: { value: string }) {
+  return <>{industryLabel(value)}</>;
+}
+
+export function ProjectDomainsCompact({ values }: { values: string[] }) {
+  return <>{formatDomainsCompact(values)}</>;
 }
 
 export function ProjectFeaturedFlags({

@@ -8,6 +8,8 @@ export type ProjectFormValues = {
   projectType: string;
   projectPhase: string;
   status: string;
+  industry: string;
+  domains: string[];
   techStack: string;
   problemSolved: string;
   whatItDoes: string;
@@ -24,7 +26,10 @@ export type ProjectFormValues = {
   archived: boolean;
 };
 
-export type ProjectFormErrors = Partial<Record<keyof ProjectFormValues, string>> & {
+export type ProjectFormErrors = Partial<
+  Record<Exclude<keyof ProjectFormValues, "domains">, string>
+> & {
+  domains?: string;
   form?: string;
 };
 

@@ -1,6 +1,11 @@
 import { and, asc, count, desc, eq, ilike, or, type SQL } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db";
 import { projects, type Project } from "@/db/schema/projects";
+import {
+  domainLabel,
+  domainLabels,
+  industryLabel,
+} from "@/lib/projects/taxonomy";
 
 /** Public-visible projects only: published, not hidden, not archived. */
 export function publicProjectConditions(extra?: SQL) {
@@ -21,6 +26,8 @@ export type PublicProject = {
   projectType: string;
   projectPhase: string;
   status: string;
+  industry: string;
+  domains: string[];
   techStack: string[];
   problemSolved: string | null;
   whatItDoes: string | null;
@@ -101,6 +108,8 @@ function mapProject(row: Project): PublicProject {
     projectType: row.projectType,
     projectPhase: row.projectPhase,
     status: row.status,
+    industry: row.industry,
+    domains: row.domains ?? [],
     techStack: row.techStack ?? [],
     problemSolved: row.problemSolved,
     whatItDoes: row.whatItDoes,
@@ -222,6 +231,8 @@ export function projectStatusLabel(value: string): string {
 export function projectPhaseLabel(value: string): string {
   return PROJECT_PHASE_LABELS[value] ?? value;
 }
+
+export { domainLabel, domainLabels, industryLabel };
 
 export function projectHasLinks(project: PublicProject): boolean {
   return Boolean(

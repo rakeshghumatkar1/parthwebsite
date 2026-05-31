@@ -49,7 +49,7 @@ export const MODULE_GUIDANCE: Record<ModuleKey, ModuleGuidance> = {
     listHelpBullets: [
       "A project is a portfolio piece Parth built — software, automation, AI, or tools.",
       "Later appears on: Home, Projects page, Project detail page, About Parth.",
-      "Required: title, slug, short description, project type, status.",
+      "Required: title, slug, short description, project type, project phase, status, industry, domains.",
       "Published = ready for public. Hidden = excluded even if published. Archived = older work on file.",
       "Use only approved real links — do not invent GitHub, demo, or download URLs.",
     ],
@@ -166,6 +166,8 @@ export const FIELD_HINTS = {
   fullDescription: "Optional longer text for detail pages.",
   projectType: "Category: internal tool, AI system, automation, data platform, SaaS, content/media, other.",
   projectPhase: "Timeline classification: Current Work (recent software systems) or Early Work (childhood/early builds).",
+  industry: "Business sector or market this project relates to.",
+  domains: "Select one or more use-case areas this project demonstrates.",
   status: "Lifecycle: active, experiment, archived, or concept.",
   proofType: "Evidence type: GitHub, screenshot, PDF, recognition, presentation, etc.",
   updateType: "What changed: new project, repo, video, proof, feature, technical note, status change.",

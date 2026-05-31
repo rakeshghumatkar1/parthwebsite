@@ -22,6 +22,8 @@ import {
   updateProjectAction,
 } from "@/lib/admin/projects/actions";
 import {
+  DOMAIN_OPTIONS,
+  INDUSTRY_OPTIONS,
   PROJECT_PHASE_OPTIONS,
   PROJECT_STATUS_OPTIONS,
   PROJECT_TYPE_OPTIONS,
@@ -80,6 +82,8 @@ const emptyValues: ProjectFormValues = {
   projectType: "",
   projectPhase: "current_work",
   status: "active",
+  industry: "general_business",
+  domains: ["other"],
   techStack: "",
   problemSolved: "",
   whatItDoes: "",
@@ -294,6 +298,59 @@ export function ProjectForm({
                   </option>
                 ))}
               </select>
+            </AdminField>
+
+            <AdminField
+              id="industry"
+              label="Industry"
+              required
+              error={errors.industry}
+              hint={FIELD_HINTS.industry}
+            >
+              <select
+                id="industry"
+                name="industry"
+                defaultValue={values.industry || "general_business"}
+                className={adminInputClassName(Boolean(errors.industry))}
+                required
+              >
+                {INDUSTRY_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </AdminField>
+
+            <AdminField
+              id="domains"
+              label="Domains"
+              required
+              error={errors.domains}
+              hint={FIELD_HINTS.domains}
+            >
+              <div
+                className={[
+                  "grid gap-2 rounded-md border bg-tb-surface p-3 sm:grid-cols-2",
+                  errors.domains ? "border-red-400" : "border-tb-navy-border",
+                ].join(" ")}
+              >
+                {DOMAIN_OPTIONS.map((option) => (
+                  <label
+                    key={option.value}
+                    className="flex items-start gap-2 text-sm leading-snug"
+                  >
+                    <input
+                      type="checkbox"
+                      name="domains"
+                      value={option.value}
+                      defaultChecked={values.domains.includes(option.value)}
+                      className="mt-0.5 shrink-0"
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
             </AdminField>
           </AdminFormSection>
 

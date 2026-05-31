@@ -22,6 +22,42 @@ export const projectPhaseEnum = pgEnum("project_phase", [
   "early_work",
 ]);
 
+export const projectIndustryEnum = pgEnum("project_industry", [
+  "ai_software",
+  "recruitment_hr",
+  "marketing_digital_services",
+  "education_learning",
+  "finance_trading",
+  "healthcare",
+  "real_estate",
+  "retail_ecommerce",
+  "manufacturing_operations",
+  "nonprofit_social_impact",
+  "smart_home_iot",
+  "personal_productivity",
+  "general_business",
+  "other",
+]);
+
+export const projectDomainEnum = pgEnum("project_domain", [
+  "ai_systems",
+  "workflow_automation",
+  "internal_tools",
+  "data_platforms",
+  "reporting_dashboards",
+  "seo_marketing_automation",
+  "lead_generation",
+  "content_automation",
+  "video_media_automation",
+  "local_ai",
+  "iot_hardware",
+  "home_automation",
+  "robotics_drones",
+  "trading_prediction_systems",
+  "knowledge_management",
+  "other",
+]);
+
 export const proofTypeEnum = pgEnum("proof_type", [
   "github",
   "youtube",

@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
   index,
@@ -7,7 +8,13 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { projectPhaseEnum, projectStatusEnum, projectTypeEnum } from "./enums";
+import {
+  projectDomainEnum,
+  projectIndustryEnum,
+  projectPhaseEnum,
+  projectStatusEnum,
+  projectTypeEnum,
+} from "./enums";
 import { media } from "./media";
 
 export const projects = pgTable(
@@ -21,6 +28,11 @@ export const projects = pgTable(
     projectType: projectTypeEnum("project_type").notNull(),
     projectPhase: projectPhaseEnum("project_phase").notNull().default("current_work"),
     status: projectStatusEnum("status").notNull(),
+    industry: projectIndustryEnum("industry").notNull().default("general_business"),
+    domains: projectDomainEnum("domains")
+      .array()
+      .notNull()
+      .default(sql`ARRAY['other']::project_domain[]`),
     featuredOnHome: boolean("featured_on_home").notNull().default(false),
     featuredOnAbout: boolean("featured_on_about").notNull().default(false),
     displayOrder: integer("display_order").notNull().default(100),

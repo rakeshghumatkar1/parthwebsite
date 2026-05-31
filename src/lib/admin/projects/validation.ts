@@ -1,4 +1,6 @@
 import {
+  DOMAIN_VALUES,
+  INDUSTRY_VALUES,
   PROJECT_PHASE_VALUES,
   PROJECT_STATUS_VALUES,
   PROJECT_TYPE_VALUES,
@@ -50,6 +52,8 @@ export function formDataToValues(formData: FormData): ProjectFormValues {
     projectType: String(formData.get("projectType") ?? ""),
     projectPhase: String(formData.get("projectPhase") ?? "current_work"),
     status: String(formData.get("status") ?? ""),
+    industry: String(formData.get("industry") ?? "general_business"),
+    domains: formData.getAll("domains").map(String).filter(Boolean),
     techStack: String(formData.get("techStack") ?? ""),
     problemSolved: String(formData.get("problemSolved") ?? ""),
     whatItDoes: String(formData.get("whatItDoes") ?? ""),
@@ -75,6 +79,8 @@ export function projectToFormValues(project: {
   projectType: string;
   projectPhase: string;
   status: string;
+  industry: string;
+  domains: string[];
   techStack: string[] | null;
   problemSolved: string | null;
   whatItDoes: string | null;
@@ -98,6 +104,8 @@ export function projectToFormValues(project: {
     projectType: project.projectType,
     projectPhase: project.projectPhase,
     status: project.status,
+    industry: project.industry,
+    domains: project.domains ?? [],
     techStack: techStackToInput(project.techStack),
     problemSolved: project.problemSolved ?? "",
     whatItDoes: project.whatItDoes ?? "",
@@ -155,6 +163,23 @@ export function validateProjectForm(
     errors.status = "Select a valid status.";
   }
 
+  if (!values.industry) {
+    errors.industry = "Industry is required.";
+  } else if (!INDUSTRY_VALUES.includes(values.industry as never)) {
+    errors.industry = "Select a valid industry.";
+  }
+
+  if (!values.domains.length) {
+    errors.domains = "Select at least one domain.";
+  } else {
+    const invalidDomains = values.domains.filter(
+      (domain) => !DOMAIN_VALUES.includes(domain as never),
+    );
+    if (invalidDomains.length > 0) {
+      errors.domains = "Select valid domain options only.";
+    }
+  }
+
   const displayOrder = values.displayOrder.trim();
   if (displayOrder && !/^-?\d+$/.test(displayOrder)) {
     errors.displayOrder = "Display order must be a whole number.";
@@ -187,6 +212,10 @@ export function validateProjectForm(
       errors.projectPhase = "Project phase is required to publish.";
     }
     if (!values.status) errors.status = "Status is required to publish.";
+    if (!values.industry) errors.industry = "Industry is required to publish.";
+    if (!values.domains.length) {
+      errors.domains = "Select at least one domain to publish.";
+    }
   }
 
   return errors;
@@ -205,6 +234,8 @@ export function valuesToDbPayload(values: ProjectFormValues) {
     projectType: values.projectType as (typeof PROJECT_TYPE_VALUES)[number],
     projectPhase: values.projectPhase as (typeof PROJECT_PHASE_VALUES)[number],
     status: values.status as (typeof PROJECT_STATUS_VALUES)[number],
+    industry: values.industry as (typeof INDUSTRY_VALUES)[number],
+    domains: values.domains as (typeof DOMAIN_VALUES)[number][],
     techStack: techStack.length > 0 ? techStack : null,
     problemSolved: values.problemSolved.trim() || null,
     whatItDoes: values.whatItDoes.trim() || null,

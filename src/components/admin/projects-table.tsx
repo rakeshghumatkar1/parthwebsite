@@ -13,11 +13,13 @@ import {
 import { AdminTableShell } from "./ui/admin-table-shell";
 import {
   ProjectFeaturedFlags,
+  ProjectIndustryLabel,
   ProjectPhaseLabel,
   ProjectStatusBadge,
   ProjectStatusLabel,
   ProjectTypeLabel,
 } from "./project-status-badge";
+import { formatDomainsCompact } from "@/lib/projects/taxonomy";
 
 type ProjectsTableProps = {
   projects: Project[];
@@ -65,6 +67,7 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
           <tr>
             <th className={adminTableHeadCellClass}>Title</th>
             <th className={adminTableHeadCellClass}>Phase</th>
+            <th className={adminTableHeadCellClass}>Industry</th>
             <th className={adminTableHeadCellClass}>Type</th>
             <th className={adminTableHeadCellClass}>Status</th>
             <th className={adminTableHeadCellClass}>Visibility</th>
@@ -80,9 +83,15 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
               <td className={adminTableBodyCellClass}>
                 <div className="font-medium">{project.title}</div>
                 <div className="text-xs text-tb-text-muted">{project.slug}</div>
+                <div className="text-xs text-tb-text-muted">
+                  {formatDomainsCompact(project.domains)}
+                </div>
               </td>
               <td className={adminTableBodyCellClass}>
                 <ProjectPhaseLabel value={project.projectPhase} />
+              </td>
+              <td className={adminTableBodyCellClass}>
+                <ProjectIndustryLabel value={project.industry} />
               </td>
               <td className={adminTableBodyCellClass}>
                 <ProjectTypeLabel value={project.projectType} />
