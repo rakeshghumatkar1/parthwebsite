@@ -6,10 +6,12 @@ import {
   AdminFormError,
   adminInputClassName,
 } from "@/components/admin/admin-auth-panel";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
 import { PublishingSidebar } from "@/components/admin/publishing-sidebar";
 import { RelationSelect } from "@/components/admin/admin-list-shared";
+import { FIELD_HINTS, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import {
   createUpdateAction,
   updateUpdateAction,
@@ -81,13 +83,21 @@ export function UpdateForm({
 
       <AdminFormError message={errors.form} />
 
+      <AdminCmsNotice />
+      <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.updates.formIntro}</p>
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-6">
           <AdminFormSection
             title="Basic info"
             description="Timeline entries for future Home and Updates pages."
           >
-            <AdminField id="title" label="Title" error={errors.title}>
+            <AdminField
+              id="title"
+              label="Title"
+              error={errors.title}
+              hint={FIELD_HINTS.title}
+            >
               <input
                 id="title"
                 name="title"
@@ -102,7 +112,7 @@ export function UpdateForm({
               id="slug"
               label="Slug"
               error={errors.slug}
-              hint="URL-safe identifier. Lowercase letters, numbers, and hyphens."
+              hint={FIELD_HINTS.slug}
             >
               <input
                 id="slug"
@@ -118,6 +128,7 @@ export function UpdateForm({
               id="updateType"
               label="Update type"
               error={errors.updateType}
+              hint={FIELD_HINTS.updateType}
             >
               <select
                 id="updateType"
@@ -139,7 +150,7 @@ export function UpdateForm({
               id="shortSummary"
               label="Short summary"
               error={errors.shortSummary}
-              hint="Brief excerpt for cards and list previews."
+              hint={FIELD_HINTS.shortSummary}
             >
               <textarea
                 id="shortSummary"
@@ -150,7 +161,12 @@ export function UpdateForm({
               />
             </AdminField>
 
-            <AdminField id="body" label="Body" error={errors.body}>
+            <AdminField
+              id="body"
+              label="Body"
+              error={errors.body}
+              hint={FIELD_HINTS.body}
+            >
               <textarea
                 id="body"
                 name="body"
@@ -164,7 +180,7 @@ export function UpdateForm({
               id="eventDate"
               label="Event date"
               error={errors.eventDate}
-              hint="Optional date shown on the timeline."
+              hint={FIELD_HINTS.eventDate}
             >
               <input
                 id="eventDate"
@@ -187,6 +203,7 @@ export function UpdateForm({
               options={projectOptions}
               defaultValue={values.relatedProjectId}
               error={errors.relatedProjectId}
+              hint={FIELD_HINTS.relatedProjectId}
             />
 
             <RelationSelect
@@ -196,6 +213,7 @@ export function UpdateForm({
               options={videoOptions}
               defaultValue={values.relatedVideoId}
               error={errors.relatedVideoId}
+              hint={FIELD_HINTS.relatedVideoId}
             />
 
             <RelationSelect
@@ -205,6 +223,7 @@ export function UpdateForm({
               options={proofOptions}
               defaultValue={values.relatedProofId}
               error={errors.relatedProofId}
+              hint={FIELD_HINTS.relatedProofId}
             />
           </AdminFormSection>
         </div>
@@ -225,13 +244,7 @@ export function UpdateForm({
             showFeaturedAbout={false}
           />
 
-          <AdminHelpBox title="Where this appears later">
-            <ul className="list-disc space-y-1 pl-4">
-              <li>Home timeline / activity feed</li>
-              <li>Public Updates page</li>
-              <li>Related project, video, or proof detail pages</li>
-            </ul>
-          </AdminHelpBox>
+          <AdminWhatAppearsWhere items={MODULE_GUIDANCE.updates.whereAppears} />
         </aside>
       </div>
     </form>

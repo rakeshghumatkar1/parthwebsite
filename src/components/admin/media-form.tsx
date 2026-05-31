@@ -7,9 +7,16 @@ import {
   AdminFormError,
   adminInputClassName,
 } from "@/components/admin/admin-auth-panel";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
 import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
 import { RelationSelect } from "@/components/admin/admin-list-shared";
+import {
+  BLOB_PREFIX_RULE,
+  FIELD_HINTS,
+  MODULE_GUIDANCE,
+} from "@/lib/admin/cms-guidance";
 import {
   createMediaAction,
   updateMediaAction,
@@ -75,11 +82,17 @@ export function MediaForm({
 
       <AdminFormError message={errors.form} />
 
+      <AdminCmsNotice />
+      <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.media.formIntro}</p>
+
       <AdminHelpBox title="URL-only media">
-        Paste approved file URLs only — there is no upload in this phase. In a
-        future phase, files may use a Blob prefix such as{" "}
-        <code className="text-xs">parthwebsite/</code>.
+        <p>
+          Paste approved file URLs only — there is no upload in this phase.{" "}
+          {BLOB_PREFIX_RULE}
+        </p>
       </AdminHelpBox>
+
+      <AdminWhatAppearsWhere items={MODULE_GUIDANCE.media.whereAppears} />
 
       <AdminFormSection
         title="File"
@@ -89,7 +102,7 @@ export function MediaForm({
           id="fileUrl"
           label="File URL"
           error={errors.fileUrl}
-          hint="Required. Use an approved real URL."
+          hint={FIELD_HINTS.fileUrl}
         >
           <input
             id="fileUrl"
@@ -156,7 +169,12 @@ export function MediaForm({
         description="Display hints for images on future public pages."
       >
         <div className="grid gap-4 sm:grid-cols-2">
-          <AdminField id="imageRole" label="Image role" error={errors.imageRole}>
+          <AdminField
+            id="imageRole"
+            label="Image role"
+            error={errors.imageRole}
+            hint={FIELD_HINTS.imageRole}
+          >
             <select
               id="imageRole"
               name="imageRole"
@@ -176,6 +194,7 @@ export function MediaForm({
             id="imageDisplayMode"
             label="Display mode"
             error={errors.imageDisplayMode}
+            hint={FIELD_HINTS.imageDisplayMode}
           >
             <select
               id="imageDisplayMode"
@@ -207,7 +226,12 @@ export function MediaForm({
           />
         </AdminField>
 
-        <AdminField id="altText" label="Alt text" error={errors.altText}>
+        <AdminField
+          id="altText"
+          label="Alt text"
+          error={errors.altText}
+          hint={FIELD_HINTS.altText}
+        >
           <input
             id="altText"
             name="altText"

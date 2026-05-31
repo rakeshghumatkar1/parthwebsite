@@ -6,10 +6,12 @@ import {
   AdminFormError,
   adminInputClassName,
 } from "@/components/admin/admin-auth-panel";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
 import { RelationSelect } from "@/components/admin/admin-list-shared";
 import { PublishingSidebar } from "@/components/admin/publishing-sidebar";
+import { FIELD_HINTS, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import { createVideoAction, updateVideoAction } from "@/lib/admin/videos/actions";
 import { VIDEO_CATEGORY_OPTIONS } from "@/lib/admin/videos/constants";
 import type { VideoFormState, VideoFormValues } from "@/lib/admin/videos/types";
@@ -76,13 +78,21 @@ export function VideoForm({
 
       <AdminFormError message={errors.form} />
 
+      <AdminCmsNotice />
+      <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.videos.formIntro}</p>
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-6">
           <AdminFormSection
             title="Basic info"
             description="Core video identity for future public video pages."
           >
-            <AdminField id="title" label="Title" error={errors.title}>
+            <AdminField
+              id="title"
+              label="Title"
+              error={errors.title}
+              hint={FIELD_HINTS.title}
+            >
               <input
                 id="title"
                 name="title"
@@ -97,7 +107,7 @@ export function VideoForm({
               id="slug"
               label="Slug"
               error={errors.slug}
-              hint="URL-safe identifier. Lowercase letters, numbers, and hyphens."
+              hint={FIELD_HINTS.slug}
             >
               <input
                 id="slug"
@@ -113,7 +123,7 @@ export function VideoForm({
               id="youtubeUrl"
               label="YouTube URL"
               error={errors.youtubeUrl}
-              hint="Full YouTube watch or embed URL."
+              hint={FIELD_HINTS.youtubeUrl}
             >
               <input
                 id="youtubeUrl"
@@ -141,7 +151,7 @@ export function VideoForm({
             </AdminField>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <AdminField id="category" label="Category" error={errors.category}>
+              <AdminField id="category" label="Category" error={errors.category} hint={FIELD_HINTS.category}>
                 <select
                   id="category"
                   name="category"
@@ -157,7 +167,12 @@ export function VideoForm({
                 </select>
               </AdminField>
 
-              <AdminField id="eventDate" label="Event date" error={errors.eventDate}>
+              <AdminField
+                id="eventDate"
+                label="Event date"
+                error={errors.eventDate}
+                hint={FIELD_HINTS.eventDate}
+              >
                 <input
                   id="eventDate"
                   name="eventDate"
@@ -179,7 +194,7 @@ export function VideoForm({
               label="Related project"
               options={projectOptions}
               defaultValue={values.relatedProjectId}
-              hint="Optional. Connects this video to a portfolio project."
+              hint={FIELD_HINTS.relatedProjectId}
             />
 
             <RelationSelect
@@ -188,7 +203,7 @@ export function VideoForm({
               label="Thumbnail media"
               options={mediaOptions}
               defaultValue={values.thumbnailMediaId}
-              hint="Optional. Pick an image from the media library."
+              hint={FIELD_HINTS.thumbnailMediaId}
             />
           </AdminFormSection>
         </div>
@@ -209,14 +224,7 @@ export function VideoForm({
             backHref="/admin/videos"
           />
 
-          <AdminHelpBox title="Where this appears later">
-            <ul className="list-disc space-y-1 pl-4">
-              <li>Home featured videos</li>
-              <li>Public Videos page</li>
-              <li>About Parth highlights</li>
-              <li>Project detail video sections</li>
-            </ul>
-          </AdminHelpBox>
+          <AdminWhatAppearsWhere items={MODULE_GUIDANCE.videos.whereAppears} />
         </aside>
       </div>
     </form>

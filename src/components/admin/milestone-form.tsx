@@ -6,10 +6,12 @@ import {
   AdminFormError,
   adminInputClassName,
 } from "@/components/admin/admin-auth-panel";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
 import { RelationSelect } from "@/components/admin/admin-list-shared";
 import { PublishingSidebar } from "@/components/admin/publishing-sidebar";
+import { FIELD_HINTS, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import {
   createMilestoneAction,
   updateMilestoneAction,
@@ -73,13 +75,21 @@ export function MilestoneForm({
 
       <AdminFormError message={errors.form} />
 
+      <AdminCmsNotice />
+      <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.milestones.formIntro}</p>
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-6">
           <AdminFormSection
             title="Basic info"
             description="Timeline milestone for future About and Home pages."
           >
-            <AdminField id="title" label="Title" error={errors.title}>
+            <AdminField
+              id="title"
+              label="Title"
+              error={errors.title}
+              hint={FIELD_HINTS.title}
+            >
               <input
                 id="title"
                 name="title"
@@ -93,7 +103,7 @@ export function MilestoneForm({
               id="eventLabel"
               label="Event label"
               error={errors.eventLabel}
-              hint='Optional short label, e.g. "Regional finals".'
+              hint={FIELD_HINTS.eventLabel}
             >
               <input
                 id="eventLabel"
@@ -118,7 +128,12 @@ export function MilestoneForm({
             </AdminField>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <AdminField id="category" label="Category" error={errors.category}>
+              <AdminField
+                id="category"
+                label="Category"
+                error={errors.category}
+                hint={FIELD_HINTS.category}
+              >
                 <select
                   id="category"
                   name="category"
@@ -134,7 +149,12 @@ export function MilestoneForm({
                 </select>
               </AdminField>
 
-              <AdminField id="eventDate" label="Event date" error={errors.eventDate}>
+              <AdminField
+                id="eventDate"
+                label="Event date"
+                error={errors.eventDate}
+                hint={FIELD_HINTS.eventDate}
+              >
                 <input
                   id="eventDate"
                   name="eventDate"
@@ -156,6 +176,7 @@ export function MilestoneForm({
               label="Related project"
               options={projectOptions}
               defaultValue={values.relatedProjectId}
+              hint={FIELD_HINTS.relatedProjectId}
             />
 
             <RelationSelect
@@ -164,6 +185,7 @@ export function MilestoneForm({
               label="Related proof"
               options={proofOptions}
               defaultValue={values.relatedProofId}
+              hint={FIELD_HINTS.relatedProofId}
             />
 
             <RelationSelect
@@ -172,6 +194,7 @@ export function MilestoneForm({
               label="Related video"
               options={videoOptions}
               defaultValue={values.relatedVideoId}
+              hint={FIELD_HINTS.relatedVideoId}
             />
           </AdminFormSection>
         </div>
@@ -194,13 +217,7 @@ export function MilestoneForm({
             backHref="/admin/milestones"
           />
 
-          <AdminHelpBox title="Where this appears later">
-            <ul className="list-disc space-y-1 pl-4">
-              <li>About Parth timeline</li>
-              <li>Home featured milestones</li>
-              <li>Project detail milestone sections</li>
-            </ul>
-          </AdminHelpBox>
+          <AdminWhatAppearsWhere items={MODULE_GUIDANCE.milestones.whereAppears} />
         </aside>
       </div>
     </form>

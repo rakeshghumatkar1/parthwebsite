@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AdminFieldHint } from "./admin-form-section";
+import { FIELD_HINTS } from "@/lib/admin/cms-guidance";
 
 function checkboxClassName() {
   return "h-4 w-4 rounded border-tb-navy-border text-tb-blue focus:ring-tb-blue/30";
@@ -49,32 +50,38 @@ export function PublishingSidebar({
 
       <label className="flex items-start gap-2 text-sm">
         <input type="checkbox" name="published" defaultChecked={values.published} className={checkboxClassName()} />
-        <span><span className="font-medium">Published</span><AdminFieldHint>Draft records stay out of future public listings.</AdminFieldHint></span>
+        <span><span className="font-medium">Published</span><AdminFieldHint>{FIELD_HINTS.published}</AdminFieldHint></span>
       </label>
 
       <label className="flex items-start gap-2 text-sm">
         <input type="checkbox" name="hidden" defaultChecked={values.hidden} className={checkboxClassName()} />
-        <span><span className="font-medium">Hidden</span><AdminFieldHint>Hides from public views even when published.</AdminFieldHint></span>
+        <span><span className="font-medium">Hidden</span><AdminFieldHint>{FIELD_HINTS.hidden}</AdminFieldHint></span>
       </label>
 
       {showFeaturedHome ? (
         <label className="flex items-start gap-2 text-sm">
           <input type="checkbox" name="featuredOnHome" defaultChecked={values.featuredOnHome} className={checkboxClassName()} />
-          <span><span className="font-medium">Featured on Home</span></span>
+          <span>
+            <span className="font-medium">Featured on Home</span>
+            <AdminFieldHint>{FIELD_HINTS.featuredOnHome}</AdminFieldHint>
+          </span>
         </label>
       ) : null}
 
       {showFeaturedAbout ? (
         <label className="flex items-start gap-2 text-sm">
           <input type="checkbox" name="featuredOnAbout" defaultChecked={values.featuredOnAbout} className={checkboxClassName()} />
-          <span><span className="font-medium">Featured on About</span></span>
+          <span>
+            <span className="font-medium">Featured on About</span>
+            <AdminFieldHint>{FIELD_HINTS.featuredOnAbout}</AdminFieldHint>
+          </span>
         </label>
       ) : null}
 
       <div className="space-y-1.5">
         <label htmlFor="displayOrder" className="block text-sm font-medium">Display order</label>
         <input id="displayOrder" name="displayOrder" type="number" defaultValue={values.displayOrder} className={`block w-full rounded-md border bg-tb-surface px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tb-blue/30 ${errors?.displayOrder ? "border-red-400" : "border-tb-navy-border"}`} />
-        <AdminFieldHint>Lower numbers appear first in lists.</AdminFieldHint>
+        <AdminFieldHint>{FIELD_HINTS.displayOrder}</AdminFieldHint>
         {errors?.displayOrder ? <p className="text-sm text-red-600">{errors.displayOrder}</p> : null}
       </div>
 

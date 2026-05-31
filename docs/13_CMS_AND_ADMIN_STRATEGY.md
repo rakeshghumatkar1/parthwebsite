@@ -255,6 +255,12 @@ Recommended data entry order: projects → proof/media/videos → milestones →
 
 ---
 
+## Admin UX guidance (Phase 2.6 — implemented)
+
+Non-technical admin support added: dashboard workflow, per-module help boxes, field-level hints, empty-state guidance, practical Help page. Content entry should wait until Home/public pages are connected. Media remains URL-only; future Blob prefix remains `parthwebsite/`.
+
+---
+
 ## Admin UX rules
 
 ### Layout

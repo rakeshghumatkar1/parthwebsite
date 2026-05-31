@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminEmptyState } from "@/components/admin/admin-empty-state";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminModuleGuide } from "@/components/admin/admin-module-guide";
 import { VideoFilters } from "@/components/admin/video-filters";
 import { VideoTable } from "@/components/admin/video-table";
+import { MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 import { getProjectOptions } from "@/lib/admin/shared/relation-options";
 import { listVideos } from "@/lib/admin/videos/queries";
 import type { VideoListFilters } from "@/lib/admin/videos/types";
 
-export const metadata = {
-  title: "Videos | Parth Admin",
-};
+export const metadata = { title: "Videos | Parth Admin" };
 
 type PageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -25,10 +25,11 @@ function readFilter(
   return typeof value === "string" ? value : undefined;
 }
 
+const guidance = MODULE_GUIDANCE.videos;
+
 export default async function AdminVideosPage({ searchParams }: PageProps) {
   const admin = await requireAdminSession();
   const params = await searchParams;
-
   const filters: VideoListFilters = {
     q: readFilter(params, "q"),
     category: readFilter(params, "category"),
@@ -38,7 +39,6 @@ export default async function AdminVideosPage({ searchParams }: PageProps) {
     featuredOnAbout: readFilter(params, "featuredOnAbout"),
     relatedProjectId: readFilter(params, "relatedProjectId"),
   };
-
   const [videos, projectOptions] = await Promise.all([
     listVideos(filters),
     getProjectOptions(),
@@ -49,40 +49,16 @@ export default async function AdminVideosPage({ searchParams }: PageProps) {
       <div className="space-y-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Videos</h1>
-            <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">
-              Manage YouTube video records for future public video pages.
-            </p>
+            <h1 className="text-2xl font-semibold tracking-tight">{guidance.title}</h1>
+            <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">{guidance.subtitle}</p>
           </div>
-          <Link
-            href="/admin/videos/new"
-            className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white transition hover:bg-tb-blue-hover"
-          >
-            Create video
-          </Link>
+          <Link href="/admin/videos/new" className="rounded-md bg-tb-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-tb-blue-hover">Create video</Link>
         </div>
-
-        <AdminHelpBox title="About videos">
-          Videos can appear later on the Home page, Videos page, About Parth
-          page, and project detail pages. Use approved real YouTube URLs only.
-          Public pages are not connected yet.
-        </AdminHelpBox>
-
+        <AdminCmsNotice />
+        <AdminModuleGuide module="videos" />
         <VideoFilters filters={filters} projectOptions={projectOptions} />
-
         {videos.length === 0 ? (
-          <AdminEmptyState
-            title="No videos yet"
-            description="Add the first video record with an approved YouTube URL."
-            action={
-              <Link
-                href="/admin/videos/new"
-                className="inline-flex rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover"
-              >
-                Create video
-              </Link>
-            }
-          />
+          <AdminEmptyState title={guidance.emptyTitle} description={guidance.emptyDescription} waitNote={guidance.emptyWaitNote} action={<Link href="/admin/videos/new" className="inline-flex rounded-md bg-tb-blue px-4 py-2 text-sm font-medium text-white hover:bg-tb-blue-hover">Create video</Link>} />
         ) : (
           <VideoTable videos={videos} projectOptions={projectOptions} />
         )}

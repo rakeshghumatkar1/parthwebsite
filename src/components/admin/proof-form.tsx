@@ -6,13 +6,15 @@ import {
   AdminFormError,
   adminInputClassName,
 } from "@/components/admin/admin-auth-panel";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import {
   AdminFieldHint,
   AdminFormSection,
 } from "@/components/admin/admin-form-section";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
 import { RelationSelect } from "@/components/admin/admin-list-shared";
 import { PublishingSidebar } from "@/components/admin/publishing-sidebar";
+import { FIELD_HINTS, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import {
   createProofAction,
   updateProofAction,
@@ -87,13 +89,21 @@ export function ProofForm({
 
       <AdminFormError message={errors.form} />
 
+      <AdminCmsNotice />
+      <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.proof.formIntro}</p>
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-6">
           <AdminFormSection
             title="Basic info"
             description="Core proof identity for the Proof Library."
           >
-            <AdminField id="title" label="Title" error={errors.title}>
+            <AdminField
+              id="title"
+              label="Title"
+              error={errors.title}
+              hint={FIELD_HINTS.title}
+            >
               <input
                 id="title"
                 name="title"
@@ -108,7 +118,7 @@ export function ProofForm({
               id="slug"
               label="Slug"
               error={errors.slug}
-              hint="URL-safe identifier. Lowercase letters, numbers, and hyphens."
+              hint={FIELD_HINTS.slug}
             >
               <input
                 id="slug"
@@ -124,6 +134,7 @@ export function ProofForm({
               id="proofType"
               label="Proof type"
               error={errors.proofType}
+              hint={FIELD_HINTS.proofType}
             >
               <select
                 id="proofType"
@@ -160,6 +171,7 @@ export function ProofForm({
               id="whatThisProves"
               label="What this proves"
               error={errors.whatThisProves}
+              hint={FIELD_HINTS.whatThisProves}
             >
               <textarea
                 id="whatThisProves"
@@ -175,7 +187,12 @@ export function ProofForm({
             title="Links and dates"
             description="Only add approved real URLs. Leave blank if not available yet."
           >
-            <AdminField id="fileUrl" label="File URL" error={errors.fileUrl}>
+            <AdminField
+              id="fileUrl"
+              label="File URL"
+              error={errors.fileUrl}
+              hint={FIELD_HINTS.fileUrl}
+            >
               <input
                 id="fileUrl"
                 name="fileUrl"
@@ -190,6 +207,7 @@ export function ProofForm({
               id="externalUrl"
               label="External URL"
               error={errors.externalUrl}
+              hint={FIELD_HINTS.externalUrl}
             >
               <input
                 id="externalUrl"
@@ -205,7 +223,7 @@ export function ProofForm({
               id="eventDate"
               label="Event date"
               error={errors.eventDate}
-              hint="Optional date for recognitions, milestones, or dated proof."
+              hint={FIELD_HINTS.eventDate}
             >
               <input
                 id="eventDate"
@@ -232,7 +250,7 @@ export function ProofForm({
               label="Related project"
               options={projectOptions}
               defaultValue={values.relatedProjectId}
-              hint="Connect this proof to a portfolio project."
+              hint={FIELD_HINTS.relatedProjectId}
             />
 
             <RelationSelect
@@ -241,7 +259,7 @@ export function ProofForm({
               label="Related milestone"
               options={milestoneOptions}
               defaultValue={values.relatedMilestoneId}
-              hint="Connect this proof to a timeline milestone."
+              hint={FIELD_HINTS.relatedMilestoneId}
             />
 
             <RelationSelect
@@ -250,7 +268,7 @@ export function ProofForm({
               label="Media library item"
               options={mediaOptions}
               defaultValue={values.mediaId}
-              hint="Attach an image or file from the media library."
+              hint={FIELD_HINTS.mediaId}
             />
           </AdminFormSection>
         </div>
@@ -272,13 +290,7 @@ export function ProofForm({
             extraNote="Proof Library public pages are not connected yet."
           />
 
-          <AdminHelpBox title="Where this appears later">
-            <ul className="list-disc space-y-1 pl-4">
-              <li>Home Proof Library section</li>
-              <li>Work you can review section</li>
-              <li>Project and milestone cross-links</li>
-            </ul>
-          </AdminHelpBox>
+          <AdminWhatAppearsWhere items={MODULE_GUIDANCE.proof.whereAppears} />
         </aside>
       </div>
     </form>

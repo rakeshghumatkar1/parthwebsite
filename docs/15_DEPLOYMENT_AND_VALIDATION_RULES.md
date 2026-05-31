@@ -46,6 +46,13 @@ npm run db:studio      # Drizzle Studio (optional)
 
 **Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
 
+**Admin UX validation (Phase 2.6+):**
+
+- Dashboard explains CMS workflow and content-entry caution  
+- Each module list/create/edit has help text and field hints  
+- Help page documents modules, flags, relations, Blob rule, troubleshooting  
+- No seed data; no public page changes  
+
 **Remaining CMS modules validation (Phase 2.5+):**
 
 - `/admin/proof`, `/admin/videos`, `/admin/milestones`, `/admin/updates`, `/admin/media` routes work when logged in  

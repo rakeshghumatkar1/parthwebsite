@@ -7,11 +7,13 @@ import {
   AdminFormError,
   adminInputClassName,
 } from "@/components/admin/admin-auth-panel";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import {
   AdminFieldHint,
   AdminFormSection,
 } from "@/components/admin/admin-form-section";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
+import { FIELD_HINTS, MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import {
   createProjectAction,
   updateProjectAction,
@@ -90,13 +92,21 @@ export function ProjectForm({
 
       <AdminFormError message={errors.form} />
 
+      <AdminCmsNotice />
+      <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.projects.formIntro}</p>
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-6">
           <AdminFormSection
             title="Basic info"
             description="Core project identity used across future public pages."
           >
-            <AdminField id="title" label="Title" error={errors.title}>
+            <AdminField
+              id="title"
+              label="Title"
+              error={errors.title}
+              hint={FIELD_HINTS.title}
+            >
               <input
                 id="title"
                 name="title"
@@ -111,7 +121,7 @@ export function ProjectForm({
               id="slug"
               label="Slug"
               error={errors.slug}
-              hint="URL-safe identifier. Lowercase letters, numbers, and hyphens."
+              hint={FIELD_HINTS.slug}
             >
               <input
                 id="slug"
@@ -127,7 +137,7 @@ export function ProjectForm({
               id="shortDescription"
               label="Short description"
               error={errors.shortDescription}
-              hint="Card excerpt for Home, Projects list, and previews."
+              hint={FIELD_HINTS.shortDescription}
             >
               <textarea
                 id="shortDescription"
@@ -144,6 +154,7 @@ export function ProjectForm({
                 id="projectType"
                 label="Project type"
                 error={errors.projectType}
+                hint={FIELD_HINTS.projectType}
               >
                 <select
                   id="projectType"
@@ -161,7 +172,12 @@ export function ProjectForm({
                 </select>
               </AdminField>
 
-              <AdminField id="status" label="Status" error={errors.status}>
+              <AdminField
+                id="status"
+                label="Status"
+                error={errors.status}
+                hint={FIELD_HINTS.status}
+              >
                 <select
                   id="status"
                   name="status"
@@ -188,6 +204,7 @@ export function ProjectForm({
               id="fullDescription"
               label="Full description"
               error={errors.fullDescription}
+              hint={FIELD_HINTS.fullDescription}
             >
               <textarea
                 id="fullDescription"
@@ -202,6 +219,7 @@ export function ProjectForm({
               id="problemSolved"
               label="Problem solved"
               error={errors.problemSolved}
+              hint={FIELD_HINTS.problemSolved}
             >
               <textarea
                 id="problemSolved"
@@ -216,6 +234,7 @@ export function ProjectForm({
               id="whatItDoes"
               label="What it does"
               error={errors.whatItDoes}
+              hint={FIELD_HINTS.whatItDoes}
             >
               <textarea
                 id="whatItDoes"
@@ -230,6 +249,7 @@ export function ProjectForm({
               id="parthRole"
               label="Parth's role"
               error={errors.parthRole}
+              hint={FIELD_HINTS.parthRole}
             >
               <textarea
                 id="parthRole"
@@ -249,7 +269,7 @@ export function ProjectForm({
               id="techStack"
               label="Tags"
               error={errors.techStack}
-              hint='Example: Python, PostgreSQL, Next.js'
+              hint={FIELD_HINTS.techStack}
             >
               <input
                 id="techStack"
@@ -268,6 +288,7 @@ export function ProjectForm({
               id="githubUrl"
               label="GitHub URL"
               error={errors.githubUrl}
+              hint={FIELD_HINTS.githubUrl}
             >
               <input
                 id="githubUrl"
@@ -279,7 +300,12 @@ export function ProjectForm({
               />
             </AdminField>
 
-            <AdminField id="demoUrl" label="Demo URL" error={errors.demoUrl}>
+            <AdminField
+              id="demoUrl"
+              label="Demo URL"
+              error={errors.demoUrl}
+              hint={FIELD_HINTS.demoUrl}
+            >
               <input
                 id="demoUrl"
                 name="demoUrl"
@@ -290,7 +316,12 @@ export function ProjectForm({
               />
             </AdminField>
 
-            <AdminField id="videoUrl" label="Video URL" error={errors.videoUrl}>
+            <AdminField
+              id="videoUrl"
+              label="Video URL"
+              error={errors.videoUrl}
+              hint={FIELD_HINTS.videoUrl}
+            >
               <input
                 id="videoUrl"
                 name="videoUrl"
@@ -305,6 +336,7 @@ export function ProjectForm({
               id="pdfDownloadUrl"
               label="PDF download URL"
               error={errors.pdfDownloadUrl}
+              hint={FIELD_HINTS.pdfDownloadUrl}
             >
               <input
                 id="pdfDownloadUrl"
@@ -342,9 +374,7 @@ export function ProjectForm({
               />
               <span>
                 <span className="font-medium">Published</span>
-                <AdminFieldHint>
-                  Draft projects stay out of future public listings.
-                </AdminFieldHint>
+                <AdminFieldHint>{FIELD_HINTS.published}</AdminFieldHint>
               </span>
             </label>
 
@@ -357,9 +387,7 @@ export function ProjectForm({
               />
               <span>
                 <span className="font-medium">Hidden</span>
-                <AdminFieldHint>
-                  Hides from public views even when published.
-                </AdminFieldHint>
+                <AdminFieldHint>{FIELD_HINTS.hidden}</AdminFieldHint>
               </span>
             </label>
 
@@ -372,9 +400,7 @@ export function ProjectForm({
               />
               <span>
                 <span className="font-medium">Archived</span>
-                <AdminFieldHint>
-                  Marks older work without deleting the record.
-                </AdminFieldHint>
+                <AdminFieldHint>{FIELD_HINTS.archived}</AdminFieldHint>
               </span>
             </label>
 
@@ -389,10 +415,7 @@ export function ProjectForm({
               />
               <span>
                 <span className="font-medium">Featured on Home</span>
-                <AdminFieldHint>
-                  For future Home featured project cards (lower display order
-                  appears first).
-                </AdminFieldHint>
+                <AdminFieldHint>{FIELD_HINTS.featuredOnHome}</AdminFieldHint>
               </span>
             </label>
 
@@ -405,9 +428,7 @@ export function ProjectForm({
               />
               <span>
                 <span className="font-medium">Featured on About</span>
-                <AdminFieldHint>
-                  For future About Parth project highlights.
-                </AdminFieldHint>
+                <AdminFieldHint>{FIELD_HINTS.featuredOnAbout}</AdminFieldHint>
               </span>
             </label>
 
@@ -415,7 +436,7 @@ export function ProjectForm({
               id="displayOrder"
               label="Display order"
               error={errors.displayOrder}
-              hint="Lower numbers appear first in lists."
+              hint={FIELD_HINTS.displayOrder}
             >
               <input
                 id="displayOrder"
@@ -452,14 +473,7 @@ export function ProjectForm({
             </Link>
           </section>
 
-          <AdminHelpBox title="Where this appears later">
-            <ul className="list-disc space-y-1 pl-4">
-              <li>Home featured projects</li>
-              <li>Public Projects page</li>
-              <li>About Parth highlights</li>
-              <li>Individual project detail pages</li>
-            </ul>
-          </AdminHelpBox>
+          <AdminWhatAppearsWhere items={MODULE_GUIDANCE.projects.whereAppears} />
         </aside>
       </div>
     </form>

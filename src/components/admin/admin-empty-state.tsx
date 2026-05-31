@@ -1,12 +1,14 @@
 type AdminEmptyStateProps = {
   title: string;
   description: string;
+  waitNote?: string;
   action?: React.ReactNode;
 };
 
 export function AdminEmptyState({
   title,
   description,
+  waitNote,
   action,
 }: AdminEmptyStateProps) {
   return (
@@ -15,6 +17,11 @@ export function AdminEmptyState({
       <p className="mx-auto mt-2 max-w-lg text-sm text-tb-text-muted">
         {description}
       </p>
+      {waitNote ? (
+        <p className="mx-auto mt-3 max-w-lg rounded-md bg-tb-surface-muted px-3 py-2 text-sm text-tb-text-muted">
+          {waitNote}
+        </p>
+      ) : null}
       {action ? <div className="mt-5">{action}</div> : null}
     </div>
   );

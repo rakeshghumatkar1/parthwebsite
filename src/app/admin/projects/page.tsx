@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminEmptyState } from "@/components/admin/admin-empty-state";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminModuleGuide } from "@/components/admin/admin-module-guide";
 import { ProjectsFilters } from "@/components/admin/projects-filters";
 import { ProjectsTable } from "@/components/admin/projects-table";
+import { MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 import { listProjects } from "@/lib/admin/projects/queries";
 import type { ProjectListFilters } from "@/lib/admin/projects/types";
@@ -23,6 +25,8 @@ function readFilter(
   const value = params[key];
   return typeof value === "string" ? value : undefined;
 }
+
+const guidance = MODULE_GUIDANCE.projects;
 
 export default async function AdminProjectsPage({ searchParams }: PageProps) {
   const admin = await requireAdminSession();
@@ -46,9 +50,11 @@ export default async function AdminProjectsPage({ searchParams }: PageProps) {
       <div className="space-y-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Projects</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">
+              {guidance.title}
+            </h1>
             <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">
-              Manage portfolio project records for future public pages.
+              {guidance.subtitle}
             </p>
           </div>
           <Link
@@ -59,19 +65,15 @@ export default async function AdminProjectsPage({ searchParams }: PageProps) {
           </Link>
         </div>
 
-        <AdminHelpBox title="About projects">
-          Projects can appear later on the Home page, Projects page, About Parth
-          page, and Project detail pages. This phase only manages project records.
-          Public pages are not connected yet. Use approved real URLs only — do not
-          invent GitHub, demo, or download links.
-        </AdminHelpBox>
-
+        <AdminCmsNotice />
+        <AdminModuleGuide module="projects" />
         <ProjectsFilters filters={filters} />
 
         {projects.length === 0 ? (
           <AdminEmptyState
-            title="No projects yet"
-            description="Add the first project from the approved launch projects later."
+            title={guidance.emptyTitle}
+            description={guidance.emptyDescription}
+            waitNote={guidance.emptyWaitNote}
             action={
               <Link
                 href="/admin/projects/new"

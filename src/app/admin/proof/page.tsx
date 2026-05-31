@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
+import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import { AdminEmptyState } from "@/components/admin/admin-empty-state";
-import { AdminHelpBox } from "@/components/admin/admin-help-box";
+import { AdminModuleGuide } from "@/components/admin/admin-module-guide";
 import { ProofFilters } from "@/components/admin/proof-filters";
 import { ProofTable } from "@/components/admin/proof-table";
+import { MODULE_GUIDANCE } from "@/lib/admin/cms-guidance";
 import { requireAdminSession } from "@/lib/admin/page-guard";
 import { listProofItems } from "@/lib/admin/proof/queries";
 import type { ProofListFilters } from "@/lib/admin/proof/types";
@@ -24,6 +26,8 @@ function readFilter(
   const value = params[key];
   return typeof value === "string" ? value : undefined;
 }
+
+const guidance = MODULE_GUIDANCE.proof;
 
 export default async function AdminProofPage({ searchParams }: PageProps) {
   const admin = await requireAdminSession();
@@ -50,10 +54,10 @@ export default async function AdminProofPage({ searchParams }: PageProps) {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">
-              Proof Library
+              {guidance.title}
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-tb-text-muted">
-              Manage proof items for future Home and Proof Library pages.
+              {guidance.subtitle}
             </p>
           </div>
           <Link
@@ -64,19 +68,15 @@ export default async function AdminProofPage({ searchParams }: PageProps) {
           </Link>
         </div>
 
-        <AdminHelpBox title="About proof items">
-          Proof items can appear later on the Home Proof Library section and
-          related project or milestone pages. This phase only manages proof
-          records. Public pages are not connected yet. Use approved real URLs
-          only — do not invent file or external links.
-        </AdminHelpBox>
-
+        <AdminCmsNotice />
+        <AdminModuleGuide module="proof" />
         <ProofFilters filters={filters} projectOptions={projectOptions} />
 
         {items.length === 0 ? (
           <AdminEmptyState
-            title="No proof items yet"
-            description="Add the first proof item from approved launch content later."
+            title={guidance.emptyTitle}
+            description={guidance.emptyDescription}
+            waitNote={guidance.emptyWaitNote}
             action={
               <Link
                 href="/admin/proof/new"
