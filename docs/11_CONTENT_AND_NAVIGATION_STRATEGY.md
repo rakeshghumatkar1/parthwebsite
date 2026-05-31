@@ -104,6 +104,8 @@ Footer **may** include more links than top nav (Systems, Proof, Company groups).
 
 **Current footer** (Phase 3.2): Company, Systems (root-aware home anchors), Resources (built CMS routes + muted GitHub), Connect (`/#contact` + muted Email).
 
+**Public listing filters** (Phase 3.3): Search/filter panels on `/projects`, `/proof`, `/videos`, and `/updates` appear only when there are at least six published records **or** when the URL has active query params. Empty CMS pages stay clean without filter chrome. Admin filters are unchanged.
+
 ---
 
 ## Content types by page

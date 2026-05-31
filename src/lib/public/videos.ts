@@ -1,6 +1,7 @@
 import {
   and,
   asc,
+  count,
   desc,
   eq,
   ilike,
@@ -138,6 +139,24 @@ export async function getPublicVideos(
     );
   } catch {
     return [];
+  }
+}
+
+/** Total published public videos (no list filters applied). */
+export async function getPublicVideosCount(): Promise<number> {
+  if (!isDatabaseConfigured()) {
+    return 0;
+  }
+
+  try {
+    const db = getDb();
+    const [row] = await db
+      .select({ count: count() })
+      .from(videos)
+      .where(publicVideoConditions());
+    return row?.count ?? 0;
+  } catch {
+    return 0;
   }
 }
 

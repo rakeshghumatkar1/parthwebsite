@@ -1,6 +1,7 @@
 import {
   and,
   asc,
+  count,
   desc,
   eq,
   ilike,
@@ -134,5 +135,23 @@ export async function getPublicUpdates(
     );
   } catch {
     return [];
+  }
+}
+
+/** Total published public updates (no list filters applied). */
+export async function getPublicUpdatesCount(): Promise<number> {
+  if (!isDatabaseConfigured()) {
+    return 0;
+  }
+
+  try {
+    const db = getDb();
+    const [row] = await db
+      .select({ count: count() })
+      .from(updates)
+      .where(publicUpdateConditions());
+    return row?.count ?? 0;
+  } catch {
+    return 0;
   }
 }

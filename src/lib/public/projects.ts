@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, ilike, or, type SQL } from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, or, type SQL } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db";
 import { projects, type Project } from "@/db/schema/projects";
 
@@ -151,6 +151,24 @@ export async function getPublicProjects(
 
   const extra = conditions.length > 0 ? and(...conditions) : undefined;
   return queryPublicProjects(extra);
+}
+
+/** Total published public projects (no list filters applied). */
+export async function getPublicProjectsCount(): Promise<number> {
+  if (!isDatabaseConfigured()) {
+    return 0;
+  }
+
+  try {
+    const db = getDb();
+    const [row] = await db
+      .select({ count: count() })
+      .from(projects)
+      .where(publicProjectConditions());
+    return row?.count ?? 0;
+  } catch {
+    return 0;
+  }
 }
 
 export async function getPublicProjectBySlug(

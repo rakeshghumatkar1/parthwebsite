@@ -2,15 +2,24 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { PublicEmptyState } from "@/components/public/empty-state";
+import {
+  PublicEmptyState,
+  PublicListingSummary,
+} from "@/components/public/empty-state";
+import { PublicListingFiltersShell } from "@/components/public/listing-filters-shell";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { VideoCard } from "@/components/videos/video-card";
 import { VideoFilters } from "@/components/videos/video-filters";
+import {
+  hasActivePublicFilters,
+  shouldShowPublicFilters,
+} from "@/lib/public/filter-visibility";
 import { getPublicMediaByIds } from "@/lib/public/media";
 import { getPublicProjectFilterOptions } from "@/lib/public/projects";
 import {
   getPublicVideos,
+  getPublicVideosCount,
   type PublicVideoListFilters,
 } from "@/lib/public/videos";
 
@@ -19,6 +28,8 @@ export const metadata: Metadata = {
   description:
     "Approved walkthroughs, demos, technical explanations, and project videos from the Parth CMS.",
 };
+
+const FILTER_KEYS = ["q", "category", "relatedProjectId"] as const;
 
 type VideosPageProps = {
   searchParams: Promise<{
@@ -35,11 +46,17 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
     category: params.category,
     relatedProjectId: params.relatedProjectId,
   };
+  const hasActiveFilters = hasActivePublicFilters(params, FILTER_KEYS);
 
-  const [videos, projectOptions] = await Promise.all([
+  const [videos, projectOptions, totalCount] = await Promise.all([
     getPublicVideos(filters),
     getPublicProjectFilterOptions(),
+    getPublicVideosCount(),
   ]);
+
+  const showFilters = shouldShowPublicFilters(totalCount, hasActiveFilters);
+  const showSummary =
+    !showFilters && totalCount > 0 && !hasActiveFilters && videos.length > 0;
 
   const mediaMap = await getPublicMediaByIds(
     videos
@@ -56,11 +73,18 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
             title="Videos"
             description="Approved walkthroughs, demos, technical explanations, and project videos—published through the CMS when ready for review."
           />
-          <Suspense fallback={null}>
-            <VideoFilters projectOptions={projectOptions} />
-          </Suspense>
+          {showFilters ? (
+            <PublicListingFiltersShell>
+              <Suspense fallback={null}>
+                <VideoFilters projectOptions={projectOptions} />
+              </Suspense>
+            </PublicListingFiltersShell>
+          ) : null}
+          {showSummary ? (
+            <PublicListingSummary totalCount={totalCount} noun="video" />
+          ) : null}
           {videos.length > 0 ? (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${showSummary || showFilters ? "mt-6" : "mt-10"}`}>
               {videos.map((video) => (
                 <VideoCard
                   key={video.id}
@@ -75,8 +99,13 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
             </div>
           ) : (
             <PublicEmptyState
-              className="mt-10"
-              message="Videos will appear here after approved YouTube/demo records are published in the CMS."
+              className={showFilters ? "mt-6" : "mt-10"}
+              message={
+                hasActiveFilters
+                  ? "No videos match the current filters. Clear filters to see all published videos."
+                  : "Videos will appear here after approved YouTube/demo records are published in the CMS."
+              }
+              clearHref={hasActiveFilters ? "/videos" : undefined}
             />
           )}
         </Section>

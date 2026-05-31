@@ -8,6 +8,8 @@ Reusable structure for future Parth microsite pages—purpose, sections, CMS nee
 
 **Site navigation (Phase 3.2):** `SiteHeader` links to built public routes (`/`, `/projects`, `/proof`, `/videos`, `/about-parth`, `/updates`); CTA → `/#contact`. `SiteFooter` mirrors built routes plus root-aware home anchors for Systems and Contact. No new pages created in this phase.
 
+**Public listing filters (Phase 3.3):** Conditional filter panels on CMS listing pages — hidden when empty or low content (&lt; 6 records), shown when enough content exists or query params are active. Admin filters unchanged.
+
 ---
 
 ## Blueprint index

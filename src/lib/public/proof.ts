@@ -1,6 +1,7 @@
 import {
   and,
   asc,
+  count,
   desc,
   eq,
   ilike,
@@ -147,6 +148,24 @@ export async function getPublicProofItems(
     );
   } catch {
     return [];
+  }
+}
+
+/** Total published public proof items (no list filters applied). */
+export async function getPublicProofItemsCount(): Promise<number> {
+  if (!isDatabaseConfigured()) {
+    return 0;
+  }
+
+  try {
+    const db = getDb();
+    const [row] = await db
+      .select({ count: count() })
+      .from(proofItems)
+      .where(publicProofConditions());
+    return row?.count ?? 0;
+  } catch {
+    return 0;
   }
 }
 

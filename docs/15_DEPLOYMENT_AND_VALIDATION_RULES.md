@@ -143,6 +143,7 @@ Commit **only if all apply**:
 | Scope | Only intended files changed |
 | Links | No new broken nav/footer links; home anchors use root-aware `/#…` URLs from header/footer |
 | Exposure | No unfinished pages added to nav |
+| Public filters | Listing filters hidden when empty/low content; shown at ≥ 6 records or with active query params |
 | Proof integrity | No fake projects, proof, metrics, or URLs |
 | Surprises | No unexpected package/DB/auth file changes |
 
