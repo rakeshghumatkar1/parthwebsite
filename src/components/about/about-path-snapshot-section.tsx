@@ -16,19 +16,33 @@ export function AboutPathSnapshotSection() {
           Explore Full Build Journey
         </Button>
       </div>
-      <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        {ABOUT_PATH_SNAPSHOT.map((node) => (
-          <li
-            key={node.period}
-            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-          >
-            <p className="text-sm font-semibold text-tb-blue">{node.period}</p>
-            <p className="mt-2 text-sm leading-relaxed text-tb-text-muted">
-              {node.label}
-            </p>
-          </li>
-        ))}
-      </ol>
+
+      <div className="relative mt-10">
+        <div
+          className="absolute left-4 right-4 top-[1.125rem] hidden h-0.5 bg-gradient-to-r from-tb-blue/10 via-tb-blue/35 to-tb-blue/10 lg:block"
+          aria-hidden
+        />
+        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3">
+          {ABOUT_PATH_SNAPSHOT.map((node, index) => (
+            <li key={node.period} className="relative">
+              <div className="mb-3 hidden items-center justify-center lg:flex">
+                <span
+                  className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 border-tb-blue/30 bg-white text-xs font-bold tabular-nums text-tb-blue shadow-sm ring-4 ring-tb-surface-muted"
+                  aria-hidden
+                >
+                  {index + 1}
+                </span>
+              </div>
+              <article className="h-full rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm ring-1 ring-slate-100 transition-shadow hover:shadow-md">
+                <p className="text-sm font-semibold text-tb-blue">{node.period}</p>
+                <p className="mt-2 text-sm leading-relaxed text-tb-text-muted">
+                  {node.label}
+                </p>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </div>
     </Section>
   );
 }
