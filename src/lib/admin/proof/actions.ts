@@ -29,19 +29,24 @@ async function saveProof(formData: FormData, id?: string): Promise<ProofFormStat
     return { errors: { slug: "This slug is already in use." }, values };
   }
 
+  let redirectUrl: string;
+
   try {
     if (id) {
       const updated = await updateProofRecord(id, payload);
       if (!updated) return { errors: { form: "Proof item not found." }, values };
       revalidatePath(BASE);
-      redirect(`${BASE}/${id}?saved=1`);
+      redirectUrl = `${BASE}/${id}?saved=1`;
+    } else {
+      const created = await createProofRecord(payload);
+      revalidatePath(BASE);
+      redirectUrl = `${BASE}/${created.id}?saved=1`;
     }
-    const created = await createProofRecord(payload);
-    revalidatePath(BASE);
-    redirect(`${BASE}/${created.id}?saved=1`);
   } catch {
     return { errors: { form: "Could not save proof item. Try again." }, values };
   }
+
+  redirect(redirectUrl);
 }
 
 export async function createProofAction(_prev: ProofFormState, formData: FormData) {

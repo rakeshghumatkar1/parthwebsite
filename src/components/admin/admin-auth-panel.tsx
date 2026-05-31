@@ -35,13 +35,27 @@ type FieldProps = {
   error?: string;
   children: React.ReactNode;
   hint?: string;
+  required?: boolean;
 };
 
-export function AdminField({ id, label, error, children, hint }: FieldProps) {
+export function AdminField({
+  id,
+  label,
+  error,
+  children,
+  hint,
+  required = false,
+}: FieldProps) {
   return (
     <div className="space-y-1.5">
       <label htmlFor={id} className="block text-sm font-medium">
         {label}
+        {required ? (
+          <span className="text-red-600" aria-hidden="true">
+            {" "}
+            *
+          </span>
+        ) : null}
       </label>
       {children}
       {hint ? (

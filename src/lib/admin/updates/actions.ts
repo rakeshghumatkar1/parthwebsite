@@ -16,19 +16,24 @@ async function saveUpdate(formData: FormData, id?: string): Promise<UpdateFormSt
   if (Object.keys(errors).length > 0) return { errors, values };
   const payload = updateValuesToDbPayload(values);
   if (await isUpdateSlugTaken(payload.slug, id)) return { errors: { slug: "This slug is already in use." }, values };
+  let redirectUrl: string;
+
   try {
     if (id) {
       const updated = await updateUpdateRecord(id, payload);
       if (!updated) return { errors: { form: "Update not found." }, values };
       revalidatePath(BASE);
-      redirect(`${BASE}/${id}?saved=1`);
+      redirectUrl = `${BASE}/${id}?saved=1`;
+    } else {
+      const created = await createUpdateRecord(payload);
+      revalidatePath(BASE);
+      redirectUrl = `${BASE}/${created.id}?saved=1`;
     }
-    const created = await createUpdateRecord(payload);
-    revalidatePath(BASE);
-    redirect(`${BASE}/${created.id}?saved=1`);
   } catch {
     return { errors: { form: "Could not save update. Try again." }, values };
   }
+
+  redirect(redirectUrl);
 }
 
 export async function createUpdateAction(_prev: UpdateFormState, formData: FormData) {

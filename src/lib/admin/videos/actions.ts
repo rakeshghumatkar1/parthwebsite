@@ -16,19 +16,24 @@ async function saveVideo(formData: FormData, id?: string): Promise<VideoFormStat
   if (Object.keys(errors).length > 0) return { errors, values };
   const payload = videoValuesToDbPayload(values);
   if (await isVideoSlugTaken(payload.slug, id)) return { errors: { slug: "This slug is already in use." }, values };
+  let redirectUrl: string;
+
   try {
     if (id) {
       const updated = await updateVideoRecord(id, payload);
       if (!updated) return { errors: { form: "Video not found." }, values };
       revalidatePath(BASE);
-      redirect(`${BASE}/${id}?saved=1`);
+      redirectUrl = `${BASE}/${id}?saved=1`;
+    } else {
+      const created = await createVideoRecord(payload);
+      revalidatePath(BASE);
+      redirectUrl = `${BASE}/${created.id}?saved=1`;
     }
-    const created = await createVideoRecord(payload);
-    revalidatePath(BASE);
-    redirect(`${BASE}/${created.id}?saved=1`);
   } catch {
     return { errors: { form: "Could not save video. Try again." }, values };
   }
+
+  redirect(redirectUrl);
 }
 
 export async function createVideoAction(_prev: VideoFormState, formData: FormData) {

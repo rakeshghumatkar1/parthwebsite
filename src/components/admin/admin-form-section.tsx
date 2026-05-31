@@ -29,3 +29,11 @@ export function AdminFormSection({
 export function AdminFieldHint({ children }: { children: React.ReactNode }) {
   return <p className="text-xs leading-relaxed text-tb-text-muted">{children}</p>;
 }
+
+export function AdminRequiredFieldsNote() {
+  return (
+    <p className="text-sm text-tb-text-muted">
+      Fields marked <span className="text-red-600">*</span> are required.
+    </p>
+  );
+}

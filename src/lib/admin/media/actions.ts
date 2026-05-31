@@ -15,19 +15,24 @@ async function saveMedia(formData: FormData, id?: string): Promise<MediaFormStat
   const errors = validateMediaForm(values);
   if (Object.keys(errors).length > 0) return { errors, values };
   const payload = mediaValuesToDbPayload(values);
+  let redirectUrl: string;
+
   try {
     if (id) {
       const updated = await updateMediaRecord(id, payload);
       if (!updated) return { errors: { form: "Media record not found." }, values };
       revalidatePath(BASE);
-      redirect(`${BASE}/${id}?saved=1`);
+      redirectUrl = `${BASE}/${id}?saved=1`;
+    } else {
+      const created = await createMediaRecord(payload);
+      revalidatePath(BASE);
+      redirectUrl = `${BASE}/${created.id}?saved=1`;
     }
-    const created = await createMediaRecord(payload);
-    revalidatePath(BASE);
-    redirect(`${BASE}/${created.id}?saved=1`);
   } catch {
     return { errors: { form: "Could not save media record. Try again." }, values };
   }
+
+  redirect(redirectUrl);
 }
 
 export async function createMediaAction(_prev: MediaFormState, formData: FormData) {

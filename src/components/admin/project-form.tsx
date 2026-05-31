@@ -10,6 +10,7 @@ import { AdminCmsNotice } from "@/components/admin/admin-cms-notice";
 import {
   AdminFieldHint,
   AdminFormSection,
+  AdminRequiredFieldsNote,
 } from "@/components/admin/admin-form-section";
 import { AdminWhatAppearsWhere } from "@/components/admin/admin-what-appears-where";
 import { PublishingSidebar } from "@/components/admin/publishing-sidebar";
@@ -97,6 +98,7 @@ export function ProjectForm({
 
       <AdminCmsNotice />
       <p className="text-sm text-tb-text-muted">{MODULE_GUIDANCE.projects.formIntro}</p>
+      <AdminRequiredFieldsNote />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
         <div className="space-y-6">
@@ -106,7 +108,8 @@ export function ProjectForm({
           >
             <AdminField
               id="title"
-              label="Title (required)"
+              label="Title"
+              required
               error={errors.title}
               hint={FIELD_HINTS.title}
             >
@@ -122,7 +125,8 @@ export function ProjectForm({
 
             <AdminField
               id="slug"
-              label="Slug (required)"
+              label="Slug"
+              required
               error={errors.slug}
               hint={FIELD_HINTS.slug}
             >
@@ -138,7 +142,8 @@ export function ProjectForm({
 
             <AdminField
               id="shortDescription"
-              label="Short description (required)"
+              label="Short description"
+              required
               error={errors.shortDescription}
               hint={FIELD_HINTS.shortDescription}
             >
@@ -155,7 +160,8 @@ export function ProjectForm({
             <div className="grid gap-4 sm:grid-cols-2">
               <AdminField
                 id="projectType"
-                label="Project type (required)"
+                label="Project type"
+                required
                 error={errors.projectType}
                 hint={FIELD_HINTS.projectType}
               >
@@ -177,7 +183,8 @@ export function ProjectForm({
 
               <AdminField
                 id="projectPhase"
-                label="Project phase (required)"
+                label="Project phase"
+                required
                 error={errors.projectPhase}
                 hint={FIELD_HINTS.projectPhase}
               >
@@ -199,7 +206,8 @@ export function ProjectForm({
 
             <AdminField
               id="status"
-              label="Status (required)"
+              label="Status"
+              required
               error={errors.status}
               hint={FIELD_HINTS.status}
             >
