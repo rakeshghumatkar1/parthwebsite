@@ -1,0 +1,101 @@
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  PROJECT_STATUS_LABELS,
+  PROJECT_TYPE_LABELS,
+} from "@/lib/public/projects";
+
+const inputClassName =
+  "block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tb-blue/30";
+
+export function ProjectsFilters() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const params = new URLSearchParams();
+    for (const [key, value] of formData.entries()) {
+      if (typeof value === "string" && value.trim()) {
+        params.set(key, value.trim());
+      }
+    }
+    router.push(`/projects${params.size ? `?${params.toString()}` : ""}`);
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      <div>
+        <label htmlFor="q" className="mb-1 block text-sm font-medium text-tb-text">
+          Search
+        </label>
+        <input
+          id="q"
+          name="q"
+          defaultValue={searchParams.get("q") ?? ""}
+          placeholder="Title or description"
+          className={inputClassName}
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="projectType"
+          className="mb-1 block text-sm font-medium text-tb-text"
+        >
+          Project type
+        </label>
+        <select
+          id="projectType"
+          name="projectType"
+          defaultValue={searchParams.get("projectType") ?? ""}
+          className={inputClassName}
+        >
+          <option value="">All types</option>
+          {Object.entries(PROJECT_TYPE_LABELS).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="status" className="mb-1 block text-sm font-medium text-tb-text">
+          Status
+        </label>
+        <select
+          id="status"
+          name="status"
+          defaultValue={searchParams.get("status") ?? ""}
+          className={inputClassName}
+        >
+          <option value="">All statuses</option>
+          {Object.entries(PROJECT_STATUS_LABELS).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex items-end gap-2">
+        <button
+          type="submit"
+          className="rounded-full bg-tb-blue px-5 py-2.5 text-sm font-medium text-white hover:bg-tb-blue-hover"
+        >
+          Apply
+        </button>
+        <button
+          type="button"
+          onClick={() => router.push("/projects")}
+          className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-tb-text hover:bg-tb-surface-muted"
+        >
+          Clear
+        </button>
+      </div>
+    </form>
+  );
+}

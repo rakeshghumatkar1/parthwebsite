@@ -16,8 +16,14 @@ import {
   launchProjects,
   launchProofCategories,
 } from "@/lib/home-data";
+import { getHomeFeaturedProjects } from "@/lib/public/home-projects";
 
-export default function Home() {
+export default async function Home() {
+  const { projects: homeProjects, fromCms } = await getHomeFeaturedProjects(
+    launchProjects,
+    6,
+  );
+
   return (
     <div className="flex min-h-full flex-col">
       <SiteHeader />
@@ -25,7 +31,10 @@ export default function Home() {
         <HeroSection />
         <WorkYouCanReviewSection />
         <WhatWeBuildSection />
-        <FeaturedProjectsSection projects={launchProjects} />
+        <FeaturedProjectsSection
+          projects={homeProjects}
+          showDetailLinks={fromCms}
+        />
         <TechnicalFounderSection />
         <HowWorkHappensSection />
         <ProofLibrarySection

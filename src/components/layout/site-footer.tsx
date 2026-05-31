@@ -26,7 +26,7 @@ const footerNavGroups: FooterLinkGroup[] = [
       { label: "Videos" },
       { label: "Downloads" },
       { label: "Proof Library", href: "#proof-library" },
-      { label: "Current Projects", href: "#selected-project-builds" },
+      { label: "All Projects", href: "/projects" },
     ],
   },
   {

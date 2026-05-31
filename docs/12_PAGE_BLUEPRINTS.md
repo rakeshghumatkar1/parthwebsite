@@ -27,13 +27,13 @@ Reusable structure for future Parth microsite pages—purpose, sections, CMS nee
 
 ## Home page
 
-**Status:** Built (Phase 1–2). Full detail in `05_HOMEPAGE_BLUEPRINT.md`.
+**Status:** Built (Phase 1–2). Featured projects CMS-backed with static fallback (Phase 2.7). Full detail in `05_HOMEPAGE_BLUEPRINT.md`.
 
 | Item | Direction |
 |------|-----------|
 | Purpose | Position + proof path + primary CTA |
 | Audience | Founders, operators, technical evaluators |
-| CMS | Featured projects, proof preview, updates (hidden when empty) |
+| CMS | Featured projects from CMS when published/featured; static `launchProjects` fallback when empty; proof preview and updates still static/hidden when empty |
 | Avoid | Fake project cards, marketing agency framing |
 
 ---
@@ -87,6 +87,8 @@ Visitors evaluating **who builds the systems** before reviewing projects.
 
 ## Projects listing page
 
+**Status:** Built (Phase 2.7). Empty state when no CMS records; no static fallback on this route.
+
 ### Purpose
 
 Directory of **real software, automation, and AI workflow builds**—filterable, CMS-driven.
@@ -118,6 +120,8 @@ Technical evaluators and founders browsing proof.
 ---
 
 ## Project detail page
+
+**Status:** Built (Phase 2.7). Related proof/videos/updates not connected yet.
 
 ### Purpose
 

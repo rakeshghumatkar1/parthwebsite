@@ -1,0 +1,177 @@
+import { and, asc, desc, eq, ilike, or, type SQL } from "drizzle-orm";
+import { getDb, isDatabaseConfigured } from "@/db";
+import { projects, type Project } from "@/db/schema/projects";
+
+/** Public-visible projects only: published, not hidden, not archived. */
+export function publicProjectConditions(extra?: SQL) {
+  const base = and(
+    eq(projects.published, true),
+    eq(projects.hidden, false),
+    eq(projects.archived, false),
+  );
+  return extra ? and(base, extra) : base;
+}
+
+export type PublicProject = {
+  id: string;
+  title: string;
+  slug: string;
+  shortDescription: string;
+  fullDescription: string | null;
+  projectType: string;
+  status: string;
+  techStack: string[];
+  problemSolved: string | null;
+  whatItDoes: string | null;
+  parthRole: string | null;
+  githubUrl: string | null;
+  demoUrl: string | null;
+  videoUrl: string | null;
+  pdfDownloadUrl: string | null;
+  displayOrder: number;
+  updatedAt: Date;
+};
+
+export type PublicProjectListFilters = {
+  projectType?: string;
+  status?: string;
+  q?: string;
+};
+
+export const PROJECT_TYPE_LABELS: Record<string, string> = {
+  internal_tool: "Internal Tool",
+  ai_system: "AI System",
+  automation: "Automation",
+  data_platform: "Data Platform",
+  saas: "SaaS",
+  content_media: "Content / Media",
+  other: "Other",
+};
+
+export const PROJECT_STATUS_LABELS: Record<string, string> = {
+  active: "Active",
+  experiment: "Experiment",
+  archived: "Archived",
+  concept: "Concept",
+};
+
+function mapProject(row: Project): PublicProject {
+  return {
+    id: row.id,
+    title: row.title,
+    slug: row.slug,
+    shortDescription: row.shortDescription,
+    fullDescription: row.fullDescription,
+    projectType: row.projectType,
+    status: row.status,
+    techStack: row.techStack ?? [],
+    problemSolved: row.problemSolved,
+    whatItDoes: row.whatItDoes,
+    parthRole: row.parthRole,
+    githubUrl: row.githubUrl,
+    demoUrl: row.demoUrl,
+    videoUrl: row.videoUrl,
+    pdfDownloadUrl: row.pdfDownloadUrl,
+    displayOrder: row.displayOrder,
+    updatedAt: row.updatedAt,
+  };
+}
+
+async function queryPublicProjects(
+  extra?: SQL,
+  limit?: number,
+): Promise<PublicProject[]> {
+  if (!isDatabaseConfigured()) {
+    return [];
+  }
+
+  try {
+    const db = getDb();
+    const baseQuery = db
+      .select()
+      .from(projects)
+      .where(publicProjectConditions(extra))
+      .orderBy(asc(projects.displayOrder), desc(projects.updatedAt));
+
+    const rows = limit ? await baseQuery.limit(limit) : await baseQuery;
+    return rows.map(mapProject);
+  } catch {
+    return [];
+  }
+}
+
+/** Featured home projects — CMS only when records exist; caller applies static fallback. */
+export async function getFeaturedHomeProjects(
+  limit = 6,
+): Promise<PublicProject[]> {
+  return queryPublicProjects(eq(projects.featuredOnHome, true), limit);
+}
+
+export async function getPublicProjects(
+  filters: PublicProjectListFilters = {},
+): Promise<PublicProject[]> {
+  if (!isDatabaseConfigured()) {
+    return [];
+  }
+
+  const conditions: SQL[] = [];
+
+  if (filters.projectType) {
+    conditions.push(eq(projects.projectType, filters.projectType as never));
+  }
+  if (filters.status) {
+    conditions.push(eq(projects.status, filters.status as never));
+  }
+  const q = filters.q?.trim();
+  if (q) {
+    const pattern = `%${q}%`;
+    conditions.push(
+      or(
+        ilike(projects.title, pattern),
+        ilike(projects.shortDescription, pattern),
+        ilike(projects.slug, pattern),
+      )!,
+    );
+  }
+
+  const extra = conditions.length > 0 ? and(...conditions) : undefined;
+  return queryPublicProjects(extra);
+}
+
+export async function getPublicProjectBySlug(
+  slug: string,
+): Promise<PublicProject | null> {
+  if (!isDatabaseConfigured()) {
+    return null;
+  }
+
+  try {
+    const db = getDb();
+    const [row] = await db
+      .select()
+      .from(projects)
+      .where(publicProjectConditions(eq(projects.slug, slug)))
+      .limit(1);
+
+    return row ? mapProject(row) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function projectTypeLabel(value: string): string {
+  return PROJECT_TYPE_LABELS[value] ?? value;
+}
+
+export function projectStatusLabel(value: string): string {
+  return PROJECT_STATUS_LABELS[value] ?? value;
+}
+
+export function projectHasLinks(project: PublicProject): boolean {
+  return Boolean(
+    project.githubUrl ||
+      project.demoUrl ||
+      project.videoUrl ||
+      project.pdfDownloadUrl,
+  );
+}

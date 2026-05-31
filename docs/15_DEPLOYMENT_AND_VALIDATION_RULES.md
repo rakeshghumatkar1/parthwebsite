@@ -46,6 +46,15 @@ npm run db:studio      # Drizzle Studio (optional)
 
 **Production DB safety:** Do not run `db:migrate` against production without explicit approval. Use `DATABASE_URL_UNPOOLED` for migrations when Neon provides a direct endpoint.
 
+**Projects public validation (Phase 2.7+):**
+
+- Home featured section uses CMS when featured published projects exist; otherwise static `launchProjects` fallback  
+- `/projects` loads with empty state when no published projects  
+- `/projects/[slug]` returns not found for draft/hidden/archived/missing slugs  
+- Public queries enforce `published && !hidden && !archived`  
+- No seed/fake project data added unless explicitly scoped  
+- No Blob upload code  
+
 **Admin UX validation (Phase 2.6+):**
 
 - Dashboard explains CMS workflow and content-entry caution  

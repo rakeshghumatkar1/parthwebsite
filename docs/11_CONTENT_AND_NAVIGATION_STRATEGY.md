@@ -20,9 +20,9 @@ Do not mix digital-marketing agency pages (SEO services, lead gen) into this mic
 
 | Page | Route (target) | Purpose | CMS | Status (confirmed) |
 |------|----------------|---------|-----|-------------------|
-| **Home** | `/` | Positioning, capabilities, founder, process, CMS previews | Partial | **Built** (Phase 1–2) |
-| **Projects** | `/projects` | Directory of software builds | Projects | Planned |
-| **Project detail** | `/projects/[slug]` | Single project proof + links | Projects | Planned |
+| **Home** | `/` | Positioning, capabilities, founder, process, CMS previews | Partial | **Built** (Phase 1–2); featured projects CMS-backed with static fallback (Phase 2.7) |
+| **Projects** | `/projects` | Directory of software builds | Projects | **Built** (Phase 2.7) |
+| **Project detail** | `/projects/[slug]` | Single project proof + links | Projects | **Built** (Phase 2.7) |
 | **About Parth** | `/about-parth` | Founder story, credibility, timeline | Timeline + static | Planned |
 | **Contact** | `/contact` | Discuss a software use case | Static / form later | Planned |
 | **GitHub** | `/github` or external | Repository trail, curated links | Optional repo records | Planned |

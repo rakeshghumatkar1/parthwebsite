@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ProjectRecord } from "@/types/cms";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Section } from "@/components/ui/section";
@@ -5,13 +6,15 @@ import { Button } from "@/components/ui/button";
 
 type SelectedProjectBuildsSectionProps = {
   projects: ProjectRecord[];
+  showDetailLinks?: boolean;
 };
 
 /**
- * Selected Project Builds — static launch data now; replace with Projects CMS later.
+ * Selected Project Builds — CMS featured projects with static fallback on Home.
  */
 export function FeaturedProjectsSection({
   projects,
+  showDetailLinks = false,
 }: SelectedProjectBuildsSectionProps) {
   if (projects.length === 0) {
     return null;
@@ -68,12 +71,22 @@ export function FeaturedProjectsSection({
                   ))}
                 </ul>
               ) : null}
+              {showDetailLinks ? (
+                <div className="mt-6">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="text-sm font-medium text-tb-cyan hover:underline"
+                  >
+                    View project
+                  </Link>
+                </div>
+              ) : null}
             </article>
           ))}
         </div>
 
         <div className="mt-12">
-          <Button href="#selected-project-builds" variant="secondary" dark size="lg">
+          <Button href="/projects" variant="secondary" dark size="lg">
             Explore All Projects
           </Button>
         </div>

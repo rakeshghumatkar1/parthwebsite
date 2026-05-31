@@ -233,8 +233,8 @@ Tables: `admin_users`, `admin_sessions` (append-only migration). Protected route
 |------|--------|
 | **Admin routes** | `/admin/projects`, `/admin/projects/new`, `/admin/projects/[id]` |
 | **CRUD** | Create, edit, list, search/filter, publish/hide/archive toggles |
-| **Public connection** | Not connected — Home and `/projects` unchanged |
-| **Seed data** | Not seeded in this phase |
+| **Public connection** | Home featured section (CMS with static fallback), `/projects`, `/projects/[slug]` |
+| **Seed data** | Not seeded — public pages show empty states until content is published |
 | **Blob upload** | Not built — URL fields only; cover uses `cover_media_id` when media library exists |
 
 ---
@@ -257,7 +257,21 @@ Recommended data entry order: projects → proof/media/videos → milestones →
 
 ## Admin UX guidance (Phase 2.6 — implemented)
 
-Non-technical admin support added: dashboard workflow, per-module help boxes, field-level hints, empty-state guidance, practical Help page. Content entry should wait until Home/public pages are connected. Media remains URL-only; future Blob prefix remains `parthwebsite/`.
+Non-technical admin support added: dashboard workflow, per-module help boxes, field-level hints, empty-state guidance, practical Help page. **Projects public pages connected (Phase 2.7).** Proof, videos, updates, and about public pages still pending. Media remains URL-only; future Blob prefix remains `parthwebsite/`.
+
+---
+
+## Projects public pages (Phase 2.7 — implemented)
+
+| Item | Status |
+|------|--------|
+| **Home featured projects** | CMS query (`published`, not `hidden`, not `archived`, `featuredOnHome`); falls back to static `launchProjects` when empty or DB unavailable |
+| **Public listing** | `/projects` — CMS only; clean empty state when no records |
+| **Public detail** | `/projects/[slug]` — `notFound()` for draft/hidden/archived/missing |
+| **Public queries** | `src/lib/public/projects.ts` — separate from admin queries |
+| **Seed data** | None added |
+| **Blob upload** | Not built |
+| **Proof / Videos / Updates public** | Not built in this phase |
 
 ---
 
