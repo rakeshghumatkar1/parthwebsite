@@ -29,6 +29,13 @@
       "when": 1780245112213,
       "tag": "0003_omniscient_frank_castle",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1780264200000,
+      "tag": "0004_project_cover_image_fields",
+      "breakpoints": true
     }
   ]
 }

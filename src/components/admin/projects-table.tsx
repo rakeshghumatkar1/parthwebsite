@@ -72,6 +72,7 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
             <th className={adminTableHeadCellClass}>Status</th>
             <th className={adminTableHeadCellClass}>Visibility</th>
             <th className={adminTableHeadCellClass}>Featured</th>
+            <th className={adminTableHeadCellClass}>Cover</th>
             <th className={adminTableHeadCellClass}>Order</th>
             <th className={adminTableHeadCellClass}>Updated</th>
             <th className={adminTableHeadCellClass}>Actions</th>
@@ -111,6 +112,17 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
                   featuredOnHome={project.featuredOnHome}
                   featuredOnAbout={project.featuredOnAbout}
                 />
+              </td>
+              <td className={adminTableBodyCellClass}>
+                <span
+                  className={
+                    project.coverImageUrl
+                      ? "inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700"
+                      : "inline-flex rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-600"
+                  }
+                >
+                  {project.coverImageUrl ? "Yes" : "No"}
+                </span>
               </td>
               <td className={adminTableBodyCellClass}>{project.displayOrder}</td>
               <td className={`${adminTableBodyCellClass} whitespace-nowrap text-tb-text-muted`}>

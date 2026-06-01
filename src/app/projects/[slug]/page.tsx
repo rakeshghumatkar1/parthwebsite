@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import {
   ProjectContextPanel,
+  ProjectDetailCover,
   ProjectDetailHeader,
   ProjectDetailSection,
   ProjectLinksPanel,
@@ -36,6 +37,9 @@ export async function generateMetadata({
       title: `${project.title} | Think Big AI Systems`,
       description: project.shortDescription,
       type: "article",
+      images: project.coverImageUrl
+        ? [{ url: project.coverImageUrl, alt: project.coverImageAlt || project.title }]
+        : undefined,
     },
   };
 }
@@ -69,6 +73,7 @@ export default async function ProjectDetailPage({
           <div className="grid gap-10 lg:grid-cols-[1fr_280px] lg:items-start">
             <div className="space-y-8">
               <ProjectDetailHeader project={project} />
+              <ProjectDetailCover project={project} />
               <div className="lg:hidden">
                 <ProjectContextPanel project={project} />
               </div>

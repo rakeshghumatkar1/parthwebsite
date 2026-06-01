@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProjectCoverImage } from "@/components/projects/project-cover-image";
 import type { PublicProject } from "@/lib/public/projects";
 import {
   industryLabel,
@@ -33,6 +34,15 @@ export function ProjectCard({ project, dark = false }: ProjectCardProps) {
     <article
       className={`flex min-h-[200px] flex-col rounded-2xl border p-7 transition-colors sm:p-8 ${border}`}
     >
+      {project.coverImageUrl ? (
+        <ProjectCoverImage
+          src={project.coverImageUrl}
+          alt={project.coverImageAlt || `${project.title} cover image`}
+          fit={project.coverImageFit}
+          position={project.coverImagePosition}
+          className="mb-5"
+        />
+      ) : null}
       <div
         className={`mb-5 h-1 w-12 rounded-full bg-gradient-to-r from-tb-blue to-tb-cyan`}
         aria-hidden

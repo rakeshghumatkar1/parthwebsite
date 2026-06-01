@@ -36,6 +36,10 @@ export type PublicProject = {
   demoUrl: string | null;
   videoUrl: string | null;
   pdfDownloadUrl: string | null;
+  coverImageUrl: string | null;
+  coverImageAlt: string | null;
+  coverImageFit: string;
+  coverImagePosition: string;
   displayOrder: number;
   updatedAt: Date;
 };
@@ -128,6 +132,10 @@ function mapProject(row: Project): PublicProject {
     demoUrl: row.demoUrl,
     videoUrl: row.videoUrl,
     pdfDownloadUrl: row.pdfDownloadUrl,
+    coverImageUrl: row.coverImageUrl,
+    coverImageAlt: row.coverImageAlt,
+    coverImageFit: row.coverImageFit,
+    coverImagePosition: row.coverImagePosition,
     displayOrder: row.displayOrder,
     updatedAt: row.updatedAt,
   };

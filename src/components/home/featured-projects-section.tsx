@@ -11,6 +11,7 @@ import {
   IconTerminal,
   IconWorkflow,
 } from "@/components/ui/icons";
+import { ProjectCoverImage } from "@/components/projects/project-cover-image";
 
 type SelectedProjectBuildsSectionProps = {
   projects: ProjectRecord[];
@@ -43,6 +44,15 @@ function ProjectCard({
     <article
       className={`flex min-h-[132px] flex-col rounded-lg border border-tb-navy-border/80 bg-tb-navy-elevated/90 p-3.5 transition-colors hover:border-tb-cyan/20 sm:p-4 ${className}`}
     >
+      {project.coverImageUrl ? (
+        <ProjectCoverImage
+          src={project.coverImageUrl}
+          alt={project.coverImageAlt || `${project.title} cover image`}
+          fit={project.coverImageFit}
+          position={project.coverImagePosition}
+          className="mb-2"
+        />
+      ) : null}
       <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-md border border-tb-navy-border bg-tb-navy/70 text-tb-cyan">
         <Icon className="h-3.5 w-3.5" />
       </div>

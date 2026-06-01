@@ -30,6 +30,11 @@ import {
 } from "@/lib/admin/projects/constants";
 import { suggestSlug } from "@/lib/admin/projects/slug";
 import type { ProjectFormErrors, ProjectFormState, ProjectFormValues } from "@/lib/admin/projects/types";
+import {
+  PROJECT_COVER_FIT_OPTIONS,
+  PROJECT_COVER_POSITION_OPTIONS,
+} from "@/lib/projects/cover-image";
+import { MAX_UPLOAD_BYTES } from "@/lib/blob/constants";
 
 const DETAIL_FIELDS = [
   "fullDescription",
@@ -47,6 +52,13 @@ const LINK_FIELDS = [
   "demoUrl",
   "videoUrl",
   "pdfDownloadUrl",
+] as const satisfies ReadonlyArray<keyof ProjectFormValues>;
+
+const COVER_FIELDS = [
+  "coverImageUrl",
+  "coverImageAlt",
+  "coverImageFit",
+  "coverImagePosition",
 ] as const satisfies ReadonlyArray<keyof ProjectFormValues>;
 
 function sectionHasContent(
@@ -92,6 +104,10 @@ const emptyValues: ProjectFormValues = {
   demoUrl: "",
   videoUrl: "",
   pdfDownloadUrl: "",
+  coverImageUrl: "",
+  coverImageAlt: "",
+  coverImageFit: "contain",
+  coverImagePosition: "center",
   displayOrder: "100",
   featuredOnHome: false,
   featuredOnAbout: false,
@@ -138,18 +154,90 @@ export function ProjectForm({
   const [linksOpen, setLinksOpen] = useState(() =>
     defaultSectionOpen(mode, values, errors, LINK_FIELDS),
   );
+  const [coverOpen, setCoverOpen] = useState(() =>
+    defaultSectionOpen(mode, values, errors, COVER_FIELDS),
+  );
+  const [coverImageUrl, setCoverImageUrl] = useState(values.coverImageUrl);
+  const [coverImageAlt, setCoverImageAlt] = useState(values.coverImageAlt);
+  const [coverImageFit, setCoverImageFit] = useState(
+    values.coverImageFit || "contain",
+  );
+  const [coverImagePosition, setCoverImagePosition] = useState(
+    values.coverImagePosition || "center",
+  );
+  const [coverUploadPending, setCoverUploadPending] = useState(false);
+  const [coverUploadError, setCoverUploadError] = useState("");
 
   if (state.resetKey !== prevResetKey) {
     setPrevResetKey(state.resetKey);
     if (sectionHasErrors(errors, DETAIL_FIELDS)) setDetailsOpen(true);
     if (sectionHasErrors(errors, TECH_FIELDS)) setTechOpen(true);
     if (sectionHasErrors(errors, LINK_FIELDS)) setLinksOpen(true);
+    if (sectionHasErrors(errors, COVER_FIELDS)) setCoverOpen(true);
+    setCoverImageUrl(values.coverImageUrl);
+    setCoverImageAlt(values.coverImageAlt);
+    setCoverImageFit(values.coverImageFit || "contain");
+    setCoverImagePosition(values.coverImagePosition || "center");
+    setCoverUploadError("");
   }
 
   const showDetails =
     sectionHasErrors(errors, DETAIL_FIELDS) || detailsOpen;
   const showTech = sectionHasErrors(errors, TECH_FIELDS) || techOpen;
   const showLinks = sectionHasErrors(errors, LINK_FIELDS) || linksOpen;
+  const showCover =
+    sectionHasErrors(errors, COVER_FIELDS) ||
+    coverOpen ||
+    Boolean(coverImageUrl) ||
+    Boolean(coverUploadError);
+  const coverAltWarning = Boolean(coverImageUrl) && !coverImageAlt.trim();
+
+  async function handleCoverFileChange(file: File | null) {
+    if (!file) {
+      return;
+    }
+
+    setCoverUploadError("");
+    setCoverUploadPending(true);
+    setCoverOpen(true);
+
+    try {
+      const uploadData = new FormData();
+      uploadData.append("file", file);
+      if (projectId) {
+        uploadData.append("projectId", projectId);
+      }
+      if (coverImageAlt.trim()) {
+        uploadData.append("altText", coverImageAlt.trim());
+      }
+
+      const response = await fetch("/admin/projects/cover-upload", {
+        method: "POST",
+        body: uploadData,
+      });
+      const data = (await response.json()) as
+        | { ok: true; fileUrl: string }
+        | { ok?: false; error?: string };
+
+      if (!response.ok || data.ok !== true) {
+        setCoverUploadError(
+          "error" in data && data.error ? data.error : "Upload failed. Try again.",
+        );
+        return;
+      }
+
+      if (!data.fileUrl) {
+        setCoverUploadError("Upload succeeded but no URL was returned.");
+        return;
+      }
+
+      setCoverImageUrl(data.fileUrl);
+    } catch {
+      setCoverUploadError("Upload failed. Try again.");
+    } finally {
+      setCoverUploadPending(false);
+    }
+  }
 
   function handleTitleChange(title: string) {
     if (!slugTouched && mode === "create") {
@@ -517,9 +605,180 @@ export function ProjectForm({
             </AdminField>
 
             <AdminFieldHint>
-              Add cover images in Media Library, then paste the URL here or link
-              via project detail fields when ready.
+              Add approved real URLs only.
             </AdminFieldHint>
+          </AdminCollapsibleFormSection>
+
+          <AdminCollapsibleFormSection
+            id="project-cover-image"
+            title="Cover image"
+            description="Upload and manage one project cover image used in cards and detail page."
+            open={showCover}
+            onToggle={() => setCoverOpen((open) => !open)}
+          >
+            <AdminFieldHint>
+              Recommended cover image size: 1800 × 1100 px. Use a clear project screenshot, video frame, hardware photo, or designed cover image. This image appears as a thumbnail on project cards and as a larger cover image on the project detail page. Use Contain when the full image must remain visible.
+            </AdminFieldHint>
+            <AdminFieldHint>
+              Accepted formats: JPG, PNG, WebP. Max file size:{" "}
+              {Math.floor(MAX_UPLOAD_BYTES / (1024 * 1024))} MB.
+            </AdminFieldHint>
+
+            <AdminField
+              id="coverImageUpload"
+              label="Upload cover image"
+              hint="Direct upload saves the file URL into this project form."
+            >
+              <input
+                id="coverImageUpload"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                className={adminInputClassName(false)}
+                disabled={coverUploadPending}
+                onChange={(event) =>
+                  handleCoverFileChange(event.currentTarget.files?.[0] ?? null)
+                }
+              />
+            </AdminField>
+
+            {coverUploadPending ? (
+              <p className="text-xs text-tb-text-muted">Uploading cover image...</p>
+            ) : null}
+            {coverUploadError ? (
+              <p
+                role="alert"
+                className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700"
+              >
+                {coverUploadError}
+              </p>
+            ) : null}
+
+            <AdminField
+              id="coverImageUrl"
+              label="Cover image URL"
+              error={errors.coverImageUrl}
+              hint="Auto-filled after upload. You can edit it if needed."
+            >
+              <input
+                id="coverImageUrl"
+                name="coverImageUrl"
+                value={coverImageUrl}
+                onChange={(event) => setCoverImageUrl(event.target.value)}
+                placeholder="https://..."
+                className={adminInputClassName(Boolean(errors.coverImageUrl))}
+              />
+            </AdminField>
+
+            <AdminField
+              id="coverImageAlt"
+              label="Cover image alt text"
+              error={errors.coverImageAlt}
+              hint="Describe what is visible in the project image, for example: TradePre ML trading dashboard screenshot."
+            >
+              <input
+                id="coverImageAlt"
+                name="coverImageAlt"
+                value={coverImageAlt}
+                onChange={(event) => setCoverImageAlt(event.target.value)}
+                className={adminInputClassName(Boolean(errors.coverImageAlt))}
+              />
+            </AdminField>
+            {coverAltWarning ? (
+              <p className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
+                Cover image alt text is recommended when an image is present.
+              </p>
+            ) : null}
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AdminField
+                id="coverImageFit"
+                label="Image fit"
+                error={errors.coverImageFit}
+                hint="Use Contain when the full screenshot, video frame, hardware photo, or project image must remain visible."
+              >
+                <select
+                  id="coverImageFit"
+                  name="coverImageFit"
+                  value={coverImageFit}
+                  onChange={(event) => setCoverImageFit(event.target.value)}
+                  className={adminInputClassName(Boolean(errors.coverImageFit))}
+                >
+                  {PROJECT_COVER_FIT_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label} — {option.helper}
+                    </option>
+                  ))}
+                </select>
+              </AdminField>
+
+              <AdminField
+                id="coverImagePosition"
+                label="Image position"
+                error={errors.coverImagePosition}
+                hint="Use this only if Cover is selected and the important part of the image needs alignment."
+              >
+                <select
+                  id="coverImagePosition"
+                  name="coverImagePosition"
+                  value={coverImagePosition}
+                  onChange={(event) => setCoverImagePosition(event.target.value)}
+                  className={adminInputClassName(Boolean(errors.coverImagePosition))}
+                >
+                  {PROJECT_COVER_POSITION_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </AdminField>
+            </div>
+
+            {coverImageUrl ? (
+              <div className="space-y-2">
+                <p className="text-xs font-semibold uppercase tracking-wide text-tb-text-muted">
+                  Preview
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="overflow-hidden rounded-md border border-slate-200 bg-slate-50 p-2">
+                    <p className="mb-2 text-[11px] font-medium text-tb-text-muted">
+                      Card thumbnail
+                    </p>
+                    <div className="relative aspect-[16/10] rounded-md border border-slate-200 bg-white p-1">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={coverImageUrl}
+                        alt={coverImageAlt || "Project cover preview"}
+                        className={`h-full w-full rounded-sm ${
+                          coverImageFit === "cover" ? "object-cover" : "object-contain"
+                        }`}
+                        style={{ objectPosition: coverImagePosition }}
+                      />
+                    </div>
+                  </div>
+                  <div className="overflow-hidden rounded-md border border-slate-200 bg-slate-50 p-2">
+                    <p className="mb-2 text-[11px] font-medium text-tb-text-muted">
+                      Detail cover
+                    </p>
+                    <div className="relative aspect-[16/10] rounded-md border border-slate-200 bg-white p-1">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={coverImageUrl}
+                        alt={coverImageAlt || "Project cover preview"}
+                        className={`h-full w-full rounded-sm ${
+                          coverImageFit === "cover" ? "object-cover" : "object-contain"
+                        }`}
+                        style={{ objectPosition: coverImagePosition }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="text-xs text-tb-text-muted">
+                No cover image added yet. Project cards will use the default text-based
+                layout.
+              </p>
+            )}
           </AdminCollapsibleFormSection>
         </div>
 

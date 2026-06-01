@@ -6,6 +6,10 @@ import {
   PROJECT_TYPE_VALUES,
   RESERVED_SLUGS,
 } from "./constants";
+import {
+  PROJECT_COVER_FIT_VALUES,
+  PROJECT_COVER_POSITION_VALUES,
+} from "@/lib/projects/cover-image";
 import { normalizeSlug } from "./slug";
 import type { ProjectFormErrors, ProjectFormValues } from "./types";
 
@@ -30,6 +34,13 @@ function validateOptionalUrl(value: string): string | null {
   } catch {
     return "Use the full URL, starting with https://";
   }
+}
+
+function validateCoverImageUrl(value: string): string | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith("/")) return null;
+  return validateOptionalUrl(trimmed);
 }
 
 export function parseTechStack(input: string): string[] {
@@ -62,6 +73,10 @@ export function formDataToValues(formData: FormData): ProjectFormValues {
     demoUrl: String(formData.get("demoUrl") ?? ""),
     videoUrl: String(formData.get("videoUrl") ?? ""),
     pdfDownloadUrl: String(formData.get("pdfDownloadUrl") ?? ""),
+    coverImageUrl: String(formData.get("coverImageUrl") ?? ""),
+    coverImageAlt: String(formData.get("coverImageAlt") ?? ""),
+    coverImageFit: String(formData.get("coverImageFit") ?? "contain"),
+    coverImagePosition: String(formData.get("coverImagePosition") ?? "center"),
     displayOrder: String(formData.get("displayOrder") ?? "100"),
     featuredOnHome: formData.get("featuredOnHome") === "on",
     featuredOnAbout: formData.get("featuredOnAbout") === "on",
@@ -89,6 +104,10 @@ export function projectToFormValues(project: {
   demoUrl: string | null;
   videoUrl: string | null;
   pdfDownloadUrl: string | null;
+  coverImageUrl: string | null;
+  coverImageAlt: string | null;
+  coverImageFit: string;
+  coverImagePosition: string;
   displayOrder: number;
   featuredOnHome: boolean;
   featuredOnAbout: boolean;
@@ -114,6 +133,10 @@ export function projectToFormValues(project: {
     demoUrl: project.demoUrl ?? "",
     videoUrl: project.videoUrl ?? "",
     pdfDownloadUrl: project.pdfDownloadUrl ?? "",
+    coverImageUrl: project.coverImageUrl ?? "",
+    coverImageAlt: project.coverImageAlt ?? "",
+    coverImageFit: project.coverImageFit || "contain",
+    coverImagePosition: project.coverImagePosition || "center",
     displayOrder: String(project.displayOrder),
     featuredOnHome: project.featuredOnHome,
     featuredOnAbout: project.featuredOnAbout,
@@ -191,12 +214,31 @@ export function validateProjectForm(
     "videoUrl",
     "pdfDownloadUrl",
   ];
+  if (
+    values.coverImageFit &&
+    !PROJECT_COVER_FIT_VALUES.includes(values.coverImageFit as never)
+  ) {
+    errors.coverImageFit = "Select a valid image fit.";
+  }
+
+  if (
+    values.coverImagePosition &&
+    !PROJECT_COVER_POSITION_VALUES.includes(values.coverImagePosition as never)
+  ) {
+    errors.coverImagePosition = "Select a valid image position.";
+  }
+
 
   for (const field of urlFields) {
     const message = validateOptionalUrl(String(values[field]));
     if (message) {
       errors[field] = message;
     }
+  }
+
+  const coverUrlError = validateCoverImageUrl(values.coverImageUrl);
+  if (coverUrlError) {
+    errors.coverImageUrl = coverUrlError;
   }
 
   if (values.published) {
@@ -244,6 +286,16 @@ export function valuesToDbPayload(values: ProjectFormValues) {
     demoUrl: values.demoUrl.trim() || null,
     videoUrl: values.videoUrl.trim() || null,
     pdfDownloadUrl: values.pdfDownloadUrl.trim() || null,
+    coverImageUrl: values.coverImageUrl.trim() || null,
+    coverImageAlt: values.coverImageAlt.trim() || null,
+    coverImageFit: PROJECT_COVER_FIT_VALUES.includes(values.coverImageFit as never)
+      ? values.coverImageFit
+      : "contain",
+    coverImagePosition: PROJECT_COVER_POSITION_VALUES.includes(
+      values.coverImagePosition as never,
+    )
+      ? values.coverImagePosition
+      : "center",
     displayOrder: displayOrder ? Number(displayOrder) : 100,
     featuredOnHome: values.featuredOnHome,
     featuredOnAbout: values.featuredOnAbout,

@@ -18,6 +18,10 @@ export type ProjectFormValues = {
   demoUrl: string;
   videoUrl: string;
   pdfDownloadUrl: string;
+  coverImageUrl: string;
+  coverImageAlt: string;
+  coverImageFit: string;
+  coverImagePosition: string;
   displayOrder: string;
   featuredOnHome: boolean;
   featuredOnAbout: boolean;

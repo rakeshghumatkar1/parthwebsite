@@ -11,6 +11,10 @@ export function publicProjectToHomeRecord(project: PublicProject): ProjectRecord
     slug: project.slug,
     shortDescription: project.shortDescription,
     techStack: project.techStack,
+    coverImageUrl: project.coverImageUrl ?? undefined,
+    coverImageAlt: project.coverImageAlt ?? undefined,
+    coverImageFit: project.coverImageFit,
+    coverImagePosition: project.coverImagePosition,
     githubUrl: project.githubUrl ?? undefined,
     demoUrl: project.demoUrl ?? undefined,
   };

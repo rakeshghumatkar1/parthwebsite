@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProjectCoverImage } from "@/components/projects/project-cover-image";
 import type { PublicProject } from "@/lib/public/projects";
 import {
   domainLabel,
@@ -229,5 +230,23 @@ export function ProjectDetailHeader({ project }: { project: PublicProject }) {
         </p>
       </div>
     </div>
+  );
+}
+
+export function ProjectDetailCover({ project }: { project: PublicProject }) {
+  if (!project.coverImageUrl) {
+    return null;
+  }
+
+  return (
+    <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+      <ProjectCoverImage
+        src={project.coverImageUrl}
+        alt={project.coverImageAlt || `${project.title} cover image`}
+        fit={project.coverImageFit}
+        position={project.coverImagePosition}
+        variant="detail"
+      />
+    </section>
   );
 }

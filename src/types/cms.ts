@@ -7,6 +7,9 @@ export type ProjectRecord = {
   shortDescription: string;
   techStack: string[];
   coverImageUrl?: string;
+  coverImageAlt?: string;
+  coverImageFit?: string;
+  coverImagePosition?: string;
   githubUrl?: string;
   demoUrl?: string;
 };

@@ -219,6 +219,13 @@ export const FIELD_HINTS = {
   demoUrl: "Use the full URL, starting with https://",
   videoUrl: "Use the full URL, starting with https://",
   pdfDownloadUrl: "Use the full URL, starting with https://",
+  coverImageUrl: "Auto-filled from direct upload. You can paste a URL as fallback.",
+  coverImageAlt:
+    "Describe what is visible in the project image for accessibility.",
+  coverImageFit:
+    "Contain keeps full image visible. Cover may crop edges. Auto uses default behavior.",
+  coverImagePosition:
+    "Use only with Cover to align the important image area.",
   altText: "Image description for screen readers. Recommended for images.",
   caption: "Optional visible caption with the media.",
   imageRole: "Usage: thumbnail, gallery, proof document, hero, profile, etc.",

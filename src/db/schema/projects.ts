@@ -44,6 +44,12 @@ export const projects = pgTable(
     demoUrl: text("demo_url"),
     videoUrl: text("video_url"),
     pdfDownloadUrl: text("pdf_download_url"),
+    coverImageUrl: text("cover_image_url"),
+    coverImageAlt: text("cover_image_alt"),
+    coverImageFit: text("cover_image_fit").notNull().default("contain"),
+    coverImagePosition: text("cover_image_position")
+      .notNull()
+      .default("center"),
     coverMediaId: uuid("cover_media_id").references(() => media.id, {
       onDelete: "set null",
     }),
