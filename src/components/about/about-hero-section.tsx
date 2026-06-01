@@ -60,15 +60,12 @@ export function AboutHeroSection() {
             years of building, debugging, documenting, and improving real
             technology work — not from borrowed credentials alone.
           </p>
-          <div className="mt-5 flex flex-wrap gap-2.5 sm:gap-3">
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button href="/projects" variant="primary" dark size="lg">
               View Current Projects
             </Button>
             <Button href="/about-us/build-journey" variant="secondary" dark size="lg">
               Explore Build Journey
-            </Button>
-            <Button href="/projects/early-work" variant="secondary" dark size="lg">
-              View Early Work
             </Button>
           </div>
         </div>

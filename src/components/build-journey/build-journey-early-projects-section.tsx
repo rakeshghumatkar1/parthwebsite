@@ -1,53 +1,59 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/section";
-import { SectionHeader } from "@/components/ui/section-header";
-import { Button } from "@/components/ui/button";
-import { IconCheck, IconLayers, IconSystems } from "@/components/ui/icons";
+import { IconArrowRight, IconAutomation, IconCheck, IconSystems } from "@/components/ui/icons";
 import {
   BUILD_JOURNEY_EARLY_PROJECTS,
   BUILD_JOURNEY_EARLY_PROJECTS_INTRO,
   BUILD_JOURNEY_EXPERIMENTS,
 } from "@/lib/build-journey-page-content";
 
-const projectIcons = [IconSystems, IconLayers];
+const projectIcons = [IconAutomation, IconSystems];
 
 export function BuildJourneyEarlyProjectsSection() {
   return (
-    <Section tone="light">
-      <SectionHeader
-        eyebrow="Selected Early Builds"
-        title="Early builds that shaped the foundation."
-        description={BUILD_JOURNEY_EARLY_PROJECTS_INTRO}
-      />
+    <Section tone="light" dense>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
+          Selected Early Builds
+        </p>
+        <h2 className="mt-1.5 text-xl font-semibold tracking-tight text-tb-text sm:text-2xl">
+          Early builds that became working examples.
+        </h2>
+        <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-tb-text-muted">
+          {BUILD_JOURNEY_EARLY_PROJECTS_INTRO}
+        </p>
+      </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="mt-3 grid gap-3 lg:grid-cols-2">
         {BUILD_JOURNEY_EARLY_PROJECTS.map((project, index) => {
           const Icon = projectIcons[index] ?? IconSystems;
           return (
             <article
               key={project.title}
-              className="flex h-full flex-col rounded-2xl border border-slate-200/90 bg-white shadow-sm ring-1 ring-slate-100"
+              className="flex h-full flex-col rounded-lg border border-slate-200/90 bg-white shadow-sm ring-1 ring-slate-100"
             >
-              <div className="flex items-center justify-center border-b border-slate-200/80 bg-gradient-to-br from-tb-surface-muted to-white px-6 py-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-tb-blue/10 text-tb-blue ring-1 ring-tb-blue/20">
-                  <Icon className="h-7 w-7" />
+              <div className="flex items-center gap-3 border-b border-slate-200/80 bg-gradient-to-r from-tb-surface-muted/80 to-white px-3.5 py-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-tb-blue/20 bg-tb-blue/10 text-tb-blue">
+                  <Icon className="h-4 w-4" />
                 </div>
+                <h3 className="text-base font-semibold text-tb-text sm:text-lg">
+                  {project.title}
+                </h3>
               </div>
-              <div className="flex flex-1 flex-col p-6 sm:p-7">
-                <h3 className="text-xl font-semibold text-tb-text">{project.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-tb-text-muted sm:text-base">
+              <div className="flex flex-1 flex-col p-3.5 sm:p-4">
+                <p className="text-sm leading-relaxed text-tb-text-muted">
                   {project.description}
                 </p>
-                <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-tb-blue">
+                <p className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-tb-blue">
                   What it shows
                 </p>
-                <ul className="mt-3 space-y-2">
+                <ul className="mt-1.5 grid gap-1 sm:grid-cols-2">
                   {project.shows.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-2 text-sm text-tb-text-muted"
+                      className="flex items-start gap-1.5 text-xs text-tb-text-muted sm:text-sm"
                     >
-                      <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-tb-blue" />
+                      <IconCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-tb-blue" />
                       {item}
                     </li>
                   ))}
@@ -58,33 +64,31 @@ export function BuildJourneyEarlyProjectsSection() {
         })}
       </div>
 
-      <div className="mt-8">
-        <p className="text-xs font-semibold uppercase tracking-wide text-tb-text-muted">
+      <div className="mt-3 rounded-md border border-slate-200/80 bg-slate-50/50 px-3 py-2.5">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-tb-text-muted">
           Other early experiments
         </p>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <ul className="mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
           {BUILD_JOURNEY_EXPERIMENTS.map((item) => (
-            <span
+            <li
               key={item}
-              className="rounded-full border border-slate-200/90 bg-white px-3.5 py-1.5 text-sm font-medium text-tb-text shadow-sm ring-1 ring-slate-100"
+              className="rounded-md border border-slate-200/90 bg-white px-2.5 py-1.5 text-xs font-medium leading-snug text-tb-text"
             >
               {item}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
-      <div className="mt-10 flex flex-wrap items-center gap-4">
-        <Button href="/projects/early-work" variant="primary" size="lg">
-          View Early Work
-        </Button>
+      <p className="mt-2.5">
         <Link
           href="/projects"
-          className="text-sm font-medium text-tb-blue hover:underline"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-tb-blue hover:underline"
         >
           View Current Projects
+          <IconArrowRight className="h-3.5 w-3.5" />
         </Link>
-      </div>
+      </p>
     </Section>
   );
 }

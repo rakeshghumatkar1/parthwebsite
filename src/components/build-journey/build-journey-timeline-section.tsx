@@ -1,39 +1,63 @@
 import { Section } from "@/components/ui/section";
-import { SectionHeader } from "@/components/ui/section-header";
 import { BUILD_JOURNEY_TIMELINE } from "@/lib/build-journey-page-content";
 
 export function BuildJourneyTimelineSection() {
-  return (
-    <Section tone="muted">
-      <SectionHeader
-        eyebrow="Early Journey Timeline"
-        title="The early path, in nine steps."
-      />
+  const summarySteps = BUILD_JOURNEY_TIMELINE.slice(0, -1);
+  const conclusion = BUILD_JOURNEY_TIMELINE[BUILD_JOURNEY_TIMELINE.length - 1];
 
-      <div className="relative mt-2">
-        <div
-          className="absolute bottom-4 left-[1.125rem] top-4 hidden w-0.5 bg-gradient-to-b from-tb-blue/10 via-tb-blue/35 to-tb-blue/10 lg:block"
-          aria-hidden
-        />
-        <ol className="grid gap-4 lg:gap-3">
-          {BUILD_JOURNEY_TIMELINE.map((label, index) => (
-            <li key={label} className="relative lg:pl-12">
-              <div className="mb-2 flex items-center gap-3 lg:absolute lg:left-0 lg:top-1/2 lg:mb-0 lg:-translate-y-1/2">
+  return (
+    <Section tone="light" dense>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
+          Early Journey Timeline
+        </p>
+        <h2 className="mt-1.5 text-xl font-semibold tracking-tight text-tb-text sm:text-2xl">
+          The path in nine short steps.
+        </h2>
+      </div>
+
+      <div className="mt-3 overflow-hidden rounded-lg border border-slate-200/90 bg-white p-2 shadow-sm sm:p-2.5">
+        <ol className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+          {summarySteps.map((label, index) => (
+            <li key={label}>
+              <article className="flex h-full min-h-[3.25rem] gap-2 rounded-md border border-slate-200/80 bg-slate-50/50 p-2.5">
                 <span
-                  className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-tb-blue/30 bg-white text-xs font-bold tabular-nums text-tb-blue shadow-sm ring-4 ring-tb-surface-muted"
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-tb-blue/30 bg-white text-[10px] font-bold tabular-nums text-tb-blue"
                   aria-hidden
                 >
                   {index + 1}
                 </span>
-              </div>
-              <article className="rounded-2xl border border-slate-200/90 bg-white px-5 py-4 shadow-sm ring-1 ring-slate-100 lg:py-5">
-                <p className="text-sm font-medium leading-snug text-tb-text sm:text-base">
+                <p className="text-xs font-medium leading-snug text-tb-text sm:text-sm">
                   {label}
                 </p>
               </article>
             </li>
           ))}
         </ol>
+
+        <div
+          className="my-2 hidden h-px bg-gradient-to-r from-transparent via-tb-blue/20 to-transparent sm:block"
+          aria-hidden
+        />
+
+        <article className="rounded-md border border-tb-blue/25 bg-gradient-to-r from-tb-blue/[0.06] via-tb-blue/[0.04] to-tb-blue/[0.06] p-2.5 sm:p-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+            <div className="flex shrink-0 items-center gap-2">
+              <span
+                className="flex h-7 w-7 items-center justify-center rounded-full border border-tb-blue/35 bg-white text-[10px] font-bold tabular-nums text-tb-blue"
+                aria-hidden
+              >
+                9
+              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wide text-tb-blue">
+                Where it leads
+              </span>
+            </div>
+            <p className="text-xs font-medium leading-snug text-tb-text sm:text-sm">
+              {conclusion}
+            </p>
+          </div>
+        </article>
       </div>
     </Section>
   );

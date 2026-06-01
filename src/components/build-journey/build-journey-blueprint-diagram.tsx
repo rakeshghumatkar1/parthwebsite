@@ -9,7 +9,7 @@ function BlueprintNode({
 }) {
   return (
     <div
-      className={`rounded-lg border border-tb-cyan/30 bg-tb-navy-elevated/90 px-2.5 py-2 text-center text-[10px] font-medium leading-tight text-tb-cyan sm:text-xs ${className}`}
+      className={`rounded-md border border-tb-cyan/30 bg-tb-navy-elevated/90 px-2 py-1.5 text-center text-[10px] font-medium leading-tight text-tb-cyan sm:text-xs ${className}`}
     >
       {label}
     </div>
@@ -19,7 +19,7 @@ function BlueprintNode({
 export function BuildJourneyBlueprintDiagram() {
   return (
     <div
-      className="relative w-full min-h-[280px] overflow-hidden rounded-2xl border border-tb-navy-border bg-tb-navy-elevated/90 p-5 shadow-xl shadow-black/20 sm:min-h-[320px] sm:p-7 lg:min-h-[360px]"
+      className="relative w-full min-h-[240px] overflow-hidden rounded-xl border border-tb-cyan/20 bg-tb-navy-elevated/80 shadow-xl shadow-black/30 ring-1 ring-tb-cyan/10 sm:min-h-[280px] lg:min-h-[300px]"
       aria-label="Technical blueprint diagram: code, motor, drone, microcontroller, and robotics elements"
     >
       <div
@@ -36,11 +36,11 @@ export function BuildJourneyBlueprintDiagram() {
         aria-hidden
       />
 
-      <div className="relative flex h-full flex-col justify-between gap-4">
-        <div className="flex items-start justify-between gap-3">
+      <div className="relative flex h-full flex-col justify-between gap-3 p-4 sm:p-5">
+        <div className="flex items-start justify-between gap-2">
           <BlueprintNode label="Laptop / Code" className="max-w-[88px]" />
           <svg
-            className="mt-4 hidden h-px flex-1 text-tb-cyan/40 sm:block"
+            className="mt-3 hidden h-px flex-1 text-tb-cyan/40 sm:block"
             aria-hidden
           >
             <line
@@ -59,7 +59,7 @@ export function BuildJourneyBlueprintDiagram() {
         <div className="flex items-center justify-center">
           <svg
             viewBox="0 0 200 120"
-            className="h-28 w-full max-w-[280px] text-tb-cyan/70 sm:h-32"
+            className="h-24 w-full max-w-[260px] text-tb-cyan/70 sm:h-28"
             aria-hidden
           >
             <rect
@@ -118,7 +118,7 @@ export function BuildJourneyBlueprintDiagram() {
           </svg>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
           <BlueprintNode label="Arduino Board" />
           <BlueprintNode label="Drone" />
           <BlueprintNode label="Robotics / Lego" />

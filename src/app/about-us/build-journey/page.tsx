@@ -4,7 +4,6 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { BuildJourney2018ProofSection } from "@/components/build-journey/build-journey-2018-proof-section";
 import { BuildJourneyBridgeSection } from "@/components/build-journey/build-journey-bridge-section";
 import { BuildJourneyEarlyProjectsSection } from "@/components/build-journey/build-journey-early-projects-section";
-import { BuildJourneyEarlyWorkBridgeSection } from "@/components/build-journey/build-journey-early-work-bridge-section";
 import { BuildJourneyHeroSection } from "@/components/build-journey/build-journey-hero-section";
 import { BuildJourneyLearningSection } from "@/components/build-journey/build-journey-learning-section";
 import { BuildJourneyOriginSection } from "@/components/build-journey/build-journey-origin-section";
@@ -38,7 +37,6 @@ export default async function BuildJourneyPage() {
         <BuildJourneyLearningSection />
         <BuildJourney2018ProofSection proofLinks={proofLinks} />
         <BuildJourneyTimelineSection />
-        <BuildJourneyEarlyWorkBridgeSection />
         <BuildJourneyBridgeSection />
       </main>
       <SiteFooter />

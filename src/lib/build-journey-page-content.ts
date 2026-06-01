@@ -5,19 +5,8 @@ export const BUILD_JOURNEY_EARLY_ERA_CUTOFF = "2021-12-31";
 export const BUILD_JOURNEY_METADATA = {
   title: "Build Journey | Think Big AI Systems",
   description:
-    "How Parth's early curiosity, robotics exposure, electronics experiments, and build-led learning shaped the foundation for current AI software systems work.",
+    "How Parth's childhood shift from football to electronics, robotics, and build-led learning connects to current AI software systems work.",
 } as const;
-
-export const BUILD_JOURNEY_ORIGIN_CHAIN = [
-  "Football",
-  "Knee problem",
-  "Time away from playground",
-  "YouTube",
-  "Motor-based pencil sharpener video",
-  "Curiosity about electronics",
-  "Robotics class in Pune",
-  "Early builder path",
-] as const;
 
 export const BUILD_JOURNEY_ORBIT_CENTER =
   "Code + Components + Real-world Systems" as const;
@@ -78,7 +67,7 @@ export const BUILD_JOURNEY_EARLY_PROJECTS = [
 ] as const;
 
 export const BUILD_JOURNEY_EARLY_PROJECTS_INTRO =
-  "A few early project examples from the robotics, electronics, Arduino, drone, and home-automation years. The full early-work list can be managed through the Projects CMS." as const;
+  "Hands-on examples from robotics, Arduino, drone, and home-automation years." as const;
 
 export const BUILD_JOURNEY_EXPERIMENTS = [
   "RFID attendance",
@@ -91,7 +80,7 @@ export const BUILD_JOURNEY_EXPERIMENTS = [
 export const BUILD_JOURNEY_LEARNING_STEPS = [
   "Define the requirement",
   "Identify the missing concept",
-  "Learn from docs, forums, videos, AI, examples, and GitHub issues",
+  "Learn from docs, forums, videos, and examples",
   "Set up the structure",
   "Write code / assemble the system",
   "Test through trial and error",
@@ -101,7 +90,7 @@ export const BUILD_JOURNEY_LEARNING_STEPS = [
 ] as const;
 
 export const BUILD_JOURNEY_LEARNING_KEY_LINE =
-  "Parth's strength is not that he already knows everything. His strength is that he has developed the habit of figuring things out." as const;
+  "Parth's strength is not that he already knows everything. He structures the task and learns by figuring things out." as const;
 
 export const BUILD_JOURNEY_2018_PROOF = [
   {
@@ -129,12 +118,12 @@ export const BUILD_JOURNEY_TIMELINE = [
   "Football interest",
   "Knee issue and time away from playground",
   "YouTube discovery",
-  "Motor/electronics curiosity",
+  "Motor/electronics interest",
   "Robotics class in Pune",
   "Arduino, C++, electronics",
   "Drones, IoT, automation",
   "2018 public presentation and recognition",
-  "Early builds leading into current software systems",
+  "From working builds toward software systems",
 ] as const;
 
 export const BUILD_JOURNEY_EARLY_WORK_BRIDGE =

@@ -26,41 +26,37 @@ export function BuildJourneyHeroSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-tb-navy-deep via-tb-navy to-tb-navy text-tb-text-on-dark">
       <HeroGridOverlay />
-      <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-12 lg:py-28">
+      <div className="relative mx-auto grid w-full max-w-6xl gap-6 px-6 py-10 sm:px-8 sm:py-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-6 lg:py-14">
         <div className="max-w-xl lg:max-w-none">
-          <nav aria-label="Breadcrumb" className="text-sm text-tb-text-on-dark-muted">
+          <nav aria-label="Breadcrumb" className="text-xs text-tb-text-on-dark-muted sm:text-sm">
             <Link href="/about-us" className="text-tb-cyan hover:underline">
               About Us
             </Link>
             <span className="mx-2 text-tb-navy-border">/</span>
             <span className="text-tb-text-on-dark">Build Journey</span>
           </nav>
-          <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-tb-cyan sm:text-sm">
+          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-tb-cyan sm:text-sm">
             Parth&apos;s Early Build Journey
           </p>
-          <h1 className="mt-4 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
             The childhood{" "}
             <span className="text-tb-blue">journey</span> behind the builder.
           </h1>
-          <p className="mt-6 text-base leading-relaxed text-tb-text-on-dark sm:text-lg">
-            How football, YouTube, electronics, robotics, Arduino, drones, and
-            early builds shaped Parth&apos;s technical path — and how that foundation
-            connects to current software systems work.
+          <p className="mt-4 text-base leading-relaxed text-tb-text-on-dark sm:text-lg">
+            From football and YouTube to robotics, Arduino, drones, and working
+            hardware projects — the period before current software systems.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
-            <Button href="/about-us" variant="primary" dark size="lg">
-              Back to About Us
-            </Button>
-            <Button href="/projects/early-work" variant="secondary" dark size="lg">
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button href="/projects/early-work" variant="primary" dark size="lg">
               View Early Work
             </Button>
-            <Button href="/projects" variant="secondary" dark size="lg">
-              View Current Projects
+            <Button href="/about-us" variant="secondary" dark size="lg">
+              Back to About Us
             </Button>
           </div>
         </div>
 
-        <div className="relative min-w-0 lg:pl-2">
+        <div className="relative min-w-0 lg:pl-1">
           <BuildJourneyBlueprintDiagram />
         </div>
       </div>
