@@ -24,7 +24,8 @@
     "db:upsert-milk-temperature-alarm": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-milk-temperature-alarm-project.ts",
     "db:upsert-bluetooth-car-controller": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-bluetooth-car-controller-project.ts",
     "db:upsert-rfid-door-lock": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-rfid-door-lock-project.ts",
-    "db:upsert-random-led-switch": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-random-led-switch-project.ts"
+    "db:upsert-random-led-switch": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-random-led-switch-project.ts",
+    "db:upsert-water-level-monitor": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-water-level-monitor-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
