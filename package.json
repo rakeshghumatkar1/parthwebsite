@@ -11,7 +11,8 @@
     "db:migrate": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs migrate",
     "db:studio": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs studio",
     "db:preflight": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/db-preflight.ts",
-    "db:upsert-tradepre": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-tradepre-project.ts"
+    "db:upsert-tradepre": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-tradepre-project.ts",
+    "db:upsert-instagram-ai-news": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-instagram-ai-news-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
