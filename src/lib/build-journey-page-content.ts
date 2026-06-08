@@ -92,20 +92,41 @@ export const BUILD_JOURNEY_LEARNING_STEPS = [
 export const BUILD_JOURNEY_LEARNING_KEY_LINE =
   "Parth's strength is not that he already knows everything. He structures the task and learns by figuring things out." as const;
 
+export const BUILD_JOURNEY_2018_SECTION_INTRO =
+  "These moments showed that Parth's early work was not limited to private experimentation. He was already explaining his projects publicly, receiving community recognition, and learning around working software professionals." as const;
+
+export const BUILD_JOURNEY_NELKINDA_MUG_EVIDENCE = {
+  src: "/images/build-journey/recognition/nelkinda-2018-speaker-mug.png",
+  alt: "Speaker mug from Nelkinda Tech Kids Meetup 2018 showing Parth and event date",
+  headline: "An Accidental Coder at the Age of 11",
+  label: "Passionate Young Coder",
+  caption: "Speaker recognition — Nelkinda Tech Kids Meetup, 9 Dec 2018",
+} as const;
+
+export const BUILD_JOURNEY_NELKINDA_TWITTER_EVIDENCE = {
+  src: "/images/build-journey/recognition/nelkinda-2018-twitter-mention.png",
+  alt: "Nelkinda Twitter mention recognizing Parth Ghumatkar's Tech Kids Meetup talk in 2018",
+  caption: "Nelkinda public mention",
+} as const;
+
+export const BUILD_JOURNEY_CODERETREAT_2018_VIDEO_URL =
+  "https://www.youtube.com/watch?v=EoqpNxWISfc" as const;
+
+export const BUILD_JOURNEY_CODERETREAT_2018_VIDEO_CAPTION =
+  "Recognition at Global Day of Coderetreat 2018" as const;
+
 export const BUILD_JOURNEY_2018_PROOF = [
   {
     key: "nelkinda2018" as const,
     title: "Nelkinda Tech Kids Meetup 2018",
     description:
-      "Presented as \"An Accidental Coder at the age of 11\" — covering electronics, robotics, Arduino, C++, drones, IoT, and early automation work.",
-    ctaLabel: "View presentation material",
+      "On 9 December 2018, Parth presented \"An Accidental Coder at the Age of 11\" at Nelkinda Tech Kids Meetup. The talk covered Python, programming, IoT, robotics, Arduino, drones, electronics, and early automation work.",
   },
   {
     key: "coderetreat2018" as const,
     title: "Global Day of Coderetreat 2018",
     description:
-      "Recognized for logical and problem-solving ability in a room of experienced software professionals.",
-    ctaLabel: "View recognition",
+      "At Global Day of Coderetreat 2018, Parth participated with experienced software professionals and was unanimously selected for felicitation for his logic, coding approach, and problem-solving ability.",
   },
 ] as const;
 

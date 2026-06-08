@@ -9,11 +9,8 @@ import { BuildJourneyLearningSection } from "@/components/build-journey/build-jo
 import { BuildJourneyOriginSection } from "@/components/build-journey/build-journey-origin-section";
 import { BuildJourneyStructuredExposureSection } from "@/components/build-journey/build-journey-structured-exposure-section";
 import { BuildJourneyTimelineSection } from "@/components/build-journey/build-journey-timeline-section";
-import {
-  BUILD_JOURNEY_METADATA,
-  BUILD_JOURNEY_PROOF_SLUGS,
-} from "@/lib/build-journey-page-content";
-import { getBuildJourneyProofLinksBySlug } from "@/lib/public/build-journey";
+import { BUILD_JOURNEY_METADATA } from "@/lib/build-journey-page-content";
+import { getPublicEarlyWorkProjects } from "@/lib/public/projects";
 
 export const metadata: Metadata = {
   title: BUILD_JOURNEY_METADATA.title,
@@ -21,10 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BuildJourneyPage() {
-  const proofLinks = await getBuildJourneyProofLinksBySlug([
-    BUILD_JOURNEY_PROOF_SLUGS.nelkinda2018,
-    BUILD_JOURNEY_PROOF_SLUGS.coderetreat2018,
-  ]);
+  const earlyWorkProjects = await getPublicEarlyWorkProjects(3);
 
   return (
     <div className="flex min-h-full flex-col">
@@ -33,9 +27,11 @@ export default async function BuildJourneyPage() {
         <BuildJourneyHeroSection />
         <BuildJourneyOriginSection />
         <BuildJourneyStructuredExposureSection />
-        <BuildJourneyEarlyProjectsSection />
+        <BuildJourneyEarlyProjectsSection
+          earlyWorkProjects={earlyWorkProjects}
+        />
         <BuildJourneyLearningSection />
-        <BuildJourney2018ProofSection proofLinks={proofLinks} />
+        <BuildJourney2018ProofSection />
         <BuildJourneyTimelineSection />
         <BuildJourneyBridgeSection />
       </main>

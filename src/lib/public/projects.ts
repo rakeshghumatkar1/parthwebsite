@@ -178,6 +178,13 @@ export async function getPublicFeaturedAboutProjects(
   return queryPublicProjects(eq(projects.featuredOnAbout, true), limit);
 }
 
+/** Early Work projects for Build Journey and similar listings. */
+export async function getPublicEarlyWorkProjects(
+  limit = 3,
+): Promise<PublicProject[]> {
+  return queryPublicProjects(eq(projects.projectPhase, "early_work"), limit);
+}
+
 /** Lightweight options for public filter dropdowns. */
 export async function getPublicProjectFilterOptions(): Promise<
   { id: string; title: string }[]
