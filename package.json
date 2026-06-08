@@ -17,7 +17,8 @@
     "db:upsert-kite-charts": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-kite-charts-project.ts",
     "db:upsert-shorts-cli-pipeline": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-shorts-cli-pipeline-project.ts",
     "db:upsert-seo-snapshot": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-seo-snapshot-project.ts",
-    "db:upsert-swatantra": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-swatantra-project.ts"
+    "db:upsert-swatantra": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-swatantra-project.ts",
+    "db:upsert-zoom-automation": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-zoom-automation-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
