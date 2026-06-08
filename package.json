@@ -21,7 +21,8 @@
     "db:upsert-zoom-automation": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-zoom-automation-project.ts",
     "db:upsert-auto-pc-bluetooth": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-auto-pc-bluetooth-project.ts",
     "db:upsert-hand-sanitizer": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-hand-sanitizer-project.ts",
-    "db:upsert-milk-temperature-alarm": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-milk-temperature-alarm-project.ts"
+    "db:upsert-milk-temperature-alarm": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-milk-temperature-alarm-project.ts",
+    "db:upsert-bluetooth-car-controller": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-bluetooth-car-controller-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
