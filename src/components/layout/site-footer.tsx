@@ -1,30 +1,31 @@
 import Link from "next/link";
 import type { FooterLink, FooterLinkGroup } from "@/lib/home-data";
 
-const CONTACT_URL = "https://thinkbigdigital.co/contact";
+const GITHUB_URL = "https://github.com/ParthGhumatkar";
 
 const footerNavGroups: FooterLinkGroup[] = [
   {
     title: "Company",
     links: [
-      { label: "About Us", href: "/about-us" },
-      { label: "Contact Us", href: CONTACT_URL },
+      { label: "About Parth", href: "/about-parth" },
+      { label: "Contact", href: "/#contact" },
     ],
   },
   {
     title: "Projects",
     links: [
-      { label: "Current Projects", href: "/projects" },
+      { label: "All Projects", href: "/projects" },
       { label: "Early Work", href: "/projects/early-work" },
       { label: "Build Journey", href: "/about-us/build-journey" },
+      { label: "Proof Library", href: "/proof" },
+      { label: "Videos", href: "/videos" },
       { label: "Updates", href: "/updates" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Downloads", href: "/downloads" },
-      { label: "GitHub" },
+      { label: "GitHub", href: GITHUB_URL },
       { label: "Blog" },
     ],
   },
@@ -39,7 +40,7 @@ const footerNavGroups: FooterLinkGroup[] = [
   },
   {
     title: "Connect",
-    links: [{ label: "Discuss a Project", href: CONTACT_URL }],
+    links: [{ label: "Discuss a Software Use Case", href: "/#contact" }],
   },
 ];
 

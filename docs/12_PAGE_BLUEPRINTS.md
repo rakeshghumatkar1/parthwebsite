@@ -6,7 +6,7 @@ Reusable structure for future Parth microsite pages—purpose, sections, CMS nee
 
 **Tone:** Mature, proof-led, technical founder—not student portfolio or prodigy narrative.
 
-**Site navigation (Phase 3.2+):** `SiteHeader` links to built public routes including **About Us** → `/about-us`. Legacy `/about-parth` redirects to `/about-us`.
+**Site navigation (Phase 3.5+):** `SiteHeader` links to built public routes: Home, Projects, Proof, Videos, About Parth, Updates. CTA **Discuss a Software Use Case** → `/#contact`. Downloads is not shown in header/footer active nav until content-ready.
 
 **Public listing filters (Phase 3.3):** Conditional filter panels on CMS listing pages — hidden when empty or low content (&lt; 6 records), shown when enough content exists or query params are active. Admin filters unchanged.
 

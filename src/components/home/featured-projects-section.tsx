@@ -197,7 +197,7 @@ export function FeaturedProjectsSection({
           <Button href="/projects" variant="secondary" dark size="lg">
             Explore current projects
           </Button>
-          <Button href="/projects/early-work" variant="ghost" dark>
+          <Button href="/projects/early-work" variant="secondary" dark>
             View early work
           </Button>
         </div>

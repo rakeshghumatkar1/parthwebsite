@@ -98,11 +98,13 @@ Footer **may** include more links than top nav (Systems, Proof, Company groups).
 
 - Same Approved/Live rule—no broken routes.
 - In-page anchors on home use **root-aware** URLs (`/#contact`, `/#what-we-build`) so they work from any public page.
-- GitHub, Downloads, Email, and `/contact` remain muted until approved routes or URLs exist.
+- GitHub footer link is active: `https://github.com/ParthGhumatkar` (external, `noopener noreferrer`).
+- **Downloads** is hidden from header and footer active links until the page is content-ready (route may exist but is not promoted in nav).
+- Email and standalone `/contact` remain muted until approved routes or URLs exist.
 - Think Big Digital Solutions attribution allowed; link to main site only when URL approved.
 - Legal links (Privacy, Terms) only when pages are Live.
 
-**Current footer** (Phase 3.2): Company, Systems (root-aware home anchors), Resources (built CMS routes + muted GitHub), Connect (`/#contact` + muted Email).
+**Current footer** (Phase 3.5): Company (About Parth, Contact → `/#contact`), Projects (All Projects, Early Work, Build Journey, Proof Library, Videos, Updates), Resources (GitHub → `https://github.com/ParthGhumatkar`, muted Blog), Systems (root-aware `/#what-we-build`), Connect (`/#contact`). Downloads not shown as an active link.
 
 **Public listing filters** (Phase 3.3): Search/filter panels on `/projects`, `/proof`, `/videos`, and `/updates` appear only when there are at least six published records **or** when the URL has active query params. Empty CMS pages stay clean without filter chrome. Admin filters are unchanged.
 

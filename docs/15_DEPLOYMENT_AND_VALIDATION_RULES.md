@@ -181,7 +181,7 @@ After push (when deployment expected):
 | Vercel build | Dashboard or GitHub deployment status — success |
 | Live URL | Load production URL (e.g. `https://parthwebsite.vercel.app` until custom domain) |
 | Mobile | Narrow viewport smoke test |
-| Key interactions | CTAs, anchors, header |
+| Key interactions | CTAs, anchors, header — verify Downloads hidden from nav; GitHub footer link; dark-section button contrast on Home featured projects |
 | Metadata | Title/description visible; OG when configured |
 | CMS sections | Still hidden if no data (no empty cards) |
 
