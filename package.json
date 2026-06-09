@@ -37,7 +37,8 @@
     "db:upsert-rock-paper-scissors-python": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-rock-paper-scissors-python-project.ts",
     "db:upsert-dew-point-calculator": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-dew-point-calculator-project.ts",
     "db:upsert-ir-remote-led-control": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-ir-remote-led-control-project.ts",
-    "db:upsert-alexa-home-automation": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-alexa-home-automation-project.ts"
+    "db:upsert-alexa-home-automation": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-alexa-home-automation-project.ts",
+    "db:upsert-rfid-gsm-attendance-alert": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-rfid-gsm-attendance-alert-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
