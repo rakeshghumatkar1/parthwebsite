@@ -45,7 +45,8 @@
     "db:upsert-wifi-home-device-control": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-wifi-home-device-control-project.ts",
     "db:upsert-cycle-rpm-brake-light": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-cycle-rpm-brake-light-project.ts",
     "db:upsert-bluetooth-speaker-conversion": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-bluetooth-speaker-conversion-project.ts",
-    "db:upsert-tv-remote-rgb-led": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-tv-remote-rgb-led-project.ts"
+    "db:upsert-tv-remote-rgb-led": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-tv-remote-rgb-led-project.ts",
+    "db:upsert-alexa-tv-voice-remote": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-alexa-tv-voice-remote-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
