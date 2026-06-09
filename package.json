@@ -48,7 +48,8 @@
     "db:upsert-tv-remote-rgb-led": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-tv-remote-rgb-led-project.ts",
     "db:upsert-alexa-tv-voice-remote": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-alexa-tv-voice-remote-project.ts",
     "db:upsert-bluetooth-rgb-home-decor": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-bluetooth-rgb-home-decor-project.ts",
-    "db:upsert-early-drone-flight-tests": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-early-drone-flight-tests-project.ts"
+    "db:upsert-early-drone-flight-tests": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-early-drone-flight-tests-project.ts",
+    "db:upsert-lego-robotics-origin": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-lego-robotics-origin-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
