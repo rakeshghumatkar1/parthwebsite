@@ -42,7 +42,8 @@
     "db:upsert-alexa-diwali-lights": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-alexa-diwali-lights-project.ts",
     "db:upsert-robotic-arm-aarti-ganpati": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-robotic-arm-aarti-ganpati-project.ts",
     "db:upsert-smart-temperature-controller": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-smart-temperature-controller-project.ts",
-    "db:upsert-wifi-home-device-control": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-wifi-home-device-control-project.ts"
+    "db:upsert-wifi-home-device-control": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-wifi-home-device-control-project.ts",
+    "db:upsert-cycle-rpm-brake-light": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-cycle-rpm-brake-light-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
