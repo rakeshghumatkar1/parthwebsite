@@ -13,6 +13,7 @@ type SectionProps = {
   tone?: SectionTone;
   children: ReactNode;
   className?: string;
+  containerClassName?: string;
   /** Tighter vertical padding for nested bands */
   compact?: boolean;
   /** Denser rhythm for homepage-style sections */
@@ -24,6 +25,7 @@ export function Section({
   tone = "light",
   children,
   className = "",
+  containerClassName = "max-w-6xl",
   compact = false,
   dense = false,
 }: SectionProps) {
@@ -35,7 +37,9 @@ export function Section({
 
   return (
     <section id={id} className={`${toneClasses[tone]} ${className}`}>
-      <div className={`mx-auto w-full max-w-6xl ${padding}`}>{children}</div>
+      <div className={`mx-auto w-full ${containerClassName} ${padding}`}>
+        {children}
+      </div>
     </section>
   );
 }
