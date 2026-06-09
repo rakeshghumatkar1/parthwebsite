@@ -4,10 +4,7 @@ import { Button } from "@/components/ui/button";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Proof", href: "/proof" },
-  { label: "Videos", href: "/videos" },
-  { label: "About Parth", href: "/about-parth" },
-  { label: "Updates", href: "/updates" },
+  { label: "About Us", href: "/about-parth" },
 ] as const;
 
 export function SiteHeader() {

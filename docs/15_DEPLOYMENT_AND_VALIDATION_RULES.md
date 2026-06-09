@@ -181,7 +181,7 @@ After push (when deployment expected):
 | Vercel build | Dashboard or GitHub deployment status — success |
 | Live URL | Load production URL (e.g. `https://parthwebsite.vercel.app` until custom domain) |
 | Mobile | Narrow viewport smoke test |
-| Key interactions | CTAs, anchors, header — verify Downloads hidden from nav; GitHub footer link; dark-section button contrast on Home featured projects |
+| Key interactions | CTAs, anchors, header — minimal nav (Home, Projects, About Us); no Proof/Videos/Updates in header/footer; GitHub footer link; dark-section button contrast on Home featured projects |
 | Favicon | Custom navy/cyan **P** icon in tab — hard refresh or incognito if old Vercel/default icon cached |
 | Metadata | Title/description visible; OG when configured |
 | CMS sections | Still hidden if no data (no empty cards) |

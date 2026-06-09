@@ -79,7 +79,7 @@ Use this status for every route before exposing it in nav:
 7. About Parth  
 8. Contact  
 
-**Current header nav** (Phase 3.2): Home, Projects, Proof, Videos, About Parth, Updates — all real public routes. CTA **Discuss a Software Use Case** → `/#contact`. Home section anchors removed from top nav; use footer Systems links or navigate Home for in-page sections.
+**Current header nav** (Phase 3.6): Home, Projects, About Us → `/about-parth`. CTA **Discuss a Software Use Case** → `/#contact`. Proof, Videos, Updates, Downloads, GitHub, and Blog are **not** promoted in header until content is ready and user approves.
 
 **Previous MVP nav** (Phase 1–2): shortened in-page anchors — Review, Systems, Process, Founder, Contact — replaced when public CMS routes went Live.
 
@@ -99,12 +99,13 @@ Footer **may** include more links than top nav (Systems, Proof, Company groups).
 - Same Approved/Live rule—no broken routes.
 - In-page anchors on home use **root-aware** URLs (`/#contact`, `/#what-we-build`) so they work from any public page.
 - GitHub footer link is active: `https://github.com/ParthGhumatkar` (external, `noopener noreferrer`).
-- **Downloads** is hidden from header and footer active links until the page is content-ready (route may exist but is not promoted in nav).
+- **Proof**, **Videos**, and **Updates** routes may exist but are not promoted in header/footer until content entry is ready and user approves.
+- **Downloads** and **Blog** remain hidden from active nav until content-ready.
 - Email and standalone `/contact` remain muted until approved routes or URLs exist.
 - Think Big Digital Solutions attribution allowed; link to main site only when URL approved.
 - Legal links (Privacy, Terms) only when pages are Live.
 
-**Current footer** (Phase 3.5): Company (About Parth, Contact → `/#contact`), Projects (All Projects, Early Work, Build Journey, Proof Library, Videos, Updates), Resources (GitHub → `https://github.com/ParthGhumatkar`, muted Blog), Systems (root-aware `/#what-we-build`), Connect (`/#contact`). Downloads not shown as an active link.
+**Current footer** (Phase 3.6): Company (About Parth, Contact → `/#contact`), Projects (All Projects, Early Work, Build Journey), Resources (GitHub → `https://github.com/ParthGhumatkar` only), Systems (root-aware `/#what-we-build`), Connect (`/#contact`). Proof, Videos, Updates, Downloads, and Blog are not promoted.
 
 **Public listing filters** (Phase 3.3): Search/filter panels on `/projects`, `/proof`, `/videos`, and `/updates` appear only when there are at least six published records **or** when the URL has active query params. Empty CMS pages stay clean without filter chrome. Admin filters are unchanged.
 

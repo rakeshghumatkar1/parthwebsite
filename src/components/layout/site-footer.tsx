@@ -17,17 +17,11 @@ const footerNavGroups: FooterLinkGroup[] = [
       { label: "All Projects", href: "/projects" },
       { label: "Early Work", href: "/projects/early-work" },
       { label: "Build Journey", href: "/about-us/build-journey" },
-      { label: "Proof Library", href: "/proof" },
-      { label: "Videos", href: "/videos" },
-      { label: "Updates", href: "/updates" },
     ],
   },
   {
     title: "Resources",
-    links: [
-      { label: "GitHub", href: GITHUB_URL },
-      { label: "Blog" },
-    ],
+    links: [{ label: "GitHub", href: GITHUB_URL }],
   },
   {
     title: "Systems",
