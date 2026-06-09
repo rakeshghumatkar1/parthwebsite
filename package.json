@@ -26,7 +26,9 @@
     "db:upsert-rfid-door-lock": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-rfid-door-lock-project.ts",
     "db:upsert-random-led-switch": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-random-led-switch-project.ts",
     "db:upsert-water-level-monitor": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-water-level-monitor-project.ts",
-    "db:upsert-fingerprint-servo-lock": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-fingerprint-servo-lock-project.ts"
+    "db:upsert-fingerprint-servo-lock": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-fingerprint-servo-lock-project.ts",
+    "db:upsert-lpg-gas-detection": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-lpg-gas-detection-project.ts",
+    "db:upsert-early-work-batch-one": "npm run db:upsert-hand-sanitizer && npm run db:upsert-auto-pc-bluetooth && npm run db:upsert-lpg-gas-detection && npm run db:upsert-rfid-door-lock && npm run db:upsert-fingerprint-servo-lock && npm run db:upsert-water-level-monitor"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

@@ -5,13 +5,21 @@
 
 import { neon } from "@neondatabase/serverless";
 
+const LEGACY_WATER_LEVEL_SLUG =
+  "water-level-monitor-jsn-sr04t-sensor-prototype";
+
+const JSN_SR04T_GITHUB_URL =
+  "https://github.com/ParthGhumatkar/Water-level-project-with-JSN-SR-04T-sensor/blob/main/JSN_SR-04T_sensor.ino";
+
 const WATER_LEVEL_MONITOR = {
-  title: "Water Level Monitor — JSN-SR04T Sensor Prototype",
-  slug: "water-level-monitor-jsn-sr04t-sensor-prototype",
+  title: "Water Level Monitor — Ultrasonic Sensor Automation Prototype",
+  slug: "water-level-monitor-ultrasonic-sensor-automation-prototype",
   shortDescription:
-    "An early Arduino water-level monitoring prototype using a JSN-SR04T-style ultrasonic sensor, LCD display, LED indicator, and relay control logic.",
+    "An early Arduino water-level monitoring prototype using ultrasonic distance sensing, LCD output, and relay/LED control logic, with both HC-SR04 and JSN-SR04T sensor versions.",
   fullDescription:
-    "Water Level Monitor was an early Arduino automation prototype from 2021 focused on measuring liquid level or distance using a JSN-SR04T ultrasonic sensor setup. The project reads distance values, displays the measurement on an LCD, and uses threshold-based logic to control an LED and relay. The project shows Parth experimenting with sensor readings, display output, and real-world control behavior — the same pattern that appears across many of his early electronics builds. This project is useful because it moves from simple sensor reading to a control decision. It shows early thinking around monitoring systems: measure a physical condition, display the result, and trigger a response.",
+    "Water Level Monitor was an early Arduino automation prototype from 2021 focused on measuring liquid level or distance using ultrasonic sensor setups. The project appears in two early variations: one using an HC-SR04-style sonar sensor and another using a JSN-SR04T-style ultrasonic sensor. Both versions follow the same core pattern: measure distance, display the reading, and trigger relay/LED output based on a threshold. Additional JSN-SR04T code version: " +
+    JSN_SR04T_GITHUB_URL +
+    ". This project is useful because it moves from simple sensor reading to a control decision. It shows early thinking around monitoring systems: measure a physical condition, display the result, and trigger a response.",
   projectType: "automation",
   projectPhase: "early_work",
   status: "archived",
@@ -28,6 +36,7 @@ const WATER_LEVEL_MONITOR = {
   techStack: [
     "Arduino",
     "C++",
+    "HC-SR04 Sensor",
     "JSN-SR04T Sensor",
     "Ultrasonic Sensor",
     "I2C LCD",
@@ -40,11 +49,11 @@ const WATER_LEVEL_MONITOR = {
   problemSolved:
     "The project explored how a water-level or distance-monitoring task could be automated. Instead of manually checking the level, the system could measure distance, display it, and trigger a control response when the reading crossed a defined threshold.",
   whatItDoes:
-    "The Arduino sketch sends a trigger pulse, reads the echo duration, converts the value into centimeters, displays the distance on an I2C LCD, and switches LED/relay output depending on whether the measured distance is below or above the threshold.",
+    "The Arduino sketches send a trigger pulse, read echo duration, convert the value into centimeters, display the distance on an I2C LCD, and switch LED/relay output depending on whether the measured distance crosses the threshold.",
   parthRole:
-    "Parth wrote the Arduino control logic, connected the ultrasonic sensor flow with LCD display output, and added threshold-based LED/relay control. The project demonstrates early sensor automation and physical output control.",
+    "Parth wrote Arduino control logic for ultrasonic distance sensing, LCD display output, and threshold-based LED/relay control. The project demonstrates early sensor automation and physical output control.",
   githubUrl:
-    "https://github.com/ParthGhumatkar/Water-level-project-with-JSN-SR-04T-sensor/blob/main/JSN_SR-04T_sensor.ino",
+    "https://github.com/ParthGhumatkar/Sonar-water-level-project-with-HC-SR04/blob/main/Sonar_water_project.ino",
   demoUrl: null,
   videoUrl: null,
   pdfDownloadUrl: null,
@@ -154,6 +163,16 @@ async function main() {
       RETURNING id, slug
     `;
     console.log(`Inserted Water Level Monitor project (${inserted[0]?.id}).`);
+  }
+
+  const hidden = await sql`
+    UPDATE projects
+    SET hidden = true, updated_at = NOW()
+    WHERE slug = ${LEGACY_WATER_LEVEL_SLUG}
+    RETURNING slug
+  `;
+  if (hidden.length > 0) {
+    console.log(`Hidden legacy water level slug: ${LEGACY_WATER_LEVEL_SLUG}`);
   }
 
   const verify = await sql`
