@@ -17,6 +17,10 @@ import {
   shouldShowPublicFilters,
 } from "@/lib/public/filter-visibility";
 import {
+  EARLY_WORK_PAGE_INTRO,
+  EARLY_WORK_PAGE_INTRO_SECOND,
+} from "@/lib/build-journey-page-content";
+import {
   getPublicProjects,
   getPublicProjectsCount,
   type PublicProjectListFilters,
@@ -25,7 +29,7 @@ import {
 export const metadata: Metadata = {
   title: "Early Work | Think Big AI Systems",
   description:
-    "Early robotics, Arduino, IoT, drone, automation, and learning-era builds from Parth's formative technical years.",
+    "Parth's early hands-on projects from around age 12 — LEGO robotics, drones, Arduino, IoT, and nearly 35 documented builds from 2016–2018.",
 };
 
 const FILTER_KEYS = ["q", "projectType", "status"] as const;
@@ -66,10 +70,10 @@ export default async function EarlyWorkProjectsPage({
       <SiteHeader />
       <main>
         <Section tone="light">
-          <SectionHeader
-            title="Early Work"
-            description="Early projects from Parth's robotics, electronics, Arduino, IoT, drone, and home-automation learning years. These entries support the Build Journey and show how the technical foundation developed over time."
-          />
+          <SectionHeader title="Early Work" description={EARLY_WORK_PAGE_INTRO} />
+          <p className="-mt-8 mb-10 max-w-3xl text-sm leading-relaxed text-tb-text-muted sm:mb-12 sm:text-base">
+            {EARLY_WORK_PAGE_INTRO_SECOND}
+          </p>
           <div className="mb-10 flex flex-wrap gap-4 sm:mb-12">
             <Link
               href="/about-us/build-journey"

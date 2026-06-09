@@ -24,9 +24,10 @@ export function BuildJourneyBridgeSection() {
           From early builds to current systems.
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-tb-text-on-dark-muted sm:text-base">
-          The early work shows the pattern: curiosity, testing, debugging, and
-          persistence. Current projects now apply that pattern to software systems,
-          automation, data, and AI workflows.
+          The pattern that started early stayed the same: curiosity, testing,
+          debugging, persistence, and learning by doing. Current projects now apply
+          that same approach to software systems, automation, data, AI, and business
+          workflows.
         </p>
 
         <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

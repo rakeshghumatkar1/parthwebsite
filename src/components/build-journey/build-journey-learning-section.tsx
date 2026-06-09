@@ -60,7 +60,8 @@ export function BuildJourneyLearningSection() {
           </div>
 
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-tb-text-muted sm:text-base">
-            When stuck: search sources, test, fail, debug, adjust, and retry.
+            When stuck, the process was simple: observe the issue, test one part at a
+            time, search for possible fixes, adjust the build or code, and try again.
           </p>
 
           <div className="mt-3 rounded-md border border-slate-200/80 bg-slate-50/50 p-2.5 sm:p-3">

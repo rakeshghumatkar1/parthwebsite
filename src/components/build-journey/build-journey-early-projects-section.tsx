@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BuildJourneyEarlyWorkCard } from "@/components/build-journey/build-journey-early-work-card";
 import { Section } from "@/components/ui/section";
 import { IconArrowRight } from "@/components/ui/icons";
-import { BUILD_JOURNEY_EXPERIMENTS } from "@/lib/build-journey-page-content";
+import { BUILD_JOURNEY_EXPERIMENTS, BUILD_JOURNEY_EARLY_PROJECTS_INTRO } from "@/lib/build-journey-page-content";
 import type { PublicProject } from "@/lib/public/projects";
 
 type BuildJourneyEarlyProjectsSectionProps = {
@@ -24,8 +24,7 @@ export function BuildJourneyEarlyProjectsSection({
           Early builds that became working examples.
         </h2>
         <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-tb-text-muted">
-          Hands-on early projects, experiments, and automation builds are shown
-          here as they are added.
+          {BUILD_JOURNEY_EARLY_PROJECTS_INTRO}
         </p>
       </div>
 

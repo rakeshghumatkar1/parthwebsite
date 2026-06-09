@@ -26,17 +26,32 @@ export function BuildJourneyStructuredExposureSection() {
           <h2 className="mt-1.5 text-balance text-xl font-semibold leading-snug tracking-tight text-tb-text sm:text-2xl">
             Robotics turned interest into structured building.
           </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-tb-text-muted sm:text-base">
-            Parth completed all three levels of Lego Advanced Robotics — learning
-            electronics, C++ coding, assembly, and project thinking through
-            components, movement, logic, control, and troubleshooting.
-          </p>
+          <div className="mt-2 max-w-3xl space-y-2 text-sm leading-relaxed text-tb-text-muted sm:text-base">
+            <p>
+              Parth joined robotics classes in Pune and completed all three levels of
+              LEGO Advanced Robotics. That stage gave him a structured foundation in
+              electronics basics, C++ coding, assembling, movement logic, control, and
+              troubleshooting.
+            </p>
+            <p>
+              More importantly, it changed the way he approached learning. Instead of
+              only being curious about gadgets, he started learning how systems are put
+              together, how components interact, and how to test an idea step by step.
+            </p>
+            <p>
+              This phase also gave him the confidence to move beyond guided classwork
+              and start learning independently at home.
+            </p>
+          </div>
 
           <div className="mt-3.5 grid gap-3.5 xl:grid-cols-[1fr_232px] xl:items-start">
             <BuildJourneyOrbitDiagram compact />
 
             <aside className="rounded-md border border-slate-200/80 bg-slate-50/60 p-3.5">
-              <div className="flex items-center gap-2">
+              <p className="text-xs font-medium leading-snug text-tb-text-muted">
+                Structured learning first. Independent building next.
+              </p>
+              <div className="mt-3 flex items-center gap-2">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-slate-200/90 bg-white text-tb-blue">
                   <IconChip className="h-3.5 w-3.5" />
                 </span>

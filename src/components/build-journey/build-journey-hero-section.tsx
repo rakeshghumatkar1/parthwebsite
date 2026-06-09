@@ -44,7 +44,8 @@ export function BuildJourneyHeroSection() {
           </h1>
           <p className="mt-4 text-base leading-relaxed text-tb-text-on-dark sm:text-lg">
             From football and YouTube to robotics, Arduino, drones, and working
-            hardware projects — the period before current software systems.
+            hardware projects — this is the period where curiosity became a habit
+            of building.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button href="/projects/early-work" variant="primary" dark size="lg">

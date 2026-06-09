@@ -67,7 +67,22 @@ export const BUILD_JOURNEY_EARLY_PROJECTS = [
 ] as const;
 
 export const BUILD_JOURNEY_EARLY_PROJECTS_INTRO =
-  "Hands-on examples from robotics, Arduino, drone, and home-automation years." as const;
+  "Hands-on early projects, experiments, and automation builds that show how ideas were turned into working prototypes." as const;
+
+export const BUILD_JOURNEY_EARLY_OUTPUT_STATS = [
+  "Started around age 12",
+  "Nearly 35 documented early projects",
+  "Built across 2016–2018",
+  "Hardware + coding + documentation",
+] as const;
+
+export const BUILD_JOURNEY_DOCUMENTING_CHIPS = [
+  "Video shooting",
+  "On-screen text and explanation",
+  "Editing in Filmora",
+  "Music and presentation choices",
+  "Publishing project demos online",
+] as const;
 
 export const BUILD_JOURNEY_EXPERIMENTS = [
   "RFID attendance",
@@ -90,10 +105,10 @@ export const BUILD_JOURNEY_LEARNING_STEPS = [
 ] as const;
 
 export const BUILD_JOURNEY_LEARNING_KEY_LINE =
-  "Parth's strength is not that he already knows everything. He structures the task and learns by figuring things out." as const;
+  "Parth's strength is not that he always knew everything in advance. It is that he kept learning by building, debugging, retrying, and figuring things out." as const;
 
 export const BUILD_JOURNEY_2018_SECTION_INTRO =
-  "These moments showed that Parth's early work was not limited to private experimentation. He was already explaining his projects publicly, receiving community recognition, and learning around working software professionals." as const;
+  "As the project archive grew, some of Parth's early work also began receiving outside visibility. This was not the goal at the time, but it became a useful sign that his experiments were being seen beyond home and class environments." as const;
 
 export const BUILD_JOURNEY_NELKINDA_MUG_EVIDENCE = {
   src: "/images/build-journey/recognition/nelkinda-2018-speaker-mug.png",
@@ -137,15 +152,24 @@ export const BUILD_JOURNEY_PROOF_SLUGS = {
 
 export const BUILD_JOURNEY_TIMELINE = [
   "Football interest",
-  "Knee issue and time away from playground",
+  "Time away from the playground",
   "YouTube discovery",
-  "Motor/electronics interest",
-  "Robotics class in Pune",
-  "Arduino, C++, electronics",
-  "Drones, IoT, automation",
-  "2018 public presentation and recognition",
-  "From working builds toward software systems",
+  "Interest in motors and electronics",
+  "Robotics classes in Pune",
+  "LEGO robotics foundation",
+  "Independent home learning",
+  "Drone learning and hardware experimentation",
+  "Arduino, IoT, automation, and public project documentation",
 ] as const;
+
+export const BUILD_JOURNEY_TIMELINE_NOTE =
+  "Builder habit forms: from curiosity to repeated hands-on projects." as const;
+
+export const EARLY_WORK_PAGE_INTRO =
+  "This archive brings together Parth's early hands-on projects from the years when he was learning by building. Starting around age 12, he worked across LEGO robotics, drones, Arduino, IoT, Bluetooth, GSM, sensors, lighting, home automation, Python, and simple web experiments. Between roughly 2016 and 2018 alone, he built or documented around 35 projects, with a few smaller experiments left out. Some were guided, some were learning exercises, and many were self-driven — but together they show a consistent pattern of curiosity, persistence, and turning ideas into working prototypes." as const;
+
+export const EARLY_WORK_PAGE_INTRO_SECOND =
+  "Many of these projects were also recorded and edited by Parth himself, showing not only technical experimentation but also an early habit of documenting and explaining the work." as const;
 
 export const BUILD_JOURNEY_EARLY_WORK_BRIDGE =
   "Early project entries will be available under Early Work as they are published." as const;

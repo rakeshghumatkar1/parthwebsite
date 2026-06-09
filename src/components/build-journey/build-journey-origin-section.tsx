@@ -17,16 +17,22 @@ export function BuildJourneyOriginSection() {
           </h2>
           <div className="mt-2 max-w-3xl space-y-2 text-sm leading-relaxed text-tb-text-muted sm:text-base">
             <p>
-              Football was one of Parth&apos;s early interests. A knee problem stopped
-              him from continuing the way he wanted — while friends played and went
-              for tournaments, he stayed away from the playground. YouTube became a
-              way to pass time.
+              Football was one of Parth&apos;s early interests, but a knee problem
+              stopped him from continuing the way he wanted. As friends kept playing
+              and going for tournaments, he spent more time away from the playground.
+              That created space for something else to grow.
             </p>
             <p>
-              One video about sharpening a pencil with a motor sparked an interest
-              in electronics: technology could move, control, respond, and solve
-              small real-world problems. When materials were hard to find, the next
-              step became a robotics class in Pune.
+              YouTube became more than entertainment. Watching videos about gadgets,
+              robotics, and electronics sparked a different kind of curiosity — how
+              things work, how they are controlled, and whether he could build
+              something himself.
+            </p>
+            <p>
+              One video about sharpening a pencil with a motor sparked an early interest
+              in practical electronics. When finding materials was not always easy, the
+              next step became clear: learn the basics properly and start building from
+              there.
             </p>
           </div>
         </div>

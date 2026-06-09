@@ -154,10 +154,10 @@ export function BuildJourney2018ProofSection() {
     <Section tone="light" dense>
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-tb-blue">
-          2018 Public Recognition
+          Early Public Visibility
         </p>
         <h2 className="mt-1.5 text-xl font-semibold tracking-tight text-tb-text sm:text-2xl">
-          Two public milestones from 2018
+          Some of the work began getting noticed publicly.
         </h2>
         <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-tb-text-muted">
           {BUILD_JOURNEY_2018_SECTION_INTRO}
