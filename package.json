@@ -34,7 +34,8 @@
     "db:upsert-water-pump-bluetooth": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-water-pump-bluetooth-project.ts",
     "db:upsert-fifa-world-cup-html": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-fifa-world-cup-html-project.ts",
     "db:upsert-card-game-python": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-card-game-python-project.ts",
-    "db:upsert-rock-paper-scissors-python": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-rock-paper-scissors-python-project.ts"
+    "db:upsert-rock-paper-scissors-python": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-rock-paper-scissors-python-project.ts",
+    "db:upsert-dew-point-calculator": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-dew-point-calculator-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
