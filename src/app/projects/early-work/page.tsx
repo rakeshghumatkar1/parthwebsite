@@ -71,9 +71,9 @@ export default async function EarlyWorkProjectsPage({
           {projects.length > 0 ? (
             <div className={showFilters ? "mt-5" : "mt-6"}>
               <EarlyWorkProjectGrid
-                key={params.q?.trim() || "all"}
                 projects={projects}
                 archiveTotal={totalCount}
+                hasActiveSearch={hasActiveFilters}
               />
             </div>
           ) : (
@@ -81,7 +81,7 @@ export default async function EarlyWorkProjectsPage({
               className={showFilters ? "mt-5" : "mt-6"}
               message={
                 hasActiveFilters
-                  ? "No early work projects match your search. Clear search to see all published early work projects."
+                  ? "No matching early projects found."
                   : "Early work entries will appear here after selected childhood and learning-era builds are published."
               }
               clearHref={hasActiveFilters ? BASE_PATH : undefined}

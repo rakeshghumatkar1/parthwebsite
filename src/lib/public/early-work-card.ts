@@ -53,3 +53,40 @@ export function getEarlyWorkCardImageSources(project: PublicProject): string[] {
   if (project.coverImageUrl) sources.push(project.coverImageUrl);
   return sources;
 }
+
+const FALLBACK_LABEL_RULES = [
+  { label: "Arduino Build", pattern: /\barduino\b/i },
+  {
+    label: "Sensor Project",
+    pattern: /\b(sensor|dht|ultrasonic|mq2|\bir\b|hall)\b/i,
+  },
+  { label: "Python Project", pattern: /\bpython\b/i },
+  { label: "Web Experiment", pattern: /\b(html|web)\b/i },
+  { label: "Robotics Build", pattern: /\b(robotics|lego|robot)\b/i },
+  { label: "Drone Project", pattern: /\bdrone\b/i },
+  { label: "Bluetooth Build", pattern: /\bbluetooth\b/i },
+  { label: "Voice Automation", pattern: /\balexa\b/i },
+  {
+    label: "Automation Prototype",
+    pattern: /\b(home automation|automation)\b/i,
+  },
+  { label: "Game Project", pattern: /\bgame\b/i },
+] as const;
+
+function getEarlyWorkFallbackSearchText(project: PublicProject): string {
+  return [
+    project.title,
+    project.shortDescription,
+    project.projectType,
+    ...project.techStack,
+  ].join(" ");
+}
+
+/** Category label for designed fallback thumbnails when no video/cover image exists. */
+export function getEarlyWorkFallbackThumbnailLabel(project: PublicProject): string {
+  const haystack = getEarlyWorkFallbackSearchText(project);
+  for (const rule of FALLBACK_LABEL_RULES) {
+    if (rule.pattern.test(haystack)) return rule.label;
+  }
+  return "Early Build";
+}
