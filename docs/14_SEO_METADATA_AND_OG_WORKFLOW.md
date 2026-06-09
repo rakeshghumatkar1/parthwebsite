@@ -109,6 +109,19 @@ Add when domain and OG asset are stable.
 
 ---
 
+## Favicon / app icons
+
+| Asset | Location | Notes |
+|-------|----------|-------|
+| `icon.svg` | `src/app/icon.svg` | Primary browser tab icon — navy background, cyan **P** monogram, blue system-node accent |
+| `icon.png` | `src/app/icon.png` | 32×32 PNG fallback |
+| `apple-icon.png` | `src/app/apple-icon.png` | 180×180 Apple touch icon |
+| `favicon.svg` | `public/favicon.svg` | Direct `/favicon.svg` fallback |
+
+Use App Router file conventions; do not duplicate with `metadata.icons` unless replacing files. After deploy, favicon cache may persist — hard refresh or incognito to verify.
+
+---
+
 ## Robots.txt
 
 **Goals**
