@@ -43,7 +43,8 @@
     "db:upsert-robotic-arm-aarti-ganpati": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-robotic-arm-aarti-ganpati-project.ts",
     "db:upsert-smart-temperature-controller": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-smart-temperature-controller-project.ts",
     "db:upsert-wifi-home-device-control": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-wifi-home-device-control-project.ts",
-    "db:upsert-cycle-rpm-brake-light": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-cycle-rpm-brake-light-project.ts"
+    "db:upsert-cycle-rpm-brake-light": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-cycle-rpm-brake-light-project.ts",
+    "db:upsert-bluetooth-speaker-conversion": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-bluetooth-speaker-conversion-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
