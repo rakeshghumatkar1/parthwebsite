@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Suspense } from "react";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { PublicEmptyState } from "@/components/public/empty-state";
 import { PublicListingFiltersShell } from "@/components/public/listing-filters-shell";
-import { EarlyWorkArchiveSummary } from "@/components/projects/early-work-archive-summary";
 import { EarlyWorkFilters } from "@/components/projects/early-work-filters";
+import { EarlyWorkIntroPanel } from "@/components/projects/early-work-intro-panel";
 import { EarlyWorkProjectGrid } from "@/components/projects/early-work-project-grid";
 import { Section } from "@/components/ui/section";
-import { SectionHeader } from "@/components/ui/section-header";
 import {
   hasActivePublicFilters,
   shouldShowPublicFilters,
 } from "@/lib/public/filter-visibility";
-import {
-  EARLY_WORK_PAGE_INTRO,
-  EARLY_WORK_PAGE_INTRO_SECOND,
-} from "@/lib/build-journey-page-content";
 import {
   getPublicProjects,
   getPublicProjectsCount,
@@ -64,28 +58,7 @@ export default async function EarlyWorkProjectsPage({
       <SiteHeader />
       <main>
         <Section tone="light" containerClassName="max-w-7xl">
-          <SectionHeader title="Early Work" description={EARLY_WORK_PAGE_INTRO} />
-          <p className="-mt-8 mb-10 max-w-3xl text-sm leading-relaxed text-tb-text-muted sm:mb-12 sm:text-base">
-            {EARLY_WORK_PAGE_INTRO_SECOND}
-          </p>
-          <div className="mb-8 flex flex-wrap gap-4 sm:mb-10">
-            <Link
-              href="/about-us/build-journey"
-              className="text-sm font-medium text-tb-blue hover:underline"
-            >
-              Back to Build Journey
-            </Link>
-            <Link
-              href="/projects"
-              className="text-sm font-medium text-tb-blue hover:underline"
-            >
-              View Current Projects
-            </Link>
-          </div>
-
-          {totalCount > 0 ? (
-            <EarlyWorkArchiveSummary totalCount={totalCount} />
-          ) : null}
+          <EarlyWorkIntroPanel totalCount={totalCount} />
 
           {showFilters ? (
             <PublicListingFiltersShell>
