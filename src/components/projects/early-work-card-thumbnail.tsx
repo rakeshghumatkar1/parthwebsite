@@ -47,9 +47,6 @@ function EarlyWorkFallbackThumbnail({ project }: { project: PublicProject }) {
       <p className="relative mt-1 text-center text-sm font-semibold leading-snug text-tb-text">
         {mainLabel}
       </p>
-      <p className="relative mt-0.5 text-[10px] font-medium text-tb-text-muted">
-        Archive item
-      </p>
     </div>
   );
 }
