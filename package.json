@@ -31,7 +31,8 @@
     "db:upsert-early-work-batch-one": "npm run db:upsert-hand-sanitizer && npm run db:upsert-auto-pc-bluetooth && npm run db:upsert-lpg-gas-detection && npm run db:upsert-rfid-door-lock && npm run db:upsert-fingerprint-servo-lock && npm run db:upsert-water-level-monitor",
     "db:upsert-fortnite-hardware-hacking": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-fortnite-hardware-hacking-project.ts",
     "db:upsert-piano-tiles-game-hacking": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-piano-tiles-game-hacking-project.ts",
-    "db:upsert-water-pump-bluetooth": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-water-pump-bluetooth-project.ts"
+    "db:upsert-water-pump-bluetooth": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-water-pump-bluetooth-project.ts",
+    "db:upsert-fifa-world-cup-html": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/upsert-fifa-world-cup-html-project.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
